@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Borel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --ted-color: #e62b1e;
+    --dark: #333;
+    --light: #fff;
+
+    --font-Borel: "Borel", cursive;
+    --font-Poppins: "Poppins", sans-serif;
+    --font-Raleway: "Raleway", sans-serif;
+
+    --fontW1: 100;
+    --fontW2: 200;
+    --fontW3: 300;
+    --fontWx4: 400;
+    --fontWx5: 500;
+    --fontWx6: 600;
+    --fontWx7: 700;
+    --fontWx8: 800;
+    --fontWx9: 900;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+    font-weight: var(--fontWx3);
+}
+
+body {
+    background-color: #faf8f8;
+}
+
+nav {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.cards {
+    padding: 100px 7%;
+}
+
+#banner .text {
+    font-family: 'Rubik', sans-serif;
+    font-size: 110px;
+    color: #faf8f8;
+    position: absolute;
+    bottom: -30px;
+    font-weight: var(--fontWx9);
+    text-transform: uppercase;
+}
+
+#banner {
+    background-image: url(../images/hoem-section-12.jpg);
+    background-position: center;
+    background-size: cover;    
+    width: 100%;
+    height: 260px;
+    padding-left: 200px;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.special-heading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.special-heading {
+    color: #ebeced;
+    font-size: 60px;
+    font-weight: 800;
+    margin: 0;
+    text-transform: uppercase; 
+}
+
+.special-heading-title {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.description {
+    font-size: 16px;
+    color: #707070;
+    margin: 0;
+    width: auto;
+    line-height: 1.5;
+}
+
+.heading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.content-under-special-heading {
+    margin-left: 90px;
+}
+
+/* About Us Start */
+#aboutus {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#aboutus #main-heading {
+    margin: 50px auto 100px;
+}
+
+.abt-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding-left: 1.5%;
+    padding-right: 0.5%;
+    margin-bottom: 150px;
+}
+
+.abt-right {
+    padding: 30px;
+}
+
+.abt-right .heading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.heading h3 {
+    font-weight: 500;
+}
+
+.heading #sub {
+    margin-left: 40px;
+}
+
+.heading ul {
+    margin-left: 80px;
+    font-size: 14px;
+    color: #707070;
+    line-height: 1.5;
+}
+
+.abt-right .description {
+    margin: 0;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: auto;
+}
+
+.abt-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.abt-left img {
+    width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(1 1 1 / 15%);
+}
+
+/* About Us End */
+
+@media (max-width: 1580px) {
+    .cards {
+        padding: 50px 50px;
+    }
+}
+
+@media (max-width: 1350px) {
+    .abt-left img {
+        width: 500px;
+    }
+    .description {
+        font-size: 15px;
+    }
+    .special-heading-title {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 1220px) {
+    .cards {
+        padding: 30px 30px;
+    }
+    .abt-left img {
+        width: 400px;
+    }
+    .description {
+        font-size: 14px;
+    }
+    .special-heading-title {
+        font-size: 35px;
+    }
+    .heading #sub {
+        margin-left: 35px;
+    }
+    .heading ul {
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 1115px) {
+    .abt-content {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 1030px) {
+    .abt-content {
+        flex-wrap: wrap;
+    }
+    #tedx-content {
+        flex-direction: column-reverse;
+    }
+    .abt-left img {
+        width: 500px;
+    }
+}
+
+@media (max-width: 950px) {
+    .cards {
+        padding: 30px 40px;
+    }
+}
+
+@media (max-width: 720px) {
+    .cards {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .special-heading {
+        font-size: 90px;
+    }
+    .sub-special-heading {
+        font-size: 20px;
+        margin: -65px 0 10px;
+    }
+    .special-heading-title {
+        font-size: 30px;
+    }
+    #banner .text {
+        font-size: 100px;
+        bottom: -28px;
+    }
+}
+
+@media (max-width: 550px) {
+    .special-heading-title {
+        font-size: 25px;
+    }
+    .description {
+        font-size: 13px;
+    }
+    .heading ul {
+        font-size: 13px;
+    }
+    .abt-left img {
+        width: 400px;
+    }
+    #banner {
+        height: 200px;
+    }
+}
+
+@media (max-width: 460px) {
+    .abt-left img {
+        width: 350px;
+    }
+    .abt-right .description {
+        margin: 10px;
+    }
+    .heading #sub {
+        margin-left: 15px;
+    }
+    .heading ul {
+        margin-left: 35px;
+    }
+}
+
+@media (max-width: 420px) {
+    .abt-left img {
+        width: 350px;
+    }
+    .special-heading-title {
+        font-size: 20px;
+    }
+    .description {
+        font-size: 12px;
+    }
+    .heading ul {
+        font-size: 12px;
+    }
+    #banner .text {
+        font-size: 90px;
+        bottom: -22px;
+    }
+}
+
+@media (max-width: 385px) {
+    .abt-left img {
+        width: 300px;
+    }
+    #banner .text {
+        font-size: 75px;
+    }
+    .abt-right {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 340px) {
+    #banner .text {
+        font-size: 65px;
+        bottom: -18px;
+    }
+    #banner {
+        height: 180px;
+    }
+    .abt-left img {
+        width: 250px;
+    }
+    .abt-right {
+        padding: 10px;
+    }
+    .special-heading-title {
+        font-size: 18px;
+    }
+    .description {
+        font-size: 11px;
+    }
+    .heading ul {
+        font-size: 11px;
+        margin-left: 25px;
+    }
+    .heading #sub {
+        margin-left: 5px;
+    }
+    .abt-right .description {
+        margin: 10px 0 10px 5px;
+    }
+}

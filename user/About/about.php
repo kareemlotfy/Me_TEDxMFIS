@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/66081d606d.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="user/images/x-art.png" type="image/x-icon">
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <link rel="stylesheet" href="user/style.css">
+    <link rel="stylesheet" href="user/About/style-about.css">
+    <title>TEDx Manarat AlFarouk School - Spreading ideas, inspiring change.</title>
+</head>
+<body>
+    <section class="header" id="headerSection">
+        <nav id="navbar">
+            <a href="user/Home/index.php"><img src="user\images\TEDx_logo_place2_RGB_CS2_page-0003.png" alt="tedx logo" id="tedx_logo"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark  burger mark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="user/Home/index.php" class="nav_text">Home</a></li>
+                    <li><a href="user/Speakers/speakers.php" class="nav_text">Speakers</a></li>
+                    <li><a href="user/shop/index.php?page=products" class="nav_text">Shop</a></li>
+                    <li><a href="user/Sponsors/sponsors.php" class="nav_text">Sponsors</a></li>
+                    <li><a href="user/About/about.php" class="nav_text">About</a></li>
+                    <li><a href="user/Tickets/buy-tickets.php" class="nav_text">Tickets</a></li>
+                </ul>
+            </div>
+            <form action="">
+                <button class="ticket-button"><a href="">Get Ticket</a></button>
+            </form>
+            <i class="fa-solid fa-bars burger" onclick="showMenu()"></i>
+        </nav>
+    </section>
+
+    <div class="cards" id="banner">
+        <div>
+            <h1 class="text">ABOUT</h1>
+        </div>
+    </div>
+
+    <!-- About Us Start -->
+    <section class="cards" id="aboutus">
+        <div class="abt-content">
+            <div class="abt-right">
+                <div class="heading">
+                    <h3 class="special-heading-title">What is TED?</h3>
+                    <p class="description">TED is on a mission to discover and spread ideas that spark imagination, embrace possibility and catalyze impact. Our organization is devoted to curiosity, reason, wonder and the pursuit of knowledge — without an agenda. We welcome people from every discipline and culture who seek a deeper understanding of the world and connection with others, and we invite everyone to engage with ideas and activate them in your community.</p>
+                    <p class="description">TED began in 1984 as a conference where Technology, Entertainment and Design converged, but today it spans a multitude of worldwide communities and initiatives exploring everything from science and business to education, arts and global issues. In addition to the hundreds of TED Talks curated from our annual conferences and published on TED.com, we produce original podcasts, short video series, animated educational lessons (TED-Ed) and TV programs that are translated into more than 100 languages and distributed via partnerships around the world.
+                    Each year, more than 3,000 independently run TEDx events bring people together to share ideas and bridge divides in communities on every continent. Through the Audacious Project, TED has helped catalyze more than $3 billion in funding for projects that seek to make the world more beautiful, sustainable and just. In 2020, TED launched Countdown, an initiative to accelerate solutions to the climate crisis and mobilize a movement for a net-zero future. View a full list of TED’s many programs and initiatives.</p>
+                    <p class="description">TED is owned by a nonprofit, nonpartisan foundation. Our aim is to help create a future worth pursuing for all.</p>
+                </div>
+            </div>
+            <div class="abt-left">
+                <img src="user\images\ted img 2.jpg" alt="" id="ted-img">
+            </div>
+        </div>
+        <div class="abt-content" id="tedx-content">
+            <div class="abt-left">
+                <img src="user/images/tedx.jpeg" alt="" id="tedx-img">
+            </div>
+            <div class="abt-right">
+                <div class="heading">
+                    <h3 class="special-heading-title">What is TEDx?</h3>
+                    <p class="description">In the spirit of ideas worth spreading, TED has created a program called TEDx. TEDx is a program of local,
+                         self-organized events that bring people together to share a TED-like experience. Our event is called TEDx[name],
+                          where x = independently organized TED event. At our TEDx[name] event, TED Talks video and live speakers will combine to spark deep discussion and connection in a small group. 
+                          The TED Conference provides general guidance for the TEDx program, but individual TEDx events, including ours, are self-organized.</p>
+                </div>
+            </div>
+        </div>
+        <div class="abt-content">
+            <div class="abt-right">
+                <div class="heading">
+                    <h3 class="special-heading-title">What is TEDxManaratAlFaroukSchool?</h3>
+                    <p class="description" id="sub">TEDxManaratAlFaroukSchool brings the spirit and passion surrounding TED and
+                        TEDx to link the schools’ generations.</p>
+                        <h3>Vision:</h3>
+                        <p class="description" id="sub">
+                        To build up a generation of enlightened youth, able to face different life
+                        challenges without losing their identity and enthusiasm.</p>
+                        <h3>Mission:</h3>
+                        <p class="description" id="sub">TEDxManaratAlFaroukSchool aims to provide a suitable working environment
+                        for youth where they can exchange knowledge and experiences, to fill out the
+                        gap between different generations, and to improve their social and technical
+                        skills in all life affairs.</p>
+                        </p>
+                        <h3>Goals and Objectives:</h3>
+                        <ul>
+                            <li>Making our annual TEDx event.</li>
+                            <li>Providing workshops in different fields for students.</li>
+                            <li>Creating a successful Islamic community.</li>
+                            <li>Give a chance for youth to express their ideas on stage.</li>
+                            <li>Provide new innovative ideas through our stage.</li>
+                            <li>To spread the idea of TEDx between different schools.</li>
+                            <li>To access students’ ideas and projects to supporting entities.</li>
+                        </ul>
+                        
+                </div>
+            </div>
+            <div class="abt-left" >
+                <img src="user\images\tedxmfis-logo-1080x675.jpg" alt="" id="tedxMFIS-img">
+            </div>
+        </div>
+    </section>
+    <!-- About Us End -->   
+    <div class="cursor"></div>
+    <div class="cursor2"></div>
+    <script src="user/script.js"></script>
+</body>
+</html>

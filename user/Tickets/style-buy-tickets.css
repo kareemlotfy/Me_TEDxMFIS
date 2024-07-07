@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Borel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --ted-color: #e62b1e;
+    --dark: #333;
+    --light: #fff;
+
+    --font-Borel: "Borel", cursive;
+    --font-Poppins: "Poppins", sans-serif;
+    --font-Raleway: "Raleway", sans-serif;
+
+    --fontW1: 100;
+    --fontW2: 200;
+    --fontW3: 300;
+    --fontWx4: 400;
+    --fontWx5: 500;
+    --fontWx6: 600;
+    --fontWx7: 700;
+    --fontWx8: 800;
+    --fontWx9: 900;
+}
+/* start globals */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.cards{
+  padding: 100px 250px;
+}
+.special-heading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.special-heading {
+  color: #ebeced;
+  font-size: 120px;
+  font-weight: 800;
+  margin: 0;
+  text-transform: uppercase; 
+}
+
+.sub-special-heading {
+  margin: -80px 0 10px 0;
+  font-size: 22px;
+  color: var(--ted-color);
+}
+
+.special-heading-title {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-size: 16px;
+  color: #707070;
+  margin: 0;
+  width: auto;
+}
+
+.heading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.content-under-special-heading{
+  margin-left: 50px;
+}
+
+#banner {
+  background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/tickets-banner5.jpg);
+  background-position: center;
+  background-size: cover;    
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.banner-content{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.banner-header {
+  font-family: 'Rubik', sans-serif;
+  font-size: 120px;
+  opacity: 70%;
+  color: var(--light-grey);
+  bottom: -35px;
+  font-weight: var(--fontWx9);
+  text-transform: uppercase;
+}
+
+.banner-description{
+  font-family: 'Rubik', sans-serif;
+  font-size: 60px;
+  font-weight: 500;
+  color: var(--light);
+  margin-top: -75px;
+}
+
+.tickets-text-container{
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width:860px) {
+  .banner-header{
+    font-size: 100px;
+  }
+  .banner-description{
+    font-size: 50px;
+    margin-top: -65px;
+  }
+
+}
+
+@media(max-width:686px){
+  .banner-header{
+    font-size: 90px;
+  }
+  .banner-description{
+    font-size: 45px;
+    margin-top: -60px;
+  }
+}
+
+@media (max-width:620px) {
+  .banner-header{
+    font-size: 80px;
+  }
+  .banner-description{
+    font-size: 40px;
+    margin-top: -50px;
+  }
+}
+
+@media (max-width:555px){
+  .banner-header{
+    font-size: 70px;
+  }
+  .banner-description{
+    font-size: 35px;
+    margin-top: -45px;
+  }
+}
+
+@media (max-width:500px) {
+  .banner-description{
+    font-size: 30px;
+    /* margin-top: -40px; */
+  }
+}
+
+@media (max-width:430px) {
+  .banner-header{
+    font-size: 60px;
+  }
+  .banner-description{
+    font-size: 25px;
+    margin-top: -35px;
+  }
+}
+
+@media (max-width:368px) {
+  .banner-header{
+    font-size: 40px;
+  }
+  .banner-description{
+    font-size: 20px;
+    margin-top: -25px;
+  }
+}
