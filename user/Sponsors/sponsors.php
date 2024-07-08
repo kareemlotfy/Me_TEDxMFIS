@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/66081d606d.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="user/images/x-art.png" type="image/x-icon">
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="http://localhost/Me_TEDxMFIS/">
     <link rel="stylesheet" href="user/Home/style-speakers.css">
     <link rel="stylesheet" href="user/style.css">
     <title>TEDx Manarat AlFarouk School - Spreading ideas, inspiring change.</title>

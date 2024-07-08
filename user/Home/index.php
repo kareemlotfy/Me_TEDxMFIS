@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="user/images/x-art.png" type="image/x-icon">
 
     <!-- Base URL -->
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="http://localhost/Me_TEDxMFIS/">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="user/style.css">
@@ -46,7 +46,7 @@
                 </ul>
             </div>
             <form action="">
-            <button class="ticket-button"><a href="user/Tickets/tickets.php">Get Ticket</a></button>
+                <button class="ticket-button"><a href="user/Tickets/tickets.php">Get Ticket</a></button>
             </form>
             <!-- Burger Menu -->
             <!-- <i class="fa-solid fa-bars burger" onclick="showMenu()"></i> -->
@@ -190,6 +190,7 @@
                 <div class="description heading_description">Today, what started as a small conference has turned into
                     the unmissable rendezvous for product people.</div>
             </div>
+            <div class="spacing_size spacing_size-initial" style="height:50px;"></div>
 
             <!-- Schedule Container -->
             <div class="schedule_container">
@@ -211,10 +212,48 @@
                 </div> -->
                 <div class="schedule_card">
                     <h4 class="schedule_card_time">9.00 am</h4>
-                    <div class="schedule_card_line"></div>
-                    <h4 class="schedule_card_title"></h4>
-                    <div class="schedule_card_desc"></div>
-
+                    <div class="schedule_card_line_circle">
+                        <div class="time_line-check"><span class="time_line-check_circle" chec
+                                style="background: var(--ted-color);"></span></div>
+                    </div>
+                    <h4 class="schedule_card_title">Regestiration</h4>
+                    <div class="schedule_card_desc">Join 600 product managers, designers, founders.</div>
+                </div>
+                <div class="schedule_card">
+                    <h4 class="schedule_card_time">9.00 am</h4>
+                    <div class="schedule_card_line_circle">
+                        <div class="time_line-check"><span class="time_line-check_circle" chec
+                                style="background: #e6481e;"></span></div>
+                    </div>
+                    <h4 class="schedule_card_title">Coffee Break</h4>
+                    <div class="schedule_card_desc">JBreakfast, lunch, and unlimited tea and coffee are all part.</div>
+                </div>
+                <div class="schedule_card">
+                    <h4 class="schedule_card_time">9.00 am</h4>
+                    <div class="schedule_card_line_circle">
+                        <div class="time_line-check"><span class="time_line-check_circle" chec
+                                style="background: #e66b1e;"></span></div>
+                    </div>
+                    <h4 class="schedule_card_title">Conference</h4>
+                    <div class="schedule_card_desc">How startups can work effectively with corporate.</div>
+                </div>
+                <div class="schedule_card">
+                    <h4 class="schedule_card_time">9.00 am</h4>
+                    <div class="schedule_card_line_circle">
+                        <div class="time_line-check"><span class="time_line-check_circle" chec
+                                style="background: #e68e1e;"></span></div>
+                    </div>
+                    <h4 class="schedule_card_title">Workshops</h4>
+                    <div class="schedule_card_desc">Building your own brand in a digital world right now!.</div>
+                </div>
+                <div class="schedule_card">
+                    <h4 class="schedule_card_time">9.00 am</h4>
+                    <div class="schedule_card_line_circle">
+                        <div class="time_line-check"><span class="time_line-check_circle" chec
+                                style="background: #e6b11e;"></span></div>
+                    </div>
+                    <h4 class="schedule_card_title">After Party</h4>
+                    <div class="schedule_card_desc">When the talks end, the party starts! Stick around!.</div>
                 </div>
             </div>
 
