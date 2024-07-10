@@ -1124,19 +1124,53 @@
     .inner_content {
         width: 980px;
     }
+    .schedule_container{
+        width: 980px;
+    }
+    .schedule_card{
+        width: 172px;
+    }
     .tickets-container {
         flex-wrap: wrap;
         gap: 80px;
     }
 }
-@media (max-width:995px) {
+@media (max-width:992px) {
     .inner_content {
         width: 780px;
     }
+    .schedule_container{
+        width: 780px;
+    }
+    .schedule_card{
+        width: 165px;
+    }
 }
-@media (max-width:780px) {
+@media (max-width:799px){
+    .schedule_card{
+        width: 330px;
+    }
+}
+@media (max-width:766px) {
     .inner_content {
         width: 590px;
+    }
+    .schedule_container{
+        width: 590px;
+    }
+    .schedule_card{
+        width: 236px;
+    }
+}
+@media (max-width:600px) {
+    .inner_content{
+        width: 570px;
+    }
+    .schedule_container{
+        width: 570px;
+    }
+    .schedule_card{
+        width: 225px;
     }
 }
 @media (max-width:600px) {
@@ -1322,12 +1356,7 @@
     .schedual_content_presentation p {
         font-size: 15px;
     } */
-    .schedule_container{
-        width: 980px;
-    }
-    .schedule_card{
-        width: 172px;
-    }
+
 }
 @media (max-width:990px) {
     .abt-content {
