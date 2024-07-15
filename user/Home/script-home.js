@@ -135,7 +135,7 @@ window.addEventListener('load', adjustContainerWidths);
   //   });
 
 
-  // Set padding of class="cards"
+  // Set padding of class="body_section"
 
   function setDynamicPadding() {
     var windowWidth = window.innerWidth;
@@ -143,7 +143,7 @@ window.addEventListener('load', adjustContainerWidths);
     // Check if window width is less than or equal to 600px
     if (windowWidth <= 600) {
       // Remove inline styles added by JavaScript
-      var elements = document.querySelectorAll('.cards');
+      var elements = document.querySelectorAll('.body_section');
       elements.forEach(function (element) {
         element.style.removeProperty('padding-left');
         element.style.removeProperty('padding-right');
@@ -156,7 +156,7 @@ window.addEventListener('load', adjustContainerWidths);
     var paddingLR = paddingValue / 2;
 
     // Apply padding to the desired class
-    var elements = document.querySelectorAll('.cards');
+    var elements = document.querySelectorAll('.body_section');
     elements.forEach(function (element) {
       element.style.paddingLeft = paddingLR + 'px';
       element.style.paddingRight = paddingLR + 'px';

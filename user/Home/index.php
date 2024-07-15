@@ -12,14 +12,6 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="user/images/x-art.png" type="image/x-icon">
 
-    <!-- Base URL -->
-    <base href="http://localhost/Me_TEDxMFIS/">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="user/style.css">
-    <link rel="stylesheet" href="user/Home/style-home.css">
-    <!-- <link rel="stylesheet" href="user/css/style-hero.css"> -->
-
     <!-- Slick Files -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
@@ -27,6 +19,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
+    <!-- Base URL -->
+    <base href="http://localhost/Me_TEDxMFIS/">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="user/style.css">
+    <link rel="stylesheet" href="user/Home/style-home.css">
+    <!-- <link rel="stylesheet" href="user/css/style-hero.css"> -->
 
     <!-- Title -->
     <title>TEDx Manarat AlFarouk School</title>
@@ -76,7 +75,7 @@
     <!-- End Text Box -->
 
     <!-- About Us Section -->
-    <section class="cards" id="aboutus">
+    <section class="body_section" id="aboutus">
         <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
         <div class="abt-content">
             <!-- About Section -->
@@ -161,7 +160,7 @@
     </section>
     <!-- End About Us Section -->
     <!-- Schedule Section -->
-    <section class="cards" id="schedule">
+    <section class="body_section" id="schedule">
         <div class="inner_content">
             <div class="spacing_size spacing_size-initial" style="height:60px;"></div>
 
@@ -177,22 +176,6 @@
 
             <!-- Schedule Container -->
             <div class="schedule_container slider">
-                <!-- Schedule Cards -->
-                <!-- <div class="schedual_card_container">
-                    <div class="schedual_time">
-                        <p class="schedual_time_text">9.00 am - 10.00 am</p>
-                    </div>
-                    <div class="schedual_img">
-                        <img src="https://th.bing.com/th/id/OIP.Q8OoAC08gu3oQ1Ve8gtcGwHaGW?rs=1&pid=ImgDetMain" alt="">
-                    </div>
-                    <div class="schedual_content">
-                        <div class="schedual_content_titel">
-                            <h3>Registration</h3>
-                        </div>
-                        <p class="schedual_content_description">Join 600 product managers, designers, founders,
-                            engineers – and everything in between – to learn, eat, chat and have a great time.</p>
-                    </div>
-                </div> -->
                 <div class="schedule_card">
                     <h4 class="schedule_card_time">9.00 am</h4>
                     <div class="schedule_card_line_circle">
@@ -239,6 +222,14 @@
                     <div class="schedule_card_desc">When the talks end, the party starts! Stick around!.</div>
                 </div>
             </div>
+            <!-- <ul class="slick-dots" style="" role="tablist">
+                <li class="slick-active" aria-hidden="false" role="presentation" aria-selected="true"
+                    aria-controls="navigation00" id="slick-slide00"><button type="button" data-role="none" role="button"
+                        aria-required="false" tabindex="0">1</button></li>
+                <li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation01"
+                    id="slick-slide01"><button type="button" data-role="none" role="button" aria-required="false"
+                        tabindex="0">2</button></li>
+            </ul> -->
 
             <div class="spacing_size spacing_size-initial" style="height:60px;"></div>
         </div>
@@ -246,7 +237,7 @@
     <!-- End Schedule Section -->
 
     <!-- Speakers Section -->
-    <section class="cards" id="speakers">
+    <section class="body_section" id="speakers">
         <div class="inner_content">
             <div class="spacing_size spacing_size-initial" style="height:50px;"></div>
 
@@ -484,7 +475,7 @@
     <!-- End Speakers Section -->
 
     <!-- Video + Tickets Section -->
-    <section class="cards" id="videos">
+    <section class="body_section" id="videos">
         <div class="wave_video">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path fill="#fff" fill-opacity="1"
@@ -508,7 +499,7 @@
             </video>
         </div>
     </section>
-    <section class="cards" id="tickets">
+    <section class="body_section" id="tickets">
         <div class="wave-header wave_tickets">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path fill="#ffffff" fill-opacity="1"
