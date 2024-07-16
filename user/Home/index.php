@@ -254,7 +254,7 @@
 
             <!-- Speakers Cards Container -->
             <div class="speakers-cards-container">
-                <!-- Speaker Cards -->
+                <!-- Speaker Card 1 -->
                 <div class="speaker-card">
                     <!-- Speaker Image -->
                     <div class="speaker-img">
@@ -280,7 +280,7 @@
                         <div class="speaker-job">[Web Developer]</div>
                     </div>
                 </div>
-                <!-- Speaker Cards -->
+                <!-- Speaker Card 2 -->
                 <div class="speaker-card">
                     <!-- Speaker Image -->
                     <div class="speaker-img">
@@ -306,7 +306,7 @@
                         <div class="speaker-job">[Web Developer]</div>
                     </div>
                 </div>
-                <!-- Speaker Cards -->
+                <!-- Speaker Card 3 -->
                 <div class="speaker-card">
                     <!-- Speaker Image -->
                     <div class="speaker-img">
@@ -332,7 +332,7 @@
                         <div class="speaker-job">[Web Developer]</div>
                     </div>
                 </div>
-                <!-- Speaker Cards -->
+                <!-- Speaker Card 4 -->
                 <div class="speaker-card">
                     <!-- Speaker Image -->
                     <div class="speaker-img">
@@ -358,7 +358,7 @@
                         <div class="speaker-job">[Web Developer]</div>
                     </div>
                 </div>
-                <!-- Speaker Cards -->
+                <!-- Speaker Card 5 -->
                 <div class="speaker-card">
                     <!-- Speaker Image -->
                     <div class="speaker-img">

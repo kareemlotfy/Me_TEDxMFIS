@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Borel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
+
+:root {
+    --ted-color: #e62b1e;
+    --dark: #333;
+    --light: #fff;
+
+    --font-Borel: "Borel", cursive;
+    --font-Poppins: "Poppins", sans-serif;
+    --font-Raleway: "Raleway", sans-serif;
+
+    --fontW1: 100;
+    --fontW2: 200;
+    --fontW3: 300;
+    --fontWx4: 400;
+    --fontWx5: 500;
+    --fontWx6: 600;
+    --fontWx7: 700;
+    --fontWx8: 800;
+    --fontWx9: 900;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+    font-weight: var(--fontWx3);
+}
+
+
+
+.cards {
+    padding: 100px 7%;
+}
+
+#banner .text {
+    font-family: 'Rubik', sans-serif;
+    font-size: 110px;
+    color: #faf8f8;
+    position: absolute;
+    bottom: -30px;
+    font-weight: var(--fontWx9);
+    text-transform: uppercase;
+}
+
+#banner {
+    background-image: url(../images/hoem-section-12.jpg);
+    background-position: center;
+    background-size: cover;    
+    width: 100%;
+    height: 260px;
+    padding-left: 200px;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.body_section{
+    padding: 50px 0;
+}
+
+.inner_content {
+    padding: 35px 15px 0;
+    width: 1200px;
+    box-sizing: border-box;
+}
+
+.sponsor_slick_title {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 42px;
+    margin-bottom: 0;
+}
+
+.sponsors_slider{
+    text-align: center;
+    margin-left: -15px;
+    margin-right: -15px;
+    position: relative;
+    z-index: 1;
+    display: block;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    overflow: hidden;
+}
+
+.sponsor_card{
+    width: 300px;
+    height: 200px;
+    padding: 5px 0 30px 0;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    cursor: pointer;
+}
+
+.sponsor_card img{
+    width: 270px;
+    height: 200px;
+    padding: 32px 15px;
+    border-radius: 10px;
+    transition: all .3s;
+    max-width: 100%;
+    /* height: auto; */
+    vertical-align: top;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.sponsor_card img:hover{
+    box-shadow: 0 15px 38px rgba(0,0,0,0.1);
+}
