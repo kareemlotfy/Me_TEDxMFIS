@@ -42,29 +42,31 @@
 var navLinks = document.getElementById("navLinks");
 function showMenu() {
     navLinks.style.right = "0"
+    navLinks.style.display = "block"
 }
 function hideMenu() {
     navLinks.style.right = "-200px"
+    navLinks.style.display = "none"
 }
 
 
 // Shutdown Ticket Form
 
-async function checkFormStatus() {
-    try {
-        const response = await fetch('user/backend.php');
-        const data = await response.json();
+// async function checkFormStatus() {
+//     try {
+//         const response = await fetch('user/backend.php');
+//         const data = await response.json();
 
-        if (data.formOpen === '1') {
-            document.getElementById('myForm').style.display = 'none';
-            document.getElementById('done_message').style.display = 'block';
-        } else {
-            document.getElementById('myForm').style.display = 'block';
-            document.getElementById('done_message').style.display = 'none';
-            // document.getElementById('done_message').innerText = '';
-        }
-    } catch (error) {
-        console.error('Error fetching form status:', error);
-    }
-}
-checkFormStatus()
+//         if (data.formOpen === '1') {
+//             document.getElementById('myForm').style.display = 'none';
+//             document.getElementById('done_message').style.display = 'block';
+//         } else {
+//             document.getElementById('myForm').style.display = 'block';
+//             document.getElementById('done_message').style.display = 'none';
+//             // document.getElementById('done_message').innerText = '';
+//         }
+//     } catch (error) {
+//         console.error('Error fetching form status:', error);
+//     }
+// }
+// checkFormStatus()

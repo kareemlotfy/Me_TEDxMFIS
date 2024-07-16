@@ -333,7 +333,7 @@ nav .burger {
     }
 }
 
-@media (max-width:180px) {
+@media (max-width:780px) {
     .nav-links ul li {
         display: block;
     }
@@ -348,6 +348,7 @@ nav .burger {
         text-align: left;
         z-index: 2;
         transition: 1s;
+        display: none;
     }
 
     nav .burger {

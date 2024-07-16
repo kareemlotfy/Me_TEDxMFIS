@@ -42,7 +42,7 @@
 
             <!-- Nav Links -->
             <div class="nav-links" id="navLinks">
-                <!-- <i class="fa-solid fa-xmark  burger mark" onclick="hideMenu()"></i> -->
+                <i class="fa-solid fa-xmark  burger mark" onclick="hideMenu()"></i>
                 <ul>
                     <li><a href="user/Home/index.php" class="nav_text ">Home</a></li>
                     <li><a href="user/Speakers/speakers.php" class="nav_text">Speakers</a></li>
@@ -56,7 +56,7 @@
                 <button class="ticket-button"><a href="user/Tickets/tickets.php">Get Ticket</a></button>
             </form>
             <!-- Burger Menu -->
-            <!-- <i class="fa-solid fa-bars burger" onclick="showMenu()"></i> -->
+            <i class="fa-solid fa-bars burger" onclick="showMenu()"></i>
         </nav>
     </section>
     <!-- End Header Section -->
@@ -580,6 +580,7 @@
     <!-- JavaScript -->
     <!-- <script src="user/script.js"></script> -->
     <script src="user/Home/script-home.js"></script>
+    <script src="user/script.js"></script>
 </body>
 
 </html>

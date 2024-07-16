@@ -31,7 +31,7 @@
 
             <!-- Nav Links -->
             <div class="nav-links" id="navLinks">
-                <!-- <i class="fa-solid fa-xmark  burger mark" onclick="hideMenu()"></i> -->
+                <i class="fa-solid fa-xmark  burger mark" onclick="hideMenu()"></i>
                 <ul>
                     <li><a href="user/Home/index.php" class="nav_text ">Home</a></li>
                     <li><a href="user/Speakers/speakers.php" class="nav_text">Speakers</a></li>
@@ -45,13 +45,15 @@
                 <button class="ticket-button"><a href="user/Tickets/tickets.php">Get Ticket</a></button>
             </form>
             <!-- Burger Menu -->
-            <!-- <i class="fa-solid fa-bars burger" onclick="showMenu()"></i> -->
+            <i class="fa-solid fa-bars burger" onclick="showMenu()"></i>
         </nav>
     </section>
 
-    <div class="cards" id="banner">
-        <div>
-            <h1 class="text">SPONSORS</h1>
+    <div class="body_section" id="banner">
+        <div class="inner_content">
+            <div>
+                <h1 class="text">SPONSORS</h1>
+            </div>
         </div>
     </div>
 
@@ -63,26 +65,60 @@
             </div>
             <div class="sponsors_slider slider">
                 <div class="sponsor_card">
-                    <img src="user\images\sponsers\sp (1).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (1).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img src="user\images\sponsers\sp (2).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (2).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img src="user\images\sponsers\sp (3).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (3).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img src="user\images\sponsers\sp (4).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (4).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img src="user\images\sponsers\sp (5).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (5).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img src="user\images\sponsers\sp (6).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (6).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img src="user\images\sponsers\sp (7).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (7).png" alt="">
                 </div>
+            </div>
+            <div class="divider_custom" style="width:100%; height:1px; background-color:#e4e4e4;"></div>
+            <div class="spacing_size spacing_size-initial" style="height:48px;"></div>
+            <div class="sponsor_slick_title">
+                <h4><span style="font-weight: 400;" class="genesisexpo_font-weight">Silver Sponsors</span></h4>
+            </div>
+            <div class="genesisexpo_module_spacing">
+                <div class="spacing_size spacing_size-initial" style="height:14px;"></div>
+            </div>
+            <div class="sponsors_slider slider">
+                <div class="sponsor_card">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (1).png" alt="">
+                </div>
+                <div class="sponsor_card">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (2).png" alt="">
+                </div>
+                <div class="sponsor_card">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (3).png" alt="">
+                </div>
+                <div class="sponsor_card">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (4).png" alt="">
+                </div>
+                <div class="sponsor_card">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (5).png" alt="">
+                </div>
+                <div class="sponsor_card">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (6).png" alt="">
+                </div>
+                <div class="sponsor_card">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sp (7).png" alt="">
+                </div>
+            </div>
+            <div class="genesisexpo_module_spacing">
+                <div class="spacing_size spacing_size-initial" style="height:28px;"></div>
             </div>
         </div>
     </section>
@@ -91,8 +127,6 @@
 <div class="cursor2"></div> -->
 
     <script>
-
-
         function setDynamicPadding() {
             var windowWidth = window.innerWidth;
 
@@ -123,6 +157,64 @@
         window.onload = setDynamicPadding;
         window.addEventListener('resize', setDynamicPadding);
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.sponsors_slider').slick({
+                infinite: true,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                responsive: [{
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            dots: false
+                        }
+                    },
+                    {
+                        breakpoint: 799,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+
+        function adjustContainerWidths() {
+            const windowWidth = window.innerWidth;
+            const sponsorCard = document.querySelector('.sponsor_card');
+
+            if (windowWidth >= 480 && windowWidth <= 600) {
+                const diff = 600 - windowWidth;
+                sponsorCard.forEach(card => {
+                    card.style.width = (278 - 2 * diff) + 'px';
+                });
+            } else if (windowWidth <= 480) {
+                const diff = 480 - windowWidth;
+                sponsorCard.style.width = (450 - diff) + 'px';
+            } else {
+                return
+            }
+        }
+
+        window.addEventListener('resize', adjustContainerWidths);
+        window.addEventListener('load', adjustContainerWidths);
+    </script>
+    <!-- <script src="user/Home/script-home.js"></script> -->
+    <script src="user/script.js"></script>
+
 </body>
 
 </html>
