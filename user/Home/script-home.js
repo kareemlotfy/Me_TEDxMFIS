@@ -1,3 +1,26 @@
+// Loadr JS
+// document.addEventListener("DOMContentLoaded", function() {
+
+  // window.addEventListener('load', function() {
+  //   const loaderContainer = document.querySelector('.loader-container');
+
+  //   loaderContainer.style.opacity = '0';
+  //   loaderContainer.style.visibility = 'hidden';
+  //   document.body.style.overflow = 'auto';
+  // });
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const loaderContainer = document.querySelector('.loader-container');
+
+  setTimeout(() => {
+      loaderContainer.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+  }, 1000); // Adjust the delay as needed
+});
+
+
+
 // JS Code With Slick 
 // Code For Making Slide To Schedule Container
 $(document).ready(function () {

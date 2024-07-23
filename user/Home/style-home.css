@@ -22,6 +22,11 @@
     --fontWx7: 700;
     --fontWx8: 800;
     --fontWx9: 900;
+
+    --loader-text-color-1: #ff0000;
+    --loader-text-color-2: #000;
+    --loader-dot-color: #A51FF6;
+    --loader-bg: #fff;
 }
 
 * {
@@ -31,6 +36,114 @@
     font-family: "Rubik", sans-serif;
     font-weight: var(--fontWx3);
 }
+
+/* Loader CSS */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+.loader-container svg {
+    width: 900px;
+    font-weight: 700;
+}
+
+.loader-container svg text {
+    font-size: 25px;
+    stroke-width: 2;
+    letter-spacing: .2px;
+}
+
+.loader-container svg text.text-body-1 {
+    stroke: var(--loader-text-color-1);
+    animation: animate-stroke-1 4s infinite alternate;
+}
+
+.loader-container svg text.text-body-2 {
+    stroke: var(--loader-text-color-2);
+    animation: animate-stroke-2 4s infinite alternate;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-container svg {
+    animation: fadeInOut 2s infinite;
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes animate-stroke-1 {
+    0% {
+        fill: transparent;
+        stroke: var(--loader-text-color-1);
+        stroke-width: 1.5;
+        stroke-dashoffset: 25%;
+        stroke-dasharray: 0 32%;
+    }
+
+    50% {
+        fill: transparent;
+        stroke: var(--loader-text-color-1);
+        stroke-width: 1.5;
+    }
+
+    80%,
+    100% {
+        fill: var(--loader-text-color-1);
+        stroke: transparent;
+        stroke-width: 0;
+        stroke-dashoffset: -25%;
+        stroke-dasharray: 32% 0;
+    }
+}
+
+@keyframes animate-stroke-2 {
+    0% {
+        fill: transparent;
+        stroke: var(--loader-text-color-2);
+        stroke-width: 1.5;
+        stroke-dashoffset: 25%;
+        stroke-dasharray: 0 32%;
+    }
+
+    50% {
+        fill: transparent;
+        stroke: var(--loader-text-color-2);
+        stroke-width: 1.5;
+    }
+
+    80%,
+    100% {
+        fill: var(--loader-text-color-2);
+        stroke: transparent;
+        stroke-width: 0;
+        stroke-dashoffset: -25%;
+        stroke-dasharray: 32% 0;
+    }
+}
+
 
 /* Hero Start */
 .home_header {
