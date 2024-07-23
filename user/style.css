@@ -323,6 +323,123 @@ nav .burger {
     overflow: hidden;
 }
 
+/* Footer */
+
+footer {
+    background-color: #fff;
+    color: #333;
+    padding: 1em;
+    display: grid;
+    place-items: center;
+}
+
+.footer-container {
+    border-top: 1px solid #c7c7c7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 1em 0;
+}
+
+.fc-col1 {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-basis: 25%;
+}
+
+footer .brand {
+    margin: 10px 0;
+    width: auto;
+    height: 60px;
+}
+
+.fc-brand {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: 900;
+}
+
+.fc-col2 {
+    display: flex;
+    justify-content: center;
+    flex-basis: 50%;
+}
+
+.fc-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.fc-menu li {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.fc-col3 {
+    display: flex;
+    justify-content: end;
+    flex-basis: 25%;
+}
+
+.fc-media-icons {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.fc-media-icons li {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    margin: 0.5em;
+    border-radius: 50%;
+}
+
+.footer-text {
+    width: 100%;
+    font-weight: 300;
+    color: #6b6373;
+    text-align:center;
+}
+
+.fc-media-icons i {
+    font-size: 20px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.fc-media-icons a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 20px;
+}
+
+.facebook-icon i:hover {
+    color: #2d4373;
+}
+
+.instagram-icon i:hover {
+    color: #c13584;
+}
+
+.linkedin-icon i:hover {
+    color: #005582;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+}
+
 @media (max-width:1120px) {
     .extra_text_ticket_button {
         display: none;

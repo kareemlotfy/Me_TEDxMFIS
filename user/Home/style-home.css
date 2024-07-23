@@ -621,10 +621,15 @@
 }
 
 .slick-dots {
+    position: relative;
     text-align: center;
     min-height: 50px;
     padding-bottom: 0;
     margin: 30px 15px 0 15px;
+}
+
+.slick-dots li.slick-active button:before{
+    color: transparent;
 }
 
 .slick-dots li {
@@ -1013,6 +1018,9 @@
     .schedule_container{
         width: 980px;
     }
+    .tickets-text-container {
+        margin-left: 0px;
+    }
     .schedule_card{
         width: 172px;
     }
@@ -1134,6 +1142,7 @@
     }
     .abt-left img {
         width: 500px;
+        height: 500px;
     }
     .video-container {
     }
@@ -1383,13 +1392,6 @@
     }
     .special-heading-title {
         font-size: 35px;
-    }
-    .speaker-img img {
-        width: 300px;
-        height: 300px;
-    }
-    .speaker-nav {
-        width: 280px;
     }
 }
 @media (max-width:500px) {
