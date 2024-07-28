@@ -34,41 +34,6 @@
 
 
 
-.cards {
-    padding: 100px 7%;
-}
-
-#banner .text {
-    font-family: 'Rubik', sans-serif;
-    font-size: 110px;
-    color: #faf8f8;
-    position: absolute;
-    bottom: -30px;
-    font-weight: var(--fontWx9);
-    text-transform: uppercase;
-}
-
-#banner {
-    background-image: url(../images/hoem-section-12.jpg);
-    background-position: center;
-    background-size: cover;    
-    width: 100%;
-    height: 260px;
-    padding-left: 200px;
-    position: relative;
-    margin-bottom: 50px;
-}
-
-.body_section{
-    padding: 50px 0;
-}
-
-.inner_content {
-    padding: 35px 15px 0;
-    width: 1200px;
-    box-sizing: border-box;
-}
-
 .sponsor_slick_title {
     font-weight: 400;
     font-size: 30px;

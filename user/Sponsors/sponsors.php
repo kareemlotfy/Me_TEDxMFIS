@@ -24,13 +24,13 @@
 
     <section class="header" id="headerSection">
         <!-- Navigation -->
-        <nav id="navbar">
+        <nav class="banners_navbar" id="navbar">
             <!-- Logo -->
-            <a href="user/Home/index.php"><img src="user\images\TEDx_logo_place2_RGB_CS2_page-0001.png" alt="tedx logo"
+            <a href="user/Home/index.php"><img src="user\images\TEDx_logo_place2_RGB_CS2_page-0003.png" alt="tedx logo"
                     id="tedx_logo"></a>
 
             <!-- Nav Links -->
-            <div class="nav-links" id="navLinks">
+            <div class="nav-links banners_navbar" id="navLinks">
                 <i class="fa-solid fa-xmark  burger mark" onclick="hideMenu()"></i>
                 <ul>
                     <li><a href="user/Home/index.html" class="nav_text ">Home</a></li>
@@ -49,7 +49,7 @@
         </nav>
     </section>
 
-    <div class="body_section" id="banner">
+    <div class="body_section sponsers_banner" id="banner">
         <div class="inner_content">
             <div>
                 <h1 class="text">SPONSORS</h1>
@@ -65,25 +65,25 @@
             </div>
             <div class="sponsors_slider slider">
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (1).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (1).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (2).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (2).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (3).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (3).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (4).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (4).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (5).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (5).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (6).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (6).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (7).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (7).png" alt="">
                 </div>
             </div>
             <div class="divider_custom" style="width:100%; height:1px; background-color:#e4e4e4;"></div>
@@ -96,25 +96,25 @@
             </div>
             <div class="sponsors_slider slider">
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (1).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (1).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (2).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (2).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (3).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (3).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (4).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (4).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (5).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (5).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (6).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (6).png" alt="">
                 </div>
                 <div class="sponsor_card">
-                    <img class="sponsor_card_img" src="user\images\sponsers\sp (7).png" alt="">
+                    <img class="sponsor_card_img" src="user\images\sponsers\sponser (7).png" alt="">
                 </div>
             </div>
             <div class="genesisexpo_module_spacing">
@@ -122,6 +122,39 @@
             </div>
         </div>
     </section>
+    <footer>
+        <div class="inner_content">
+            <div class="footer-container">
+                <div class="fc-col1">
+                    <img src="user\images\TEDx_logo_place2_RGB_CS2_page-0001.png" alt="TEDxManaratAlFarouk logo"
+                        class="brand">
+                </div>
+                <div class="fc-col2">
+                    <div class="footer-text">
+                        This independent TEDx event is operated under license from TED.
+                    </div>
+                    <!-- <ul class="fc-menu">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Speakers</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Sponsors</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Tickets</a></li>
+                    </ul> -->
+                </div>
+                <div class="fc-col3">
+                    <ul class="fc-media-icons">
+                        <li class="facebook-icon"><a href="https://www.facebook.com/TEDxManaratAlFarouk/"
+                                target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li class="instagram-icon"><a href="https://www.instagram.com/tedx.manaratalfaroukschool/"
+                                target="_blank"><i class="fab fa-instagram"></i></a></li>
+                        <li class="linkedin-icon"><a href="https://eg.linkedin.com/company/tedxmanaratalfaroukschool"
+                                target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- <div class="cursor"></div>
 <div class="cursor2"></div> -->
@@ -212,7 +245,7 @@
         window.addEventListener('resize', adjustContainerWidths);
         window.addEventListener('load', adjustContainerWidths);
     </script>
-    <!-- <script src="user/Home/script-home.js"></script> -->
+    <script src="user/Home/script-home.js"></script>
     <script src="user/script.js"></script>
 
 </body>
