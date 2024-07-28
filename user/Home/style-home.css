@@ -942,6 +942,7 @@
     text-align: center;
     font-size: 24px;
     font-weight: 500;
+    max-width: 200px;
 }
 
 .speaker-job {
