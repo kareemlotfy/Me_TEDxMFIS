@@ -31,12 +31,15 @@
 }
 
 .large-speaker-card {
-    width: 540px; /* 2 times the original speaker card width */
+    width: 270px; /* 2 times the original speaker card width */
     height: 370px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .large-speaker-card img {
-    width: 310px;
+    width: 210px;
     border-radius: 12px;
 }
 
