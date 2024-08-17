@@ -1,13 +1,24 @@
-<?php 
+<?php
+// Set secure session cookie parameters before starting the session
+ini_set('session.cookie_secure', '1'); // Ensure cookies are sent over HTTPS
+ini_set('session.cookie_httponly', '1'); // Prevent JavaScript access to session cookies
+ini_set('session.cookie_samesite', 'Strict'); // Mitigate CSRF attacks
+
+
 require("../Misc/db_conn.php");
 require("../Misc/functions.php");
 adminLogin();
 
 $admin_id = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
+$adminName = htmlspecialchars(getAdminName($con, $admin_id), ENT_QUOTES, 'UTF-8');
 $page_id = 2; // Example: Page X ID
-$has_permission = mysqli_query($con, "SELECT * FROM permissions WHERE admin_id=$admin_id AND page_id=$page_id");
 
-if (mysqli_num_rows($has_permission) == 0) {
+$stmt = $con->prepare("SELECT * FROM permissions WHERE admin_id = ? AND page_id = ?");
+$stmt->bind_param("ii", $admin_id, $page_id);
+$stmt->execute();
+$has_permission = $stmt->get_result();
+
+if ($has_permission->num_rows == 0) {
     // Admin doesn't have permission to access this page
     header("Location: ../Misc/unauthorized.php");
     exit();
@@ -17,20 +28,21 @@ $limit = 10; // Number of records per page
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get current page number from query string, default to page 1
 $offset = ($currentPage - 1) * $limit; // Calculate the offset
 
-// filter condition
+// Filter condition
 $filter = '';
 if (isset($_GET['userFilter'])) {
-    if ($_GET['userFilter'] == 'paid') {
+    $userFilter = htmlspecialchars($_GET['userFilter'], ENT_QUOTES, 'UTF-8');
+    if ($userFilter == 'paid') {
         $filter = "WHERE isaccepted = 'yes'";
-    } elseif ($_GET['userFilter'] == 'unpaid') {
+    } elseif ($userFilter == 'unpaid') {
         $filter = "WHERE isaccepted = 'no'";
     }
 }
 
-// search phone
+// Search phone
 $searchPhone = '';
 if (isset($_GET['searchPhone']) && !empty($_GET['searchPhone'])) {
-    $searchPhone = mysqli_real_escape_string($con, $_GET['searchPhone']);
+    $searchPhone = $con->real_escape_string($_GET['searchPhone']);
     $filter .= $filter ? " AND phone LIKE '%$searchPhone%'" : "WHERE phone LIKE '%$searchPhone%'";
 }
 
@@ -45,7 +57,7 @@ if (!$paidCountResult) {
 $paidCountRow = $paidCountResult->fetch_assoc();
 $paidCount = $paidCountRow["paid_count"];
 
-// Count users who did not pay (isaccepted = 'no') 
+// Count users who did not pay (isaccepted = 'no')
 $unpaidCountSql = "SELECT COUNT(*) as unpaid_count FROM user_cred WHERE isaccepted = 'no'";
 $unpaidCountResult = $con->query($unpaidCountSql);
 
@@ -60,8 +72,11 @@ $unpaidCount = $unpaidCountRow["unpaid_count"];
 $totalUsers = $paidCount + $unpaidCount;
 
 // Query to fetch users with pagination and filter
-$sql = "SELECT * FROM user_cred $filter LIMIT $limit OFFSET $offset";
-$result = $con->query($sql);
+$sql = "SELECT * FROM user_cred $filter LIMIT ? OFFSET ?";
+$stmt = $con->prepare($sql);
+$stmt->bind_param("ii", $limit, $offset);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if (!$result) {
     die("Invalid query: " . $con->error);
@@ -158,7 +173,8 @@ $con->close();
 <nav class="navbar">
     <h1>Tickets</h1>
     <form class="centered">
-        <a href="admin/Profile/profile.php"><?php echo $_SESSION["adminName"] ?></a>&nbsp;&nbsp;&nbsp;<a href="admin/Profile/profile.php"><i class="fi fi-tr-circle-user"></i></a>
+    <a href="admin/Profile/profile.php"><?php echo htmlspecialchars($adminName); ?></a>&nbsp;&nbsp;&nbsp;
+    <a href="admin/Profile/profile.php"><i class="fi fi-tr-circle-user"></i></a>
     </form>
 </nav>
 
@@ -179,8 +195,8 @@ $con->close();
 </div>
 
 <div class="main">
-    <h3>Total Users: <?php echo $totalUsers; ?></h3>
-    <h4>Paid: <?php echo $paidCount; ?> | Unpaid: <?php echo $unpaidCount; ?></h4>
+    <h3>Total Users: <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?></h3>
+    <h4>Paid: <?php echo htmlspecialchars($paidCount, ENT_QUOTES, 'UTF-8'); ?> | Unpaid: <?php echo htmlspecialchars($unpaidCount, ENT_QUOTES, 'UTF-8'); ?></h4>
     <br>
     <form action="admin/Tickets/tickets.php" method="get">
         <label for="userFilter">Filter by status:</label>
@@ -191,23 +207,18 @@ $con->close();
         </select>
     </form>
     <br>
-    <?php
-    if ($_GET['userFilter'] == 'paid') {
-        $y = "export_pdf_paid.php";
-    } elseif ($_GET['userFilter'] == 'unpaid') {
-        $y = "export_pdf_unpaid.php";
-    } else {
-        $y = "export_pdf_all.php";
-    }
-    ?>
-    <form action="admin/Tickets/<?php echo $y ?>" method="post">
+
+    <form action="admin/Tickets/export_pdf.php" method="post">
+        <input type="hidden" name="userFilter" value="<?php echo htmlspecialchars(isset($_GET['userFilter']) ? $_GET['userFilter'] : 'all', ENT_QUOTES, 'UTF-8'); ?>">
+        <input type="hidden" name="searchPhone" value="<?php echo htmlspecialchars(isset($_GET['searchPhone']) ? $_GET['searchPhone'] : '', ENT_QUOTES, 'UTF-8'); ?>">
         <button type="submit" class="pagination-btn">Export to PDF</button>
     </form>
+
     <br>
 
     <form action="admin/Tickets/tickets.php" method="get" id="searchForm">
-        <input type="hidden" name="userFilter" value="<?php echo isset($_GET['userFilter']) ? $_GET['userFilter'] : 'all'; ?>">
-        <input type="text" id="searchPhone" name="searchPhone" placeholder="Search by Phone Number" value="<?php echo $searchPhone; ?>">
+        <input type="hidden" name="userFilter" value="<?php echo htmlspecialchars(isset($_GET['userFilter']) ? $_GET['userFilter'] : 'all', ENT_QUOTES, 'UTF-8'); ?>">
+        <input type="text" id="searchPhone" name="searchPhone" placeholder="Search by Phone Number" value="<?php echo htmlspecialchars($searchPhone, ENT_QUOTES, 'UTF-8'); ?>">
     </form>
     
     <table>
@@ -224,23 +235,24 @@ $con->close();
         <tbody id="userTable">
             <?php
             while ($row = $result->fetch_assoc()) {
-                $name = $row["first_name"] . " " . $row["last_name"];
-                $initials = strtoupper($row["first_name"][0] . $row["last_name"][0]);
+                $name = htmlspecialchars($row["first_name"] . " " . $row["last_name"], ENT_QUOTES, 'UTF-8');
+                $initials = htmlspecialchars(strtoupper($row["first_name"][0] . $row["last_name"][0]), ENT_QUOTES, 'UTF-8');
                 $status = $row["isaccepted"] == 'yes' ? "Paid" : "Unpaid";
+                $rowId = htmlspecialchars($row["id"], ENT_QUOTES, 'UTF-8');
                 echo "<tr>
                         <td><div class='profile-circle'>$initials</div></td>
                         <td>" . $name . "</td>
-                        <td>" . $row["email"] . "</td>
-                        <td>" . $row["phone"] . "</td>
-                        <td>" . $status . "</td>
+                        <td>" . htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8') . "</td>
+                        <td>" . htmlspecialchars($row["phone"], ENT_QUOTES, 'UTF-8') . "</td>
+                        <td>" . htmlspecialchars($status, ENT_QUOTES, 'UTF-8') . "</td>
                         <td class='action-icons'>";
                 if ($row["isaccepted"] == 'no') {
-                    echo "<a href='admin/Update/update.php?id=" . $row["id"] . "'><i class='fi fi-rr-pencil'></i></a>
-                          <a href='admin/Accept/accept.php?id=" . $row["id"] . "'><i class='fi fi-rr-check'></i></a>
+                    echo "<a href='admin/Update/update.php?id=" . $rowId . "'><i class='fi fi-rr-pencil'></i></a>
+                          <a href='admin/Accept/accept.php?id=" . $rowId . "'><i class='fi fi-rr-check'></i></a>
                         </td>
                       </tr>";
                 } else {
-                    echo "<a href='admin/Update/update.php?id=" . $row["id"] . "'><i class='fi fi-rr-pencil'></i></a>
+                    echo "<a href='admin/Update/update.php?id=" . $rowId . "'><i class='fi fi-rr-pencil'></i></a>
                           </td>
                       </tr>";
                 }

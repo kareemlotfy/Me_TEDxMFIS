@@ -1,20 +1,53 @@
-<?php 
-
+<?php
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
 adminLogin();
 
 $admin_id = $_SESSION['adminId'];
-$page_id = 4; // Example: Page X ID
-$has_permission = mysqli_query($con, "SELECT * FROM permissions WHERE admin_id=$admin_id AND page_id=$page_id");
+$adminName = getAdminName($con, $admin_id);
 
-if (mysqli_num_rows($has_permission) == 0) {
+// Validate and sanitize admin_id before using it in the query
+if (!filter_var($admin_id, FILTER_VALIDATE_INT)) {
+    header("Location: ../Misc/unauthorized.php");
+    exit();
+}
+
+$page_id = 4; // Example: Page X ID
+
+// Use prepared statements to avoid SQL injection
+$stmt = $con->prepare("SELECT * FROM permissions WHERE admin_id=? AND page_id=?");
+$stmt->bind_param("ii", $admin_id, $page_id);
+$stmt->execute();
+$has_permission = $stmt->get_result();
+
+if ($has_permission->num_rows == 0) {
     // Admin doesn't have permission to access this page
     header("Location: ../Misc/unauthorized.php");
     exit();
 }
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkbox_status'])) {
+    $new_status = $_POST['checkbox_status'] ? 1 : 0;
+    $query = "UPDATE settings SET checkbox_status = ? WHERE id = 1";
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("i", $new_status);
+    if ($stmt->execute()) {
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error']);
+    }
+    exit;
+}
+
+// Fetch checkbox status for initial page load
+$query = "SELECT checkbox_status FROM settings WHERE id = 1";
+$result = $con->query($query);
+$checkbox_status = $result->fetch_assoc()['checkbox_status'];
+
+$con->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +65,8 @@ if (mysqli_num_rows($has_permission) == 0) {
 <nav class="navbar">
     <h1>Settings</h1>
     <form class="centered">
-    <a href="admin/Profile/profile.php"><?php echo $_SESSION["adminName"] ?></a>&nbsp;&nbsp;&nbsp;<a href="admin/Profile/profile.php"><i class="fi fi-tr-circle-user"></i></a>
+        <a href="admin/Profile/profile.php"><?php echo htmlspecialchars($adminName); ?></a>&nbsp;&nbsp;&nbsp;
+        <a href="admin/Profile/profile.php"><i class="fi fi-tr-circle-user"></i></a>
     </form>
 </nav>
 
@@ -52,48 +86,43 @@ if (mysqli_num_rows($has_permission) == 0) {
     <a href="admin/Login/logout.php" class="logout"><i class="fi fi-rr-exit"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
 </div>
 
-<div class="main">
+    <div class="main">
     <div class="card_shutdown">
         <h2>Shutdown Ticketing System</h2>
-        <label for="adminSwitch" class="switch">
-            <input type="checkbox" id="adminSwitch">
+        <label for="settingsCheckbox" class="switch">
+            <input type="checkbox" id="settingsCheckbox" <?php if ($checkbox_status) echo 'checked'; ?>>
             <span class="slider"></span>
         </label>
-        <p>This Should Shutdown The Tickiting System After The Event Ends</p>
+        <p>This Should Shutdown The Ticketing System After The Event Ends</p>
     </div>
 </div>
 
-
 <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            async function initCheckbox() {
-                try {
-                    const response = await fetch('user/backend.php');
-                    const data = await response.json();
-                    document.getElementById('adminSwitch').checked = (data.formOpen === '1');
-                } catch (error) {
-                    console.error('Error initializing checkbox:', error);
-                }
-            }
+        function updateCheckboxStatus(checked) {
+            var checkboxStatus = checked ? 1 : 0;
 
-            initCheckbox();
-
-            document.getElementById('adminSwitch').addEventListener('change', async (event) => {
-                const isOpen = event.target.checked ? '1' : '0';
-                try {
-                    await fetch('user/backend.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ isOpen })
-                    });
-                } catch (error) {
-                    console.error('Error updating form status:', error);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "admin/Settings/settings.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.status === 'success') {
+                        console.log('Checkbox status updated successfully');
+                    } else {
+                        console.error('Failed to update checkbox status');
+                    }
                 }
+            };
+            xhr.send("checkbox_status=" + checkboxStatus);
+        }
+
+        window.onload = function() {
+            var checkbox = document.getElementById('settingsCheckbox');
+            checkbox.addEventListener('change', function() {
+                updateCheckboxStatus(this.checked);
             });
-        });
+        }
     </script>
-
 </body>
 </html>

@@ -2,58 +2,1225 @@
 
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+
 adminLogin();
 
-$admin_id = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
-$page_id = 1; // Example: Page X ID
-$has_permission = mysqli_query($con, "SELECT * FROM permissions WHERE admin_id=$admin_id AND page_id=$page_id");
+                                                // DASHBOARD SYSTEM //
 
-if (mysqli_num_rows($has_permission) == 0) {
+
+                                                
+// Count users who paid (isaccepted = 'yes')
+$paidCountSql = "SELECT COUNT(*) as paid_count FROM user_cred WHERE isaccepted = 'yes'";
+$paidCountResult = $con->query($paidCountSql);
+
+if (!$paidCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$paidCountRow = $paidCountResult->fetch_assoc();
+$paidCount = $paidCountRow["paid_count"];
+
+// Count users who did not pay (isaccepted = 'no')
+$unpaidCountSql = "SELECT COUNT(*) as unpaid_count FROM user_cred WHERE isaccepted = 'no'";
+$unpaidCountResult = $con->query($unpaidCountSql);
+
+if (!$unpaidCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$unpaidCountRow = $unpaidCountResult->fetch_assoc();
+$unpaidCount = $unpaidCountRow["unpaid_count"];
+
+// Total user count
+$totalUsers = $paidCount + $unpaidCount;
+
+
+// Count male users
+$maleCountSql = "SELECT COUNT(*) as male_count FROM user_cred WHERE gender = 'Male'";
+$maleCountResult = $con->query($maleCountSql);
+
+if (!$maleCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$maleCountRow = $maleCountResult->fetch_assoc();
+$maleCount = $maleCountRow["male_count"];
+
+// Count female users
+$femaleCountSql = "SELECT COUNT(*) as female_count FROM user_cred WHERE gender = 'Female'";
+$femaleCountResult = $con->query($femaleCountSql);
+
+if (!$femaleCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$femaleCountRow = $femaleCountResult->fetch_assoc();
+$femaleCount = $femaleCountRow["female_count"];
+
+
+// Count users aged above 18
+$above18CountSql = "SELECT COUNT(*) as above_18_count FROM user_cred WHERE age > 18";
+$above18CountResult = $con->query($above18CountSql);
+
+if (!$above18CountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$above18CountRow = $above18CountResult->fetch_assoc();
+$above18Count = $above18CountRow["above_18_count"];
+
+// Count users aged under 18
+$under18CountSql = "SELECT COUNT(*) as under_18_count FROM user_cred WHERE age <= 18";
+$under18CountResult = $con->query($under18CountSql);
+
+if (!$under18CountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$under18CountRow = $under18CountResult->fetch_assoc();
+$under18Count = $under18CountRow["under_18_count"];
+
+
+// Count users from our school
+$mfisCountSql = "SELECT COUNT(*) as mfis_count FROM user_cred WHERE st_mfis = 'yes'";
+$mfisCountResult = $con->query($mfisCountSql);
+
+if (!$mfisCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$mfisCountRow = $mfisCountResult->fetch_assoc();
+$mfisCount = $mfisCountRow["mfis_count"];
+
+// Count users who are not from our school
+$notMfisCountSql = "SELECT COUNT(*) as not_mfis_count FROM user_cred WHERE st_mfis = 'no'";
+$notMfisCountResult = $con->query($notMfisCountSql);
+
+if (!$notMfisCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$notMfisCountRow = $notMfisCountResult->fetch_assoc();
+$notMfisCount = $notMfisCountRow["not_mfis_count"];
+
+// Count users by login type
+$studentInSchoolCountSql = "SELECT COUNT(*) as student_in_school_count FROM user_cred WHERE login_type = 'Student In School'";
+$studentInSchoolCountResult = $con->query($studentInSchoolCountSql);
+
+if (!$studentInSchoolCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$studentInSchoolCountRow = $studentInSchoolCountResult->fetch_assoc();
+$studentInSchoolCount = $studentInSchoolCountRow["student_in_school_count"];
+
+$studentInCollegeCountSql = "SELECT COUNT(*) as student_in_college_count FROM user_cred WHERE login_type = 'Student In College'";
+$studentInCollegeCountResult = $con->query($studentInCollegeCountSql);
+
+if (!$studentInCollegeCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$studentInCollegeCountRow = $studentInCollegeCountResult->fetch_assoc();
+$studentInCollegeCount = $studentInCollegeCountRow["student_in_college_count"];
+
+$parentCountSql = "SELECT COUNT(*) as parent_count FROM user_cred WHERE login_type = 'Parent'";
+$parentCountResult = $con->query($parentCountSql);
+
+if (!$parentCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$parentCountRow = $parentCountResult->fetch_assoc();
+$parentCount = $parentCountRow["parent_count"];
+
+
+// Count users who entered the event
+$enteredEventCountSql = "SELECT COUNT(*) as entered_count FROM user_cred WHERE enter_status = 'yes'";
+$enteredEventCountResult = $con->query($enteredEventCountSql);
+
+if (!$enteredEventCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$enteredEventCountRow = $enteredEventCountResult->fetch_assoc();
+$enteredEventCount = $enteredEventCountRow["entered_count"];
+
+// Count users who did not enter the event
+$notEnteredEventCountSql = "SELECT COUNT(*) as not_entered_count FROM user_cred WHERE enter_status = 'no'";
+$notEnteredEventCountResult = $con->query($notEnteredEventCountSql);
+
+if (!$notEnteredEventCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$notEnteredEventCountRow = $notEnteredEventCountResult->fetch_assoc();
+$notEnteredEventCount = $notEnteredEventCountRow["not_entered_count"];
+
+// Count users who used the dinner ticket (dinner_status = 'yes')
+$usedDinnerTicketCountSql = "SELECT COUNT(*) as used_dinner_count FROM user_cred WHERE dinner_status = 'yes'";
+$usedDinnerTicketCountResult = $con->query($usedDinnerTicketCountSql);
+
+if (!$usedDinnerTicketCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$usedDinnerTicketCountRow = $usedDinnerTicketCountResult->fetch_assoc();
+$usedDinnerTicketCount = $usedDinnerTicketCountRow["used_dinner_count"];
+
+// Count users who did not use the dinner ticket (dinner_status = 'no')
+$notUsedDinnerTicketCountSql = "SELECT COUNT(*) as not_used_dinner_count FROM user_cred WHERE dinner_status = 'no'";
+$notUsedDinnerTicketCountResult = $con->query($notUsedDinnerTicketCountSql);
+
+if (!$notUsedDinnerTicketCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$notUsedDinnerTicketCountRow = $notUsedDinnerTicketCountResult->fetch_assoc();
+$notUsedDinnerTicketCount = $notUsedDinnerTicketCountRow["not_used_dinner_count"];
+
+
+
+$adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
+$adminName = getAdminName($con, $adminId);
+$pageId = 1; // Example: Page X ID
+
+// Check if the admin has permission to access this page
+$permissionQuery = $con->prepare("SELECT * FROM permissions WHERE admin_id = ? AND page_id = ?");
+$permissionQuery->bind_param("ii", $adminId, $pageId);
+$permissionQuery->execute();
+$hasPermission = $permissionQuery->get_result();
+
+if ($hasPermission->num_rows === 0) {
     // Admin doesn't have permission to access this page
     header("Location: ../Misc/unauthorized.php");
     exit();
 }
 
+$permissionQuery->close();
+$con->close();
 ?>
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact ">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
-    <link rel="stylesheet" href="admin/css/style.css">
-    <link rel="stylesheet" href="admin/css/style-dashboard.css">
-    <title>Admin Panel - TEDx Manarat AlFarouk School</title>
-    <link rel="shortcut icon" href="admin/images/x-art.png" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
+
+    <!-- Base -->
+    <base href="http://localhost/Me_TEDxMFIS/">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="admin/assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/css/theme-default.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Helpers -->
+    <script src="admin/assets/vendor/js/helpers.js"></script>
+    <script src="admin/assets/js/config.js"></script>
+
 </head>
+
 <body>
 
-<nav class="navbar">
-<h1>Dashboard</h1>
-    <form class="centered">
-        <a href="admin/Profile/profile.php"><?php echo $_SESSION["adminName"] ?></a>&nbsp;&nbsp;&nbsp;<a href="admin/Profile/profile.php"><i class="fi fi-tr-circle-user"></i></a>
-    </form>
-</nav>
 
-<div class="aside">
-    <br><br>
-    <img src="user/images/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="" class="logo">
-    <br><br><br>
-    <ul>
-        <a href="admin/Dashboard/dashboard.php"><li><i class="fi fi-rr-house-chimney"></i> &nbsp;&nbsp;Dashboard</li></a>
-        <a href="admin/Tickets/tickets.php?userFilter=all"><li><i class="fi fi-rr-ticket"></i> &nbsp;&nbsp;Tickets</li></a>
-        <a href="admin/Misc/coming-soon.php"><li><i class="fi fi-rr-briefcase-blank"></i> &nbsp;&nbsp;Recroute</li></a>
-        <a href="admin/Misc/coming-soon.php"><li><i class="fi fi-rr-shopping-cart"></i> &nbsp;&nbsp;Shop</li></a>
-        <a href="admin/Settings/settings.php"><li><i class="fi fi-rr-settings"></i> &nbsp;&nbsp;Settings</li></a>
-        <br><br><br><br><br>
-    </ul>
-    <br>
-    <a href="admin/Login/logout.php" class="logout"><i class="fi fi-rr-exit"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
-</div>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar  ">
+        <div class="layout-container">
 
-<div class="main">
-</div>
+
+            <!-- Menu -->
+
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+
+                <div class="app-brand demo pb-4 pt-4 ">
+                    <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
+                        <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
+                            id="tedx_logo" style="
+    width: auto;
+    height: 60px;">
+                    </a>
+
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                        <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                    </a>
+                </div>
+
+                <div class="menu-inner-shadow"></div>
+
+
+
+                <ul class="menu-inner py-1">
+                    <!-- Dashboards -->
+                    <li class="menu-item active open">
+                        <a href="admin/Dashboard/dashboard.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-smile"></i>
+                            <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
+                        </a>
+                    </li>
+
+                    <!-- e-commerce-app menu start -->
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bx-cart-alt'></i>
+                            <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="app-ecommerce-dashboard.html" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Products">Products</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-product-list.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Product List">Product List</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-product-add.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Add Product">Add Product</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-category-list.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Category List">Category List</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Order">Order</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-order-list.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Order List">Order List</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-order-details.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Order Details">Order Details</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Customer">Customer</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-customer-all.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="All Customers">All Customers</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <div class="text-truncate" data-i18n="Customer Details">Customer Details
+                                            </div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="app-ecommerce-customer-details-overview.html"
+                                                    class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Overview">Overview</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="app-ecommerce-customer-details-security.html"
+                                                    class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Security">Security</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="app-ecommerce-customer-details-billing.html" class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Address & Billing">Address &
+                                                        Billing</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="app-ecommerce-manage-reviews.html" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Manage Reviews">Manage Reviews</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="app-ecommerce-referral.html" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Referrals">Referrals</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Settings">Settings</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-detail.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Store Details">Store Details</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-payments.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Payments">Payments</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-checkout.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Checkout">Checkout</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-shipping.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Shipping & Delivery">Shipping &
+                                                Delivery</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-locations.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Locations">Locations</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-notifications.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Notifications">Notifications</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- e-commerce-app menu end -->
+                    <li class="menu-item">
+                        <a href="admin/Tickets/tickets.php?userFilter=all" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div class="text-truncate" data-i18n="Users">Users</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="admin/Settings/settings.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-cog"></i>
+                            <div class="text-truncate" data-i18n="Settings">Settings</div>
+                        </a>
+                    </li>
+            </aside>
+            <!-- / Menu -->
+
+
+
+            <!-- Layout container -->
+            <div class="layout-page">
+
+
+
+
+
+                <!-- Navbar -->
+
+
+
+
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0   d-xl-none ">
+                        <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-md"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <!-- Language -->
+                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                    data-bs-toggle="dropdown">
+                                    <i class='bx bx-globe bx-sm'></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-language="en"
+                                            data-text-direction="ltr">
+                                            <span>English</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-language="fr"
+                                            data-text-direction="ltr">
+                                            <span>French</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-language="ar"
+                                            data-text-direction="rtl">
+                                            <span>Arabic</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-language="de"
+                                            data-text-direction="ltr">
+                                            <span>German</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- /Language -->
+
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
+                                    data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
+                                            class="w-px-40 h-auto rounded-circle">
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="admin/Profile/profile.php">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
+                                                            class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
+                                                    <small class="text-muted">Admin</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider my-1"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="admin\Profile\profile.php">
+                                            <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="admin\Profile\edit_account.php">
+                                            <i class="bx bx-cog bx-md me-3"></i><span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider my-1"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="admin/Login/logout.php" target="_blank">
+                                            <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--/ User -->
+                        </ul>
+                    </div>
+
+
+                    <!-- Search Small Screens -->
+                    <div class="navbar-search-wrapper search-input-wrapper  d-none">
+                        <input type="text" class="form-control search-input container-xxl border-0"
+                            placeholder="Search..." aria-label="Search...">
+                        <i class="bx bx-x bx-md search-toggler cursor-pointer"></i>
+                    </div>
+                </nav>
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="row">
+                            <div class="col-xxl-6 col-lg-12 col-md-6 order-0">
+                                <div class="row">
+                                    <div class="col-6 mb-6">
+                                        <div class="card h-100">
+                                            <div class="card-body pb-0">
+                                                <span class="d-block fw-medium mb-1">Gender</span>
+                                                <h4 class="card-title mb-0 mb-lg-4">Total
+                                                    <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                </h4>
+                                                <div id="genderChart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-6">
+                                        <div class="card h-100">
+                                            <div class="card-body pb-0">
+                                                <span class="d-block fw-medium mb-1">Ages</span>
+                                                <h4 class="card-title mb-0 mb-lg-4">Total
+                                                    <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                </h4>
+                                                <div id="ageChart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-12 col-xxl-6 order-3 order-md-2">
+                                <div class="row">
+                                    <div class="col-6 mb-6">
+                                        <div class="card h-100">
+                                            <div class="card-body pb-0">
+                                                <span class="d-block fw-medium mb-1">From MFIS</span>
+                                                <h4 class="card-title mb-0 mb-lg-4">Total
+                                                    <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                </h4>
+                                                <div id="mfisChart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-6">
+                                        <div class="card h-100">
+                                            <div class="card-body pb-0">
+                                                <span class="d-block fw-medium mb-1">Login Type</span>
+                                                <h4 class="card-title mb-0 mb-lg-4">Total
+                                                    <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                </h4>
+                                                <div id="loginChart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Event Statistics -->
+                            <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-6">
+                                <div class="card h-100">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <div class="card-title mb-0">
+                                            <h5 class="mb-1 me-2">Event Status</h5>
+                                            <p class="card-subtitle">
+                                                <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?> Total
+                                                Users</p>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn text-muted p-0" type="button" id="orederStatistics"
+                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="bx bx-dots-vertical-rounded bx-md"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end"
+                                                aria-labelledby="orederStatistics">
+                                                <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                                                <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                                                <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-6">
+                                            <div class="d-flex flex-column align-items-center gap-1">
+                                                <h3 class="mb-1">8</h3>
+                                                <small>Total User Today</small>
+                                            </div>
+                                            <div id="eChart"></div>
+                                        </div>
+                                        <ul class="p-0 m-0">
+                                            <li class="d-flex align-items-center mb-5">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <span class="avatar-initial rounded bg-label-primary"><i
+                                                            class='bx bx-mobile-alt'></i></span>
+                                                </div>
+                                                <div
+                                                    class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Entered Event</h6>
+                                                    </div>
+                                                    <div class="user-progress">
+                                                        <h6 class="mb-0">
+                                                            <?php echo htmlspecialchars($enteredEventCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex align-items-center mb-5">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <span class="avatar-initial rounded bg-label-success"><i
+                                                            class='bx bx-closet'></i></span>
+                                                </div>
+                                                <div
+                                                    class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Didn't Enter Event</h6>
+                                                    </div>
+                                                    <div class="user-progress">
+                                                        <h6 class="mb-0">
+                                                            <?php echo htmlspecialchars($notEnteredEventCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex align-items-center mb-5">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <span class="avatar-initial rounded bg-label-info"><i
+                                                            class='bx bx-home-alt'></i></span>
+                                                </div>
+                                                <div
+                                                    class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Ate Dinner</h6>
+                                                    </div>
+                                                    <div class="user-progress">
+                                                        <h6 class="mb-0">
+                                                            <?php echo htmlspecialchars($usedDinnerTicketCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex align-items-center">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <span class="avatar-initial rounded bg-label-secondary"><i
+                                                            class='bx bx-football'></i></span>
+                                                </div>
+                                                <div
+                                                    class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Didn't Eat Dinner</h6>
+                                                    </div>
+                                                    <div class="user-progress">
+                                                        <h6 class="mb-0">
+                                                            <?php echo htmlspecialchars($notUsedDinnerTicketCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ Event Statistics -->
+
+                            <!-- Grades Overview -->
+                            <div class="col-md-6 col-lg-6 col-xl-6 order-1 mb-6">
+                                <div class="card">
+                                    <div class="card-header header-elements">
+                                        <h5 class="card-title mb-0">Grade Analysis</h5>
+                                        <div class="card-header-elements ms-auto py-0 dropdown">
+                                            <button
+                                                class="btn btn-text-secondary rounded-pill text-muted border-0 p-2 me-n1"
+                                                type="button" id="heat-chart-dd" data-bs-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false"><i
+                                                    class="bx bx-dots-vertical-rounded bx-md text-muted"></i></button>
+                                            <div class="dropdown-menu dropdown-menu-end"
+                                                aria-labelledby="heat-chart-dd">
+                                                <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+                                                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                                <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="gardesChart" class="chartjs" data-height="337"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ Grades Overview -->
+
+                            <!-- Google and Events Timeline -->
+                            <div class="col-md-6 col-lg-6 order-4 order-lg-3">
+                                <div class="card text-center h-100">
+                                    <div class="card-header nav-align-top">
+                                        <ul class="nav nav-pills" role="tablist">
+                                            <li class="nav-item">
+                                                <button type="button" class="nav-link active" role="tab"
+                                                    data-bs-toggle="tab" data-bs-target="#navs-pills-google"
+                                                    aria-controls="navs-pills-google"
+                                                    aria-selected="true">Google</button>
+                                            </li>
+                                            <li class="nav-item">
+                                                <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                                    data-bs-target="#navs-pills-events"
+                                                    aria-controls="navs-pills-events"
+                                                    aria-selected="false">Events</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content pt-0 pb-4">
+                                        <div class="tab-pane fade show active" id="navs-pills-google" role="tabpanel">
+                                            <div class="table-responsive text-start text-nowrap">
+                                                <div class="card h-100">
+                                                    <div
+                                                        class="card-header d-flex align-items-center justify-content-between">
+                                                        <div class="card-title mb-0">
+                                                            <h5 class="mb-1">Google Statistics</h5>
+                                                            <p class="card-subtitle">Total number of Visits 23.8k</p>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <button type="button"
+                                                                class="btn btn-label-primary">January</button>
+                                                            <button type="button"
+                                                                class="btn btn-label-primary dropdown-toggle dropdown-toggle-split"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <span class="visually-hidden">Toggle Dropdown</span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">January</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">February</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">March</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">April</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">May</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">June</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">July</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">August</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">September</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">October</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">November</a></li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="javascript:void(0);">December</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div id="googleStatisticsChart"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="navs-pills-events" role="tabpanel">
+                                            <div class="table-responsive text-start text-nowrap">
+                                                <div class="card">
+                                                    <div class="card-header header-elements">
+                                                        <h5 class="card-title mb-0">Event Statistics</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <canvas id="eventsChart" class="chartjs"
+                                                            data-height="400"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ Google and Events Timeline -->
+                            <!-- Browser and OS table -->
+                            <div class="col-md-6 order-3 order-lg-4 mb-6 mb-lg-0">
+                                <div class="card text-center h-100">
+                                    <div class="card-header nav-align-top">
+                                        <ul class="nav nav-pills" role="tablist">
+                                            <li class="nav-item">
+                                                <button type="button" class="nav-link active" role="tab"
+                                                    data-bs-toggle="tab" data-bs-target="#navs-pills-browser"
+                                                    aria-controls="navs-pills-browser"
+                                                    aria-selected="true">Browser</button>
+                                            </li>
+                                            <li class="nav-item">
+                                                <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                                    data-bs-target="#navs-pills-os" aria-controls="navs-pills-os"
+                                                    aria-selected="false">Operating
+                                                    System</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content pt-0 pb-4">
+                                        <div class="tab-pane fade show active" id="navs-pills-browser" role="tabpanel">
+                                            <div class="table-responsive text-start text-nowrap">
+                                                <table class="table table-borderless">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Browser</th>
+                                                            <th>Visits</th>
+                                                            <th class="w-50">Data In Percentage</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/chrome.png"
+                                                                        alt="Chrome" height="24" class="me-3">
+                                                                    <span class="text-heading">Chrome</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">8.92k</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-success"
+                                                                            role="progressbar" style="width: 64.75%"
+                                                                            aria-valuenow="64.75" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">64.75%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/safari.png"
+                                                                        alt="Safari" height="24" class="me-3">
+                                                                    <span class="text-heading">Safari</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">1.29k</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-primary"
+                                                                            role="progressbar" style="width: 18.43%"
+                                                                            aria-valuenow="18.43" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">18.43%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/firefox.png"
+                                                                        alt="Firefox" height="24" class="me-3">
+                                                                    <span class="text-heading">Firefox</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">328</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-info"
+                                                                            role="progressbar" style="width: 8.37%"
+                                                                            aria-valuenow="8.37" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">8.37%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/edge.png"
+                                                                        alt="Edge" height="24" class="me-3">
+                                                                    <span class="text-heading">Edge</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">142</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-warning"
+                                                                            role="progressbar" style="width: 6.12%"
+                                                                            aria-valuenow="6.12" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">6.12%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/opera.png"
+                                                                        alt="Opera" height="24" class="me-3">
+                                                                    <span class="text-heading">Opera</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">82</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-danger"
+                                                                            role="progressbar" style="width: 2.12%"
+                                                                            aria-valuenow="1.94" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">2.12%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>6</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/uc.png"
+                                                                        alt="uc" height="24" class="me-3">
+                                                                    <span class="text-heading">UC Browser</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">328</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-danger"
+                                                                            role="progressbar" style="width: 20.14%"
+                                                                            aria-valuenow="1.94" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">20.14%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="navs-pills-os" role="tabpanel">
+                                            <div class="table-responsive text-start text-nowrap">
+                                                <table class="table table-borderless">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>System</th>
+                                                            <th>Visits</th>
+                                                            <th class="w-50">Data In Percentage</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/windows.png"
+                                                                        alt="Windows" height="24" class="me-3">
+                                                                    <span class="text-heading">Windows</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">875.24k</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-success"
+                                                                            role="progressbar" style="width: 61.50%"
+                                                                            aria-valuenow="61.50" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">61.50%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/mac.png"
+                                                                        alt="Mac" height="24" class="me-3">
+                                                                    <span class="text-heading">Mac</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">89.68k</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-primary"
+                                                                            role="progressbar" style="width: 16.67%"
+                                                                            aria-valuenow="16.67" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">16.67%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/ubuntu.png"
+                                                                        alt="Ubuntu" height="24" class="me-3">
+                                                                    <span class="text-heading">Ubuntu</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">37.68k</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-info"
+                                                                            role="progressbar" style="width: 12.82%"
+                                                                            aria-valuenow="12.82" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">12.82%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/chrome.png"
+                                                                        alt="Chrome" height="24" class="me-3">
+                                                                    <span class="text-heading">Chrome</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">8.34k</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-warning"
+                                                                            role="progressbar" style="width: 6.25%"
+                                                                            aria-valuenow="6.25" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">6.25%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/cent.png"
+                                                                        alt="Cent" height="24" class="me-3">
+                                                                    <span class="text-heading">Cent</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">2.25k</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-danger"
+                                                                            role="progressbar" style="width: 2.76%"
+                                                                            aria-valuenow="2.76" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">2.76%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>6</td>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <img src="admin/assets/img/icons/brands/linux.png"
+                                                                        alt="linux" height="24" class="me-3">
+                                                                    <span class="text-heading">Linux</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-heading">328k</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center gap-4">
+                                                                    <div class="progress w-100" style="height:10px;">
+                                                                        <div class="progress-bar bg-danger"
+                                                                            role="progressbar" style="width: 20.14%"
+                                                                            aria-valuenow="2.76" aria-valuemin="0"
+                                                                            aria-valuemax="100"></div>
+                                                                    </div>
+                                                                    <small class="fw-medium">20.14%</small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ Browser and OS table -->
+                        </div>
+
+                    </div>
+                    <!-- / Content -->
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+
+
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="admin/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="admin/assets/vendor/libs/popper/popper.js"></script>
+    <script src="admin/assets/vendor/js/bootstrap.js"></script>
+    <script src="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="admin/assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="admin/assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="admin/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="admin/assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="admin/assets/vendor/libs/chartjs/chartjs.js"></script>
+
+    <!-- Main JS -->
+    <script src="admin/assets/js/main.js"></script>
+
+
+    <!-- Page JS -->
+    <script src="admin/assets/js/dashboards-analytics.js"></script>
 
 </body>
+
 </html>

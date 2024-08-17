@@ -1,7 +1,10 @@
 <?php 
 
 require("functions.php");
+require("db_conn.php");
 adminLogin();
+$admin_id = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
+$adminName = getAdminName($con, $admin_id);
 
 ?>
 
@@ -19,15 +22,16 @@ adminLogin();
 <body>
 
 <nav class="navbar">
-<h1>Unauthorized !</h1>
+    <h1>Unauthorized Access</h1>
     <form class="centered">
-        <a href="admin/Profile/profile.php"><?php echo $_SESSION["adminName"] ?></a>&nbsp;&nbsp;&nbsp;<a href="admin/Profile/profile.php"><i class="fi fi-tr-circle-user"></i></a>
+    <a href="admin/Profile/profile.php"><?php echo htmlspecialchars($adminName); ?></a>&nbsp;&nbsp;&nbsp;
+    <a href="admin/Profile/profile.php"><i class="fi fi-tr-circle-user"></i></a>
     </form>
 </nav>
 
 <div class="aside">
     <br><br>
-    <img src="user/images/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="" class="logo">
+    <img src="user/images/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="TEDx Logo" class="logo">
     <br><br><br>
     <ul>
         <a href="admin/Dashboard/dashboard.php"><li><i class="fi fi-rr-house-chimney"></i> &nbsp;&nbsp;Dashboard</li></a>
@@ -42,7 +46,7 @@ adminLogin();
 </div>
 
 <div class="main">
-    <?php echo "You are not authorized to access this page."; ?>
+    <p>You are not authorized to access this page. Please contact support or <a href="admin/Dashboard/dashboard.php">return to the dashboard</a>.</p>
 </div>
 
 </body>
