@@ -34,6 +34,18 @@
 body{
     background: var(--light);
 }
+.profile-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffe0db;
+    color: #ff3e1d;
+    font-size: 12px;
+}
+
 .container{
     display: flex;
     align-items: center;

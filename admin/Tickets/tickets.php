@@ -97,173 +97,624 @@ $con->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr"
+    data-theme="theme-default" data-assets-path="admin/assets/" data-template="vertical-menu-template"
+    data-style="light">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>User</title>
+    <!-- Base -->
+    <base href="http://localhost/Me_TEDxMFIS/">
     <link rel="stylesheet" href="admin/css/style.css">
-    <link rel="stylesheet" href="admin/css/style-tickets.css">
-    <title>Admin Panel - TEDx Manarat AlFarouk School</title>
-    <link rel="shortcut icon" href="admin/images/x-art.png" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="admin/css/style-tickets.css"> -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
-    <style>
-    .pagination {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        padding-bottom: 20px;
-    }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
 
-    .pagination a, .pagination-btn {
-        color: #007bff;
-        padding: 8px 16px;
-        text-decoration: none;
-        transition: background-color 0.3s;
-        margin: 0 4px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        display: inline-block;
-        cursor: pointer;
-        background-color: white;
-    }
+    <!-- Icons -->
+    <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/fonts/flag-icons.css" />
 
-    .pagination a:hover, .pagination-btn:hover {
-        background-color: #f1f1f1;
-    }
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
 
-    .pagination a.active, .pagination-btn.active {
-        background-color: #007bff;
-        color: white;
-        border: 1px solid #007bff;
-    }
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
+    <link rel="stylesheet" href="admin/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
+    <link rel="stylesheet" href="admin/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css">
+    <link rel="stylesheet" href="admin/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/libs/@form-validation/form-validation.css" />
 
-    .pagination a.disabled, .pagination-btn.disabled {
-        color: #ddd;
-        pointer-events: none;
-    }
+    <!-- Page CSS -->
 
-    .profile-circle {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #ffe0db;
-        color: #ff3e1d;
-        font-size: 14px;
-    }
 
-    .action-icons i {
-        font-size: 20px;
-        cursor: pointer;
-        margin-right: 10px;
-        color: #007bff;
-        transition: color 0.3s;
-    }
+    <!-- Helpers -->
+    <script src="admin/assets/vendor/js/helpers.js"></script>
+    <script src="admin/assets/js/config.js"></script>
 
-    .action-icons i:hover {
-        color: #0056b3;
-    }
-    </style>
 </head>
+
 <body>
 
-<nav class="navbar">
-    <h1>Tickets</h1>
-    <form class="centered">
-    <a href="admin/Profile/profile.php"><?php echo htmlspecialchars($adminName); ?></a>&nbsp;&nbsp;&nbsp;
-    <a href="admin/Profile/profile.php"><i class="fi fi-tr-circle-user"></i></a>
-    </form>
-</nav>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar  ">
+        <div class="layout-container">
+            <!-- Menu -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo pb-4 pt-4 ">
+                    <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
+                        <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
+                            id="tedx_logo" style="
+    width: auto;
+    height: 60px;">
+                    </a>
 
-<div class="aside">
-    <br><br>
-    <img src="user/images/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="" class="logo">
-    <br><br><br>
-    <ul>
-        <a href="admin/Dashboard/dashboard.php"><li><i class="fi fi-rr-house-chimney"></i> &nbsp;&nbsp;Dashboard</li></a>
-        <a href="admin/Tickets/tickets.php?userFilter=all"><li><i class="fi fi-rr-ticket"></i> &nbsp;&nbsp;Tickets</li></a>
-        <a href="admin/Misc/coming-soon.php"><li><i class="fi fi-rr-briefcase-blank"></i> &nbsp;&nbsp;Recroute</li></a>
-        <a href="admin/Misc/coming-soon.php"><li><i class="fi fi-rr-shopping-cart"></i> &nbsp;&nbsp;Shop</li></a>
-        <a href="admin/Settings/settings.php"><li><i class="fi fi-rr-settings"></i> &nbsp;&nbsp;Settings</li></a>
-        <br><br><br><br><br>
-    </ul>
-    <br>
-    <a href="admin/Login/logout.php" class="logout"><i class="fi fi-rr-exit"></i>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
-</div>
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                        <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                    </a>
+                </div>
 
-<div class="main">
-    <h3>Total Users: <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?></h3>
-    <h4>Paid: <?php echo htmlspecialchars($paidCount, ENT_QUOTES, 'UTF-8'); ?> | Unpaid: <?php echo htmlspecialchars($unpaidCount, ENT_QUOTES, 'UTF-8'); ?></h4>
-    <br>
-    <form action="admin/Tickets/tickets.php" method="get">
-        <label for="userFilter">Filter by status:</label>
-        <select name="userFilter" id="userFilter" onchange="this.form.submit()">
-            <option value="all" <?php if (!isset($_GET['userFilter']) || $_GET['userFilter'] == 'all') echo 'selected'; ?>>All</option>
-            <option value="paid" <?php if (isset($_GET['userFilter']) && $_GET['userFilter'] == 'paid') echo 'selected'; ?>>Paid</option>
-            <option value="unpaid" <?php if (isset($_GET['userFilter']) && $_GET['userFilter'] == 'unpaid') echo 'selected'; ?>>Unpaid</option>
-        </select>
-    </form>
-    <br>
+                <div class="menu-inner-shadow"></div>
 
-    <form action="admin/Tickets/export_pdf.php" method="post">
-        <input type="hidden" name="userFilter" value="<?php echo htmlspecialchars(isset($_GET['userFilter']) ? $_GET['userFilter'] : 'all', ENT_QUOTES, 'UTF-8'); ?>">
-        <input type="hidden" name="searchPhone" value="<?php echo htmlspecialchars(isset($_GET['searchPhone']) ? $_GET['searchPhone'] : '', ENT_QUOTES, 'UTF-8'); ?>">
-        <button type="submit" class="pagination-btn">Export to PDF</button>
-    </form>
+                <ul class="menu-inner py-1">
+                    <!-- Dashboards -->
+                    <li class="menu-item">
+                        <a href="admin/Dashboard/dashboard.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-smile"></i>
+                            <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
+                        </a>
+                    </li>
 
-    <br>
+                    <!-- e-commerce-app menu start -->
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bx-cart-alt'></i>
+                            <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="app-ecommerce-dashboard.html" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Products">Products</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-product-list.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Product List">Product List</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-product-add.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Add Product">Add Product</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-category-list.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Category List">Category List</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Order">Order</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-order-list.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Order List">Order List</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-order-details.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Order Details">Order Details</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Customer">Customer</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">3
+                                        <a href="app-ecommerce-customer-all.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="All Customers">All Customers</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <div class="text-truncate" data-i18n="Customer Details">Customer Details
+                                            </div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="app-ecommerce-customer-details-overview.html"
+                                                    class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Overview">Overview</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="app-ecommerce-customer-details-security.html"
+                                                    class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Security">Security</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="app-ecommerce-customer-details-billing.html" class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Address & Billing">Address &
+                                                        Billing</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="app-ecommerce-manage-reviews.html" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Manage Reviews">Manage Reviews</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="app-ecommerce-referral.html" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Referrals">Referrals</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Settings">Settings</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-detail.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Store Details">Store Details</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-payments.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Payments">Payments</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-checkout.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Checkout">Checkout</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-shipping.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Shipping & Delivery">Shipping &
+                                                Delivery</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-locations.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Locations">Locations</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="app-ecommerce-settings-notifications.html" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Notifications">Notifications</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- e-commerce-app menu end -->
+                    <li class="menu-item  active open">
+                        <a href="app-user-list.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div class="text-truncate" data-i18n="Users">Users</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-cog"></i>
+                            <div class="text-truncate" data-i18n="Settings">Settings</div>
+                        </a>
+                    </li>
+            </aside>
+            <!-- / Menu -->
 
-    <form action="admin/Tickets/tickets.php" method="get" id="searchForm">
-        <input type="hidden" name="userFilter" value="<?php echo htmlspecialchars(isset($_GET['userFilter']) ? $_GET['userFilter'] : 'all', ENT_QUOTES, 'UTF-8'); ?>">
-        <input type="text" id="searchPhone" name="searchPhone" placeholder="Search by Phone Number" value="<?php echo htmlspecialchars($searchPhone, ENT_QUOTES, 'UTF-8'); ?>">
-    </form>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Profile</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="userTable">
-            <?php
+
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                    id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0   d-xl-none ">
+                        <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-md"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <!-- Language -->
+                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                    data-bs-toggle="dropdown">
+                                    <i class='bx bx-globe bx-sm'></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-language="en"
+                                            data-text-direction="ltr">
+                                            <span>English</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-language="fr"
+                                            data-text-direction="ltr">
+                                            <span>French</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-language="ar"
+                                            data-text-direction="rtl">
+                                            <span>Arabic</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-language="de"
+                                            data-text-direction="ltr">
+                                            <span>German</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- /Language -->
+
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
+                                    data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="admin/assets/img/avatars/1.png" alt
+                                            class="w-px-40 h-auto rounded-circle">
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <img src="admin/assets/img/avatars/1.png" alt
+                                                            class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0">John Doe</h6>
+                                                    <small class="text-muted">Admin</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider my-1"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="pages-profile-user.html">
+                                            <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                                            <i class="bx bx-cog bx-md me-3"></i><span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider my-1"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+                                            <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--/ User -->
+                        </ul>
+                    </div>
+
+                    <!-- Search Small Screens -->
+                    <div class="navbar-search-wrapper search-input-wrapper  d-none">
+                        <input type="text" class="form-control search-input container-xxl border-0"
+                            placeholder="Search..." aria-label="Search...">
+                        <i class="bx bx-x bx-md search-toggler cursor-pointer"></i>
+                    </div>
+                </nav>
+                <!-- / Navbar -->
+
+
+
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Analysis Part -->
+                        <div class="row g-6 mb-6">
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="content-left">
+                                                <span class="text-heading">Total Users</span>
+                                                <div class="d-flex align-items-center my-1">
+                                                    <h4 class="mb-0 me-2">
+                                                        <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <div class="avatar">
+                                                <span class="avatar-initial rounded bg-label-primary">
+                                                    <i class="bx bx-group bx-"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="content-left">
+                                                <span class="text-heading">Paid Users</span>
+                                                <div class="d-flex align-items-center my-1">
+                                                    <h4 class="mb-0 me-2">
+                                                        <?php echo htmlspecialchars($paidCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <div class="avatar">
+                                                <span class="avatar-initial rounded bg-label-danger">
+                                                    <i class="bx bx-user-plus bx-sm"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="content-left">
+                                                <span class="text-heading">Unpaid Users</span>
+                                                <div class="d-flex align-items-center my-1">
+                                                    <h4 class="mb-0 me-2">
+                                                        <?php echo htmlspecialchars($unpaidCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <div class="avatar">
+                                                <span class="avatar-initial rounded bg-label-success">
+                                                    <i class="bx bx-user-check bx-sm"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <div class="content-left">
+                                                <span class="text-heading">Rejected Users</span>
+                                                <div class="d-flex align-items-center my-1">
+                                                    <h4 class="mb-0 me-2">Unknown</h4>
+                                                </div>
+                                            </div>
+                                            <div class="avatar">
+                                                <span class="avatar-initial rounded bg-label-warning">
+                                                    <i class="bx bx-user-voice bx-sm"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Users List Table -->
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h5 class="card-title mb-0">Search Filters</h5>
+                                <div
+                                    class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0 g-6">
+                                </div>
+                            </div>
+                            <div class="card-datatable table-responsive">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                    <div class="row">
+                                        <div class="col-md-2" style="margin-top: 1.5rem; margin-bottom:1.5rem">
+                                            <form action="admin/Tickets/tickets.php" method="get">
+                                                <select id="UserRole" class="form-select text-capitalize"
+                                                    name="userFilter" id="userFilter" onchange="this.form.submit()">
+                                                    <option value="all"
+                                                        <?php if (!isset($_GET['userFilter']) || $_GET['userFilter'] == 'all') echo 'selected'; ?>>
+                                                        All</option>
+                                                    <option value="paid"
+                                                        <?php if (isset($_GET['userFilter']) && $_GET['userFilter'] == 'paid') echo 'selected'; ?>>
+                                                        Paid</option>
+                                                    <option value="unpaid"
+                                                        <?php if (isset($_GET['userFilter']) && $_GET['userFilter'] == 'unpaid') echo 'selected'; ?>>
+                                                        Unpaid</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div
+                                                class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-6 mb-md-0 mt-n6 mt-md-0 gap-md-4">
+                                                <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                                                    <form action="admin/Tickets/tickets.php" method="get"
+                                                        id="searchForm">
+                                                        <input type="hidden" name="userFilter"
+                                                            value="<?php echo htmlspecialchars(isset($_GET['userFilter']) ? $_GET['userFilter'] : 'all', ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <input type="text" class="form-control" id="searchPhone"
+                                                            name="searchPhone" placeholder="Search User"
+                                                            value="<?php echo htmlspecialchars($searchPhone, ENT_QUOTES, 'UTF-8'); ?>">
+
+                                                    </form>
+
+                                                </div>
+                                                <div class="dt-buttons btn-group flex-wrap">
+                                                    <div class="btn-group">
+                                                        <form action="admin/Tickets/export_pdf.php" method="post">
+                                                            <input type="hidden" name="userFilter"
+                                                                value="<?php echo htmlspecialchars(isset($_GET['userFilter']) ? $_GET['userFilter'] : 'all', ENT_QUOTES, 'UTF-8'); ?>">
+                                                            <input type="hidden" name="searchPhone"
+                                                                value="<?php echo htmlspecialchars(isset($_GET['searchPhone']) ? $_GET['searchPhone'] : '', ENT_QUOTES, 'UTF-8'); ?>">
+                                                            <button
+                                                                class="btn buttons-collection pagination-btn dropdown-toggle btn-label-secondary me-4"
+                                                                tabindex="0" aria-controls="DataTables_Table_0"
+                                                                type="submit" aria-haspopup="dialog"
+                                                                aria-expanded="false">
+                                                                <span><i
+                                                                        class="bx bx-export me-2 bx-sm"></i>Export</span>
+                                                            </button>
+                                                        </form>
+                                                    </div> <button class="btn btn-secondary add-new btn-primary"
+                                                        tabindex="0" aria-controls="DataTables_Table_0" type="button"
+                                                        data-bs-toggle="offcanvas"
+                                                        data-bs-target="#offcanvasAddUser"><span><i
+                                                                class="bx bx-plus bx-sm me-0 me-sm-2"></i><span
+                                                                class="d-none d-sm-inline-block">Add New
+                                                                User</span></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table
+                                        class="datatables-users table border-top dataTable no-footer dtr-column collapsed"
+                                        id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info"
+                                        style="width: 1391px;">
+                                        <thead>
+                                            <tr>
+
+                                                <th class="sorting sorting_desc" tabindex="0"
+                                                    aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                                    style="width: 334px;"
+                                                    aria-label="User: activate to sort column ascending"
+                                                    aria-sort="descending">Name</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1" style="width: 149px;"
+                                                    aria-label="Role: activate to sort column ascending">Email</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1" style="width: 107px;"
+                                                    aria-label="Plan: activate to sort column ascending">Phone</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1" style="width: 201px;"
+                                                    aria-label="Billing: activate to sort column ascending">Status</th>
+                                                <th class="sorting_disabled dtr-hidden" rowspan="1" colspan="1"
+                                                    style="width: 175px;" aria-label="Actions">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="userTable">
+                                            <?php
             while ($row = $result->fetch_assoc()) {
                 $name = htmlspecialchars($row["first_name"] . " " . $row["last_name"], ENT_QUOTES, 'UTF-8');
                 $initials = htmlspecialchars(strtoupper($row["first_name"][0] . $row["last_name"][0]), ENT_QUOTES, 'UTF-8');
                 $status = $row["isaccepted"] == 'yes' ? "Paid" : "Unpaid";
                 $rowId = htmlspecialchars($row["id"], ENT_QUOTES, 'UTF-8');
                 echo "<tr>
-                        <td><div class='profile-circle'>$initials</div></td>
-                        <td>" . $name . "</td>
-                        <td>" . htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8') . "</td>
-                        <td>" . htmlspecialchars($row["phone"], ENT_QUOTES, 'UTF-8') . "</td>
-                        <td>" . htmlspecialchars($status, ENT_QUOTES, 'UTF-8') . "</td>
-                        <td class='action-icons'>";
-                if ($row["isaccepted"] == 'no') {
-                    echo "<a href='admin/Update/update.php?id=" . $rowId . "'><i class='fi fi-rr-pencil'></i></a>
-                          <a href='admin/Accept/accept.php?id=" . $rowId . "'><i class='fi fi-rr-check'></i></a>
+                        <td class='sorting_1'>
+                          <div class='d-flex justify-content-start align-items-center user-name'>
+                            <div class='avatar-wrapper'>
+                              <div class='avatar avatar-sm me-4'>
+                                <div class='rounded-circle profile-circle'>$initials</div>
+                              </div>
+                            </div>
+                            <div class='d-flex flex-column'><a href='javascript:;'
+                                class='text-heading text-truncate'><span class='fw-medium'>" . $name . "</span></a>
+                            </div>
+                          </div>
                         </td>
-                      </tr>";
+                        <td><span class='text-truncate d-flex align-items-center text-heading'>" . htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8') . "</span>
+                        </td>
+                        <td ><span class='text-heading'>" . htmlspecialchars($row["phone"], ENT_QUOTES, 'UTF-8') . "</span></td>
+                        <td><span class='badge bg-label-success' text-capitalized=''>" . htmlspecialchars($status, ENT_QUOTES, 'UTF-8') . "</span>
+                        </td>
+                        <td >
+                          <div class='d-flex align-items-center'>";
+                          if ($row["isaccepted"] == 'no') {
+                    echo "<a href='javascript:;'
+                              class='btn btn-icon delete-record'><i class='bx bx-trash bx-sm'></i>
+                            </a>
+                            <a href='admin/Update/update.php?id=" . $rowId . "' class='btn btn-icon'><i
+                                class='bx bx-show bx-sm'></i>
+                            </a>
+                            <a href='javascript:;'
+                              class='btn btn-icon dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i
+                                class='bx bx-dots-vertical-rounded bx-sm'></i>
+                            </a>
+                            <div class='dropdown-menu dropdown-menu-end m-0'>
+                                <a href='admin/Update/update.php?id=" . $rowId . "'>Edit</a>
+                                <a href='javascript:;' class='dropdown-item'>Suspend</a>
+                                <a href='admin/Accept/accept.php?id=" . $rowId . "'>Accept</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>";
                 } else {
-                    echo "<a href='admin/Update/update.php?id=" . $rowId . "'><i class='fi fi-rr-pencil'></i></a>
-                          </td>
-                      </tr>";
+                    echo "<a href='javascript:;'
+                              class='btn btn-icon delete-record'><i class='bx bx-trash bx-sm'></i>
+                            </a>
+                            <a href='admin/Update/update.php?id=" . $rowId . "' class='btn btn-icon'><i
+                                class='bx bx-show bx-sm'></i>
+                            </a>
+                            <a href='javascript:;'
+                              class='btn btn-icon dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i
+                                class='bx bx-dots-vertical-rounded bx-sm'></i>
+                            </a>
+                            <div class='dropdown-menu dropdown-menu-end m-0'>
+                                <a href='admin/Update/update.php?id=" . $rowId . "'>Edit</a>
+                                <a href='javascript:;' class='dropdown-item'>Suspend</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>";
                 }
             }
             ?>
-        </tbody>
-    </table>
 
-    <!-- Pagination -->
-    <div class="pagination">
-        <?php 
+                                        </tbody>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status"
+                                                aria-live="polite">Showing
+                                                1 to 10 of 50 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_paginate paging_simple_numbers"
+                                                id="DataTables_Table_0_paginate">
+                                                <ul class="pagination">
+                                                    <?php 
         $totalPages = ceil($totalFilteredUsers / $limit);
         $queryString = http_build_query(array_merge($_GET, ['page' => 1]));
 
@@ -271,18 +722,30 @@ $con->close();
         if ($currentPage > 1) {
             $prevPage = $currentPage - 1;
             $queryString = http_build_query(array_merge($_GET, ['page' => $prevPage]));
-            echo "<a href='admin/Tickets/tickets.php?$queryString'>&laquo; Previous</a>";
+            echo "<li class='paginate_button page-item previous' id='DataTables_Table_0_previous'>
+                            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'><i class='bx bx-chevron-left bx-18px'></i>
+                            </a>
+                            </li>";
         } else {
-            echo "<a class='disabled'>&laquo; Previous</a>";
+            echo "<li class='paginate_button page-item previous disabled' id='DataTables_Table_0_previous'>
+                            <a class='page-link'><i class='bx bx-chevron-left bx-18px'></i>
+                            </a>
+                            </li>";
         }
 
         // Page numbers
         for ($i = 1; $i <= $totalPages; $i++) {
             $queryString = http_build_query(array_merge($_GET, ['page' => $i]));
             if ($i == $currentPage) {
-                echo "<a class='active' href='admin/Tickets/tickets.php?$queryString'>$i</a>";
+                echo "<li class='paginate_button page-item active'>
+                            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i
+                            </a>
+                            </li>";
             } else {
-                echo "<a href='admin/Tickets/tickets.php?$queryString'>$i</a>";
+                echo "<li class='paginate_button page-item'>
+                            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i
+                            </a>
+                            </li>";
             }
         }
 
@@ -290,22 +753,200 @@ $con->close();
         if ($currentPage < $totalPages) {
             $nextPage = $currentPage + 1;
             $queryString = http_build_query(array_merge($_GET, ['page' => $nextPage]));
-            echo "<a href='admin/Tickets/tickets.php?$queryString'>Next &raquo;</a>";
+            echo "<li class='paginate_button page-item next' id='DataTables_Table_0_next'>
+                            <a href='admin/Tickets/tickets.php?$queryString'
+                              class='page-link'><i class='bx bx-chevron-right bx-18px'></i>
+                            </a>
+                            </li>";
         } else {
-            echo "<a class='disabled'>Next &raquo;</a>";
+            echo "<li class='paginate_button page-item next disabled' id='DataTables_Table_0_next'>
+                            <a href='admin/Tickets/tickets.php?$queryString'
+                              class='page-link'><i class='bx bx-chevron-right bx-18px'></i>
+                            </a>
+                            </li>";
         }
         ?>
-    </div>
-</div>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="width: 1%;"></div>
+                                </div>
+                            </div>
+                            <!-- Offcanvas to add new user -->
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser"
+                                aria-labelledby="offcanvasAddUserLabel">
+                                <div class="offcanvas-header border-bottom">
+                                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add User</h5>
+                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body mx-0 flex-grow-0 p-6 h-100">
+                                    <form class="add-new-user pt-0 fv-plugins-bootstrap5 fv-plugins-framework"
+                                        id="addNewUserForm" onsubmit="return false" novalidate="novalidate">
+                                        <div class="mb-6 fv-plugins-icon-container">
+                                            <label class="form-label" for="add-user-fullname">Full Name</label>
+                                            <input type="text" class="form-control" id="add-user-fullname"
+                                                placeholder="John Doe" name="userFullname" aria-label="John Doe">
+                                            <div
+                                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                            </div>
+                                        </div>
+                                        <div class="mb-6 fv-plugins-icon-container">
+                                            <label class="form-label" for="add-user-email">Email</label>
+                                            <input type="text" id="add-user-email" class="form-control"
+                                                placeholder="john.doe@example.com" aria-label="john.doe@example.com"
+                                                name="userEmail">
+                                            <div
+                                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                            </div>
+                                        </div>
+                                        <div class="mb-6">
+                                            <label class="form-label" for="add-user-contact">Contact</label>
+                                            <input type="text" id="add-user-contact" class="form-control phone-mask"
+                                                placeholder="+1 (609) 988-44-11" aria-label="john.doe@example.com"
+                                                name="userContact">
+                                        </div>
+                                        <div class="mb-6">
+                                            <label class="form-label" for="add-user-company">Company</label>
+                                            <input type="text" id="add-user-company" class="form-control"
+                                                placeholder="Web Developer" aria-label="jdoe1" name="companyName">
+                                        </div>
+                                        <div class="mb-6">
+                                            <label class="form-label" for="country">Country</label>
+                                            <div class="position-relative"><select id="country"
+                                                    class="select2 form-select select2-hidden-accessible"
+                                                    data-select2-id="country" tabindex="-1" aria-hidden="true">
+                                                    <option value="" data-select2-id="2">Select</option>
+                                                    <option value="Australia">Australia</option>
+                                                    <option value="Bangladesh">Bangladesh</option>
+                                                    <option value="Belarus">Belarus</option>
+                                                    <option value="Brazil">Brazil</option>
+                                                    <option value="Canada">Canada</option>
+                                                    <option value="China">China</option>
+                                                    <option value="France">France</option>
+                                                    <option value="Germany">Germany</option>
+                                                    <option value="India">India</option>
+                                                    <option value="Indonesia">Indonesia</option>
+                                                    <option value="Israel">Israel</option>
+                                                    <option value="Italy">Italy</option>
+                                                    <option value="Japan">Japan</option>
+                                                    <option value="Korea">Korea, Republic of</option>
+                                                    <option value="Mexico">Mexico</option>
+                                                    <option value="Philippines">Philippines</option>
+                                                    <option value="Russia">Russian Federation</option>
+                                                    <option value="South Africa">South Africa</option>
+                                                    <option value="Thailand">Thailand</option>
+                                                    <option value="Turkey">Turkey</option>
+                                                    <option value="Ukraine">Ukraine</option>
+                                                    <option value="United Arab Emirates">United Arab Emirates</option>
+                                                    <option value="United Kingdom">United Kingdom</option>
+                                                    <option value="United States">United States</option>
+                                                </select><span
+                                                    class="select2 select2-container select2-container--default"
+                                                    dir="ltr" data-select2-id="1" style="width: 352px;"><span
+                                                        class="selection"><span
+                                                            class="select2-selection select2-selection--single"
+                                                            role="combobox" aria-haspopup="true" aria-expanded="false"
+                                                            tabindex="0" aria-disabled="false"
+                                                            aria-labelledby="select2-country-container"><span
+                                                                class="select2-selection__rendered"
+                                                                id="select2-country-container" role="textbox"
+                                                                aria-readonly="true"><span
+                                                                    class="select2-selection__placeholder">Select
+                                                                    Country</span></span><span
+                                                                class="select2-selection__arrow" role="presentation"><b
+                                                                    role="presentation"></b></span></span></span><span
+                                                        class="dropdown-wrapper" aria-hidden="true"></span></span></div>
+                                        </div>
+                                        <div class="mb-6">
+                                            <label class="form-label" for="user-role">User Role</label>
+                                            <select id="user-role" class="form-select">
+                                                <option value="subscriber">Subscriber</option>
+                                                <option value="editor">Editor</option>
+                                                <option value="maintainer">Maintainer</option>
+                                                <option value="author">Author</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-6">
+                                            <label class="form-label" for="user-plan">Select Plan</label>
+                                            <select id="user-plan" class="form-select">
+                                                <option value="basic">Basic</option>
+                                                <option value="enterprise">Enterprise</option>
+                                                <option value="company">Company</option>
+                                                <option value="team">Team</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary me-3 data-submit">Submit</button>
+                                        <button type="reset" class="btn btn-label-danger"
+                                            data-bs-dismiss="offcanvas">Cancel</button>
+                                        <input type="hidden">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
 
-<script>
-document.getElementById('searchPhone').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        document.getElementById('searchForm').submit();
-    }
-});
-</script>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
+
+    </div>
+    <!-- / Layout wrapper -->
+
+
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <!-- <script src="admin/assets/vendor/libs/jquery/jquery.js"></script> -->
+    <script src="admin/assets/vendor/libs/popper/popper.js"></script>
+    <script src="admin/assets/vendor/js/bootstrap.js"></script>
+    <script src="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="admin/assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="admin/assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="admin/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="admin/assets/vendor/js/menu.js"></script>
+    <script src="../js/menu.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="admin/assets/vendor/libs/moment/moment.js"></script>
+    <script src="admin/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="admin/assets/vendor/libs/select2/select2.js"></script>
+    <script src="admin/assets/vendor/libs/@form-validation/popular.js"></script>
+    <script src="admin/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+    <script src="admin/assets/vendor/libs/@form-validation/auto-focus.js"></script>
+    <script src="admin/assets/vendor/libs/cleavejs/cleave.js"></script>
+    <script src="admin/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+
+    <!-- Main JS -->
+    <script src="admin/assets/js/main.js"></script>
+
+
+    <!-- Page JS -->
+    <script src="admin/assets/js/app-user-list.js"></script>
+    <script>
+        document.getElementById('searchPhone').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('searchForm').submit();
+            }
+        });
+    </script>
 
 </body>
+
 </html>
