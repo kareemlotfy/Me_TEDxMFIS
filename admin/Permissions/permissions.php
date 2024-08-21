@@ -74,20 +74,72 @@ if (isset($_GET['admin_id']) && ctype_digit($_GET['admin_id'])) {
     exit();
 }
 
+
+
+
 // Display admin's permissions with checkboxes
 if ($admin !== null && $admin_id != 1) {
+    echo "<div class='role-edit'>";
     echo "<h2>Permissions for " . htmlspecialchars($admin['admin_name']) . "</h2>";
-    echo "<form method='post' action='admin/Permissions/permissions.php'>";
+    echo "<form method='post' action='admin/Permissions/permissions.php' class='toggle-section'>";
     
     while ($page = $pages_query->fetch_assoc()) {
         $checked = in_array($page['id'], $permissions) ? "checked" : "";
-        echo "<input type='checkbox' name='permissions[]' value='" . htmlspecialchars($page['id']) . "' $checked>" . htmlspecialchars($page['name']) . "<br>";
+        echo "<div class='toggle-item'>";
+        echo "<span>" . htmlspecialchars($page['name']) . "</span>";
+        echo "<label class='switch'>";
+        echo "<input type='checkbox' name='permissions[]' value='" . htmlspecialchars($page['id']) . "' $checked>";
+        echo "<span class='slider'></span>";
+        echo "</label>";
+        echo "</div>";
     }
     
     echo "<input type='hidden' name='admin_id' value='" . htmlspecialchars($admin_id) . "'>";
-    echo "<input type='submit' value='Save'>";
+    echo "<input type='submit' value='Save' class='btn btn-primary saveButton'>";
     echo "</form>";
+    echo "</div>";
 } else {
     echo "Admin not found or is a super admin.";
 }
 ?>
+
+<!-- 
+                            <div class='role-edit'>
+                                <h2>Role edit - SEO Specialist</h2>
+                                
+                                <div class="toggle-section">
+                                    <div class="toggle-item">
+                                        <span>Products</span>
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <span>Settings</span>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <span>Orders</span>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-item">
+                                        <span>Blog</span>
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="delete-role"><i class="fa-regular fa-trash-can"></i></button>
+                                    <button class="copy-role"><i class="fa-regular fa-clone"></i></button>
+                                </div>
+                            </div>
+-->

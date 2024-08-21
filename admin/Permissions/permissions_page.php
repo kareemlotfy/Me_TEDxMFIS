@@ -26,133 +26,6 @@ $permission_stmt->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- <div class="main">
-        <div class="container">
-            <div class="box form-box">
-                <header>Add Another Admin</header>
-                <form method="POST">
-                    <div class="field input">
-                        <label for="name">Name</label>
-                        <input type="text" name="new_name" id="new_name" autocomplete="off" required>
-                    </div>
-                    <div class="field input">
-                        <label for="username">Username</label>
-                        <input type="text" name="new_username" id="new_username" autocomplete="off" required>
-                    </div>
-                    <div class="field input">
-                        <label for="password">Password</label>
-                        <input type="password" name="new_password" id="new_password" autocomplete="off" required>
-                    </div>
-                    <div class="field input">
-                        <label for="committee">Committee</label>
-                        <select name="new_committee" id="new_committee" required>
-                            <option value="" disabled selected>Select Committee</option>
-                            <option value="Coaching">Coaching</option>
-                            <option value="Designs">Designs</option>
-                            <option value="Logistics">Logistics</option>
-                            <option value="Human Resources (HR)">Human Resources (HR)</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Information Technology (IT)">Information Technology (IT)</option>
-                            <option value="Media">Media</option>
-                            <option value="Public Relations (PR)">Public Relations (PR)</option>
-                        </select>
-                    </div>
-                    <div class="field input">
-                        <label for="position">Position</label>
-                        <select name="new_position" id="new_position" required>
-                            <option value="" disabled selected>Select Position</option>
-                            <option value="Organizer">Organizer</option>
-                            <option value="Operation">Operation</option>
-                            <option value="Head">Head</option>
-                            <option value="Vice">Vice</option>
-                            <option value="Member">Member</option>
-                        </select>
-                    </div>
-                    <div class="field input">
-                        <label for="email">Email</label>
-                        <input type="email" name="new_email" id="new_email" autocomplete="off" required>
-                    </div>
-                    <div class="field">
-                        <input type="submit" class="btn" name="submit" value="Add">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> -->
-
-<!-- 
-    <?php
-    // Fetch and display list of admins
-    $admins_query = "SELECT * FROM admin_cred";
-    $admins_stmt = $con->prepare($admins_query);
-    $admins_stmt->execute();
-    $admins = $admins_stmt->get_result();
-
-    // Display admins and store the first admin's ID
-    $first_admin_id = null;
-    echo "<h2>Admins</h2>";
-    echo "<ul>";
-    while ($admin = $admins->fetch_assoc()) {
-        if ($admin['id'] != $_SESSION["adminId"]) {
-            if ($first_admin_id === null) {
-                $first_admin_id = $admin['id'];
-            }
-            echo "<li><a href='#' onclick='showPermissions(" . htmlspecialchars($admin['id']) . "); return false;'>" . htmlspecialchars($admin['admin_name']) . "</a> <a href='#' onclick='confirmDelete(" . htmlspecialchars($admin['id']) . "); return false;'><i class='fa fa-trash'></i></a></li>";
-        }
-    }
-    echo "</ul>";
-    $admins_stmt->close();
-    ?>
-
-    <div id="permissionsSection"></div>
-
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $frm_data = filteration($_POST);
-
-        $newName = $frm_data['new_name'];
-        $newUsername = $frm_data['new_username'];
-        $newPassword = $frm_data['new_password'];
-        $newCommittee = $frm_data['new_committee'];
-        $newPosition = $frm_data['new_position'];
-        $newEmail = $frm_data['new_email'];
-
-        // Check if username already exists
-        $check_query = "SELECT * FROM admin_cred WHERE admin_username = ? AND admin_name = ?";
-        $check_stmt = $con->prepare($check_query);
-        $check_stmt->bind_param("ss", $newUsername, $newName);
-        $check_stmt->execute();
-        $result = $check_stmt->get_result();
-
-        if (!empty($newName) && !empty($newUsername) && !empty($newPassword) && !empty($newCommittee) && !empty($newPosition) && !empty($newEmail)) {
-            if ($result->num_rows > 0) {
-                alert("error", "Username Already Exists!", "The username you entered is already in use. Please choose a different username and try again.");
-                addBodyClassAndStyle();
-            } else {
-                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                $insert_query = "INSERT INTO admin_cred (admin_name, admin_username, admin_pass, admin_committee, admin_position, email) VALUES (?, ?, ?, ?, ?, ?)";
-                $insert_stmt = $con->prepare($insert_query);
-                $insert_stmt->bind_param("ssssss", $newName, $newUsername, $hashedPassword, $newCommittee, $newPosition, $newEmail);
-
-                if ($insert_stmt->execute()) {
-                    alert("success", "New admin account created successfully", "Congratulations! Your new admin account has been created successfully. You can now log in using your credentials.");
-                    addBodyClassAndStyle();
-                } else {
-                    echo "Error: " . $insert_stmt->error;
-                }
-                $insert_stmt->close();
-            }
-            $check_stmt->close();
-        } else {
-            alert("error", "Please fill in all required fields", "Oops! It seems like you missed filling in some required fields. Please make sure to fill in all the mandatory information and try again.");
-            addBodyClassAndStyle();
-        }
-    }
-    ?>
- -->
-
 
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact ">
 
@@ -161,7 +34,7 @@ $permission_stmt->close();
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard</title>
+    <title>Profile</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
@@ -169,6 +42,7 @@ $permission_stmt->close();
     <!-- Base -->
     <base href="http://localhost/Me_TEDxMFIS/">
     <link rel="stylesheet" href="admin/css/style.css">
+    <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <!-- Fonts -->
@@ -186,6 +60,8 @@ $permission_stmt->close();
     <!-- Core CSS -->
     <link rel="stylesheet" href="admin/assets/vendor/css/core.css" />
     <link rel="stylesheet" href="admin/assets/vendor/css/theme-default.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/css/pages/page-profile.css" />
+
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
@@ -197,28 +73,26 @@ $permission_stmt->close();
     <script src="admin/assets/js/config.js"></script>
     <style>
         /* Basic resets */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
 
-        body {
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        .saveButton {
+            margin-top: 20px;
+            border-radius: 10px;
         }
 
         .newcontainer {
-            display: flex;
+            display: grid;
+            grid-template-columns: 0.3fr 0.7fr;
             border-radius: 10px;
             /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
             overflow: hidden;
             gap: 20px;
             padding: 20px;
+        }
+
+        .toggle-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
         }
 
         .roles-list {
@@ -235,11 +109,17 @@ $permission_stmt->close();
         .role-item {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 10px;
             margin-bottom: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            border-radius: 5px;
+            border-radius: 10px;
+            border: 1px solid #d7d7d7aa;
+        }
+
+        .role-item a {
+            color: #333;
         }
 
         .role-item:hover,
@@ -268,10 +148,9 @@ $permission_stmt->close();
 
         .create-role {
             padding: 10px;
-            background-color: #735cdd;
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             text-align: center;
         }
@@ -304,9 +183,6 @@ $permission_stmt->close();
             border-radius: 5px;
         }
 
-        .toggle-section {
-            margin-bottom: 20px;
-        }
 
         .toggle-item {
             display: flex;
@@ -402,7 +278,7 @@ $permission_stmt->close();
 
 
                 <div class="app-brand demo pb-4 pt-4 ">
-                    <a href="index.html" class="app-brand-link">
+                    <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
                         <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
                             id="tedx_logo" style="
     width: auto;
@@ -420,7 +296,7 @@ $permission_stmt->close();
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item ">
+                    <li class="menu-item permi">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
                             <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
@@ -637,7 +513,7 @@ $permission_stmt->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/assets/img/avatars/1.png" alt
+                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
                                             class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -647,7 +523,7 @@ $permission_stmt->close();
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/assets/img/avatars/1.png" alt
+                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
                                                             class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
@@ -662,21 +538,21 @@ $permission_stmt->close();
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin\Profile\profile.php">
-                                            <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                                        <a class="dropdown-item menu-link" href="admin\Profile\profile.php">
+                                            <i class="bx bx-user bx-sm me-3"></i><span>My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin\Profile\edit_account.php">
-                                            <i class="bx bx-cog bx-md me-3"></i><span>Settings</span>
+                                        <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
+                                            <i class="bx bx-cog bx-sm me-3"></i><span>Account Settings</span>
                                         </a>
                                     </li>
                                     <li>
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin/Login/logout.php" target="_blank">
-                                            <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                                        <a class="dropdown-item menu-link" href="admin/Login/logout.php">
+                                            <i class="bx bx-power-off bx-sm me-3"></i><span>Log Out</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -699,70 +575,106 @@ $permission_stmt->close();
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Header -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card mb-6">
+                                    <div class="user-profile-header-banner">
+                                        <img src="admin/assets/img/pages/profile-banner.png" alt="Banner image"
+                                            class="rounded-top">
+                                    </div>
+                                    <div
+                                        class="user-profile-header d-flex flex-column flex-lg-row text-sm-start text-center mb-8">
+                                        <div class="flex-shrink-0 mt-1 mx-sm-0 mx-auto">
+                                            <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                alt="user image"
+                                                class="d-block h-auto ms-0 ms-sm-6 rounded-3 user-profile-img">
+                                        </div>
+                                        <div class="flex-grow-1 mt-3 mt-lg-5">
+                                            <div
+                                                class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-5 flex-md-row flex-column gap-4">
+                                                <div class="user-profile-info">
+                                                    <h4 class="mb-2 mt-lg-7"><?php echo htmlspecialchars($adminName); ?>
+                                                    </h4>
+                                                    <ul
+                                                        class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4 mt-4">
+                                                        <li class="list-inline-item">
+                                                            <i class='bx bx-palette me-2 align-top'></i><span
+                                                                class="fw-medium">UX Designer</span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <i class='bx bx-map me-2 align-top'></i><span
+                                                                class="fw-medium">Vatican City</span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <i class='bx bx-calendar me-2 align-top'></i><span
+                                                                class="fw-medium"> Joined April
+                                                                2021</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-primary mb-1">
+                                                    <i class='bx bx-user-check bx-sm me-2'></i>Connected
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ Header -->
+
+                        <!-- Navbar pills -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="nav-align-top">
+                                    <ul class="nav nav-pills flex-column flex-sm-row mb-6">
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="admin/Profile/profile.php"><i class='bx bx-user bx-sm me-1_5'></i>
+                                                Profile</a></li>
+                                        <li class="nav-item"><a class="nav-link active"
+                                                href="admin/Permissions/permissions_page.php"><i
+                                                    class='bx bx-group bx-sm me-1_5'></i> Admins and Permitions</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ Navbar pills -->
                         <div class="newcontainer">
                             <!-- Left Sidebar -->
                             <div class="roles-list">
-                                <div class="role-item active">
-                                    <span class="role-color green"></span>
-                                    SEO Specialist
-                                </div>
-                                <div class="role-item">
-                                    <span class="role-color red"></span>
-                                    Supervisor
-                                </div>
-                                <div class="role-item">
-                                    <span class="role-color red"></span>
-                                    Orders specialist
-                                </div>
-                                <div class="role-item">
-                                    <span class="role-color yellow"></span>
-                                    Operator
-                                </div>
-                                <button class="create-role">Create new role</button>
+                                <?php
+    // Fetch and display list of admins
+    $admins_query = "SELECT * FROM admin_cred";
+    $admins_stmt = $con->prepare($admins_query);
+    $admins_stmt->execute();
+    $admins = $admins_stmt->get_result();
+
+    // Display admins and store the first admin's ID
+    $first_admin_id = null;
+    while ($admin = $admins->fetch_assoc()) {
+        if ($admin['id'] != $_SESSION["adminId"]) {
+            if ($first_admin_id === null) {
+                $first_admin_id = $admin['id'];
+            }
+            echo "<div class='role-item '>";
+            echo "<span class='role-color green'></span>";
+            echo "<a href='#' onclick='showPermissions(" . htmlspecialchars($admin['id']) . "); return false;'>" . htmlspecialchars($admin['admin_name']) . "</a> <a href='javascript:void(0);' onclick='confirmDelete(" . htmlspecialchars($admin['id']) . "); return false;'><i class='fa-regular fa-trash-can'></i></a>";
+            echo "</div>";
+        }
+    }
+    
+    $admins_stmt->close();
+    ?>
+                                <button class=" create-role btn btn-secondary add-new btn-primary" type="button"
+                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddAdmin">Add New
+                                    Admin</button>
                             </div>
 
+
+
                             <!-- Right Section -->
-                            <div class="role-edit">
-                                <h2>Role edit - SEO Specialist</h2>
-                                <div class="edit-form">
-                                    <label>Role name</label>
-                                    <input type="text" value="SEO Specialist" disabled>
-                                </div>
-                                <div class="toggle-section">
-                                    <div class="toggle-item">
-                                        <span>Products</span>
-                                        <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                    <div class="toggle-item">
-                                        <span>Settings</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                    <div class="toggle-item">
-                                        <span>Orders</span>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                    <div class="toggle-item">
-                                        <span>Blog</span>
-                                        <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="action-buttons">
-                                    <button class="delete-role"><i class="fa-regular fa-trash-can"></i></button>
-                                    <button class="copy-role"><i class="fa-regular fa-clone"></i></button>
-                                </div>
-                            </div>
+                            <div id="permissionsSection"></div>
                             <!-- / Content -->
                             <div class="content-backdrop fade"></div>
                         </div>
@@ -772,6 +684,135 @@ $permission_stmt->close();
                 </div>
                 <!-- / Layout page -->
             </div>
+
+            <!-- Offcanvas to add new user -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddAdmin"
+                aria-labelledby="offcanvasAddUserLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add User</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body mx-0 flex-grow-0 p-6 h-100">
+                    <form method="POST" class="add-new-user pt-0 fv-plugins-bootstrap5 fv-plugins-framework"
+                        id="addNewAdminForm">
+                        <div class="mb-6 fv-plugins-icon-container">
+                            <label class="form-label" for="name">Full Name</label>
+                            <input type="text" class="form-control" placeholder="John Doe" name="new_name" id="new_name"
+                                autocomplete="off" required>
+                            <div
+                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="mb-6 fv-plugins-icon-container">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" class="form-control" placeholder="john.doe@example.com" name="new_email"
+                                id="new_email" autocomplete="off" required>
+                            <div
+                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="mb-6 fv-plugins-icon-container">
+                            <label class="form-label" for="username">Username</label>
+                            <input type="text" class="form-control" placeholder="" name="new_username" id="new_username"
+                                autocomplete="off" required>
+                            <div
+                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                            </div>
+                        </div>
+                        <!-- Contace Place -->
+                        <!-- <div class="mb-6">
+                            <label class="form-label" for="add-user-contact">Contact</label>
+                            <input type="text" id="add-user-contact" class="form-control phone-mask"
+                                placeholder="+1 (609) 988-44-11" aria-label="john.doe@example.com" name="userContact">
+                        </div> -->
+                        <div class="mb-6">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" class="form-control" name="new_password" id="new_password"
+                                autocomplete="off" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label" for="committee">Committee</label>
+                            <div class="position-relative">
+                                <select name="new_committee" id="new_committee" required
+                                    class="select2 form-select select2-hidden-accessible" tabindex="-1"
+                                    aria-hidden="true">
+                                    <option value="" disabled selected>Select Committee</option>
+                                    <option value="Coaching">Coaching</option>
+                                    <option value="Designs">Designs</option>
+                                    <option value="Logistics">Logistics</option>
+                                    <option value="Human Resources (HR)">Human Resources (HR)</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Information Technology (IT)">Information Technology (IT)</option>
+                                    <option value="Media">Media</option>
+                                    <option value="Public Relations (PR)">Public Relations (PR)</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="form-label" for="position">Position</label>
+                            <select name="new_position" id="new_position" required class="form-select">
+                                <option value="" disabled selected>Select Position</option>
+                                <option value="Organizer">Organizer</option>
+                                <option value="Operation">Operation</option>
+                                <option value="Head">Head</option>
+                                <option value="Vice">Vice</option>
+                                <option value="Member">Member</option>
+                            </select>
+                        </div>
+
+                        <input type="submit" class="btn btn-primary me-3 data-submit" name="submit"
+                            value="Add"></input>
+                        <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Cancel</button>
+                        <input type="hidden">
+                    </form>
+                </div>
+            </div>
+
+            <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $frm_data = filteration($_POST);
+
+        $newName = $frm_data['new_name'];
+        $newUsername = $frm_data['new_username'];
+        $newPassword = $frm_data['new_password'];
+        $newCommittee = $frm_data['new_committee'];
+        $newPosition = $frm_data['new_position'];
+        $newEmail = $frm_data['new_email'];
+
+        // Check if username already exists
+        $check_query = "SELECT * FROM admin_cred WHERE admin_username = ? AND admin_name = ?";
+        $check_stmt = $con->prepare($check_query);
+        $check_stmt->bind_param("ss", $newUsername, $newName);
+        $check_stmt->execute();
+        $result = $check_stmt->get_result();
+
+        if (!empty($newName) && !empty($newUsername) && !empty($newPassword) && !empty($newCommittee) && !empty($newPosition) && !empty($newEmail)) {
+            if ($result->num_rows > 0) {
+                alert("error", "Username Already Exists!", "The username you entered is already in use. Please choose a different username and try again.");
+                addBodyClassAndStyle();
+            } else {
+                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                $insert_query = "INSERT INTO admin_cred (admin_name, admin_username, admin_pass, admin_committee, admin_position, email) VALUES (?, ?, ?, ?, ?, ?)";
+                $insert_stmt = $con->prepare($insert_query);
+                $insert_stmt->bind_param("ssssss", $newName, $newUsername, $hashedPassword, $newCommittee, $newPosition, $newEmail);
+
+                if ($insert_stmt->execute()) {
+                    alert("success", "New admin account created successfully", "Congratulations! Your new admin account has been created successfully. You can now log in using your credentials.");
+                    addBodyClassAndStyle();
+                } else {
+                    echo "Error: " . $insert_stmt->error;
+                }
+                $insert_stmt->close();
+            }
+            $check_stmt->close();
+        } else {
+            alert("error", "Please fill in all required fields", "Oops! It seems like you missed filling in some required fields. Please make sure to fill in all the mandatory information and try again.");
+            addBodyClassAndStyle();
+        }
+    }
+    ?>
 
 
 
@@ -860,7 +901,7 @@ $permission_stmt->close();
             }
 
             window.onload = function () {
-                let firstAdminId = < ? php echo json_encode($first_admin_id); ? > ;
+                let firstAdminId = <?php echo json_encode($first_admin_id); ?> ;
                 if (firstAdminId !== null) {
                     showPermissions(firstAdminId);
                 }

@@ -82,7 +82,7 @@ $con->close();
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Account settings</title>
+    <title>Account Settings</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
@@ -138,7 +138,7 @@ $con->close();
 
 
                 <div class="app-brand demo pb-4 pt-4 ">
-                    <a href="index.html" class="app-brand-link">
+                    <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
                         <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
                             id="tedx_logo" style="
     width: auto;
@@ -376,7 +376,7 @@ $con->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/assets/img/avatars/1.png" alt
+                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
                                             class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -386,7 +386,7 @@ $con->close();
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/assets/img/avatars/1.png" alt
+                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
                                                             class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
@@ -401,21 +401,21 @@ $con->close();
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin\Profile\profile.php">
-                                            <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                                        <a class="dropdown-item menu-link" href="admin\Profile\profile.php">
+                                            <i class="bx bx-user bx-sm me-3"></i><span>My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin\Profile\edit_account.php">
-                                            <i class="bx bx-cog bx-md me-3"></i><span>Settings</span>
+                                        <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
+                                            <i class="bx bx-cog bx-sm me-3"></i><span>Account Settings</span>
                                         </a>
                                     </li>
                                     <li>
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin/Login/logout.php" target="_blank">
-                                            <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                                        <a class="dropdown-item menu-link" href="admin/Login/logout.php">
+                                            <i class="bx bx-power-off bx-sm me-3"></i><span>Log Out</span>
                                         </a>
                                     </li>
                                 </ul>

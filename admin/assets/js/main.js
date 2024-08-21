@@ -237,3 +237,54 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
             e.update()
         }))
     });
+
+
+
+    function closePopup() {
+        let popup = document.getElementById("popup");
+        let newUsername = document.getElementById("new_username");
+        popup.classList.add("close_popup");
+        document.body.classList.remove("popup_active");
+        newUsername.focus();
+    }
+
+    function addBodyClassAndStyle() {
+        let popup = document.getElementById("popup");
+        popup.classList.remove("close_popup");
+        document.body.classList.add("popup_active");
+    }
+
+    function showPermissions(adminId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'admin/Permissions/permissions.php?admin_id=' + adminId, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                document.getElementById('permissionsSection').innerHTML = xhr.responseText;
+            } else if (xhr.readyState == 4) {
+                document.getElementById('permissionsSection').innerHTML =
+                    "An error occurred while loading permissions.";
+            }
+        };
+        xhr.send();
+    }
+
+    function confirmDelete(adminId) {
+        if (confirm("Are you sure you want to delete this admin?")) {
+            deleteAdmin(adminId);
+        }
+    }
+
+    function deleteAdmin(adminId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'admin/Permissions/DeleteAdminScript.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(xhr.responseText); // Show alert message from server
+                location.reload(); // Refresh the page after deletion
+            } else if (xhr.readyState == 4) {
+                alert("Error deleting admin.");
+            }
+        };
+        xhr.send('admin_id=' + adminId);
+    }

@@ -529,21 +529,21 @@ $con->close();
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin\Profile\profile.php">
-                                            <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                                        <a class="dropdown-item menu-link" href="admin\Profile\profile.php">
+                                            <i class="bx bx-user bx-sm me-3"></i><span>My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin\Profile\edit_account.php">
-                                            <i class="bx bx-cog bx-md me-3"></i><span>Settings</span>
+                                        <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
+                                            <i class="bx bx-cog bx-sm me-3"></i><span>Account Settings</span>
                                         </a>
                                     </li>
                                     <li>
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="admin/Login/logout.php" target="_blank">
-                                            <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                                        <a class="dropdown-item menu-link" href="admin/Login/logout.php">
+                                            <i class="bx bx-power-off bx-sm me-3"></i><span>Log Out</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -631,18 +631,7 @@ $con->close();
                                                 <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?> Total
                                                 Users</p>
                                         </div>
-                                        <div class="dropdown">
-                                            <button class="btn text-muted p-0" type="button" id="orederStatistics"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-vertical-rounded bx-md"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end"
-                                                aria-labelledby="orederStatistics">
-                                                <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-6">
@@ -729,22 +718,10 @@ $con->close();
 
                             <!-- Grades Overview -->
                             <div class="col-md-6 col-lg-6 col-xl-6 order-1 mb-6">
-                                <div class="card">
+                                <div class="card" style="height: 100%;">
                                     <div class="card-header header-elements">
                                         <h5 class="card-title mb-0">Grade Analysis</h5>
-                                        <div class="card-header-elements ms-auto py-0 dropdown">
-                                            <button
-                                                class="btn btn-text-secondary rounded-pill text-muted border-0 p-2 me-n1"
-                                                type="button" id="heat-chart-dd" data-bs-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false"><i
-                                                    class="bx bx-dots-vertical-rounded bx-md text-muted"></i></button>
-                                            <div class="dropdown-menu dropdown-menu-end"
-                                                aria-labelledby="heat-chart-dd">
-                                                <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="card-body">
                                         <canvas id="gardesChart" class="chartjs" data-height="337"></canvas>

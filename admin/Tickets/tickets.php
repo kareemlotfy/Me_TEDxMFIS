@@ -327,7 +327,7 @@ $con->close();
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
+                        <a href="admin/Settings/settings.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
@@ -390,7 +390,7 @@ $con->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/assets/img/avatars/1.png" alt
+                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
                                             class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -400,7 +400,7 @@ $con->close();
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/assets/img/avatars/1.png" alt
+                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
                                                             class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
@@ -415,21 +415,21 @@ $con->close();
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages-profile-user.html">
-                                            <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                                        <a class="dropdown-item menu-link" href="pages-profile-user.html">
+                                            <i class="bx bx-user bx-sm me-3"></i><span>My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages-account-settings-account.html">
-                                            <i class="bx bx-cog bx-md me-3"></i><span>Settings</span>
+                                        <a class="dropdown-item menu-link" href="pages-account-settings-account.html">
+                                            <i class="bx bx-cog bx-sm me-3"></i><span>Account Settings</span>
                                         </a>
                                     </li>
                                     <li>
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
-                                            <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                                        <a class="dropdown-item menu-link" href="auth-login-cover.html">
+                                            <i class="bx bx-power-off bx-sm me-3"></i><span>Log Out</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -598,13 +598,14 @@ $con->close();
                                                                         class="bx bx-export me-2 bx-sm"></i>Export</span>
                                                             </button>
                                                         </form>
-                                                    </div> <button class="btn btn-secondary add-new btn-primary"
-                                                        tabindex="0" aria-controls="DataTables_Table_0" type="button"
+                                                    </div> 
+                                                    <button class="btn btn-secondary add-new btn-primary" type="button"
                                                         data-bs-toggle="offcanvas"
-                                                        data-bs-target="#offcanvasAddUser"><span><i
-                                                                class="bx bx-plus bx-sm me-0 me-sm-2"></i><span
-                                                                class="d-none d-sm-inline-block">Add New
-                                                                User</span></span></button>
+                                                        data-bs-target="#offcanvasAddUser">
+                                                        <span><i class="bx bx-plus bx-sm me-0 me-sm-2"></i>
+                                                            <span class="d-none d-sm-inline-block">Add New User</span>
+                                                        </span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
