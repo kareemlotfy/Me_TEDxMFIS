@@ -465,7 +465,7 @@ $con->close();
                                                 <span class="text-heading">Total Users</span>
                                                 <div class="d-flex align-items-center my-1">
                                                     <h4 class="mb-0 me-2">
-                                                        <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                        <span id="totalUsers"></span>
                                                     </h4>
                                                 </div>
                                             </div>

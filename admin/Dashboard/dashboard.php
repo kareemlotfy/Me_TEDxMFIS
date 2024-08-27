@@ -5,182 +5,6 @@ require("../Misc/functions.php");
 
 adminLogin();
 
-                                                // DASHBOARD SYSTEM //
-
-
-                                                
-// Count users who paid (isaccepted = 'yes')
-$paidCountSql = "SELECT COUNT(*) as paid_count FROM user_cred WHERE isaccepted = 'yes'";
-$paidCountResult = $con->query($paidCountSql);
-
-if (!$paidCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$paidCountRow = $paidCountResult->fetch_assoc();
-$paidCount = $paidCountRow["paid_count"];
-
-// Count users who did not pay (isaccepted = 'no')
-$unpaidCountSql = "SELECT COUNT(*) as unpaid_count FROM user_cred WHERE isaccepted = 'no'";
-$unpaidCountResult = $con->query($unpaidCountSql);
-
-if (!$unpaidCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$unpaidCountRow = $unpaidCountResult->fetch_assoc();
-$unpaidCount = $unpaidCountRow["unpaid_count"];
-
-// Total user count
-$totalUsers = $paidCount + $unpaidCount;
-
-
-// Count male users
-$maleCountSql = "SELECT COUNT(*) as male_count FROM user_cred WHERE gender = 'Male'";
-$maleCountResult = $con->query($maleCountSql);
-
-if (!$maleCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$maleCountRow = $maleCountResult->fetch_assoc();
-$maleCount = $maleCountRow["male_count"];
-
-// Count female users
-$femaleCountSql = "SELECT COUNT(*) as female_count FROM user_cred WHERE gender = 'Female'";
-$femaleCountResult = $con->query($femaleCountSql);
-
-if (!$femaleCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$femaleCountRow = $femaleCountResult->fetch_assoc();
-$femaleCount = $femaleCountRow["female_count"];
-
-
-// Count users aged above 18
-$above18CountSql = "SELECT COUNT(*) as above_18_count FROM user_cred WHERE age > 18";
-$above18CountResult = $con->query($above18CountSql);
-
-if (!$above18CountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$above18CountRow = $above18CountResult->fetch_assoc();
-$above18Count = $above18CountRow["above_18_count"];
-
-// Count users aged under 18
-$under18CountSql = "SELECT COUNT(*) as under_18_count FROM user_cred WHERE age <= 18";
-$under18CountResult = $con->query($under18CountSql);
-
-if (!$under18CountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$under18CountRow = $under18CountResult->fetch_assoc();
-$under18Count = $under18CountRow["under_18_count"];
-
-
-// Count users from our school
-$mfisCountSql = "SELECT COUNT(*) as mfis_count FROM user_cred WHERE st_mfis = 'yes'";
-$mfisCountResult = $con->query($mfisCountSql);
-
-if (!$mfisCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$mfisCountRow = $mfisCountResult->fetch_assoc();
-$mfisCount = $mfisCountRow["mfis_count"];
-
-// Count users who are not from our school
-$notMfisCountSql = "SELECT COUNT(*) as not_mfis_count FROM user_cred WHERE st_mfis = 'no'";
-$notMfisCountResult = $con->query($notMfisCountSql);
-
-if (!$notMfisCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$notMfisCountRow = $notMfisCountResult->fetch_assoc();
-$notMfisCount = $notMfisCountRow["not_mfis_count"];
-
-// Count users by login type
-$studentInSchoolCountSql = "SELECT COUNT(*) as student_in_school_count FROM user_cred WHERE login_type = 'Student In School'";
-$studentInSchoolCountResult = $con->query($studentInSchoolCountSql);
-
-if (!$studentInSchoolCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$studentInSchoolCountRow = $studentInSchoolCountResult->fetch_assoc();
-$studentInSchoolCount = $studentInSchoolCountRow["student_in_school_count"];
-
-$studentInCollegeCountSql = "SELECT COUNT(*) as student_in_college_count FROM user_cred WHERE login_type = 'Student In College'";
-$studentInCollegeCountResult = $con->query($studentInCollegeCountSql);
-
-if (!$studentInCollegeCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$studentInCollegeCountRow = $studentInCollegeCountResult->fetch_assoc();
-$studentInCollegeCount = $studentInCollegeCountRow["student_in_college_count"];
-
-$parentCountSql = "SELECT COUNT(*) as parent_count FROM user_cred WHERE login_type = 'Parent'";
-$parentCountResult = $con->query($parentCountSql);
-
-if (!$parentCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$parentCountRow = $parentCountResult->fetch_assoc();
-$parentCount = $parentCountRow["parent_count"];
-
-
-// Count users who entered the event
-$enteredEventCountSql = "SELECT COUNT(*) as entered_count FROM user_cred WHERE enter_status = 'yes'";
-$enteredEventCountResult = $con->query($enteredEventCountSql);
-
-if (!$enteredEventCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$enteredEventCountRow = $enteredEventCountResult->fetch_assoc();
-$enteredEventCount = $enteredEventCountRow["entered_count"];
-
-// Count users who did not enter the event
-$notEnteredEventCountSql = "SELECT COUNT(*) as not_entered_count FROM user_cred WHERE enter_status = 'no'";
-$notEnteredEventCountResult = $con->query($notEnteredEventCountSql);
-
-if (!$notEnteredEventCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$notEnteredEventCountRow = $notEnteredEventCountResult->fetch_assoc();
-$notEnteredEventCount = $notEnteredEventCountRow["not_entered_count"];
-
-// Count users who used the dinner ticket (dinner_status = 'yes')
-$usedDinnerTicketCountSql = "SELECT COUNT(*) as used_dinner_count FROM user_cred WHERE dinner_status = 'yes'";
-$usedDinnerTicketCountResult = $con->query($usedDinnerTicketCountSql);
-
-if (!$usedDinnerTicketCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$usedDinnerTicketCountRow = $usedDinnerTicketCountResult->fetch_assoc();
-$usedDinnerTicketCount = $usedDinnerTicketCountRow["used_dinner_count"];
-
-// Count users who did not use the dinner ticket (dinner_status = 'no')
-$notUsedDinnerTicketCountSql = "SELECT COUNT(*) as not_used_dinner_count FROM user_cred WHERE dinner_status = 'no'";
-$notUsedDinnerTicketCountResult = $con->query($notUsedDinnerTicketCountSql);
-
-if (!$notUsedDinnerTicketCountResult) {
-    die("Invalid query: " . $con->error);
-}
-
-$notUsedDinnerTicketCountRow = $notUsedDinnerTicketCountResult->fetch_assoc();
-$notUsedDinnerTicketCount = $notUsedDinnerTicketCountRow["not_used_dinner_count"];
-
-
-
 $adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
 $adminName = getAdminName($con, $adminId);
 $pageId = 1; // Example: Page X ID
@@ -242,6 +66,7 @@ $con->close();
     <!-- Helpers -->
     <script src="admin/assets/vendor/js/helpers.js"></script>
     <script src="admin/assets/js/config.js"></script>
+    <script src="admin/data/analytics_data.js"></script> 
 
 </head>
 
@@ -574,7 +399,7 @@ $con->close();
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Gender</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
-                                                    <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                    <span id="totalUsers"></span>
                                                 </h4>
                                                 <div id="genderChart"></div>
                                             </div>
@@ -585,7 +410,7 @@ $con->close();
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Ages</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
-                                                    <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                    <span id="totalUsers"></span>
                                                 </h4>
                                                 <div id="ageChart"></div>
                                             </div>
@@ -600,7 +425,7 @@ $con->close();
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">From MFIS</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
-                                                    <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                    <span id="totalUsers"></span>
                                                 </h4>
                                                 <div id="mfisChart"></div>
                                             </div>
@@ -611,7 +436,7 @@ $con->close();
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Login Type</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
-                                                    <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
+                                                    <span id="totalUsers"></span>
                                                 </h4>
                                                 <div id="loginChart"></div>
                                             </div>
@@ -628,7 +453,7 @@ $con->close();
                                         <div class="card-title mb-0">
                                             <h5 class="mb-1 me-2">Event Status</h5>
                                             <p class="card-subtitle">
-                                                <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?> Total
+                                                <span id="totalUsers"></span> Total
                                                 Users</p>
                                         </div>
                                         
@@ -654,7 +479,7 @@ $con->close();
                                                     </div>
                                                     <div class="user-progress">
                                                         <h6 class="mb-0">
-                                                            <?php echo htmlspecialchars($enteredEventCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                            <span id="enteredEventCount"></span>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -671,7 +496,7 @@ $con->close();
                                                     </div>
                                                     <div class="user-progress">
                                                         <h6 class="mb-0">
-                                                            <?php echo htmlspecialchars($notEnteredEventCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                            <span id="notEnteredEventCount"></span>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -688,7 +513,7 @@ $con->close();
                                                     </div>
                                                     <div class="user-progress">
                                                         <h6 class="mb-0">
-                                                            <?php echo htmlspecialchars($usedDinnerTicketCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                            <span id="usedDinnerCount"></span>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -705,7 +530,7 @@ $con->close();
                                                     </div>
                                                     <div class="user-progress">
                                                         <h6 class="mb-0">
-                                                            <?php echo htmlspecialchars($notUsedDinnerTicketCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                            <span id="notUsedDinnerCount"></span>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -1196,7 +1021,7 @@ $con->close();
 
 
     <!-- Page JS -->
-    <script src="admin/assets/js/dashboards-analytics.js"></script>
+    <script type="module" src="admin/assets/js/dashboards-analytics.js"></script>
 
 </body>
 

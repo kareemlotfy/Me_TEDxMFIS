@@ -37,119 +37,7 @@
 // })
 
 
-// Menu
-
-// scripts.js
-
-// window.addEventListener('scroll', function() {
-//     const parallaxImage = document.querySelectorAll('.second_img');
-//     let scrollPosition = window.pageYOffset;
-//     parallaxImage.style.transform = 'translateY( -' + (scrollPosition * 0.3) + 'px)';
-// });
-
-
-// window.addEventListener('scroll', function() {
-//     const parallaxImages = document.querySelectorAll('.second_img');
-//     let scrollPosition = window.pageYOffset;
-    
-//     parallaxImages.forEach(function(image, index) {
-//         let speed = 0.5 + (index * 0.1); // Different speed for each image
-//         image.style.transform = 'translateY( -' + (scrollPosition * 0.2) + 'px)';
-//     });
-// });
-
-
-// scripts.js
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     const abtContents = document.querySelectorAll('.abt-content');
-    
-//     const observerOptions = {
-//         root: null, // Use the viewport as the root
-//         threshold: 0.2 // Trigger when 10% of the element is visible
-//     };
-
-//     const observerCallback = (entries, observer) => {
-//         entries.forEach(entry => {
-//             if (entry.isIntersecting) {
-//                 // Start parallax effect
-//                 window.addEventListener('scroll', parallaxEffect);
-//                 entry.target.classList.add('in-view');
-//             } else {
-//                 // Stop parallax effect
-//                 entry.target.classList.remove('in-view');
-//             }
-//         });
-//     };
-
-//     const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-//     abtContents.forEach(content => {
-//         observer.observe(content);
-//     });
-
-//     function parallaxEffect() {
-//         const inViewContents = document.querySelectorAll('.abt-content.in-view');
-//         let scrollPosition = window.pageYOffset;
-
-//         inViewContents.forEach(function(content) {
-//             const secondImg = content.querySelector('.second_img');
-//             let contentOffsetTop = content.getBoundingClientRect().top + scrollPosition;
-//             if (scrollPosition + window.innerHeight > contentOffsetTop) {
-//                 let translateY = (scrollPosition - contentOffsetTop) * 0.3; // Adjust speed as needed
-//                 secondImg.style.transform = `translateY(-${translateY}px)`;
-//             }
-//         });
-//     }
-// });
-
-// scripts.js
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     const abtContents = document.querySelectorAll('.abt-content');
-    
-//     const observerOptions = {
-//         root: null, // Use the viewport as the root
-//         threshold: 0.5 // Trigger when 50% of the element is visible
-//     };
-
-//     const observerCallback = (entries, observer) => {
-//         entries.forEach(entry => {
-//             if (entry.isIntersecting) {
-//                 // Start parallax effect
-//                 window.addEventListener('scroll', parallaxEffect);
-//                 entry.target.classList.add('in-view');
-//             } else {
-//                 // Stop parallax effect
-//                 entry.target.classList.remove('in-view');
-//             }
-//         });
-//     };
-
-//     const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-//     abtContents.forEach(content => {
-//         observer.observe(content);
-//     });
-
-//     function parallaxEffect() {
-//         const inViewContents = document.querySelectorAll('.abt-content.in-view');
-//         let scrollPosition = window.pageYOffset;
-
-//         inViewContents.forEach(function(content) {
-//             const secondImg = content.querySelector('.second_img');
-//             let contentOffsetTop = content.getBoundingClientRect().top + scrollPosition - window.innerHeight / 2;
-//             if (scrollPosition + window.innerHeight > contentOffsetTop) {
-//                 let translateY = ((scrollPosition + window.innerHeight / 2 - contentOffsetTop) * 0.2) -50; // Adjust speed and initial offset
-//                 secondImg.style.transform = `translateY(-${translateY}px)`;
-//             }
-//         });
-//     }
-// });
-
-
-// scripts.js
-
+// Paralax Effect in About Page
 document.addEventListener('DOMContentLoaded', function() {
     const abtContents = document.querySelectorAll('.abt-content');
 
@@ -204,9 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     checkVisibilityOnLoad();
     window.addEventListener('scroll', parallaxEffect);
 });
-
-
-
+// Paralax End
 
 
 
@@ -219,6 +105,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.style.overflow = 'auto';
     }, 1000); // Adjust the delay as needed
 });
+// Loader End
+
+
 
 // Nav Responsive
 var navLinks = document.getElementById("navLinks");
@@ -232,10 +121,11 @@ function hideMenu() {
     navLinks.style.right = "-200px"
     navLinks.style.display = "none"
 }
+// Nav Responsive End
+
 
 
 // Set padding of class="body_section"
-
 function setDynamicPadding() {
     var windowWidth = window.innerWidth;
 
@@ -265,7 +155,7 @@ function setDynamicPadding() {
 // Call the function initially and on window resize
 window.onload = setDynamicPadding;
 window.addEventListener('resize', setDynamicPadding);
-
+// Set padding End
 
 // Shutdown Ticket Form
 
