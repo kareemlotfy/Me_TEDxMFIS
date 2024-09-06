@@ -101,9 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr"
-    data-theme="theme-default" data-assets-path="admin/assets/" data-template="vertical-menu-template"
-    data-style="light">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact ">
+
 
 <head>
     <meta charset="utf-8" />
@@ -116,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="http://localhost/Me_TEDxMFIS/">
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -184,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item">
+                    <li class="menu-item ">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
                             <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
@@ -199,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="app-ecommerce-dashboard.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
                                 </a>
                             </li>
@@ -209,17 +208,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-product-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Product List">Product List</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-product-add.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Add Product">Add Product</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-category-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Category List">Category List</div>
                                         </a>
                                     </li>
@@ -231,12 +230,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-order-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Order List">Order List</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-order-details.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Order Details">Order Details</div>
                                         </a>
                                     </li>
@@ -248,7 +247,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-customer-all.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="All Customers">All Customers</div>
                                         </a>
                                     </li>
@@ -259,19 +258,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </a>
                                         <ul class="menu-sub">
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-overview.html"
+                                                <a href="javascript:void(0);"
                                                     class="menu-link">
                                                     <div class="text-truncate" data-i18n="Overview">Overview</div>
                                                 </a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-security.html"
+                                                <a href="javascript:void(0);"
                                                     class="menu-link">
                                                     <div class="text-truncate" data-i18n="Security">Security</div>
                                                 </a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-billing.html" class="menu-link">
+                                                <a href="javascript:void(0);" class="menu-link">
                                                     <div class="text-truncate" data-i18n="Address & Billing">Address &
                                                         Billing</div>
                                                 </a>
@@ -281,12 +280,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <a href="app-ecommerce-manage-reviews.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Manage Reviews">Manage Reviews</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="app-ecommerce-referral.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Referrals">Referrals</div>
                                 </a>
                             </li>
@@ -296,33 +295,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-detail.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Store Details">Store Details</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-payments.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Payments">Payments</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-checkout.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Checkout">Checkout</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-shipping.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Shipping & Delivery">Shipping &
                                                 Delivery</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-locations.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Locations">Locations</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-notifications.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Notifications">Notifications</div>
                                         </a>
                                     </li>
@@ -337,22 +336,248 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="text-truncate" data-i18n="Users">Users</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="admin/Settings/settings.php" class="menu-link">
+                    <li class="menu-item active open">
+                        <a href="admin/Settings/settings.php" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="admin\Misc\coming-soon.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-purchase-tag-alt"></i>
+                            <div class="text-truncate" data-i18n="Coupons ">Coupons</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="admin\Misc\coming-soon.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-briefcase"></i>
+                            <div class="text-truncate" data-i18n="Recruit">Recruit</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menu-inner" style="height:60px;">
+                    <li class="menu-item" style="position: absolute; bottom: 10px; margin-top:10px;">
+                        <a href="admin/Login/logout.php" class="menu-link">
+                            <i class="bx bx-power-off bx-sm me-3"></i>
+                            <div class="text-truncate" data-i18n="Log Out">Log Out</div>
+                        </a>
+                    </li>
+                </ul>
+                    
+            </aside>
+            <!-- Menu -->
+
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+
+                <div class="app-brand demo pb-4 pt-4 ">
+                <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
+                        <div class="logo-container">
+                            <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
+                                class="tedx-logo" id="tedx_logo" >
+                            <img src="admin\assets\img\logos\x-art.png" class="x-logo" alt="x-logo" >
+                        </div>
+                        
+                    </a>
+
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                        <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+                    </a>
+                </div>
+
+                <div class="menu-inner-shadow"></div>
+
+
+
+                <ul class="menu-inner py-1">
+                    <!-- Dashboards -->
+                    <li class="menu-item ">
+                        <a href="admin/Dashboard/dashboard.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-smile"></i>
+                            <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+                        </a>
+                    </li>
+
+                    <!-- e-commerce-app menu start -->
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bx-cart-alt'></i>
+                            <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Products">Products</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Product List">Product List</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Add Product">Add Product</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Category List">Category List</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Order">Order</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Order List">Order List</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Order Details">Order Details</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Customer">Customer</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="All Customers">All Customers</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                            <div class="text-truncate" data-i18n="Customer Details">Customer Details
+                                            </div>
+                                        </a>
+                                        <ul class="menu-sub">
+                                            <li class="menu-item">
+                                                <a href="javascript:void(0);"
+                                                    class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Overview">Overview</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="javascript:void(0);"
+                                                    class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Security">Security</div>
+                                                </a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="javascript:void(0);" class="menu-link">
+                                                    <div class="text-truncate" data-i18n="Address & Billing">Address &
+                                                        Billing</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Manage Reviews">Manage Reviews</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Referrals">Referrals</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <div class="text-truncate" data-i18n="Settings">Settings</div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Store Details">Store Details</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Payments">Payments</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Checkout">Checkout</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Shipping & Delivery">Shipping &
+                                                Delivery</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Locations">Locations</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="javascript:void(0);" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Notifications">Notifications</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- e-commerce-app menu end -->
+                    <li class="menu-item">
+                        <a href="admin/Tickets/tickets.php?userFilter=all" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div class="text-truncate" data-i18n="Users">Users</div>
+                        </a>
+                    </li>
+                    <li class="menu-item ">
+                        <a href="admin/Settings/settings.php" class="menu-link ">
+                            <i class="menu-icon tf-icons bx bx-cog"></i>
+                            <div class="text-truncate" data-i18n="Settings">Settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="admin\Misc\coming-soon.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-purchase-tag-alt"></i>
+                            <div class="text-truncate" data-i18n="Coupons ">Coupons</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="admin\Misc\coming-soon.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-briefcase"></i>
+                            <div class="text-truncate" data-i18n="Recruit">Recruit</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menu-inner" style="height:60px;">
+                    <li class="menu-item" style="position: absolute; bottom: 10px; margin-top:10px;">
+                        <a href="admin/Login/logout.php" class="menu-link">
+                            <i class="bx bx-power-off bx-sm me-3"></i>
+                            <div class="text-truncate" data-i18n="Log Out">Log Out</div>
+                        </a>
+                    </li>
+                </ul>
+                    
             </aside>
             <!-- / Menu -->
 
-
-
             <!-- Layout container -->
             <div class="layout-page">
-
                 <!-- Navbar -->
-
                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
                     id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0   d-xl-none ">
@@ -365,7 +590,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Language -->
-                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0" style="visibility:hidden;">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <i class='bx bx-globe bx-sm'></i>
@@ -404,18 +629,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
-                                            class="w-px-40 h-auto rounded-circle">
+                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                            alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="admin/Profile/profile.php">
+                                        <a class="dropdown-item" href="javascript:void(0);">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
-                                                            class="w-px-40 h-auto rounded-circle">
+                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                            alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -435,7 +660,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </li>
                                     <li>
                                         <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
-                                            <i class="bx bx-cog bx-sm me-3"></i><span>Account Settings</span>
+                                            <i class="bx bx-edit bx-sm me-3"></i><span>Edit Account</span>
                                         </a>
                                     </li>
                                     <li>

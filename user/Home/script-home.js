@@ -10,14 +10,14 @@
   // });
 // });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const loaderContainer = document.querySelector('.loader-container');
+// document.addEventListener('DOMContentLoaded', function() {
+//   const loaderContainer = document.querySelector('.loader-container');
 
-  setTimeout(() => {
-      loaderContainer.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-  }, 1000); // Adjust the delay as needed
-});
+//   setTimeout(() => {
+//       loaderContainer.classList.add('hidden');
+//       document.body.style.overflow = 'auto';
+//   }, 1000); // Adjust the delay as needed
+// });
 
 
 

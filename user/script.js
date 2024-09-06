@@ -99,19 +99,11 @@ document.addEventListener('DOMContentLoaded', function() {
 // Loader
 document.addEventListener('DOMContentLoaded', function () {
     const loaderContainer = document.querySelector('.loader-container');
-    const textElement = document.querySelector('.text2');
-
     setTimeout(() => {
-        // Wait for the fade-out transition to complete
-        loaderContainer.addEventListener('transitionend', function () {
-            // Wait an additional 0.5 seconds after the transition ends
-            setTimeout(() => {
-                loaderContainer.parentNode.removeChild(loaderContainer);
-                document.body.style.overflow = 'auto';
-                console.log("the loader is removed")
-                console.log("wating for the animation")
-            }, 500); // 0.5-second delay
-        });
+        loaderContainer.parentNode.removeChild(loaderContainer);
+        document.body.style.overflow = 'auto';
+        console.log("the loader is removed")
+        console.log("wating for the animation")
     }, 1000);
     
 });

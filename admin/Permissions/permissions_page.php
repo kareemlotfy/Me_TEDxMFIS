@@ -109,6 +109,13 @@ if ($adminDetails) {
             flex-direction: column;
             justify-content: space-between;
             border-radius: 15px;
+            max-height: 470px;
+        }
+
+        .roles-list-admins {
+            overflow-y: auto;
+            max-height: 420px;
+            margin-bottom: 20px;
         }
 
         .role-item {
@@ -169,6 +176,7 @@ if ($adminDetails) {
             flex-basis: 70%;
             background-color: #fff;
             border-radius: 15px;
+            max-height: 470px;
         }
 
         .role-edit h2 {
@@ -279,6 +287,7 @@ if ($adminDetails) {
         <div class="layout-container">
 
             <!-- Menu -->
+
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
 
@@ -301,7 +310,7 @@ if ($adminDetails) {
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item permi">
+                    <li class="menu-item ">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
                             <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
@@ -316,7 +325,7 @@ if ($adminDetails) {
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="app-ecommerce-dashboard.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
                                 </a>
                             </li>
@@ -326,17 +335,17 @@ if ($adminDetails) {
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-product-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Product List">Product List</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-product-add.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Add Product">Add Product</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-category-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Category List">Category List</div>
                                         </a>
                                     </li>
@@ -348,12 +357,12 @@ if ($adminDetails) {
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-order-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Order List">Order List</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-order-details.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Order Details">Order Details</div>
                                         </a>
                                     </li>
@@ -365,7 +374,7 @@ if ($adminDetails) {
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-customer-all.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="All Customers">All Customers</div>
                                         </a>
                                     </li>
@@ -376,19 +385,19 @@ if ($adminDetails) {
                                         </a>
                                         <ul class="menu-sub">
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-overview.html"
+                                                <a href="javascript:void(0);"
                                                     class="menu-link">
                                                     <div class="text-truncate" data-i18n="Overview">Overview</div>
                                                 </a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-security.html"
+                                                <a href="javascript:void(0);"
                                                     class="menu-link">
                                                     <div class="text-truncate" data-i18n="Security">Security</div>
                                                 </a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-billing.html" class="menu-link">
+                                                <a href="javascript:void(0);" class="menu-link">
                                                     <div class="text-truncate" data-i18n="Address & Billing">Address &
                                                         Billing</div>
                                                 </a>
@@ -398,12 +407,12 @@ if ($adminDetails) {
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <a href="app-ecommerce-manage-reviews.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Manage Reviews">Manage Reviews</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="app-ecommerce-referral.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Referrals">Referrals</div>
                                 </a>
                             </li>
@@ -413,33 +422,33 @@ if ($adminDetails) {
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-detail.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Store Details">Store Details</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-payments.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Payments">Payments</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-checkout.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Checkout">Checkout</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-shipping.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Shipping & Delivery">Shipping &
                                                 Delivery</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-locations.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Locations">Locations</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-notifications.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Notifications">Notifications</div>
                                         </a>
                                     </li>
@@ -454,18 +463,39 @@ if ($adminDetails) {
                             <div class="text-truncate" data-i18n="Users">Users</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="admin/Settings/settings.php" class="menu-link">
+                    <li class="menu-item active open">
+                        <a href="admin/Settings/settings.php" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="admin\Misc\coming-soon.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-purchase-tag-alt"></i>
+                            <div class="text-truncate" data-i18n="Coupons ">Coupons</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="admin\Misc\coming-soon.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-briefcase"></i>
+                            <div class="text-truncate" data-i18n="Recruit">Recruit</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menu-inner" style="height:60px;">
+                    <li class="menu-item" style="position: absolute; bottom: 10px; margin-top:10px;">
+                        <a href="admin/Login/logout.php" class="menu-link">
+                            <i class="bx bx-power-off bx-sm me-3"></i>
+                            <div class="text-truncate" data-i18n="Log Out">Log Out</div>
+                        </a>
+                    </li>
+                </ul>
+                    
             </aside>
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
-
                 <!-- Navbar -->
                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
                     id="layout-navbar">
@@ -479,7 +509,7 @@ if ($adminDetails) {
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Language -->
-                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0" style="visibility:hidden;">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <i class='bx bx-globe bx-sm'></i>
@@ -518,18 +548,18 @@ if ($adminDetails) {
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
-                                            class="w-px-40 h-auto rounded-circle">
+                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                            alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="admin/Profile/profile.php">
+                                        <a class="dropdown-item" href="javascript:void(0);">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
-                                                            class="w-px-40 h-auto rounded-circle">
+                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                            alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -549,7 +579,7 @@ if ($adminDetails) {
                                     </li>
                                     <li>
                                         <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
-                                            <i class="bx bx-cog bx-sm me-3"></i><span>Account Settings</span>
+                                            <i class="bx bx-edit bx-sm me-3"></i><span>Edit Account</span>
                                         </a>
                                     </li>
                                     <li>
@@ -619,7 +649,7 @@ if ($adminDetails) {
                                                     </ul>
                                                 </div>
                                                 <a href="javascript:void(0)" class="btn btn-primary mb-1">
-                                                    <i class='bx bx-user-check bx-sm me-2'></i>Connected
+                                                    <i class='bx bx-edit bx-sm me-2'></i>Edit Account
                                                 </a>
                                             </div>
                                         </div>
@@ -634,21 +664,22 @@ if ($adminDetails) {
                             <div class="col-md-12">
                                 <div class="nav-align-top">
                                     <ul class="nav nav-pills flex-column flex-sm-row mb-6">
-                                        <li class="nav-item"><a class="nav-link"
-                                                href="admin/Profile/profile.php"><i class='bx bx-user bx-sm me-1_5'></i>
+                                        <li class="nav-item"><a class="nav-link" href="admin/Profile/profile.php"><i
+                                                    class='bx bx-user bx-sm me-1_5'></i>
                                                 Profile</a></li>
                                         <li class="nav-item"><a class="nav-link active"
                                                 href="admin/Permissions/permissions_page.php"><i
-                                                    class='bx bx-group bx-sm me-1_5'></i> Admins and Permissions</a></li>
+                                                    class='bx bx-group bx-sm me-1_5'></i> Admins and Permissions</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <!--/ Navbar pills -->
                         <div class="newcontainer">
-                            <!-- Left Sidebar -->
                             <div class="roles-list">
-                                <?php
+                                <div class="roles-list-admins" id="vertical-scrollbar">
+                                    <?php
     // Fetch and display list of admins
     $admins_query = "SELECT * FROM admin_cred";
     $admins_stmt = $con->prepare($admins_query);
@@ -671,10 +702,15 @@ if ($adminDetails) {
     
     $admins_stmt->close();
     ?>
+
+                                </div>
                                 <button class=" create-role btn btn-secondary add-new btn-primary" type="button"
                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddAdmin">Add New
-                                    Admin</button>
+                                    Admin
+                                </button>
                             </div>
+                            <!-- Left Sidebar -->
+
 
 
 
@@ -732,13 +768,12 @@ if ($adminDetails) {
                                 placeholder="+1 (609) 988-44-11" aria-label="john.doe@example.com" name="userContact">
                         </div> -->
                         <div class="mb-6">
-    <label class="form-label" for="password">Password</label>
-    <input type="password" class="form-control" name="new_password" id="new_password"
-        autocomplete="off" required
-        pattern="(?=.*\d)(?=.*[a-z])(?=.*[\W\s]).{8,}"
-        title="Password must be at least 8 characters long, contain at least one lowercase letter, and at least one number, symbol, or whitespace character."
-        placeholder="Enter a strong password">
-</div>
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" class="form-control" name="new_password" id="new_password"
+                                autocomplete="off" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[\W\s]).{8,}"
+                                title="Password must be at least 8 characters long, contain at least one lowercase letter, and at least one number, symbol, or whitespace character."
+                                placeholder="Enter a strong password">
+                        </div>
                         <div class="mb-6">
                             <label class="form-label" for="committee">Committee</label>
                             <div class="position-relative">
@@ -770,8 +805,7 @@ if ($adminDetails) {
                             </select>
                         </div>
 
-                        <input type="submit" class="btn btn-primary me-3 data-submit" name="submit"
-                            value="Add"></input>
+                        <input type="submit" class="btn btn-primary me-3 data-submit" name="submit" value="Add"></input>
                         <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Cancel</button>
                         <input type="hidden">
                     </form>
@@ -869,6 +903,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <script src="admin/assets/js/dashboards-analytics.js"></script>
 
         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var e, t, l;
+                e = document.getElementById("vertical-scrollbar"),
+                    t = document.getElementById("horizontal-example"),
+                    l = document.getElementById("both-scrollbars-example"),
+                    e && new PerfectScrollbar(e, {
+                        wheelPropagation: !1
+                    }),
+                    t && new PerfectScrollbar(t, {
+                        wheelPropagation: !1,
+                        suppressScrollY: !0
+                    }),
+                    l && new PerfectScrollbar(l, {
+                        wheelPropagation: !1
+                    })
+            });
+
             function closePopup() {
                 let popup = document.getElementById("popup");
                 let newUsername = document.getElementById("new_username");
@@ -919,7 +970,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             window.onload = function () {
-                let firstAdminId = <?php echo json_encode($first_admin_id); ?> ;
+                let firstAdminId = <?php echo json_encode($first_admin_id);?> ;
                 if (firstAdminId !== null) {
                     showPermissions(firstAdminId);
                 }

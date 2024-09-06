@@ -35928,11 +35928,18 @@ html:not(.layout-navbar-fixed) .layout-content-navbar .layout-page {
         margin-left: auto
     }
 
-    .layout-menu-collapsed:not(.layout-menu-hover):not(.layout-menu-offcanvas):not(.layout-menu-fixed-offcanvas) .layout-menu .app-brand-logo~.app-brand-text {
+    .layout-menu-collapsed:not(.layout-menu-hover):not(.layout-menu-offcanvas):not(.layout-menu-fixed-offcanvas) .layout-menu .logo-container .tedx-logo {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         opacity: 0
+    }
+
+    .layout-menu-collapsed:not(.layout-menu-hover):not(.layout-menu-offcanvas):not(.layout-menu-fixed-offcanvas) .layout-menu .logo-container .x-logo {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        opacity: 1
     }
 
     .layout-menu-collapsed:not(.layout-menu-hover):not(.layout-menu-offcanvas):not(.layout-menu-fixed-offcanvas) .layout-menu .app-brand .layout-menu-toggle {
@@ -41491,3 +41498,30 @@ a.bg-vimeo:focus {
     overflow: hidden;
 }
 /* /Alert */
+
+/* Aside Logo */
+.logo-container {
+    position: relative;
+    width: auto;
+    height: 60px; 
+}
+
+.tedx-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 60px;
+    z-index: 2;  
+}
+
+
+.x-logo {
+    position: absolute;
+    top: 10px;
+    left: -15px;
+    width: auto;
+    height: 30px; 
+    z-index: 1;
+    opacity: 0;  
+}

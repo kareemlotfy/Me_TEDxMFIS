@@ -91,10 +91,12 @@ $con->close();
 
                 <div class="app-brand demo pb-4 pt-4 ">
                     <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
-                        <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
-                            id="tedx_logo" style="
-    width: auto;
-    height: 60px;">
+                        <div class="logo-container">
+                            <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
+                                class="tedx-logo" id="tedx_logo" >
+                            <img src="admin\assets\img\logos\x-art.png" class="x-logo" alt="x-logo" >
+                        </div>
+                        
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -123,7 +125,7 @@ $con->close();
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="app-ecommerce-dashboard.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
                                 </a>
                             </li>
@@ -133,17 +135,17 @@ $con->close();
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-product-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Product List">Product List</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-product-add.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Add Product">Add Product</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-category-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Category List">Category List</div>
                                         </a>
                                     </li>
@@ -155,12 +157,12 @@ $con->close();
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-order-list.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Order List">Order List</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-order-details.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Order Details">Order Details</div>
                                         </a>
                                     </li>
@@ -172,7 +174,7 @@ $con->close();
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-customer-all.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="All Customers">All Customers</div>
                                         </a>
                                     </li>
@@ -183,19 +185,19 @@ $con->close();
                                         </a>
                                         <ul class="menu-sub">
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-overview.html"
+                                                <a href="javascript:void(0);"
                                                     class="menu-link">
                                                     <div class="text-truncate" data-i18n="Overview">Overview</div>
                                                 </a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-security.html"
+                                                <a href="javascript:void(0);"
                                                     class="menu-link">
                                                     <div class="text-truncate" data-i18n="Security">Security</div>
                                                 </a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="app-ecommerce-customer-details-billing.html" class="menu-link">
+                                                <a href="javascript:void(0);" class="menu-link">
                                                     <div class="text-truncate" data-i18n="Address & Billing">Address &
                                                         Billing</div>
                                                 </a>
@@ -205,12 +207,12 @@ $con->close();
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <a href="app-ecommerce-manage-reviews.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Manage Reviews">Manage Reviews</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="app-ecommerce-referral.html" class="menu-link">
+                                <a href="javascript:void(0);" class="menu-link">
                                     <div class="text-truncate" data-i18n="Referrals">Referrals</div>
                                 </a>
                             </li>
@@ -220,33 +222,33 @@ $con->close();
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-detail.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Store Details">Store Details</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-payments.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Payments">Payments</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-checkout.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Checkout">Checkout</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-shipping.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Shipping & Delivery">Shipping &
                                                 Delivery</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-locations.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Locations">Locations</div>
                                         </a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="app-ecommerce-settings-notifications.html" class="menu-link">
+                                        <a href="javascript:void(0);" class="menu-link">
                                             <div class="text-truncate" data-i18n="Notifications">Notifications</div>
                                         </a>
                                     </li>
@@ -261,47 +263,40 @@ $con->close();
                             <div class="text-truncate" data-i18n="Users">Users</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="admin/Settings/settings.php" class="menu-link">
+                    <li class="menu-item ">
+                        <a href="admin/Settings/settings.php" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="admin/Settings/settings.php" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-discount"></i>
+                        <a href="admin\Misc\coming-soon.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-purchase-tag-alt"></i>
                             <div class="text-truncate" data-i18n="Coupons ">Coupons</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="admin/Settings/settings.php" class="menu-link">
+                        <a href="admin\Misc\coming-soon.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-briefcase"></i>
                             <div class="text-truncate" data-i18n="Recruit">Recruit</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="admin/Settings/settings.php" class="menu-link">
+                </ul>
+                <ul class="menu-inner" style="height:60px;">
+                    <li class="menu-item" style="position: absolute; bottom: 10px; margin-top:10px;">
+                        <a href="admin/Login/logout.php" class="menu-link">
                             <i class="bx bx-power-off bx-sm me-3"></i>
-                            <div class="text-truncate" data-i18n="Lou Out">Log Out</div>
+                            <div class="text-truncate" data-i18n="Log Out">Log Out</div>
                         </a>
                     </li>
+                </ul>
+                    
             </aside>
             <!-- / Menu -->
 
-
-
             <!-- Layout container -->
             <div class="layout-page">
-
-
-
-
-
                 <!-- Navbar -->
-
-
-
-
                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
                     id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0   d-xl-none ">
@@ -314,7 +309,7 @@ $con->close();
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Language -->
-                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0" style="display:hidden;">
+                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0" style="visibility:hidden;">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <i class='bx bx-globe bx-sm'></i>
@@ -353,18 +348,18 @@ $con->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
-                                            class="w-px-40 h-auto rounded-circle">
+                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                            alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="admin/Profile/profile.php">
+                                        <a class="dropdown-item" href="javascript:void(0);">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" alt
-                                                            class="w-px-40 h-auto rounded-circle">
+                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                            alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -384,7 +379,7 @@ $con->close();
                                     </li>
                                     <li>
                                         <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
-                                            <i class="bx bx-cog bx-sm me-3"></i><span>Account Settings</span>
+                                            <i class="bx bx-edit bx-sm me-3"></i><span>Edit Account</span>
                                         </a>
                                     </li>
                                     <li>
@@ -1046,6 +1041,29 @@ $con->close();
 
     <!-- Page JS -->
     <script type="module" src="admin/assets/js/dashboards-analytics.js"></script>
+    <!-- <script>
+        document.querySelector('.layout-menu-toggle').addEventListener('click', function() {
+    const aside = document.getElementById('layout-menu');
+    const logo = document.getElementById('tedx_logo');
+    const collapsedClass = 'menu-collapsed';
+
+    // Toggle the collapsed state
+    aside.classList.toggle(collapsedClass);
+
+    // Change the image based on whether the menu is collapsed
+    if (aside.classList.contains(collapsedClass)) {
+        // Collapsed state: Change to a smaller or different image
+        logo.src = 'admin/assets/img/logos/x-art.png';  // Update with your collapsed image path
+        logo.style.height = '30px';  // Adjust the image size when collapsed
+        logo.style.marginLeft = '-0.37em'
+    } else {
+        // Expanded state: Return to the original image
+        logo.src = 'admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg';  // Original image
+        logo.style.height = '60px';  // Original size
+    }
+});
+
+    </script> -->
 
 </body>
 
