@@ -304,7 +304,7 @@ if ($adminDetails) {
                     <li class="menu-item permi">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                            <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
+                            <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
                         </a>
                     </li>
 
@@ -639,7 +639,7 @@ if ($adminDetails) {
                                                 Profile</a></li>
                                         <li class="nav-item"><a class="nav-link active"
                                                 href="admin/Permissions/permissions_page.php"><i
-                                                    class='bx bx-group bx-sm me-1_5'></i> Admins and Permitions</a></li>
+                                                    class='bx bx-group bx-sm me-1_5'></i> Admins and Permissions</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -97,7 +97,7 @@ $adminName = getAdminName($con, $admin_id);
                     <li class="menu-item">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                            <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
+                            <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
                         </a>
                     </li>
 
