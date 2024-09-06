@@ -41366,3 +41366,128 @@ a.bg-vimeo:focus {
     border-color: rgba(56, 69, 81, .0774115686)
 }
 
+/* Alert */
+.alert_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3.4px);
+}
+
+.error,
+.succes {
+    overflow: hidden;
+    position: relative;
+    background-color: #ffffff;
+    text-align: left;
+    border-radius: 20px;
+    max-width: 290px;
+    box-shadow: -5px -4px 25px 5px rgba(0, 0, 0, 0.1),
+        1px 10px 10px 5px rgba(0, 0, 0, 0.04)
+}
+
+.alert_header {
+    padding: 1.25rem 1rem 1rem 1rem;
+    background-color: #ffffff;
+}
+
+
+.error .image {
+    background-color: #fee2e2;
+}
+
+.succes .image {
+    background-color: #e2feee;
+}
+
+.image {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+}
+
+.error .image svg {
+    color: #dc2626;
+}
+
+.succes .image svg {
+    color: #0afa2a;
+}
+
+.image svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.content {
+    margin-top: 0.75rem;
+    text-align: center;
+}
+
+.title {
+    color: #111827;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+}
+
+.message {
+    margin-top: 0.5rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.actions {
+    margin: 0.75rem 1rem;
+    background-color: #f9fafb;
+}
+
+.error .desactivate {
+    background-color: #dc2626;
+}
+
+.succes .desactivate {
+    background-color: #1aa06d;
+}
+
+.desactivate {
+    display: inline-flex;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+    justify-content: center;
+    width: 100%;
+    border-radius: 0.375rem;
+    border-width: 1px;
+    border-color: transparent;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.close_popup {
+    visibility: hidden;
+    display: none;
+}
+
+.alertCalled{
+    overflow: hidden;
+}
+/* /Alert */
