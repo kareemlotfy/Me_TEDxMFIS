@@ -1,29 +1,34 @@
-<?php
-require_once("../Misc/db_conn.php");
-require_once("../Misc/functions.php");
+<?php 
 
-// Ensure the admin is logged in
+include("../Misc/db_conn.php");
+require("../Misc/functions.php");
+
 adminLogin();
 
-// Fetch admin ID from session
-$admin_id = $_SESSION['adminId'];
-$adminName = getAdminName($con, $admin_id);
-$page_id = 8; // Example: Page X ID
+$adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
+$pageId = 8; // Example: replace with the actual page ID you want to check
 
-// Check if the admin has permission to access this page
-$permission_query = "SELECT * FROM permissions WHERE admin_id = ? AND page_id = ?";
-$permission_stmt = $con->prepare($permission_query);
-$permission_stmt->bind_param("ii", $admin_id, $page_id);
-$permission_stmt->execute();
-$has_permission = $permission_stmt->get_result();
-
-if ($has_permission->num_rows == 0) {
-    // Redirect to unauthorized page if no permission
-    header("Location: ../Misc/unauthorized.php");
-    exit();
-}
-$permission_stmt->close();
+checkAdminPermission($con, $adminId, $pageId);
 ?>
+
+<?php
+
+$adminDetails = getAdminDetails($con, $adminId);
+
+if ($adminDetails) {
+    $adminName = $adminDetails['admin_name'];
+    $adminCommitee = $adminDetails['admin_commitee'];
+    $adminPic = $adminDetails['admin_pic'];
+    $adminPosition = $adminDetails['admin_position'];
+    $adminEmail = $adminDetails['admin_email'];
+    $adminUsername = $adminDetails['admin_username'];
+    $adminNumber = $adminDetails['admin_number'];
+} else {
+    echo "Admin details not found.";
+}
+
+?>
+
 
 <!DOCTYPE html>
 
@@ -40,7 +45,7 @@ $permission_stmt->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -529,7 +534,7 @@ $permission_stmt->close();
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
-                                                    <small class="text-muted">Admin</small>
+                                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
                                                 </div>
                                             </div>
                                         </a>
@@ -600,11 +605,11 @@ $permission_stmt->close();
                                                         class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4 mt-4">
                                                         <li class="list-inline-item">
                                                             <i class='bx bx-palette me-2 align-top'></i><span
-                                                                class="fw-medium">UX Designer</span>
+                                                                class="fw-medium"><?php echo htmlspecialchars($adminCommitee); ?></span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <i class='bx bx-map me-2 align-top'></i><span
-                                                                class="fw-medium">Vatican City</span>
+                                                                class="fw-medium">Cairo City</span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <i class='bx bx-calendar me-2 align-top'></i><span
@@ -727,10 +732,13 @@ $permission_stmt->close();
                                 placeholder="+1 (609) 988-44-11" aria-label="john.doe@example.com" name="userContact">
                         </div> -->
                         <div class="mb-6">
-                            <label class="form-label" for="password">Password</label>
-                            <input type="password" class="form-control" name="new_password" id="new_password"
-                                autocomplete="off" required>
-                        </div>
+    <label class="form-label" for="password">Password</label>
+    <input type="password" class="form-control" name="new_password" id="new_password"
+        autocomplete="off" required
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[\W\s]).{8,}"
+        title="Password must be at least 8 characters long, contain at least one lowercase letter, and at least one number, symbol, or whitespace character."
+        placeholder="Enter a strong password">
+</div>
                         <div class="mb-6">
                             <label class="form-label" for="committee">Committee</label>
                             <div class="position-relative">
@@ -771,28 +779,35 @@ $permission_stmt->close();
             </div>
 
             <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $frm_data = filteration($_POST);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $frm_data = filteration($_POST);
 
-        $newName = $frm_data['new_name'];
-        $newUsername = $frm_data['new_username'];
-        $newPassword = $frm_data['new_password'];
-        $newCommittee = $frm_data['new_committee'];
-        $newPosition = $frm_data['new_position'];
-        $newEmail = $frm_data['new_email'];
+    $newName = $frm_data['new_name'];
+    $newUsername = $frm_data['new_username'];
+    $newPassword = $frm_data['new_password'];
+    $newCommittee = $frm_data['new_committee'];
+    $newPosition = $frm_data['new_position'];
+    $newEmail = $frm_data['new_email'];
 
-        // Check if username already exists
-        $check_query = "SELECT * FROM admin_cred WHERE admin_username = ? AND admin_name = ?";
+    // Server-side password validation
+    if (strlen($newPassword) < 8 || 
+        !preg_match('/[a-z]/', $newPassword) || 
+        !preg_match('/[\d\W\s]/', $newPassword)) {
+        alert("error", "Password does not meet requirements", "Password must be at least 8 characters long, contain at least one lowercase letter, and at least one number, symbol, or whitespace character.");
+        addBodyClassAndStyle();
+    } else {
+        // Check if username or email already exists
+        $check_query = "SELECT * FROM admin_cred WHERE admin_username = ? OR email = ?";
         $check_stmt = $con->prepare($check_query);
-        $check_stmt->bind_param("ss", $newUsername, $newName);
+        $check_stmt->bind_param("ss", $newUsername, $newEmail);
         $check_stmt->execute();
         $result = $check_stmt->get_result();
 
-        if (!empty($newName) && !empty($newUsername) && !empty($newPassword) && !empty($newCommittee) && !empty($newPosition) && !empty($newEmail)) {
-            if ($result->num_rows > 0) {
-                alert("error", "Username Already Exists!", "The username you entered is already in use. Please choose a different username and try again.");
-                addBodyClassAndStyle();
-            } else {
+        if ($result->num_rows > 0) {
+            alert("error", "Username or Email Already Exists!", "The username or email you entered is already in use. Please choose a different one and try again.");
+            addBodyClassAndStyle();
+        } else {
+            if (!empty($newName) && !empty($newUsername) && !empty($newPassword) && !empty($newCommittee) && !empty($newPosition) && !empty($newEmail)) {
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
                 $insert_query = "INSERT INTO admin_cred (admin_name, admin_username, admin_pass, admin_committee, admin_position, email) VALUES (?, ?, ?, ?, ?, ?)";
                 $insert_stmt = $con->prepare($insert_query);
@@ -805,14 +820,17 @@ $permission_stmt->close();
                     echo "Error: " . $insert_stmt->error;
                 }
                 $insert_stmt->close();
+            } else {
+                alert("error", "Please fill in all required fields", "Oops! It seems like you missed filling in some required fields. Please make sure to fill in all the mandatory information and try again.");
+                addBodyClassAndStyle();
             }
-            $check_stmt->close();
-        } else {
-            alert("error", "Please fill in all required fields", "Oops! It seems like you missed filling in some required fields. Please make sure to fill in all the mandatory information and try again.");
-            addBodyClassAndStyle();
         }
+        $check_stmt->close();
+        $con->close(); // Close the connection
     }
-    ?>
+}
+?>
+
 
 
 

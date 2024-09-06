@@ -1,75 +1,103 @@
 <?php 
-require("../Misc/db_conn.php");
+
+include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+
 adminLogin();
 
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+$adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
+$pageId = 1; // Example: Page X ID
 
-$adminId = $_SESSION['adminId'] ?? null;
+checkAdminPermission($con, $adminId, $pageId);
+
+?>
+
+<?php
+
+$adminDetails = getAdminDetails($con, $adminId);
+
+if ($adminDetails) {
+    $adminName = $adminDetails['admin_name'];
+    $adminCommitee = $adminDetails['admin_commitee'];
+    $adminPic = $adminDetails['admin_pic'];
+    $adminPosition = $adminDetails['admin_position'];
+    $adminEmail = $adminDetails['admin_email'];
+    $adminUsername = $adminDetails['admin_username'];
+    $adminNumber = $adminDetails['admin_number'];
+} else {
+    echo "Admin details not found.";
+}
+
+?>
+
+<?php 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Sanitize and validate input
+
+    // Sanitize input
     $adminName = filter_input(INPUT_POST, 'admin_name', FILTER_SANITIZE_STRING);
     $adminUsername = filter_input(INPUT_POST, 'admin_username', FILTER_SANITIZE_STRING);
-    $adminEmail = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $adminCommittee = filter_input(INPUT_POST, 'admin_committee', FILTER_SANITIZE_STRING);
+    $adminEmail = filter_input(INPUT_POST, 'admin_email', FILTER_SANITIZE_EMAIL);
+    $adminCommitee = filter_input(INPUT_POST, 'admin_commitee', FILTER_SANITIZE_STRING);
     $adminPosition = filter_input(INPUT_POST, 'admin_position', FILTER_SANITIZE_STRING);
+    $adminNumber = filter_input(INPUT_POST, 'admin_number', FILTER_SANITIZE_NUMBER_INT);
 
-    if (!filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format.";
-        exit();
+    // Validate required fields
+    $errors = [];
+
+    if (empty($adminName)) {
+        $errors[] = "Admin name is required.";
     }
 
-    // Update admin data in the database
-    $update_sql = "UPDATE admin_cred SET admin_name = ?, admin_username = ?, email = ?, admin_committee = ?, admin_position = ? WHERE id = ?";
-    $stmt = $con->prepare($update_sql);
-
-    if (!$stmt) {
-        echo "Prepare failed: (" . $con->errno . ") " . $con->error;
-        exit();
+    if (empty($adminUsername)) {
+        $errors[] = "Admin username is required.";
     }
 
-    $stmt->bind_param("sssssi", $adminName, $adminUsername, $adminEmail, $adminCommittee, $adminPosition, $adminId);
-    $stmt->execute();
+    if (empty($adminEmail) || !filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "A valid admin email is required.";
+    }
 
-    if ($stmt->affected_rows > 0) {
-        echo "Account updated successfully.";
+    if (empty($adminCommitee)) {
+        $errors[] = "Admin committee is required.";
+    }
+
+    if (empty($adminPosition)) {
+        $errors[] = "Admin position is required.";
+    }
+
+    if (empty($adminNumber)) {
+        $errors[] = "Admin Number is required.";
+    }
+
+    if (empty($errors)) {
+        // Update admin data in the database
+        $update_sql = "UPDATE admin_cred SET admin_name = ?, admin_username = ?, admin_email = ?, admin_commitee = ?, admin_position = ?, admin_number = ? WHERE id = ?";
+        $stmt = $con->prepare($update_sql);
+
+        if (!$stmt) {
+            alert("error", "Error", "Prepare failed: (" . $con->errno . ") " . $con->error);
+            exit();
+        }
+
+        $stmt->bind_param("sssssii", $adminName, $adminUsername, $adminEmail, $adminCommitee, $adminPosition, $adminNumber, $adminId);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            alert("success","Success","Account updated successfully.");
+        } else {
+            alert("error","Error","Error updating account or no changes made.");
+        }
+
+        $stmt->close();
     } else {
-        echo "Error updating account or no changes made.";
+        // Display validation errors
+        foreach ($errors as $error) {
+            alert("error", "Validation Error", $error);
+        }
     }
-
-    $stmt->close();
 }
-
-// Fetch current admin data
-$sql = "SELECT admin_name, admin_username, email, admin_committee, admin_position FROM admin_cred WHERE id = ?";
-$stmt = $con->prepare($sql);
-
-if (!$stmt) {
-    echo "Prepare failed: (" . $con->errno . ") " . $con->error;
-    exit();
-}
-
-$stmt->bind_param("i", $adminId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $adminName = htmlspecialchars($row["admin_name"], ENT_QUOTES, 'UTF-8');
-    $adminUsername = htmlspecialchars($row["admin_username"], ENT_QUOTES, 'UTF-8');
-    $adminEmail = htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8');
-    $adminCommittee = htmlspecialchars($row["admin_committee"], ENT_QUOTES, 'UTF-8');
-    $adminPosition = htmlspecialchars($row["admin_position"], ENT_QUOTES, 'UTF-8');
-} else {
-    echo "Admin data not found.";
-}
-
-$stmt->close();
-$con->close();
 ?>
+
 <!DOCTYPE html>
 
 
@@ -88,7 +116,7 @@ $con->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -392,7 +420,7 @@ $con->close();
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
-                                                    <small class="text-muted">Admin</small>
+                                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
                                                 </div>
                                             </div>
                                         </a>
@@ -462,11 +490,6 @@ $con->close();
                                                     <input type="file" id="upload" class="account-file-input" hidden
                                                         accept="image/png, image/jpeg" />
                                                 </label>
-                                                <button type="button"
-                                                    class="btn btn-label-secondary account-image-reset mb-4">
-                                                    <i class="bx bx-reset d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Reset</span>
-                                                </button>
 
                                                 <div>Allowed JPG, GIF or PNG. Max size of 800K</div>
                                             </div>
@@ -490,8 +513,8 @@ $con->close();
                                                         required />
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label for="email" class="form-label">E-mail</label>
-                                                    <input class="form-control" type="text" id="email" name="email"
+                                                    <label for="admin_email" class="form-label">E-mail</label>
+                                                    <input class="form-control" type="text" id="email" name="admin_email"
                                                         value="<?php echo htmlspecialchars($adminEmail); ?>"
                                                         placeholder="john.doe@example.com" required />
                                                 </div>
@@ -499,38 +522,39 @@ $con->close();
                                                     <label class="form-label" for="phoneNumber">Phone Number</label>
                                                     <div class="input-group input-group-merge">
                                                         <span class="input-group-text">EG (+20)</span>
-                                                        <input type="text" id="phoneNumber" name="phoneNumber"
+                                                        <input type="text" id="phoneNumber" name="admin_number"
+                                                            value="<?php echo htmlspecialchars($adminNumber); ?>"
                                                             class="form-control" placeholder="1234567890" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label class="form-label" for="admin_committee">Commetie</label>
+                                                    <label class="form-label" for="admin_commitee">Commetie</label>
                                                     <div class="input-group input-group-merge">
-                                                        <select name="admin_committee" id="admin_committee"
+                                                        <select name="admin_commitee" id="admin_committee"
                                                             class="form-control">
                                                             <option value="Coaching"
-                                                                <?php echo $adminCommittee == 'Coaching' ? 'selected' : ''; ?>>
+                                                                <?php echo $adminCommitee == 'Coaching' ? 'selected' : ''; ?>>
                                                                 Coaching</option>
                                                             <option value="Designs"
-                                                                <?php echo $adminCommittee == 'Designs' ? 'selected' : ''; ?>>
+                                                                <?php echo $adminCommitee == 'Designs' ? 'selected' : ''; ?>>
                                                                 Designs</option>
                                                             <option value="Logistics"
-                                                                <?php echo $adminCommittee == 'Logistics' ? 'selected' : ''; ?>>
+                                                                <?php echo $adminCommitee == 'Logistics' ? 'selected' : ''; ?>>
                                                                 Logistics</option>
                                                             <option value="Human Resources (HR)"
-                                                                <?php echo $adminCommittee == 'Human Resources (HR)' ? 'selected' : ''; ?>>
+                                                                <?php echo $adminCommitee == 'Human Resources (HR)' ? 'selected' : ''; ?>>
                                                                 Human Resources (HR)</option>
                                                             <option value="Marketing"
-                                                                <?php echo $adminCommittee == 'Marketing' ? 'selected' : ''; ?>>
+                                                                <?php echo $adminCommitee == 'Marketing' ? 'selected' : ''; ?>>
                                                                 Marketing</option>
                                                             <option value="Information Technology (IT)"
-                                                                <?php echo $adminCommittee == 'Information Technology (IT)' ? 'selected' : ''; ?>>
+                                                                <?php echo $adminCommitee == 'Information Technology (IT)' ? 'selected' : ''; ?>>
                                                                 Information Technology (IT)</option>
                                                             <option value="Media"
-                                                                <?php echo $adminCommittee == 'Media' ? 'selected' : ''; ?>>
+                                                                <?php echo $adminCommitee == 'Media' ? 'selected' : ''; ?>>
                                                                 Media</option>
                                                             <option value="Public Relations (PR)"
-                                                                <?php echo $adminCommittee == 'Public Relations (PR)' ? 'selected' : ''; ?>>
+                                                                <?php echo $adminCommitee == 'Public Relations (PR)' ? 'selected' : ''; ?>>
                                                                 Public Relations (PR)</option>
                                                         </select>
                                                     </div>
@@ -561,7 +585,6 @@ $con->close();
                                             </div>
                                             <div class="mt-6">
                                                 <button type="submit" class="btn btn-primary me-3">Save changes</button>
-                                                <button type="reset" class="btn btn-label-secondary">Cancel</button>
                                             </div>
                                         </form>
                                     </div>
@@ -571,8 +594,7 @@ $con->close();
                                     <!-- Change Password -->
                                     <h5 class="card-header">Change Password</h5>
                                     <div class="card-body pt-1">
-                                        <form id="formAccountSettings" method="GET" onsubmit="return false"
-                                            class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                                    <form id="formAccountSettings" method="POST" action="admin/Profile/change_password.php" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
                                             <div class="row">
                                                 <div
                                                     class="mb-6 col-md-6 form-password-toggle fv-plugins-icon-container">
@@ -629,7 +651,6 @@ $con->close();
                                             </ul>
                                             <div class="mt-6">
                                                 <button type="submit" class="btn btn-primary me-3">Save changes</button>
-                                                <button type="reset" class="btn btn-label-secondary">Reset</button>
                                             </div>
                                             <input type="hidden">
                                         </form>
@@ -637,36 +658,24 @@ $con->close();
                                     <!-- / Change Password -->
                                 </div>
                                 <div class="card">
-                                    <h5 class="card-header">Delete Account</h5>
-                                    <div class="card-body">
-                                        <div class="mb-6 col-12 mb-0">
-                                            <div class="alert alert-warning">
-                                                <h5 class="alert-heading mb-1">Are you sure you want to delete your
-                                                    account?</h5>
-                                                <p class="mb-0">Once you delete your account, there is no going back.
-                                                    Please be certain.</p>
-                                            </div>
-                                        </div>
-                                        <form id="formAccountDeactivation" method="POST"
-                                            onsubmit="return confirm('Are you sure you want to delete your account?');">
-                                            <div class="form-check my-8 ms-2">
-                                                <input type="hidden" name="delete_account" value="1">
-                                                <input class="form-check-input" type="checkbox" name="accountActivation"
-                                                    id="accountActivation" />
-                                                <label class="form-check-label" for="accountActivation">I confirm my
-                                                    account
-                                                    deactivation</label>
-                                            </div>
-                                            <button type="submit" class="btn btn-danger deactivate-account">Deactivate
-                                                Account</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
+    <h5 class="card-header">Delete Account</h5>
+    <div class="card-body">
+        <div class="mb-6 col-12 mb-0">
+            <div class="alert alert-warning">
+                <h5 class="alert-heading mb-1">Are you sure you want to delete your account?</h5>
+                <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+            </div>
+        </div>
+        <form action="admin/Profile/DeleteAdminScript.php" id="formAccountDeactivation" method="POST">
+            <div class="form-check my-8 ms-2">
+                <input type="hidden" name="delete_account" value="1">
+                <input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation" />
+                <label class="form-check-label" for="accountActivation">I confirm my account deactivation</label>
+            </div>
+            <button type="submit" class="btn btn-danger deactivate-account" id="deactivateButton" disabled>Deactivate Account</button>
+        </form>
+    </div>
+</div>
                     <!-- / Content -->
 
 
@@ -721,6 +730,18 @@ $con->close();
 
     <!-- Page JS -->
     <script src="admin/assets/js/pages-account-settings-account.js"></script>
+
+    <script>
+    // Get the checkbox and the button
+    const checkbox = document.getElementById('accountActivation');
+    const deactivateButton = document.getElementById('deactivateButton');
+
+    // Add an event listener to the checkbox
+    checkbox.addEventListener('change', function () {
+        // Enable the button if the checkbox is checked, otherwise disable it
+        deactivateButton.disabled = !this.checked;
+    });
+</script>
 
 </body>
 

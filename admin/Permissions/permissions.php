@@ -99,7 +99,9 @@ if ($admin !== null && $admin_id != 1) {
     echo "</form>";
     echo "</div>";
 } else {
-    echo "Admin not found or is a super admin.";
+    echo "<div class='role-edit'>";
+    echo "<h2>Admin not found or is a super admin.</h2>";
+    echo "</div>";
 }
 ?>
 

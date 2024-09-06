@@ -3,26 +3,39 @@
 ini_set('session.cookie_secure', '1'); // Ensure cookies are sent over HTTPS
 ini_set('session.cookie_httponly', '1'); // Prevent JavaScript access to session cookies
 ini_set('session.cookie_samesite', 'Strict'); // Mitigate CSRF attacks
+?>
 
+<?php 
 
-require("../Misc/db_conn.php");
+include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+
 adminLogin();
 
-$admin_id = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
-$adminName = htmlspecialchars(getAdminName($con, $admin_id), ENT_QUOTES, 'UTF-8');
-$page_id = 2; // Example: Page X ID
+$adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
+$pageId = 2; // Example: replace with the actual page ID you want to check
 
-$stmt = $con->prepare("SELECT * FROM permissions WHERE admin_id = ? AND page_id = ?");
-$stmt->bind_param("ii", $admin_id, $page_id);
-$stmt->execute();
-$has_permission = $stmt->get_result();
+checkAdminPermission($con, $adminId, $pageId);
+?>
 
-if ($has_permission->num_rows == 0) {
-    // Admin doesn't have permission to access this page
-    header("Location: ../Misc/unauthorized.php");
-    exit();
+<?php
+
+$adminDetails = getAdminDetails($con, $adminId);
+
+if ($adminDetails) {
+    $adminName = $adminDetails['admin_name'];
+    $adminCommitee = $adminDetails['admin_commitee'];
+    $adminPic = $adminDetails['admin_pic'];
+    $adminPosition = $adminDetails['admin_position'];
+    $adminEmail = $adminDetails['admin_email'];
+    $adminUsername = $adminDetails['admin_username'];
+} else {
+    echo "Admin details not found.";
 }
+
+?>
+
+<?php
 
 $limit = 10; // Number of records per page
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Get current page number from query string, default to page 1
@@ -109,8 +122,8 @@ $con->close();
 
     <title>User</title>
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
-    <link rel="stylesheet" href="admin/css/style.css">
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <!-- <link rel="stylesheet" href="admin/css/style.css"> -->
     <!-- <link rel="stylesheet" href="admin/css/style-tickets.css"> -->
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
@@ -405,8 +418,8 @@ $con->close();
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <h6 class="mb-0">John Doe</h6>
-                                                    <small class="text-muted">Admin</small>
+                                                    <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
+                                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
                                                 </div>
                                             </div>
                                         </a>
@@ -465,13 +478,13 @@ $con->close();
                                                 <span class="text-heading">Total Users</span>
                                                 <div class="d-flex align-items-center my-1">
                                                     <h4 class="mb-0 me-2">
-                                                        <span id="totalUsers"></span>
+                                                        <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
                                                     </h4>
                                                 </div>
                                             </div>
                                             <div class="avatar">
                                                 <span class="avatar-initial rounded bg-label-primary">
-                                                    <i class="bx bx-group bx-"></i>
+                                                    <i class="bx bx-group bx-sm"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -491,8 +504,8 @@ $con->close();
                                                 </div>
                                             </div>
                                             <div class="avatar">
-                                                <span class="avatar-initial rounded bg-label-danger">
-                                                    <i class="bx bx-user-plus bx-sm"></i>
+                                                <span class="avatar-initial rounded bg-label-success">
+                                                    <i class="bx bx-user-check bx-sm"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -512,8 +525,8 @@ $con->close();
                                                 </div>
                                             </div>
                                             <div class="avatar">
-                                                <span class="avatar-initial rounded bg-label-success">
-                                                    <i class="bx bx-user-check bx-sm"></i>
+                                                <span class="avatar-initial rounded bg-label-danger">
+                                                    <i class="bx bx-user-plus bx-sm"></i>
                                                 </span>
                                             </div>
                                         </div>
@@ -590,7 +603,7 @@ $con->close();
                                                             <input type="hidden" name="searchPhone"
                                                                 value="<?php echo htmlspecialchars(isset($_GET['searchPhone']) ? $_GET['searchPhone'] : '', ENT_QUOTES, 'UTF-8'); ?>">
                                                             <button
-                                                                class="btn buttons-collection pagination-btn dropdown-toggle btn-label-secondary me-4"
+                                                                class="btn buttons-collection pagination-btn btn-label-secondary me-4"
                                                                 tabindex="0" aria-controls="DataTables_Table_0"
                                                                 type="submit" aria-haspopup="dialog"
                                                                 aria-expanded="false">
@@ -657,13 +670,14 @@ $con->close();
                         </td>
                         <td><span class='text-truncate d-flex align-items-center text-heading'>" . htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8') . "</span>
                         </td>
-                        <td ><span class='text-heading'>" . htmlspecialchars($row["phone"], ENT_QUOTES, 'UTF-8') . "</span></td>
-                        <td><span class='badge bg-label-success' text-capitalized=''>" . htmlspecialchars($status, ENT_QUOTES, 'UTF-8') . "</span>
+                        <td ><span class='text-heading'>" . htmlspecialchars($row["phone"], ENT_QUOTES, 'UTF-8') . "</span></td>";
+                          if ($row["isaccepted"] == 'no') {
+                    echo "
+                        <td><span class='badge bg-label-danger' text-capitalized=''>" . htmlspecialchars($status, ENT_QUOTES, 'UTF-8') . "</span>
                         </td>
                         <td >
-                          <div class='d-flex align-items-center'>";
-                          if ($row["isaccepted"] == 'no') {
-                    echo "<a href='javascript:;'
+                          <div class='d-flex align-items-center'>
+                    <a href='javascript:;'
                               class='btn btn-icon delete-record'><i class='bx bx-trash bx-sm'></i>
                             </a>
                             <a href='admin/Update/update.php?id=" . $rowId . "' class='btn btn-icon'><i
@@ -674,15 +688,19 @@ $con->close();
                                 class='bx bx-dots-vertical-rounded bx-sm'></i>
                             </a>
                             <div class='dropdown-menu dropdown-menu-end m-0'>
-                                <a href='admin/Update/update.php?id=" . $rowId . "'>Edit</a>
-                                <a href='javascript:;' class='dropdown-item'>Suspend</a>
-                                <a href='admin/Accept/accept.php?id=" . $rowId . "'>Accept</a>
+                                <a href='admin/Update/update.php?id=" . $rowId . "'class='dropdown-item'>Edit</a>
+                                <a href='admin/Accept/accept.php?id=" . $rowId . "'class='dropdown-item'>Accept</a>
                             </div>
                         </div>
                     </td>
                 </tr>";
                 } else {
-                    echo "<a href='javascript:;'
+                    echo "
+                        <td><span class='badge bg-label-success' text-capitalized=''>" . htmlspecialchars($status, ENT_QUOTES, 'UTF-8') . "</span>
+                        </td>
+                        <td >
+                          <div class='d-flex align-items-center'>
+                    <a href='javascript:;'
                               class='btn btn-icon delete-record'><i class='bx bx-trash bx-sm'></i>
                             </a>
                             <a href='admin/Update/update.php?id=" . $rowId . "' class='btn btn-icon'><i
@@ -693,14 +711,20 @@ $con->close();
                                 class='bx bx-dots-vertical-rounded bx-sm'></i>
                             </a>
                             <div class='dropdown-menu dropdown-menu-end m-0'>
-                                <a href='admin/Update/update.php?id=" . $rowId . "'>Edit</a>
-                                <a href='javascript:;' class='dropdown-item'>Suspend</a>
+                                <a href='admin/Update/update.php?id=" . $rowId . "'class='dropdown-item'>Edit</a>
                             </div>
                         </div>
                     </td>
                 </tr>";
                 }
             }
+            ?>
+            <?php
+            $startIndex = ($currentPage - 1) * $limit + 1; // Starting user index on the current page
+            $endIndex = min($currentPage * $limit, $totalFilteredUsers); // Ending user index on the current page
+            
+            // Calculate the number of viewed users
+            $viewedUsersCount = $endIndex - $startIndex + 1;
             ?>
 
                                         </tbody>
@@ -709,64 +733,119 @@ $con->close();
                                         <div class="col-sm-12 col-md-6">
                                             <div class="dataTables_info" id="DataTables_Table_0_info" role="status"
                                                 aria-live="polite">Showing
-                                                1 to 10 of 50 entries</div>
+                                                <?php echo $viewedUsersCount ?> of <?php echo $totalUsers ?> entries</div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div class="dataTables_paginate paging_simple_numbers"
                                                 id="DataTables_Table_0_paginate">
                                                 <ul class="pagination">
-                                                    <?php 
-        $totalPages = ceil($totalFilteredUsers / $limit);
-        $queryString = http_build_query(array_merge($_GET, ['page' => 1]));
+                                                <?php 
+$totalPages = ceil($totalFilteredUsers / $limit);
+$queryString = http_build_query(array_merge($_GET, ['page' => 1]));
 
-        // Previous button
-        if ($currentPage > 1) {
-            $prevPage = $currentPage - 1;
-            $queryString = http_build_query(array_merge($_GET, ['page' => $prevPage]));
-            echo "<li class='paginate_button page-item previous' id='DataTables_Table_0_previous'>
-                            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'><i class='bx bx-chevron-left bx-18px'></i>
-                            </a>
-                            </li>";
+// Previous button
+if ($currentPage > 1) {
+    $prevPage = $currentPage - 1;
+    $queryString = http_build_query(array_merge($_GET, ['page' => $prevPage]));
+    echo "<li class='paginate_button page-item previous' id='DataTables_Table_0_previous'>
+            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'><i class='bx bx-chevron-left bx-18px'></i></a>
+          </li>";
+} else {
+    echo "<li class='paginate_button page-item previous disabled' id='DataTables_Table_0_previous'>
+            <a class='page-link'><i class='bx bx-chevron-left bx-18px'></i></a>
+          </li>";
+}
+
+// Page numbers
+if ($totalPages <= 5) {
+    // If total pages are less than or equal to 5, display all page numbers
+    for ($i = 1; $i <= $totalPages; $i++) {
+        $queryString = http_build_query(array_merge($_GET, ['page' => $i]));
+        if ($i == $currentPage) {
+            echo "<li class='paginate_button page-item active'>
+                    <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i</a>
+                  </li>";
         } else {
-            echo "<li class='paginate_button page-item previous disabled' id='DataTables_Table_0_previous'>
-                            <a class='page-link'><i class='bx bx-chevron-left bx-18px'></i>
-                            </a>
-                            </li>";
+            echo "<li class='paginate_button page-item'>
+                    <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i</a>
+                  </li>";
         }
-
-        // Page numbers
-        for ($i = 1; $i <= $totalPages; $i++) {
+    }
+} else {
+    // If total pages are more than 5
+    if ($currentPage <= 3) {
+        // Show the first 5 pages
+        for ($i = 1; $i <= 5; $i++) {
             $queryString = http_build_query(array_merge($_GET, ['page' => $i]));
             if ($i == $currentPage) {
                 echo "<li class='paginate_button page-item active'>
-                            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i
-                            </a>
-                            </li>";
+                        <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i</a>
+                      </li>";
             } else {
                 echo "<li class='paginate_button page-item'>
-                            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i
-                            </a>
-                            </li>";
+                        <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i</a>
+                      </li>";
             }
         }
+        echo "<li class='paginate_button page-item disabled'><a class='page-link'>...</a></li>";
+    } elseif ($currentPage > 3 && $currentPage < $totalPages - 2) {
+        // Show the first page, dots, current page, dots, and the last page
+        $queryString = http_build_query(array_merge($_GET, ['page' => 1]));
+        echo "<li class='paginate_button page-item'>
+                <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>1</a>
+              </li>";
+        echo "<li class='paginate_button page-item disabled'><a class='page-link'>...</a></li>";
 
-        // Next button
-        if ($currentPage < $totalPages) {
-            $nextPage = $currentPage + 1;
-            $queryString = http_build_query(array_merge($_GET, ['page' => $nextPage]));
-            echo "<li class='paginate_button page-item next' id='DataTables_Table_0_next'>
-                            <a href='admin/Tickets/tickets.php?$queryString'
-                              class='page-link'><i class='bx bx-chevron-right bx-18px'></i>
-                            </a>
-                            </li>";
-        } else {
-            echo "<li class='paginate_button page-item next disabled' id='DataTables_Table_0_next'>
-                            <a href='admin/Tickets/tickets.php?$queryString'
-                              class='page-link'><i class='bx bx-chevron-right bx-18px'></i>
-                            </a>
-                            </li>";
+        for ($i = $currentPage - 1; $i <= $currentPage + 1; $i++) {
+            $queryString = http_build_query(array_merge($_GET, ['page' => $i]));
+            if ($i == $currentPage) {
+                echo "<li class='paginate_button page-item active'>
+                        <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i</a>
+                      </li>";
+            } else {
+                echo "<li class='paginate_button page-item'>
+                        <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i</a>
+                      </li>";
+            }
         }
-        ?>
+        echo "<li class='paginate_button page-item disabled'><a class='page-link'>...</a></li>";
+        $queryString = http_build_query(array_merge($_GET, ['page' => $totalPages]));
+        echo "<li class='paginate_button page-item'>
+                <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$totalPages</a>
+              </li>";
+    } else {
+        // Show the last 5 pages
+        echo "<li class='paginate_button page-item disabled'><a class='page-link'>...</a></li>";
+        for ($i = $totalPages - 4; $i <= $totalPages; $i++) {
+            $queryString = http_build_query(array_merge($_GET, ['page' => $i]));
+            if ($i == $currentPage) {
+                echo "<li class='paginate_button page-item active'>
+                        <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i</a>
+                      </li>";
+            } else {
+                echo "<li class='paginate_button page-item'>
+                        <a href='admin/Tickets/tickets.php?$queryString' class='page-link'>$i</a>
+                      </li>";
+            }
+        }
+    }
+}
+
+// Next button
+if ($currentPage < $totalPages) {
+    $nextPage = $currentPage + 1;
+    $queryString = http_build_query(array_merge($_GET, ['page' => $nextPage]));
+    echo "<li class='paginate_button page-item next' id='DataTables_Table_0_next'>
+            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'><i class='bx bx-chevron-right bx-18px'></i></a>
+          </li>";
+} else {
+    echo "<li class='paginate_button page-item next disabled' id='DataTables_Table_0_next'>
+            <a href='admin/Tickets/tickets.php?$queryString' class='page-link'><i class='bx bx-chevron-right bx-18px'></i></a>
+          </li>";
+}
+
+?>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -936,9 +1015,6 @@ $con->close();
     <!-- Main JS -->
     <script src="admin/assets/js/main.js"></script>
 
-
-    <!-- Page JS -->
-    <script src="admin/assets/js/app-user-list.js"></script>
     <script>
         document.getElementById('searchPhone').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {

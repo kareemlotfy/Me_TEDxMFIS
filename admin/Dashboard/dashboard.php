@@ -6,24 +6,30 @@ require("../Misc/functions.php");
 adminLogin();
 
 $adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
-$adminName = getAdminName($con, $adminId);
-$pageId = 1; // Example: Page X ID
+$pageId = 1; // Example: replace with the actual page ID you want to check
 
-// Check if the admin has permission to access this page
-$permissionQuery = $con->prepare("SELECT * FROM permissions WHERE admin_id = ? AND page_id = ?");
-$permissionQuery->bind_param("ii", $adminId, $pageId);
-$permissionQuery->execute();
-$hasPermission = $permissionQuery->get_result();
+checkAdminPermission($con, $adminId, $pageId);
+?>
 
-if ($hasPermission->num_rows === 0) {
-    // Admin doesn't have permission to access this page
-    header("Location: ../Misc/unauthorized.php");
-    exit();
+<?php
+
+$adminDetails = getAdminDetails($con, $adminId);
+
+if ($adminDetails) {
+    $adminName = $adminDetails['admin_name'];
+    $adminCommitee = $adminDetails['admin_commitee'];
+    $adminPic = $adminDetails['admin_pic'];
+    $adminPosition = $adminDetails['admin_position'];
+    $adminEmail = $adminDetails['admin_email'];
+    $adminUsername = $adminDetails['admin_username'];
+    $adminNumber = $adminDetails['admin_number'];
+} else {
+    echo "Admin details not found.";
 }
 
-$permissionQuery->close();
 $con->close();
 ?>
+
 
 
 <!DOCTYPE html>
@@ -261,6 +267,24 @@ $con->close();
                             <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="admin/Settings/settings.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-discount"></i>
+                            <div class="text-truncate" data-i18n="Coupons ">Coupons</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="admin/Settings/settings.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-briefcase"></i>
+                            <div class="text-truncate" data-i18n="Recruit">Recruit</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="admin/Settings/settings.php" class="menu-link">
+                            <i class="bx bx-power-off bx-sm me-3"></i>
+                            <div class="text-truncate" data-i18n="Lou Out">Log Out</div>
+                        </a>
+                    </li>
             </aside>
             <!-- / Menu -->
 
@@ -290,7 +314,7 @@ $con->close();
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Language -->
-                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0" style="display:hidden;">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <i class='bx bx-globe bx-sm'></i>
@@ -345,7 +369,7 @@ $con->close();
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
-                                                    <small class="text-muted">Admin</small>
+                                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
                                                 </div>
                                             </div>
                                         </a>

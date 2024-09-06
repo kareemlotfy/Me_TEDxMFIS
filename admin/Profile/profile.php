@@ -1,33 +1,17 @@
 <?php 
-require("../Misc/db_conn.php");
+
+include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+
 adminLogin();
 
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Ensure the session is started
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 $adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
-$adminName = getAdminName($con, $adminId);
-$page_id = 6; // Example: Page X ID
+$pageId = 6; // Example: replace with the actual page ID you want to check
 
-// Check permission using prepared statement
-$has_permission_stmt = $con->prepare("SELECT * FROM permissions WHERE admin_id = ? AND page_id = ?");
-$has_permission_stmt->bind_param("ii", $adminId, $page_id);
-$has_permission_stmt->execute();
-$has_permission_result = $has_permission_stmt->get_result();
+checkAdminPermission($con, $adminId, $pageId);
+?>
 
-if ($has_permission_result->num_rows == 0) {
-    // Admin doesn't have permission to access this page
-    header("Location: ../Misc/unauthorized.php");
-    exit();
-}
-$has_permission_stmt->close();
+<?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
     
@@ -84,37 +68,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
 ?>
 
 <?php
-    // Assuming you have started the session earlier
 
-    // Fetch data based on the adminName stored in the session
-    $adminId = $_SESSION["adminId"];
+$adminDetails = getAdminDetails($con, $adminId);
 
-    // Use prepared statement to fetch admin data
-    $stmt = $con->prepare("SELECT admin_name, admin_username, admin_pass, admin_position, admin_pic, email, admin_committee FROM admin_cred WHERE id = ?");
-    if ($stmt) {
-        $stmt->bind_param("i", $adminId);
-        $stmt->execute();
-        $result = $stmt->get_result();
+if ($adminDetails) {
+    $adminName = $adminDetails['admin_name'];
+    $adminCommitee = $adminDetails['admin_commitee'];
+    $adminPic = $adminDetails['admin_pic'];
+    $adminPosition = $adminDetails['admin_position'];
+    $adminEmail = $adminDetails['admin_email'];
+    $adminUsername = $adminDetails['admin_username'];
+    $adminNumber = $adminDetails['admin_number'];
+} else {
+    echo "Admin details not found.";
+}
 
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            $row = $result->fetch_assoc();
-            $adminName = htmlspecialchars($row["admin_name"]);
-            $adminUsername = htmlspecialchars($row["admin_username"]);
-            $adminPassword = htmlspecialchars($row["admin_pass"]);
-            $adminCommittee = htmlspecialchars($row["admin_committee"]);
-            $adminPosition = htmlspecialchars($row["admin_position"]);
-            $adminEmail = htmlspecialchars($row["email"]);
-            $adminPic = htmlspecialchars($row["admin_pic"]);
-        } else {
-            echo "0 results";
-        }
-        $stmt->close();
-    } else {
-        echo "Prepare failed: (" . $con->errno . ") " . $con->error;
-    }
-
-    $con->close();
+$con->close();
 ?>
 
 <!DOCTYPE html>
@@ -135,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -159,8 +128,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
     <link rel="stylesheet" href="admin/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
     <link rel="stylesheet" href="admin/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
     <link rel="stylesheet" href="admin/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
-    <link rel="stylesheet" href="admin/css/style.css">
-    <link rel="stylesheet" href="admin/css/style-profile.css">
+    <!-- <link rel="stylesheet" href="admin/css/style.css">
+    <link rel="stylesheet" href="admin/css/style-profile.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Font Awesome CSS -->
 
@@ -443,7 +412,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
-                                                    <small class="text-muted">Admin</small>
+                                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
                                                 </div>
                                             </div>
                                         </a>
@@ -514,11 +483,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
                                                         class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-4 mt-4">
                                                         <li class="list-inline-item">
                                                             <i class='bx bx-palette me-2 align-top'></i><span
-                                                                class="fw-medium">UX Designer</span>
+                                                                class="fw-medium"><?php echo htmlspecialchars($adminCommitee); ?></span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <i class='bx bx-map me-2 align-top'></i><span
-                                                                class="fw-medium">Vatican City</span>
+                                                                class="fw-medium">Cairo City</span>
                                                         </li>
                                                         <li class="list-inline-item">
                                                             <i class='bx bx-calendar me-2 align-top'></i><span
@@ -571,7 +540,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
                                                 <span><?php echo $adminPosition; ?></span></li>
                                             <li class="d-flex align-items-center mb-4"><i class="bx bx-crown"></i><span
                                                     class="fw-medium mx-2">Committee:</span>
-                                                <span><?php echo $adminCommittee; ?></span></li>
+                                                <span><?php echo $adminCommitee; ?></span></li>
                                             <li class="d-flex align-items-center mb-4"><i class="bx bx-flag"></i><span
                                                     class="fw-medium mx-2">Username:</span>
                                                 <span><?php echo $adminUsername; ?></span></li>
@@ -580,7 +549,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_account'])) {
                                         <small class="card-text text-uppercase text-muted small">Contacts</small>
                                         <ul class="list-unstyled my-3 py-1">
                                             <li class="d-flex align-items-center mb-4"><i class="bx bx-phone"></i><span
-                                                    class="fw-medium mx-2">Contact:</span> <span>(123) 456-7890</span>
+                                                    class="fw-medium mx-2">Contact:</span> <span><?php echo "EG (+20) " . htmlspecialchars($adminNumber); ?></span>
                                             </li>
 
                                             <li class="d-flex align-items-center mb-4"><i

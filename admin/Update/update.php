@@ -1,22 +1,17 @@
-<?php
-require("../Misc/db_conn.php");
+<?php 
+
+include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+
 adminLogin();
 
-$admin_id = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
-$page_id = 5; // Example: Page X ID
+$adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
+$pageId = 5; // Example: replace with the actual page ID you want to check
 
-// Using prepared statements to avoid SQL injection
-$stmt = $con->prepare("SELECT * FROM permissions WHERE admin_id=? AND page_id=?");
-$stmt->bind_param("ii", $admin_id, $page_id);
-$stmt->execute();
-$has_permission = $stmt->get_result();
+checkAdminPermission($con, $adminId, $pageId);
+?>
 
-if ($has_permission->num_rows == 0) {
-    // Admin doesn't have permission to access this page
-    header("Location: ../Misc/unauthorized.php");
-    exit();
-}
+<?php
 
 // Check user ID 
 if (isset($_GET['id'])) {

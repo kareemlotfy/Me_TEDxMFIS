@@ -119,7 +119,7 @@ include('../../admin/Misc/functions.php');
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/66081d606d.js" crossorigin="anonymous"></script>
         <link rel="shortcut icon" href="user/images/x-art.png" type="image/x-icon">
-        <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+        <base href="http://localhost/Me_TEDxMFIS/">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="user/Tickets/style-tickets.css">
         <link rel="stylesheet" href="user/style.css">
@@ -407,10 +407,9 @@ include('../../admin/Misc/functions.php');
             </div>
         </div>
 
-	<div class="cursor"></div>
-    <div class="cursor2"></div>
+	<!-- <div class="cursor"></div>
+    <div class="cursor2"></div> -->
     <script src="user/script.js"></script>
-    <script src="script-tickets.js"></script>
 
 <!-- <script>
 

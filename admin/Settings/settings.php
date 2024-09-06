@@ -1,32 +1,34 @@
-<?php
+<?php 
+
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+
 adminLogin();
 
-$admin_id = $_SESSION['adminId'];
-$adminName = getAdminName($con, $admin_id);
+$adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
+$pageId = 4; // Example: replace with the actual page ID you want to check
 
-// Validate and sanitize admin_id before using it in the query
-if (!filter_var($admin_id, FILTER_VALIDATE_INT)) {
-    header("Location: ../Misc/unauthorized.php");
-    exit();
+checkAdminPermission($con, $adminId, $pageId);
+?>
+
+<?php
+
+$adminDetails = getAdminDetails($con, $adminId);
+
+if ($adminDetails) {
+    $adminName = $adminDetails['admin_name'];
+    $adminCommitee = $adminDetails['admin_commitee'];
+    $adminPic = $adminDetails['admin_pic'];
+    $adminPosition = $adminDetails['admin_position'];
+    $adminEmail = $adminDetails['admin_email'];
+    $adminUsername = $adminDetails['admin_username'];
+} else {
+    echo "Admin details not found.";
 }
 
-$page_id = 4; // Example: Page X ID
+?>
 
-// Use prepared statements to avoid SQL injection
-$stmt = $con->prepare("SELECT * FROM permissions WHERE admin_id=? AND page_id=?");
-$stmt->bind_param("ii", $admin_id, $page_id);
-$stmt->execute();
-$has_permission = $stmt->get_result();
-
-if ($has_permission->num_rows == 0) {
-    // Admin doesn't have permission to access this page
-    header("Location: ../Misc/unauthorized.php");
-    exit();
-}
-
-
+<?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkbox_status'])) {
     $new_status = $_POST['checkbox_status'] ? 1 : 0;
     $query = "UPDATE settings SET checkbox_status = ? WHERE id = 1";
@@ -64,7 +66,7 @@ $con->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -360,7 +362,7 @@ $con->close();
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
-                                                    <small class="text-muted">Admin</small>
+                                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
                                                 </div>
                                             </div>
                                         </a>

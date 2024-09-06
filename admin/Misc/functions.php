@@ -29,16 +29,30 @@ function filteration(array $data): array
     return $filteredData;
 }
 
-/**
- * Get the admin's name from the database.
- *
- * @param mysqli $con Database connection.
- * @param int $adminId Admin ID.
- * @return string|null Admin name or null if not found.
- */
-function getAdminName(mysqli $con, int $adminId): ?string
+function checkAdminPermission(mysqli $con, int $adminId, int $pageId): void
 {
-    $sql = "SELECT admin_name FROM admin_cred WHERE id = ?";
+    $sql = "SELECT * FROM permissions WHERE admin_id = ? AND page_id = ?";
+    $stmt = $con->prepare($sql);
+
+    if (!$stmt) {
+        echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+        return;
+    }
+
+    $stmt->bind_param("ii", $adminId, $pageId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        // Admin doesn't have permission to access this page
+        header("Location: ../Misc/unauthorized.php");
+        exit();
+    }
+}
+
+function getAdminDetails(mysqli $con, int $adminId): ?array
+{
+    $sql = "SELECT admin_name, admin_commitee, admin_pic, admin_position, admin_email, admin_username, admin_number FROM admin_cred WHERE id = ?";
     $stmt = $con->prepare($sql);
 
     if (!$stmt) {
@@ -51,21 +65,12 @@ function getAdminName(mysqli $con, int $adminId): ?string
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        return $row["admin_name"];
+        return $result->fetch_assoc(); // Returns an associative array with the admin's details
     }
 
     return null;
 }
 
-/**
- * Execute a SELECT query with prepared statements.
- *
- * @param string $sql SQL query.
- * @param array $values Values to bind to the query.
- * @param string $datatypes Data types for binding.
- * @return mysqli_result Query result.
- */
 function select(string $sql, array $values, string $datatypes): mysqli_result
 {
     global $con;
@@ -84,13 +89,6 @@ function select(string $sql, array $values, string $datatypes): mysqli_result
     }
 }
 
-/**
- * Display an alert message.
- *
- * @param string $type Alert type ("error" or "success").
- * @param string $title Alert title.
- * @param string $msg Alert message.
- */
 function alert(string $type, string $title, string $msg): void
 {
     $class = $type === "error" ? "error" : "success";
