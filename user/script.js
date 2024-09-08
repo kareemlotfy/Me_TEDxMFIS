@@ -161,22 +161,81 @@ window.addEventListener('resize', setDynamicPadding);
 // Set padding End
 
 // Shutdown Ticket Form
+/*async function checkFormStatus() {
+    try {
+        const response = await fetch('user/backend.php');
+        const data = await response.json();
 
-// async function checkFormStatus() {
-//     try {
-//         const response = await fetch('user/backend.php');
-//         const data = await response.json();
+        if (data.formOpen === '1') {
+            document.getElementById('myForm').style.display = 'none';
+            document.getElementById('done_message').style.display = 'block';
+        } else {
+            document.getElementById('myForm').style.display = 'block';
+            document.getElementById('done_message').style.display = 'none';
+            // document.getElementById('done_message').innerText = '';
+        }
+    } catch (error) {
+        console.error('Error fetching form status:', error);
+    }
+}
+checkFormStatus()*/
 
-//         if (data.formOpen === '1') {
-//             document.getElementById('myForm').style.display = 'none';
-//             document.getElementById('done_message').style.display = 'block';
-//         } else {
-//             document.getElementById('myForm').style.display = 'block';
-//             document.getElementById('done_message').style.display = 'none';
-//             // document.getElementById('done_message').innerText = '';
-//         }
-//     } catch (error) {
-//         console.error('Error fetching form status:', error);
-//     }
-// }
-// checkFormStatus()
+// About Us Page Images Resize 
+// Function to resize elements based on screen width
+function resizeElements() {
+    let screenWidth = window.innerWidth;
+
+    if (screenWidth <= 600) {
+        // Get all div elements
+        const firstImgs = document.querySelectorAll('.first_img');
+        const secondImgs = document.querySelectorAll('.second_img');
+        const abtLefts = document.querySelectorAll('.abt-left');
+        const abtRights = document.querySelectorAll('.abt-right');
+
+        // Initial widths
+        let firstImgInitialWidth = 400;
+        let secondImgInitialWidth = 200;
+        let abtInitialWidth = 500;
+
+        // Calculate how much the screen width has decreased from 600px
+        let widthDifference = 600 - screenWidth;
+
+        // Adjust the widths
+        let newFirstImgWidth = firstImgInitialWidth - (0.75 * widthDifference);
+        let newSecondImgWidth = secondImgInitialWidth - (0.375 * widthDifference);
+        let newAbtWidth = newFirstImgWidth + (newSecondImgWidth / 2);
+
+        // Ensure widths don't go negative
+        if (newFirstImgWidth > 0) {
+            firstImgs.forEach(firstImg => {
+                firstImg.style.width = newFirstImgWidth + 'px';
+            });
+        }
+
+        if (newSecondImgWidth > 0) {
+            secondImgs.forEach(secondImg => {
+                secondImg.style.width = newSecondImgWidth + 'px';
+            });
+        }
+
+        if (newAbtWidth > 0) {
+            abtLefts.forEach(abtLeft => {
+                abtLeft.style.width = newAbtWidth + 'px';
+            });
+            abtRights.forEach(abtRight => {
+                abtRight.style.width = newAbtWidth + 'px';
+            });
+        }
+    }
+    else{
+        return
+    }
+}
+
+// Call the resize function when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', resizeElements);
+
+// Call the resize function whenever the window is resized
+window.addEventListener('resize', resizeElements);
+
+// About Us End

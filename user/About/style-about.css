@@ -21,13 +21,8 @@
     --fontWx9: 900;
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Rubik', sans-serif;
-    font-weight: var(--fontWx3);
-}
+
+
 
 body {
     background-color: #fff;
@@ -174,12 +169,6 @@ body {
 
 /* About Us End */
 
-@media (max-width: 1580px) {
-    .cards {
-        padding: 50px 50px;
-    }
-}
-
 @media (max-width: 1350px) {
     .description {
         font-size: 15px;
@@ -244,7 +233,7 @@ body {
         padding-right: 0;
     }
     .abt-left{
-        width: 800px;
+        width: 750px;
     }
     .abt-left .test .first_img {
         width: 600px;
@@ -265,15 +254,47 @@ body {
     }
 }
 
-@media (max-width: 950px) {
-    .cards {
-        padding: 30px 40px;
+@media (max-width:992px) {
+    .inner_content {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
-@media (max-width: 720px) {
-    .cards {
-        padding: 30px 20px;
+@media (max-width:810px) {
+    .abt-left .test .first_img{
+        width: 500px;
+    }
+    .abt-left .second_img{
+        width: 250px;
+    }
+    .abt-left{
+        width: 630px;
+    }
+    .abt-right{
+        padding: 0 75px;
+    }
+    .abt-right .description{
+        max-width: 100%;
+    }
+}
+
+@media (max-width:766px) {
+    .abt-left{
+        width: 500px;
+    }
+    .abt-left .test .first_img{
+        width: 400px;
+    }
+    .abt-left .second_img{
+        width: 200px;
+    }
+    .abt-right{
+        padding: 0;
+        max-width: 500px;
+    }
+    .abt-right .description{
+        font-size: 14px;
     }
 }
 
@@ -288,10 +309,7 @@ body {
     .special-heading-title {
         font-size: 30px;
     }
-    #banner .text {
-        font-size: 100px;
-        bottom: -28px;
-    }
+
 }
 
 @media (max-width: 550px) {
@@ -307,9 +325,7 @@ body {
     .abt-left img {
         width: 400px;
     }
-    #banner {
-        height: 200px;
-    }
+
 }
 
 @media (max-width: 460px) {
@@ -337,21 +353,11 @@ body {
     .description {
         font-size: 12px;
     }
-    .heading ul {
-        font-size: 12px;
-    }
-    #banner .text {
-        font-size: 90px;
-        bottom: -22px;
-    }
 }
 
 @media (max-width: 385px) {
     .abt-left img {
         width: 300px;
-    }
-    #banner .text {
-        font-size: 75px;
     }
     .abt-right {
         padding: 20px;
@@ -359,13 +365,6 @@ body {
 }
 
 @media (max-width: 340px) {
-    #banner .text {
-        font-size: 65px;
-        bottom: -18px;
-    }
-    #banner {
-        height: 180px;
-    }
     .abt-left img {
         width: 250px;
     }
@@ -373,7 +372,7 @@ body {
         padding: 10px;
     }
     .special-heading-title {
-        font-size: 18px;
+        font-size: 24px;
     }
     .description {
         font-size: 11px;

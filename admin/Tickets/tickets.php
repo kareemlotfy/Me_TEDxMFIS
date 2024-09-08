@@ -49,6 +49,8 @@ if (isset($_GET['userFilter'])) {
         $filter = "WHERE isaccepted = 'yes'";
     } elseif ($userFilter == 'unpaid') {
         $filter = "WHERE isaccepted = 'no'";
+    } elseif ($userFilter == 'reject') {
+        $filter = "WHERE isaccepted = 'reject'";
     }
 }
 
@@ -81,8 +83,19 @@ if (!$unpaidCountResult) {
 $unpaidCountRow = $unpaidCountResult->fetch_assoc();
 $unpaidCount = $unpaidCountRow["unpaid_count"];
 
+// Count Rejected users (isaccepted = 'reject')
+$rejectedCountSql = "SELECT COUNT(*) as rejected_count FROM user_cred WHERE isaccepted = 'reject'";
+$rejectedCountResult = $con->query($rejectedCountSql);
+
+if (!$rejectedCountResult) {
+    die("Invalid query: " . $con->error);
+}
+
+$rejectedCountRow = $rejectedCountResult->fetch_assoc();
+$rejectedCount = $rejectedCountRow["rejected_count"];
+
 // Total user count
-$totalUsers = $paidCount + $unpaidCount;
+$totalUsers = $paidCount + $unpaidCount + $rejectedCount;
 
 // Query to fetch users with pagination and filter
 $sql = "SELECT * FROM user_cred $filter LIMIT ? OFFSET ?";
@@ -568,7 +581,9 @@ $con->close();
                                             <div class="content-left">
                                                 <span class="text-heading">Rejected Users</span>
                                                 <div class="d-flex align-items-center my-1">
-                                                    <h4 class="mb-0 me-2">Unknown</h4>
+                                                    <h4 class="mb-0 me-2">
+                                                        <?php echo htmlspecialchars($rejectedCount, ENT_QUOTES, 'UTF-8'); ?>
+                                                    </h4>
                                                 </div>
                                             </div>
                                             <div class="avatar">
@@ -605,6 +620,9 @@ $con->close();
                                                     <option value="unpaid"
                                                         <?php if (isset($_GET['userFilter']) && $_GET['userFilter'] == 'unpaid') echo 'selected'; ?>>
                                                         Unpaid</option>
+                                                    <option value="reject"
+                                                        <?php if (isset($_GET['userFilter']) && $_GET['userFilter'] == 'reject') echo 'selected'; ?>>
+                                                        Rejected</option>
                                                 </select>
                                             </form>
                                         </div>
@@ -681,7 +699,13 @@ $con->close();
             while ($row = $result->fetch_assoc()) {
                 $name = htmlspecialchars($row["first_name"] . " " . $row["last_name"], ENT_QUOTES, 'UTF-8');
                 $initials = htmlspecialchars(strtoupper($row["first_name"][0] . $row["last_name"][0]), ENT_QUOTES, 'UTF-8');
-                $status = $row["isaccepted"] == 'yes' ? "Paid" : "Unpaid";
+                if ($row["isaccepted"] == 'no') {
+                    $status = 'Unpaid';
+                } elseif ($row["isaccepted"] == 'yes') {
+                    $status = 'Paid';
+                } else {
+                    $status = 'Rejected';
+                }
                 $rowId = htmlspecialchars($row["id"], ENT_QUOTES, 'UTF-8');
                 echo "<tr>
                         <td class='sorting_1'>
@@ -705,12 +729,12 @@ $con->close();
                         </td>
                         <td >
                           <div class='d-flex align-items-center'>
-                    <a href='javascript:;'
+                    <!--<a href='admin/Reject/reject.php?id=" . $rowId . "'
                               class='btn btn-icon delete-record'><i class='bx bx-trash bx-sm'></i>
                             </a>
                             <a href='admin/Update/update.php?id=" . $rowId . "' class='btn btn-icon'><i
                                 class='bx bx-show bx-sm'></i>
-                            </a>
+                            </a>-->
                             <a href='javascript:;'
                               class='btn btn-icon dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i
                                 class='bx bx-dots-vertical-rounded bx-sm'></i>
@@ -718,22 +742,23 @@ $con->close();
                             <div class='dropdown-menu dropdown-menu-end m-0'>
                                 <a href='admin/Update/update.php?id=" . $rowId . "'class='dropdown-item'>Edit</a>
                                 <a href='admin/Accept/accept.php?id=" . $rowId . "'class='dropdown-item'>Accept</a>
+                                <a href='admin/Reject/reject.php?id=" . $rowId . "'class='dropdown-item'>Reject</a>
                             </div>
                         </div>
                     </td>
                 </tr>";
-                } else {
+                } elseif ($row["isaccepted"] == 'yes') {
                     echo "
                         <td><span class='badge bg-label-success' text-capitalized=''>" . htmlspecialchars($status, ENT_QUOTES, 'UTF-8') . "</span>
                         </td>
                         <td >
                           <div class='d-flex align-items-center'>
-                    <a href='javascript:;'
+                    <!--<a href='javascript:;'
                               class='btn btn-icon delete-record'><i class='bx bx-trash bx-sm'></i>
                             </a>
                             <a href='admin/Update/update.php?id=" . $rowId . "' class='btn btn-icon'><i
                                 class='bx bx-show bx-sm'></i>
-                            </a>
+                            </a>-->
                             <a href='javascript:;'
                               class='btn btn-icon dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i
                                 class='bx bx-dots-vertical-rounded bx-sm'></i>
@@ -744,8 +769,31 @@ $con->close();
                         </div>
                     </td>
                 </tr>";
-                }
+                } else {
+                    echo "
+                        <td><span class='badge bg-label-warning' text-capitalized=''>" . htmlspecialchars($status, ENT_QUOTES, 'UTF-8') . "</span>
+                        </td>
+                        <td >
+                          <div class='d-flex align-items-center'>
+                    <!--<a href='javascript:;'
+                              class='btn btn-icon delete-record'><i class='bx bx-trash bx-sm'></i>
+                            </a>
+                            <a href='admin/Update/update.php?id=" . $rowId . "' class='btn btn-icon'><i
+                                class='bx bx-show bx-sm'></i>
+                            </a>-->
+                            <a href='javascript:;'
+                              class='btn btn-icon dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i
+                                class='bx bx-dots-vertical-rounded bx-sm'></i>
+                            </a>
+                            <div class='dropdown-menu dropdown-menu-end m-0'>
+                                <a href='admin/Update/update.php?id=" . $rowId . "'class='dropdown-item'>Edit</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>";
+                
             }
+        }
             ?>
             <?php
             $startIndex = ($currentPage - 1) * $limit + 1; // Starting user index on the current page

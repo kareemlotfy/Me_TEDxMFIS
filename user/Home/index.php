@@ -1,3 +1,12 @@
+<?php
+require("../Misc/db_conn.php");
+
+$query = "SELECT checkbox_status FROM settings WHERE id = 1";
+$result = $con->query($query);
+$checkbox_status = $result->fetch_assoc()['checkbox_status'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +67,7 @@
                 <ul>
                     <li><a href="user/Home/index.php" class="nav_text ">Home</a></li>
                     <li><a href="user/Speakers/speakers.php" class="nav_text">Speakers</a></li>
-                    <li><a href="user/underm/underm.html" class="nav_text">Shop</a></li>
+                    <li><a href="user/Misc/underm.html" class="nav_text">Shop</a></li>
                     <li><a href="user/Sponsors/sponsors.php" class="nav_text">Sponsors</a></li>
                     <li><a href="user/About/about.html" class="nav_text">About</a></li>
                     <li><a href="user/Tickets/buy-tickets.html" class="nav_text">Tickets</a></li>

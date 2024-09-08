@@ -158,7 +158,7 @@ $con->close();
                         </div>
                         <div class="input-field">
                             <label for="ticket_id">Ticket ID:</label>
-                            <input type="text" name="ticket_id" value="<?php echo htmlspecialchars($userDetails['ticket_id'], ENT_QUOTES, 'UTF-8'); ?>" required disabled>
+                            <input type="text" name="ticket_id" value="<?php echo htmlspecialchars($userDetails['ticket_id'], ENT_QUOTES, 'UTF-8'); ?>" disabled>
                         </div>
                         <div class="input-field">
                             <label for="enter_status">Enter Event Status:</label>

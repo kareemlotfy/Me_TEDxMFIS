@@ -38,6 +38,13 @@
 </head>
 
 <body class="speakers_page">
+    
+    <div class="loader-container">
+        <svg viewBox="102 10 300 200" width="100%" height="100%">
+            <text x="50%" y="50%" dy=".32em" text-anchor="middle" class="text-body-1">TEDx</text>
+            <text x="50%" y="50%" dy=".32em" dx="5.5em" text-anchor="middle" class="text-body-2">ManaratAlFarouk</text>
+        </svg>
+    </div>
 
     <section class="header" id="headerSection">
         <!-- Navigation -->
@@ -52,7 +59,7 @@
                 <ul>
                     <li><a href="user/Home/index.html" class="nav_text ">Home</a></li>
                     <li><a href="user/Speakers/speakers.php" class="nav_text">Speakers</a></li>
-                    <li><a href="user/shop/index.php?page=products" class="nav_text">Shop</a></li>
+                    <li><a href="Misc/underm.html" class="nav_text">Shop</a></li>
                     <li><a href="user/Sponsors/sponsors.php" class="nav_text">Sponsors</a></li>
                     <li><a href="user/About/about.html" class="nav_text">About</a></li>
                     <li><a href="user/Tickets/buy-tickets.html" class="nav_text">Tickets</a></li>

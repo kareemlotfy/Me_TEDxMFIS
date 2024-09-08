@@ -17,6 +17,9 @@ if ($userFilter == 'paid') {
 } elseif ($userFilter == 'unpaid') {
     $filter = "WHERE isaccepted = 'no'";
 }
+elseif ($userFilter == 'reject') {
+    $filter = "WHERE isaccepted = 'reject'";
+}
 
 if (!empty($searchPhone)) {
     $filter .= $filter ? " AND phone LIKE ?" : "WHERE phone LIKE ?";
@@ -66,7 +69,7 @@ $pdf->SetFont('Arial', 'B', 10); // Smaller font size
 
 // Column headers
 $header = ['Name', 'Email', 'Phone', 'Status'];
-$widths = [70, 80, 23, 15]; // Adjusted widths to give more space to name and email columns
+$widths = [70, 80, 23, 17]; // Adjusted widths to give more space to name and email columns
 
 foreach ($header as $key => $col) {
     $pdf->Cell($widths[$key], 10, $col, 1);
@@ -76,12 +79,18 @@ $pdf->Ln();
 $pdf->SetFont('Arial', '', 10); // Smaller font size
 
 // Data rows
+// Data rows
 while ($row = $result->fetch_assoc()) {
     $name = htmlspecialchars($row["first_name"] . " " . $row["last_name"], ENT_QUOTES, 'UTF-8');
     $email = htmlspecialchars($row["email"], ENT_QUOTES, 'UTF-8');
     $phone = htmlspecialchars($row["phone"], ENT_QUOTES, 'UTF-8');
-    $status = $row["isaccepted"] == 'yes' ? "Paid" : "Unpaid";
-
+    if ($row["isaccepted"] == 'no') {
+        $status = 'Unpaid';
+    } elseif ($row["isaccepted"] == 'yes') {
+        $status = 'Paid';
+    } else {
+        $status = 'Rejected';
+    }
     $pdf->Cell($widths[0], 10, $name, 1);
     $pdf->Cell($widths[1], 10, $email, 1);
     $pdf->Cell($widths[2], 10, $phone, 1);

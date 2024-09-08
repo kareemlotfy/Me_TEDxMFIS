@@ -6,7 +6,7 @@ require("../Misc/functions.php");
 adminLogin();
 
 $adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
-$pageId = 1; // Example: Page X ID
+$pageId = 6; // Example: Page X ID
 
 checkAdminPermission($con, $adminId, $pageId);
 
@@ -893,7 +893,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <form action="admin/Profile/DeleteAdminScript.php" id="formAccountDeactivation" method="POST">
             <div class="form-check my-8 ms-2">
-                <input type="hidden" name="delete_account" value="1">
+                <input type="hidden" name="admin_id" value=" <?php echo $adminId = $_SESSION['adminId']; ?> ">
                 <input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation" />
                 <label class="form-check-label" for="accountActivation">I confirm my account deactivation</label>
             </div>

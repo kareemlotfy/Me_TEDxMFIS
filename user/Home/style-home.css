@@ -1,13 +1,4 @@
 
-/* Home Page Font */
-.home_page {
-    font-family: "Raleway", sans-serif;
-}
-
-/* End Home Page Font */
-
-
-
 /* Home Hero Start */
 .home_header {
     min-height: calc(120vh);
@@ -37,7 +28,10 @@
     margin: 0 auto 20px;
 }
 
+.hero_text_box h1 .text{
+    font-family: "Raleway", sans-serif;
 
+}
 
 .hero_text_box .third-part {
     font-family: var(--font-Borel);
@@ -242,6 +236,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
     }
 }
 
@@ -597,7 +592,7 @@
 .seconds {
     font-size: 80px;
     font-weight: 500;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Raleway", sans-serif;
 }
 
 .time-counter .part-title {
@@ -858,6 +853,7 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 42px;
+    font-family: "Raleway", sans-serif;
 }
 
 .schedule_card_line_circle {
@@ -1366,6 +1362,7 @@
 .ticket-price {
     font-size: 40px;
     font-weight: 600;
+    font-family: "Raleway", sans-serif;
     margin-bottom: 10px;
     color: var(--light);
 }
@@ -1443,7 +1440,9 @@
         flex-wrap: wrap;
         gap: 80px;
     }
-
+    .tickets-text-container .ticket_heading_description{
+        text-align: center;
+    }
 }
 
 @media (max-width:1060px) {

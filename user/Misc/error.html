@@ -7,30 +7,27 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Error</title>
-
-    <meta name="description" content="" />
+    <title>Under Maintenance</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="user/images/x-art.png" type="image/x-icon">
 
-    
     <!-- Base URL -->
     <base href="http://localhost/Me_TEDxMFIS/">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet" />
-
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="user/assets/vendor/fonts/boxicons.css" />
-
-    <!-- Page -->
-    <link rel="stylesheet" href="user/assets/vendor/css/pages/page-misc.css" />
-
+    <link rel="stylesheet" href="user/style.css">
+    <link rel="stylesheet" href="user/Home/style-home.css">
+    <style>
+        .misc-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - (1.625rem * 2));
+            text-align: center;
+            gap: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,9 +38,9 @@
         <div class="misc-wrapper">
             <h2 class="mb-2 mx-2">Page Not Found :(</h2>
             <p class="mb-4 mx-2">Oops! 😖 The requested URL was not found on this server.</p>
-            <a href="user/Home/index.html" class="btn btn-primary">Back to home</a>
+            <div class="ticket-button" style="top:0;"><a href="user/Home/index.html" style="box-shadow: none;">Back Home</a></div>
             <div class="mt-3">
-                <img src="user/assets/img/illustrations/page-misc-error-light.png" alt="page-misc-error-light" width="500"
+                <img src="user/images/illustrations/page-misc-error-light.png" alt="page-misc-error-light" width="500"
                     class="img-fluid" data-app-dark-img="illustrations/page-misc-error-dark.png"
                     data-app-light-img="illustrations/page-misc-error-light.png" />
             </div>

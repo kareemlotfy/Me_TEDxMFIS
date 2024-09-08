@@ -62,6 +62,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -210,7 +211,7 @@ nav {
     background-color: transparent;
 }
 
-.banners_navbar .nav_text {
+.banners_navbar .nav_text{
     color: #fff;
 }
 
@@ -374,6 +375,14 @@ nav .burger {
     .header .ticket-button {
         display: none;
     }
+    .speakers_page .banners_navbar .nav_text, .about_page .banners_navbar .nav_text,
+    .sponsors_page .banners_navbar .nav_text, .butTicket_page .banners_navbar .nav_text{
+        color: #333;
+    }
+    .speakers_page nav .burger, .about_page nav .burger,
+    .sponsors_page nav .burger, .butTicket_page nav .burger{
+        color: #fff;
+    }
 }
 
 /* End Nav */
@@ -382,24 +391,67 @@ nav .burger {
 
 /* Banner CSS */
 #banner .text {
-    font-family: 'Rubik', sans-serif;
     font-size: 110px;
     color: #fff;
     position: absolute;
     bottom: -40px;
-    font-weight: var(--fontWx9);
+    font-weight: 900;
     text-transform: uppercase;
 }
 
+@media (max-width:640px) {
+    #banner .text {
+        font-size: 100px;
+        bottom: -32px;
+    }
+}
+
+@media (max-width:520px) {
+    #banner .text{
+        font-size: 90px;
+        bottom: -30px;
+    }
+}
+
+@media (max-width:420px) {
+    #banner .text {
+        font-size: 80px;
+        bottom: -28px;
+    }
+}
+
+@media (max-width: 380px) {
+    #banner .text {
+        font-size: 70px;
+        bottom: -24px;
+    }
+}
+@media (max-width: 340px) {
+    #banner .text {
+        font-size: 65px;
+        bottom: -20px;
+    }
+}
 #banner {
     background-position: center;
     background-size: cover;
     width: 100%;
-    height: 320px;
+    height: 260px;
     top: -85px;
-    padding-left: 200px;
     position: relative;
     /* margin-bottom: 50px; */
+}
+
+@media (max-width:500px) {
+    #banner {
+        height: 240px;
+    }
+}
+
+@media (max-width:400px) {
+    #banner {
+        height: 200px;
+    }
 }
 
 .speakers_banner {
@@ -657,7 +709,7 @@ footer .brand {
     color: #005582;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 810px) {
     .footer-container {
         flex-direction: column;
         align-items: center;
@@ -692,6 +744,7 @@ footer .brand {
         width: 780px;
     }
 }
+
 
 @media (max-width:766px) {
     .inner_content {
