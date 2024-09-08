@@ -181,9 +181,6 @@ body {
 }
 
 @media (max-width: 1350px) {
-    .abt-left img {
-        width: 500px;
-    }
     .description {
         font-size: 15px;
     }
@@ -196,14 +193,23 @@ body {
     .cards {
         padding: 30px 30px;
     }
-    .abt-left img {
+    .abt-left{
+        width: 510px;
+    }
+    .abt-left .test .first_img {
         width: 400px;
+    }
+    .abt-left .second_img{
+        width: 200px;
     }
     .description {
         font-size: 14px;
     }
     .special-heading-title {
         font-size: 35px;
+    }
+    .tedxmfis_heading{
+        font-size: 25px;
     }
     .heading #sub {
         margin-left: 35px;
@@ -220,14 +226,42 @@ body {
 }
 
 @media (max-width: 1030px) {
+    .inner_content{
+        padding-left: 90px;
+        padding-right: 90px;
+    }
     .abt-content {
+        display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+        /* width: 630px; */
+        /* margin: auto; */
+        gap: 90px;
     }
-    #tedx-content {
-        flex-direction: column-reverse;
+    .abt-right{
+        order: 1;
+        flex-basis: 100%;
+        padding-right: 0;
     }
-    .abt-left img {
-        width: 500px;
+    .abt-left{
+        width: 800px;
+    }
+    .abt-left .test .first_img {
+        width: 600px;
+    }
+    .abt-left .second_img{
+        width: 300px;
+    }
+    .abt-right .description{
+        font-size: 18px;
+        max-width: 90%;
+    }
+    .special-heading-title{
+        font-size: 35px;
+    }
+    .body_section {
+        position: relative;
+        top: -90px;
     }
 }
 
