@@ -55,13 +55,13 @@ include('../../admin/Misc/functions.php');
 
             if (empty($first_name) || empty($last_name) || empty($email) || empty($phone) || empty($age) || empty($school) || empty($location) || empty($frm_data['gender']) || empty($frm_data['login_type']) || empty($frm_data['st_mfis']) || empty($frm_data['grade']) || empty($frm_data['ted_event']) || empty($ted_event_name)) {
                 alert("error", "Please fill in all required fields","Oops! It seems like you missed filling in some required fields. Please make sure to fill in all the mandatory information and try again.");
-                addBodyClassAndStyle();
+                
             } elseif ($frm_data['age'] < 13) {
                 alert("error", "Age Requirement Error","We're sorry, but you must be at least 13 years old to submit this form. Please ensure you meet the age requirement before proceeding.");
-                addBodyClassAndStyle();
+                
             } elseif (!is_valid_email($email)) {
                 alert("error", "Invalid email format","The email address you provided is not in a valid format. Please double-check your email address and ensure it follows the correct format (e.g., example@email.com).");
-                addBodyClassAndStyle();
+                
             } else {
 
                 include("../db_con.php");
@@ -96,11 +96,11 @@ include('../../admin/Misc/functions.php');
 
                     // Redirect to thanks for submit or display a success message
                     alert("success", "Thanks For Submit","Congratulations! Your details has been successfully submitted. Thanks!");
-                    addBodyClassAndStyle();
+                    
                     exit;
                 } else {
                     alert("error", "Phone is already used","The phone number you entered is already associated with another form. Please use a different phone number.");
-                    addBodyClassAndStyle();
+                    
                 }
 
                 $stmt->close();

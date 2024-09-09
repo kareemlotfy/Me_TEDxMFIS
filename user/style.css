@@ -211,7 +211,7 @@ nav {
     background-color: transparent;
 }
 
-.banners_navbar .nav_text{
+.banners_navbar .nav_text {
     color: #fff;
 }
 
@@ -375,12 +375,18 @@ nav .burger {
     .header .ticket-button {
         display: none;
     }
-    .speakers_page .banners_navbar .nav_text, .about_page .banners_navbar .nav_text,
-    .sponsors_page .banners_navbar .nav_text, .butTicket_page .banners_navbar .nav_text{
+
+    .speakers_page .banners_navbar .nav_text,
+    .about_page .banners_navbar .nav_text,
+    .sponsors_page .banners_navbar .nav_text,
+    .butTicket_page .banners_navbar .nav_text {
         color: #333;
     }
-    .speakers_page nav .burger, .about_page nav .burger,
-    .sponsors_page nav .burger, .butTicket_page nav .burger{
+
+    .speakers_page nav .burger,
+    .about_page nav .burger,
+    .sponsors_page nav .burger,
+    .butTicket_page nav .burger {
         color: #fff;
     }
 }
@@ -407,7 +413,7 @@ nav .burger {
 }
 
 @media (max-width:520px) {
-    #banner .text{
+    #banner .text {
         font-size: 90px;
         bottom: -30px;
     }
@@ -426,12 +432,14 @@ nav .burger {
         bottom: -24px;
     }
 }
+
 @media (max-width: 340px) {
     #banner .text {
         font-size: 65px;
         bottom: -20px;
     }
 }
+
 #banner {
     background-position: center;
     background-size: cover;
@@ -473,22 +481,26 @@ nav .burger {
 /* Banners End */
 
 
-
 /* Alerts CSS */
+dialog {
+    border: none;
+    box-shadow: -5px -4px 25px 5px rgba(0, 0, 0, 0.1),
+        1px 10px 10px 5px rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    background-color: transparent;
+    padding: 0;
+    margin: auto;
+}
+
+::backdrop {
+    backdrop-filter: blur(3.4px);
+    background-color: transparent;
+}
+
 .alert_container {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 50%;
-    left: 50%;
-    z-index: 4;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.4);
-    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(3.4px);
 }
 
 .error,
@@ -499,8 +511,7 @@ nav .burger {
     text-align: left;
     border-radius: 20px;
     max-width: 290px;
-    box-shadow: -5px -4px 25px 5px rgba(0, 0, 0, 0.1),
-        1px 10px 10px 5px rgba(0, 0, 0, 0.04);
+
 }
 
 .alert_header {
@@ -565,15 +576,15 @@ nav .burger {
     background-color: #f9fafb;
 }
 
-.error .desactivate {
+.error .alertClose {
     background-color: #dc2626;
 }
 
-.success .desactivate {
+.success .alertClose {
     background-color: #1aa06d;
 }
 
-.desactivate {
+.alertClose {
     display: inline-flex;
     padding: 0.5rem 1rem;
     color: #ffffff;
@@ -586,15 +597,6 @@ nav .burger {
     border-width: 1px;
     border-color: transparent;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.close_popup {
-    visibility: hidden;
-    display: none;
-}
-
-.alertCalled {
-    overflow: hidden;
 }
 
 /* Alert End */

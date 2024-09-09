@@ -240,20 +240,6 @@ document.getElementById("layout-menu") && (isHorizontalLayout = document.getElem
 
 
 
-    function closePopup() {
-        let popup = document.getElementById("popup");
-        let newUsername = document.getElementById("new_username");
-        popup.classList.add("close_popup");
-        document.body.classList.remove("popup_active");
-        newUsername.focus();
-    }
-
-    function addBodyClassAndStyle() {
-        let popup = document.getElementById("popup");
-        popup.classList.remove("close_popup");
-        document.body.classList.add("popup_active");
-    }
-
     function showPermissions(adminId) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'admin/Permissions/permissions.php?admin_id=' + adminId, true);

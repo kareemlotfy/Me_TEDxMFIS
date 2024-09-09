@@ -97,32 +97,39 @@ function alert(string $type, string $title, string $msg): void
         : '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_iconCarrier"><path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>';
 
     echo <<<HTML
-    <div class="alert_container" id="popup">
-        <div role="alert" class="$class">
-            <div class="alert_header">
-                <div class="image">$icon</div>
-                <div class="content">
-                    <span class="title">$title</span>
-                    <p class="message">$msg</p>
-                </div>
-                <div class="actions">
-                    <button class="desactivate close" aria-label="Close" data-dismiss="alert" type="button" onclick="closePopup()">Close</button>
+    <dialog>
+        <div class="alert_container">
+            <div role="alert" class="$class">
+                <div class="alert_header">
+                    <div class="image">$icon</div>
+                    <div class="content">
+                        <span class="title">$title</span>
+                        <p class="message">$msg</p>
+                    </div>
+                    <div class="actions">
+                        <button id="alertClose" class="alertClose" aria-label="Close" data-dismiss="alert"
+                            type="button">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </dialog>
+    
 HTML;
 
-    echo "<script>var titleVariableFromPHP = '" . htmlspecialchars($title) . "';</script>";
+    echo "<script>
+        const dialog = document.querySelector('dialog');
+        const dialogClose = dialog.querySelector('#alertClose');
+        //Show the Dialog
+        dialog.showModal();
+        // Close the Dialog and Remove it form DOM
+        dialogClose.addEventListener('click', function () {
+            dialog.close();
+            dialog.parentNode.removeChild(dialog);
+        });
+    </script>";
 }
 
-/**
- * Add a class to the body to trigger styling or behavior.
- */
-function addBodyClassAndStyle(): void
-{
-    echo '<script>document.body.classList.add("alertCalled");</script>';
-}
 
 /**
  * Redirect to login page if admin is not logged in.
