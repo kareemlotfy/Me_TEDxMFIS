@@ -191,6 +191,7 @@
 /* Nav  */
 .header {
     width: 100%;
+    overflow: hidden;
 }
 
 nav {
@@ -345,7 +346,7 @@ nav .burger {
         text-align: left;
         z-index: 2;
         transition: 1s;
-        display: none;
+        /* display: none; */
     }
 
     nav .burger {
