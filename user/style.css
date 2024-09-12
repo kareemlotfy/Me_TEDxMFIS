@@ -384,11 +384,15 @@ nav .burger {
         color: #333;
     }
 
-    .speakers_page nav .burger,
-    .about_page nav .burger,
-    .sponsors_page nav .burger,
-    .butTicket_page nav .burger {
+    .speakers_page nav .fa-bars,
+    .about_page nav .fa-bars,
+    .sponsors_page nav .fa-bars,
+    .butTicket_page nav .fa-bars {
         color: #fff;
+    }
+
+    #navLinks {
+        background-color: #fff;
     }
 }
 
@@ -406,38 +410,52 @@ nav .burger {
     text-transform: uppercase;
 }
 
-@media (max-width:640px) {
-    #banner .text {
-        font-size: 100px;
-        bottom: -32px;
-    }
-}
-
-@media (max-width:520px) {
+@media (max-width:766px) {
     #banner .text {
         font-size: 90px;
         bottom: -30px;
     }
 }
 
-@media (max-width:420px) {
+@media (max-width:640px) {
     #banner .text {
         font-size: 80px;
         bottom: -28px;
     }
 }
 
-@media (max-width: 380px) {
+@media (max-width:540px) {
     #banner .text {
         font-size: 70px;
+        bottom: -26px;
+    }
+}
+
+@media (max-width:480px) {
+    #banner .text {
+        font-size: 60px;
         bottom: -24px;
     }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 420px) {
     #banner .text {
-        font-size: 65px;
+        font-size: 50px;
         bottom: -20px;
+    }
+}
+
+@media (max-width: 360px) {
+    #banner .text {
+        font-size: 45px;
+        bottom: -16px;
+    }
+}
+
+@media (max-width: 320px) {
+    #banner .text {
+        font-size: 40px;
+        bottom: -11px;
     }
 }
 
