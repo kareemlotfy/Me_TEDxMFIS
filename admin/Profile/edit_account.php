@@ -13,6 +13,77 @@ checkAdminPermission($con, $adminId, $pageId);
 ?>
 
 <?php
+header("Location:../Misc/error.html")
+?>
+
+
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['form_type'])) {
+        $formType = $_POST['form_type'];
+        
+        // Password Change Form
+        if ($formType === 'password_change') {
+            $currentPassword = $_POST['currentPassword'];
+            $newPassword = $_POST['newPassword'];
+            $confirmPassword = $_POST['confirmPassword'];
+
+    // Prepare the SQL statement
+    $stmt = $con->prepare("SELECT admin_pass FROM admin_cred WHERE id = ?");
+    
+    // Check if prepare() was successful
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($con->error));
+    }
+    
+    $stmt->bind_param("i", $admin_id);
+    $stmt->execute();
+    $stmt->bind_result($hashedPassword);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Verify the current password
+    if (!password_verify($currentPassword, $hashedPassword)) {
+        alert("error", "", "Error",'Current password is incorrect.', "close");
+    }
+
+    // Check if the new password matches the confirmation password
+    if ($newPassword !== $confirmPassword) {
+        alert("error","Error",'New password and confirmation password do not match.');
+    }
+
+    // Check if the new password meets the requirements
+    if (strlen($newPassword) < 8 || !preg_match('/[a-z]/', $newPassword) || !preg_match('/[\d\s\W]/', $newPassword)) {
+        alert("error","Error",'Password does not meet the requirements.');
+    }
+
+    // Hash the new password
+    $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+    // Update the password in the database
+    $stmt = $con->prepare("UPDATE admin_cred SET admin_pass = ? WHERE id = ?");
+    
+    // Check if prepare() was successful
+    if ($stmt === false) {
+        alert("error","Error",'Prepare failed: ' . htmlspecialchars($con->error));
+    }
+    
+    $stmt->bind_param("si", $newHashedPassword, $admin_id);
+    if ($stmt->execute()) {
+        alert("success","Success",'Password changed successfully!');
+    } else {
+        alert("error","Error",'Failed to update password.');
+    }
+        }
+    }
+}
+
+
+    ?>
+
+
+<?php
 
 $adminDetails = getAdminDetails($con, $adminId);
 
@@ -34,6 +105,11 @@ if ($adminDetails) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    if (isset($_POST['form_type'])) {
+        $formType = $_POST['form_type'];
+        
+        // Password Change Form
+        if ($formType === 'profile_update') {
     // Sanitize input
     $adminName = filter_input(INPUT_POST, 'admin_name', FILTER_SANITIZE_STRING);
     $adminUsername = filter_input(INPUT_POST, 'admin_username', FILTER_SANITIZE_STRING);
@@ -66,37 +142,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($adminNumber)) {
-        $errors[] = "Admin Number is required.";
+        $errors[] = "Admin number is required.";
     }
 
-    if (empty($errors)) {
-        // Update admin data in the database
-        $update_sql = "UPDATE admin_cred SET admin_name = ?, admin_username = ?, admin_email = ?, admin_commitee = ?, admin_position = ?, admin_number = ? WHERE id = ?";
-        $stmt = $con->prepare($update_sql);
-
-        if (!$stmt) {
-            alert("error", "Error", "Prepare failed: (" . $con->errno . ") " . $con->error);
-            exit();
-        }
-
-        $stmt->bind_param("sssssii", $adminName, $adminUsername, $adminEmail, $adminCommitee, $adminPosition, $adminNumber, $adminId);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            alert("success","Success","Account updated successfully.");
-        } else {
-            alert("error","Error","Error updating account or no changes made.");
-        }
-
-        $stmt->close();
-    } else {
+    if (!empty($errors)) {
         // Display validation errors
         foreach ($errors as $error) {
-            alert("error", "Validation Error", $error);
+            alert("error", "", "Validation Error", $error,"close");
         }
+    } else {
+        alert("sucsess", "", "Sucsess", "hi","close");
+    }
     }
 }
+}
+
 ?>
+
 
 <!DOCTYPE html>
 
@@ -109,13 +171,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Account Settings</title>
+    <title>Edit Account</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="https://tedxmanaratalfaroukschool.com/">
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -629,7 +691,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                             alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -639,7 +701,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                             alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
@@ -702,26 +764,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                                 <div class="card mb-6">
                                     <!-- Account -->
-                                    <div class="card-body">
-                                        <div
-                                            class="d-flex align-items-start align-items-sm-center gap-6 pb-4 border-bottom">
-                                            <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
-                                                alt="user-avatar" class="d-block w-px-100 h-px-100 rounded"
-                                                id="uploadedAvatar" />
-                                            <div class="button-wrapper">
-                                                <label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-                                                    <span class="d-none d-sm-block">Upload new photo</span>
-                                                    <i class="bx bx-upload d-block d-sm-none"></i>
-                                                    <input type="file" id="upload" class="account-file-input" hidden
-                                                        accept="image/png, image/jpeg" />
-                                                </label>
-
-                                                <div>Allowed JPG, GIF or PNG. Max size of 800K</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+    <div class="card-body">
+        <div class="d-flex align-items-start align-items-sm-center gap-6 pb-4 border-bottom">
+            <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>" 
+                 alt="user-avatar" class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
+            <div class="button-wrapper">
+                <button for="upload" class="btn btn-primary me-3 mb-4" tabindex="0" disabled>
+                    <span class="d-none d-sm-block">Upload new photo</span>
+                    <i class="bx bx-upload d-block d-sm-none"></i>
+                    <input type="file" id="upload" name="admin_pic" class="account-file-input" hidden 
+                           accept="image/png, image/jpeg, image/jpg" />
+                </button>
+                <div>Allowed JPG, JPEG or PNG. Max size of 1MB</div>
+            </div>
+        </div>
+    </div>
                                     <div class="card-body pt-4">
                                         <form id="formAccountSettings" method="POST">
+                                                <input type="hidden" name="form_type" value="profile_update">
                                             <div class="row g-6">
                                                 <div class="col-md-6">
                                                     <label for="admin_name" class="form-label">Admin Name</label>
@@ -819,7 +880,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <!-- Change Password -->
                                     <h5 class="card-header">Change Password</h5>
                                     <div class="card-body pt-1">
-                                    <form id="formAccountSettings" method="POST" action="admin/Profile/change_password.php" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                                    <form id="formAccountSettings" method="POST" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                                            <input type="hidden" name="form_type" value="password_change">
                                             <div class="row">
                                                 <div
                                                     class="mb-6 col-md-6 form-password-toggle fv-plugins-icon-container">

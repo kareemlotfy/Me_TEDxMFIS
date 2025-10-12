@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate the username and password (you should use secure methods, like hashing)
     // For simplicity, let's assume valid credentials are "admin" for both username and password
-    if ($username == "a" && $password == "a") {
+    if ($username == "qrpanel@159" && $password == "openeasy@159") {
         session_start();
         $_SESSION["authenticated"] = true;
         echo "

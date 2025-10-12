@@ -41,15 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkbox_status'])) {
     }
     exit;
 }
-
-// Fetch checkbox status for initial page load
-$query = "SELECT checkbox_status FROM settings WHERE id = 1";
-$result = $con->query($query);
-$checkbox_status = $result->fetch_assoc()['checkbox_status'];
-
-$con->close();
 ?>
-
 
 <!DOCTYPE html>
 
@@ -66,7 +58,7 @@ $con->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="https://tedxmanaratalfaroukschool.com/">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -370,7 +362,7 @@ $con->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                             alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -380,7 +372,7 @@ $con->close();
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                             alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>

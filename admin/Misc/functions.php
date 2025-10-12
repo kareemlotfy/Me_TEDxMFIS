@@ -89,7 +89,7 @@ function select(string $sql, array $values, string $datatypes): mysqli_result
     }
 }
 
-function alert(string $type, string $title, string $msg): void
+function alert(string $type, string $pay, string $title, string $msg, string $button): void
 {
     $class = $type === "error" ? "error" : "success";
     $icon = $type === "error"
@@ -97,7 +97,7 @@ function alert(string $type, string $title, string $msg): void
         : '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_iconCarrier"><path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>';
 
     echo <<<HTML
-    <dialog>
+    <dialog id="alertDialog">
         <div class="alert_container">
             <div role="alert" class="$class">
                 <div class="alert_header">
@@ -107,8 +107,8 @@ function alert(string $type, string $title, string $msg): void
                         <p class="message">$msg</p>
                     </div>
                     <div class="actions">
-                        <button id="alertClose" class="alertClose" aria-label="Close" data-dismiss="alert"
-                            type="button">Close</button>
+                        <button id="alertClose" class="alertClose" aria-label="Close" data-dismiss="alert" onclick="closeAlertDialog('$pay')"
+                            type="button">$button</button>
                     </div>
                 </div>
             </div>
@@ -118,22 +118,26 @@ function alert(string $type, string $title, string $msg): void
 HTML;
 
     echo "<script>
-        const dialog = document.querySelector('dialog');
-        const dialogClose = dialog.querySelector('#alertClose');
-        //Show the Dialog
-        dialog.showModal();
-        // Close the Dialog and Remove it form DOM
-        dialogClose.addEventListener('click', function () {
-            dialog.close();
-            dialog.parentNode.removeChild(dialog);
-        });
+        const alertDialog = document.querySelector('#alertDialog');
+        alertDialog.showModal();
+
+        function closeAlertDialog(pay) {
+            const alertDialog = document.querySelector('#alertDialog');
+            alertDialog.close();
+            alertDialog.parentNode.removeChild(alertDialog);
+            if (pay === 'instapay') {
+                openInstaPayDialog();
+            } else if(pay == 'cash') {
+                openCashAtSchoolDialog();
+            }
+        }
     </script>";
 }
 
 
 /**
- * Redirect to login page if admin is not logged in.
- */
+* Redirect to login page if admin is not logged in.
+*/
 function adminLogin(): void
 {
     session_start();

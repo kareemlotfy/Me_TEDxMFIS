@@ -1,8 +1,476 @@
-// Login and Age and MFIS and OldEvents Charts Part
+
+
 
 ! function () {
     let o, e, r, t, s, i;
     i = (isDarkStyle ? (o = config.colors_dark.cardColor, e = config.colors_dark.headingColor, r = config.colors_dark.bodyColor, t = config.colors_dark.textMuted, config.colors_dark) : (o = config.colors.cardColor, e = config.colors.headingColor, r = config.colors.bodyColor, t = config.colors.textMuted, config.colors)).borderColor;
+
+    function fetchCounts() {
+        return fetch('admin/data/getCounts.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                return {
+                    male: data.male_count,
+                    female: data.female_count,
+                    above_18: data.above_18_count,
+                    under_18: data.under_18_count,
+                    mfis_yes: data.mfis_count, 
+                    mfis_no: data.not_mfis_count, 
+                    studentInSchool: data.student_in_school_count, 
+                    studentInCollege: data.student_in_college_count, 
+                    parentCount: data.parent_count,
+                    grade7: data.grade_7_count,
+                    grade8: data.grade_8_count, 
+                    grade9: data.grade_9_count,  
+                    grade10: data.grade_10_count, 
+                    grade11: data.grade_11_count, 
+                    grade12: data.grade_12_count,
+                    entered: data.entered_count,
+                    notEntered: data.not_entered_count,
+                    usedDinner: data.used_dinner_count,
+                    notUsedDinner: data.not_used_dinner_count,
+                    usedBreakfast: data.used_breakfast_count,
+                    notUsedBreakfast: data.not_used_breakfast_count
+                };
+            })
+            .catch(error => {
+                console.error('Error fetching counts:', error);
+                return {
+                    male: 0,
+                    female: 0,
+                    above_18: 0,
+                    under_18: 0,
+                    mfis_yes: 0,
+                    mfis_no: 0,
+                    studentInSchool: 0,
+                    studentInCollege: 0,
+                    parentCount: 0,
+                    grade7: 0,
+                    grade8: 0,
+                    grade9: 0,
+                    grade10: 0,
+                    grade11: 0,
+                    grade12: 0,
+                    entered: 0,
+                    notEntered: 0,
+                    usedDinner: 0,
+                    notUsedDinner: 0,
+                    usedBreakfast: 0,
+                    notUsedBreakfast: 0
+                };
+            });
+    }
+
+    
+    
+//                                                  GENDERR CHARTTTTTTTTTTT              ////////////////
+    function initGenderChart(genderData) {
+        var genderChartElement = document.querySelector("#genderChart2");
+        var genderChartOptions = {
+            chart: {
+                height: 95,
+                type: "bar",
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: "80%",
+                    columnWidth: "75%",
+                    startingShape: "rounded",
+                    endingShape: "rounded",
+                    borderRadius: 4,
+                    distributed: true
+                }
+            },
+            grid: {
+                show: false,
+                padding: {
+                    top: -20,
+                    bottom: -12,
+                    left: -10,
+                    right: 0
+                }
+            },
+            colors: [config.colors.primary, config.colors_label.primary],
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                data: [genderData.male, genderData.female]
+            }],
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: ["Male", "Female"],
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: t,
+                        fontSize: "13px"
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    show: false
+                }
+            },
+            tooltip: {
+                y: {
+                    title: {
+                        formatter: function(seriesName) {
+                            return 'Total: ';
+                        }
+                    }
+                }
+            }
+        };
+
+        if (genderChartElement) {
+            var genderChart = new ApexCharts(genderChartElement, genderChartOptions);
+            genderChart.render();
+        }
+    }
+
+
+                             //          TEST8ING  echart//
+function initEventChart(eventData) {
+    var eventChartElement = document.querySelector("#eChart22");
+    var eventChartOptions = {
+        chart: {
+            height: 285,
+            width: 250,
+            type: "donut"
+        },
+        labels: ["Entered Event", "Ate Dinner", "Ate Breakfast"],
+        series: [
+            eventData.entered,
+            eventData.usedDinner,
+            eventData.usedBreakfast,
+        ],
+        colors: [config.colors.tedx, config.colors.success, config.colors.info, config.colors.secondary],
+        stroke: {
+            width: 5,
+            colors: [o]
+        },
+        dataLabels: {
+            enabled: false // false 3l4an showing percentage on chart deh kanet old system
+        },
+        legend: {
+            show: false
+        },
+        grid: {
+            padding: {
+                top: 0,
+                bottom: 0,
+                right: 15
+            }
+        },
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: "80%",
+                    labels: {
+                        show: true,
+                        value: {
+                            fontSize: "16px",
+                            fontFamily: "Public Sans",
+                            fontWeight: 500,
+                            color: e,
+                            offsetY: -17,
+                            formatter: function (val) {
+                                return parseInt(val);
+                            }
+                        },
+                        name: {
+                            offsetY: 17,
+                            fontFamily: "Public Sans"
+                        },
+                        total: {
+                            show: true,
+                            fontSize: "13px",
+                            color: r,
+                            label: "Total",
+                            formatter: function () {
+                                return "Summary";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    if (eventChartElement) {
+        var eventChart = new ApexCharts(eventChartElement, eventChartOptions);
+        eventChart.render();
+    }
+}
+
+
+    //                                                  AGE CHARTTTTTTTTTTT              ////////////////
+    function initAgeChart(ageData) {
+        var ageChartElement = document.querySelector("#ageChart2");
+        var ageChartOptions = {
+            chart: {
+                height: 95,
+                type: "bar",
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: "80%",
+                    columnWidth: "75%",
+                    startingShape: "rounded",
+                    endingShape: "rounded",
+                    borderRadius: 4,
+                    distributed: true
+                }
+            },
+            grid: {
+                show: false,
+                padding: {
+                    top: -20,
+                    bottom: -12,
+                    left: -10,
+                    right: 0
+                }
+            },
+            colors: [config.colors.info, config.colors_label.info],
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                data: [ageData.above_18, ageData.under_18]
+            }],
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: ["18 or Above", "Under 18"],
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: t,
+                        fontSize: "13px"
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    show: false
+                }
+            },
+            tooltip: {
+                y: {
+                    title: {
+                        formatter: function(seriesName) {
+                            return 'Total: ';
+                        }
+                    }
+                }
+            }
+        };
+
+        if (ageChartElement) {
+            var ageChart = new ApexCharts(ageChartElement, ageChartOptions);
+            ageChart.render();
+        }
+    }
+
+    //                                                  MFIS CHARTTTTTTTTTTT              ////////////////
+    function initMfisChart(mfisData) {
+        var mfisChartElement = document.querySelector("#mfisChart222");
+        var mfisChartOptions = {
+            chart: {
+                height: 95,
+                type: "bar",
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: "80%",
+                    columnWidth: "75%",
+                    startingShape: "rounded",
+                    endingShape: "rounded",
+                    borderRadius: 4,
+                    distributed: true
+                }
+            },
+            grid: {
+                show: false,
+                padding: {
+                    top: -20,
+                    bottom: -12,
+                    left: -10,
+                    right: 0
+                }
+            },
+            colors: [config.colors.mfis, config.colors_label.mfis],
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                data: [mfisData.mfis_yes, mfisData.mfis_no]
+            }],
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: ["Yes", "No"],
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: t,
+                        fontSize: "13px"
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    show: false
+                }
+            },
+            tooltip: {
+                y: {
+                    title: {
+                        formatter: function(seriesName) {
+                            return 'Total: ';
+                        }
+                    }
+                }
+            }
+        };
+
+        if (mfisChartElement) {
+            var mfisChart = new ApexCharts(mfisChartElement, mfisChartOptions);
+            mfisChart.render();
+        }
+    }
+
+//                                                  LOGIN CHARTTTTTTTTTTT              ////////////////
+    function initLoginChart(loginData) {
+        var loginChartElement = document.querySelector("#loginChart22");
+        var loginChartOptions = {
+            chart: {
+                height: 95,
+                type: "bar",
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: "80%",
+                    columnWidth: "75%",
+                    startingShape: "rounded",
+                    endingShape: "rounded",
+                    borderRadius: 4,
+                    distributed: true
+                }
+            },
+            grid: {
+                show: false,
+                padding: {
+                    top: -20,
+                    bottom: -12,
+                    left: -10,
+                    right: 0
+                }
+            },
+            colors: [config.colors.success, config.colors_label.success, config.colors_label.success],
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                data: [
+                    loginData.studentInSchool, 
+                    loginData.studentInCollege, 
+                    loginData.parentCount
+                ]
+            }],
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: ["School", "College", "Parent"],
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: t,
+                        fontSize: "13px"
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    show: false
+                }
+            },
+            tooltip: {
+                y: {
+                    title: {
+                        formatter: function(seriesName) {
+                            return 'Total: ';
+                        }
+                    }
+                }
+            }
+        };
+    
+        if (loginChartElement) {
+            var loginChart = new ApexCharts(loginChartElement, loginChartOptions);
+            loginChart.render();
+        }
+    }
+
+
+                                                         // GrADING SYSTEMMMMMMMM  ////////
+   
+    // FINAL FETCHING IMPORTANT 
+    fetchCounts().then(data => {
+        initGenderChart(data);
+        initAgeChart(data);
+        initEventChart(data);
+        initMfisChart(data); 
+        initLoginChart(data); 
+    });
+
+
+    //                                                  NOT WITH CHARTTTTTTTTTTT              ////////////////
+
     var 
         a = document.querySelector("#loginChart"),
         n = {
@@ -280,12 +748,12 @@
         a = (null !== a && new ApexCharts(a, n).render(), document.querySelector("#eChart")),
         n = {
             chart: {
-                height: 185,
-                width: 150,
+                height: 285,
+                width: 250,
                 type: "donut"
             },
-            labels: ["Entered Event", "Didn't Enter Event", "Ate Dinner", "Didn't Eat Dinner"],
-            series: [50, 20, 30, 40],
+            labels: ["Entered Event", "Didn't Enter Event", "Ate Dinner", "Didn't Eat Dinner", "Ate Breakfast", "Didn't Ate Breakfast",],
+            series: [100, 100, 100, 100, 100, 100],
             colors: [config.colors.tedx, config.colors.success, config.colors.info, config.colors.secondary],
             stroke: {
                 width: 5,
@@ -659,7 +1127,7 @@
 
 // ChartJS Part
 
-! function () {
+!function () {
     var o = "#836AF9",
         r = "#ffe800",
         t = "#28dac6",
@@ -668,11 +1136,170 @@
         l = "#84D0FF";
     let i, n, d, s, c;
     s = (isDarkStyle ? (i = config.colors_dark.cardColor, n = config.colors_dark.headingColor, d = config.colors_dark.textMuted, c = config.colors_dark.bodyColor, config.colors_dark) : (i = config.colors.cardColor, n = config.colors.headingColor, d = config.colors.textMuted, c = config.colors.bodyColor, config.colors)).borderColor;
+    
     document.querySelectorAll(".chartjs").forEach(function (o) {
         o.height = o.dataset.height
     });
-    var p = document.getElementById("eventsChart"),
-        p = (p && new Chart(p, {
+
+    function fetchCounts2() {
+        return fetch('admin/data/getCounts.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                return {
+                    grade7: data.grade_7_count,
+                    grade8: data.grade_8_count, 
+                    grade9: data.grade_9_count,  
+                    grade10: data.grade_10_count, 
+                    grade11: data.grade_11_count, 
+                    grade12: data.grade_12_count 
+                };
+            })
+            .catch(error => {
+                console.error('Error fetching counts:', error);
+                return {
+                    grade7: 0,
+                    grade8: 0,
+                    grade9: 0,
+                    grade10: 0,
+                    grade11: 0,
+                    grade12: 0
+                };
+            });
+    }
+
+
+        //                              GRADING SYSTEMM          ////////
+    
+    fetchCounts2().then(gradeData => {
+        var gradesChartElement = document.getElementById("gardesChart2222");
+        
+        if (gradesChartElement) {
+            var gradesChart = new Chart(gradesChartElement, {
+                type: "polarArea",
+                data: {
+                    labels: ["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"],
+                    datasets: [{
+                        label: "Total Students",
+                        backgroundColor: [o, r, "#FF8132", "#299AFF", "#4F5D70", t, "#333333"],
+                        data: [
+                            gradeData.grade7,
+                            gradeData.grade8, 
+                            gradeData.grade9, 
+                            gradeData.grade10,
+                            gradeData.grade11,
+                            gradeData.grade12  
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 500
+                    },
+                    scales: {
+                        r: {
+                            ticks: {
+                                display: false,
+                                color: d
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            rtl: isRtl,
+                            backgroundColor: i,
+                            titleColor: n,
+                            bodyColor: c,
+                            borderWidth: 1,
+                            borderColor: s
+                        },
+                        legend: {
+                            rtl: isRtl,
+                            position: "right",
+                            labels: {
+                                usePointStyle: true,
+                                padding: 25,
+                                boxWidth: 8,
+                                boxHeight: 8,
+                                color: c
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+                //////STOOOOOOOPPPPPPPPPPPPP///////////////
+
+        var staticGradesChartElement = document.getElementById("gardesChart");
+        if (staticGradesChartElement) {
+            var staticGradesChart = new Chart(staticGradesChartElement, {
+                type: "polarArea",
+                data: {
+                    labels: ["Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"],
+                    datasets: [{
+                        label: "Total Students (Static)",
+                        backgroundColor: [o, r, "#FF8132", "#299AFF", "#4F5D70", t, "#333333"],
+                        data: [19, 17, 15, 13, 11, 9],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 500
+                    },
+                    scales: {
+                        r: {
+                            ticks: {
+                                display: false,
+                                color: d
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            rtl: isRtl,
+                            backgroundColor: i,
+                            titleColor: n,
+                            bodyColor: c,
+                            borderWidth: 1,
+                            borderColor: s
+                        },
+                        legend: {
+                            rtl: isRtl,
+                            position: "right",
+                            labels: {
+                                usePointStyle: true,
+                                padding: 25,
+                                boxWidth: 8,
+                                boxHeight: 8,
+                                color: c
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    var eventsChartElement = document.getElementById("eventsChart");
+    if (eventsChartElement) {
+        new Chart(eventsChartElement, {
             type: "bar",
             data: {
                 labels: ["Meccano", "Lumnois", "Dimentions", "Secret Code", "Semi Colon"],
@@ -688,8 +1315,8 @@
                 }]
             },
             options: {
-                responsive: !0,
-                maintainAspectRatio: !1,
+                responsive: true,
+                maintainAspectRatio: false,
                 animation: {
                     duration: 500
                 },
@@ -703,14 +1330,14 @@
                         borderColor: s
                     },
                     legend: {
-                        display: !1
+                        display: false
                     }
                 },
                 scales: {
                     x: {
                         grid: {
                             color: s,
-                            drawBorder: !1,
+                            drawBorder: false,
                             borderColor: s
                         },
                         ticks: {
@@ -722,7 +1349,7 @@
                         max: 400,
                         grid: {
                             color: s,
-                            drawBorder: !1,
+                            drawBorder: false,
                             borderColor: s
                         },
                         ticks: {
@@ -732,56 +1359,6 @@
                     }
                 }
             }
-        }), document.getElementById("gardesChart")),
-        b = (p && new Chart(p, {
-            type: "polarArea",
-            data: {
-                labels: ["Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"],
-                datasets: [{
-                    label: "Tolal Students",
-                    backgroundColor: [o, r, "#FF8132", "#299AFF", "#4F5D70", t, "#333333"],
-                    data: [19, 17, 15, 13, 11, 9, 10],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: !0,
-                maintainAspectRatio: !1,
-                animation: {
-                    duration: 500
-                },
-                scales: {
-                    r: {
-                        ticks: {
-                            display: !1,
-                            color: d
-                        },
-                        grid: {
-                            display: !1
-                        }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        rtl: isRtl,
-                        backgroundColor: i,
-                        titleColor: n,
-                        bodyColor: c,
-                        borderWidth: 1,
-                        borderColor: s
-                    },
-                    legend: {
-                        rtl: isRtl,
-                        position: "right",
-                        labels: {
-                            usePointStyle: !0,
-                            padding: 25,
-                            boxWidth: 8,
-                            boxHeight: 8,
-                            color: c
-                        }
-                    }
-                }
-            }
-        }))
+        });
+    }
 }();

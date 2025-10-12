@@ -1,0 +1,18 @@
+User-agent: *
+Disallow: /Tickets/style-buy-tickets.css
+Disallow: /Tickets/style-tickets.css
+Disallow: /Talks/style-talks.css
+Disallow: /Sponsors/style-sponsers.css
+Disallow: /Speakers/style-speakers.css
+
+Disallow: /qr-panel/
+Disallow: /Misc/
+Disallow: /images/
+Disallow: /assets/
+Disallow: /script-home.js
+Disallow: /script.js
+Disallow: /style-home.css
+Disallow: /style.css
+Disallow: /admin/
+
+Sitemap: https://tedxmanaratalfaroukschool.com/sitemap.xml

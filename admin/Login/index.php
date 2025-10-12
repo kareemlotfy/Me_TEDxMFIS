@@ -24,7 +24,7 @@ if (empty($_SESSION['csrf_token'])) {
 if (isset($_POST["submit"])) {
     // Validate CSRF token
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        alert("error", "CSRF token validation failed");
+        alert("error", "","Login Failed", "CSRF token validation failed", "close");
         exit();
     }
 
@@ -46,10 +46,10 @@ if (isset($_POST["submit"])) {
             header("Location: ../Dashboard/dashboard.php");
             exit();
         } else {
-            alert("error", "Login Failed", "Invalid username or password. Please try again.");
+            alert("error", "", "Login Failed", "Invalid username or password. Please try again.", "close");
         }
     } else {
-        alert("error", "Login Failed", "Invalid username or password. Please try again.");
+        alert("error", "", "Login Failed", "Invalid username or password. Please try again.", "close");
     }
 
     // Log failed login attempt
@@ -69,7 +69,7 @@ if (isset($_POST["submit"])) {
 
     <title>Login</title>
     <!--Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="https://tedxmanaratalfaroukschool.com/">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />

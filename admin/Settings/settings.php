@@ -1,54 +1,80 @@
-<?php 
-
+<?php
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
 
 adminLogin();
 
-$adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
-$pageId = 4; // Example: replace with the actual page ID you want to check
-
+$adminId = $_SESSION['adminId'] ?? 0;
+$pageId  = 4;
 checkAdminPermission($con, $adminId, $pageId);
-?>
 
-<?php
+$adminDetails   = getAdminDetails($con, $adminId) ?: [];
+$adminName      = $adminDetails['admin_name']     ?? '';
+$adminCommitee  = $adminDetails['admin_commitee'] ?? '';
+$adminPic       = $adminDetails['admin_pic']      ?? '';
+$adminPosition  = $adminDetails['admin_position'] ?? '';
+$adminEmail     = $adminDetails['admin_email']    ?? '';
+$adminUsername  = $adminDetails['admin_username'] ?? '';
 
-$adminDetails = getAdminDetails($con, $adminId);
+$msg = "";
 
-if ($adminDetails) {
-    $adminName = $adminDetails['admin_name'];
-    $adminCommitee = $adminDetails['admin_commitee'];
-    $adminPic = $adminDetails['admin_pic'];
-    $adminPosition = $adminDetails['admin_position'];
-    $adminEmail = $adminDetails['admin_email'];
-    $adminUsername = $adminDetails['admin_username'];
-} else {
-    echo "Admin details not found.";
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-?>
+    // ticket_price[ID], ticket_discount[ID], ticket_status[ID]
+    $prices    = $_POST['ticket_price']    ?? [];
+    $discounts = $_POST['ticket_discount'] ?? [];
+    $statuses  = $_POST['ticket_status']   ?? [];
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkbox_status'])) {
-    $new_status = $_POST['checkbox_status'] ? 1 : 0;
-    $query = "UPDATE settings SET checkbox_status = ? WHERE id = 1";
-    $stmt = $con->prepare($query);
-    $stmt->bind_param("i", $new_status);
-    if ($stmt->execute()) {
-        echo json_encode(['status' => 'success']);
-    } else {
-        echo json_encode(['status' => 'error']);
+    $allowedStatuses = ['available', 'sold_out', 'hidden', 'coming_soon'];
+
+    $con->begin_transaction();
+    try {
+        $stmt = $con->prepare("UPDATE settings SET ticket_price = ?, ticket_discount = ?, ticket_status = ? WHERE id = ?");
+        if (!$stmt) {
+            throw new Exception("Prepare failed: " . $con->error);
+        }
+
+        foreach ($prices as $id => $price) {
+            $id       = (int)$id;
+            $price    = is_numeric($price)    ? (float)$price    : 0.0;
+            $discount = isset($discounts[$id]) && is_numeric($discounts[$id]) ? (float)$discounts[$id] : 0.0;
+            $status   = isset($statuses[$id]) ? trim($statuses[$id]) : 'sold_out';
+            if (!in_array($status, $allowedStatuses, true)) {
+                $status = 'sold_out';
+            }
+
+            // ddsi => double, double, string, integer
+            $stmt->bind_param("ddsi", $price, $discount, $status, $id);
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed for ticket #$id: " . $stmt->error);
+            }
+        }
+
+        $stmt->close();
+        $con->commit();
+        $msg = "Saved Successfully";
+    } catch (Exception $e) {
+        $con->rollback();
+        $msg = "Error" . $e->getMessage();
     }
-    exit;
 }
 
-// Fetch checkbox status for initial page load
-$query = "SELECT checkbox_status FROM settings WHERE id = 1";
-$result = $con->query($query);
-$checkbox_status = $result->fetch_assoc()['checkbox_status'];
+$tickets = [];
+$sql = "SELECT id, ticket_name, ticket_status, ticket_price, ticket_discount FROM settings ORDER BY id ASC";
+$result = $con->query($sql);
 
-$con->close();
+if ($result === false) {
+    die("Database error while fetching tickets: " . $con->error);
+}
+
+while ($row = $result->fetch_assoc()) {
+    $tickets[] = $row;
+}
+$result->free();
+
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -60,13 +86,15 @@ $con->close();
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard</title>
+    <title>Settings</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
+        <base href="https://tedxmanaratalfaroukschool.com/">
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -110,7 +138,6 @@ $con->close();
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
-
                 <div class="app-brand demo pb-4 pt-4 ">
                     <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
                         <div class="logo-container">
@@ -132,7 +159,7 @@ $con->close();
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item ">
+                    <li class="menu-item">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
                             <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
@@ -280,13 +307,31 @@ $con->close();
                     </li>
                     <!-- e-commerce-app menu end -->
                     <li class="menu-item">
-                        <a href="admin/Tickets/tickets.php?userFilter=all" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bx-user'></i>
                             <div class="text-truncate" data-i18n="Users">Users</div>
                         </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="admin/Tickets/single.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Single Tickets">Single Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/vip.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="VIP Tickets">VIP Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/family.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Family Tickets">Family Tickets</div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+                    
                     <li class="menu-item active open">
-                        <a href="admin/Settings/settings.php" class="menu-link ">
+                        <a href="admin/Settings/settings.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
@@ -370,7 +415,7 @@ $con->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                             alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -380,7 +425,7 @@ $con->close();
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                             alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
@@ -428,93 +473,122 @@ $con->close();
                 </nav>
                 <!-- / Navbar -->
 
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <!-- Content -->
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        <div class="card_shutdown">
-                            <h3>Shutdown Ticketing System</h3>
-                            <label for="settingsCheckbox" class="switch">
-                                <input type="checkbox" id="settingsCheckbox"
-                                    <?php if ($checkbox_status) echo 'checked'; ?>>
-                                <span class="slider"></span>
-                            </label>
-                            <p>This Should Shutdown The Ticketing System After The Event Ends</p>
-                        </div>
+             <!-- Content wrapper -->
+             <div class="content-wrapper">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+<!-- Form for updating ticket price, discount, and ticket status -->
+<form method="POST" action="">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <h5 class="card-header">Update Ticket Settings</h5>
+        <div class="card-body">
 
-                    </div>
-                    <!-- / Content -->
-                    <div class="content-backdrop fade"></div>
+          <!-- Ticket Loop -->
+          <?php foreach ($tickets as $ticket): ?>
+            <div class="card_ticket_status mb-3 p-3 border rounded">
+              <h6><?= htmlspecialchars($ticket['ticket_name']) ?></h6>
+
+              <!-- Ticket Price & Discount -->
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label class="form-label">Ticket Price (L.E)</label>
+                  <input type="number"
+                         class="form-control"
+                         name="ticket_price[<?= $ticket['id'] ?>]"
+                         value="<?= htmlspecialchars($ticket['ticket_price']) ?>"
+                         step="0.01" min="0" required>
                 </div>
-                <!-- Content wrapper -->
+                <div class="col-md-6">
+                  <label class="form-label">Discount (L.E)</label>
+                  <input type="number"
+                         class="form-control"
+                         name="ticket_discount[<?= $ticket['id'] ?>]"
+                         value="<?= htmlspecialchars($ticket['ticket_discount']) ?>"
+                         step="0.01" min="0" required>
+                </div>
+              </div>
+
+              <!-- Ticket Status -->
+              <div>
+                <label class="me-3">
+                  <input type="radio"
+                         name="ticket_status[<?= $ticket['id'] ?>]"
+                         value="available"
+                         <?= $ticket['ticket_status'] == 'available' ? 'checked' : '' ?>>
+                  Available
+                </label>
+                <label class="me-3">
+                  <input type="radio"
+                         name="ticket_status[<?= $ticket['id'] ?>]"
+                         value="coming_soon"
+                         <?= $ticket['ticket_status'] == 'coming_soon' ? 'checked' : '' ?>>
+                  Coming Soon
+                </label>
+                <label class="me-3">
+                  <input type="radio"
+                         name="ticket_status[<?= $ticket['id'] ?>]"
+                         value="sold_out"
+                         <?= $ticket['ticket_status'] == 'sold_out' ? 'checked' : '' ?>>
+                  Sold Out
+                </label>
+                <label class="me-3">
+                  <input type="radio"
+                         name="ticket_status[<?= $ticket['id'] ?>]"
+                         value="hidden"
+                         <?= $ticket['ticket_status'] == 'hidden' ? 'checked' : '' ?>>
+                  Hidden
+                </label>
+              </div>
             </div>
-            <!-- / Layout page -->
+          <?php endforeach; ?>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary">Update All Settings</button>
         </div>
-
-
-
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-
-
-        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-        <div class="drag-target"></div>
-
+      </div>
     </div>
-    <!-- / Layout wrapper -->
+  </div>
+</form>
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
+</div>
+<!-- / Content -->
+<div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+</div>
+<!-- / Layout page -->
+</div>
 
-    <script src="admin/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="admin/assets/vendor/libs/popper/popper.js"></script>
-    <script src="admin/assets/vendor/js/bootstrap.js"></script>
-    <script src="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="admin/assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="admin/assets/vendor/libs/i18n/i18n.js"></script>
-    <script src="admin/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="admin/assets/vendor/js/menu.js"></script>
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
 
-    <!-- endbuild -->
+<!-- Drag Target Area To SlideIn Menu On Small Screens -->
+<div class="drag-target"></div>
 
-    <!-- Vendors JS -->
-    <script src="admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-    <script src="admin/assets/vendor/libs/chartjs/chartjs.js"></script>
+</div>
+<!-- / Layout wrapper -->
 
-    <!-- Main JS -->
-    <script src="admin/assets/js/main.js"></script>
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
 
+<script src="admin/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="admin/assets/vendor/libs/popper/popper.js"></script>
+<script src="admin/assets/vendor/js/bootstrap.js"></script>
+<script src="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="admin/assets/vendor/libs/hammer/hammer.js"></script>
+<script src="admin/assets/vendor/libs/i18n/i18n.js"></script>
+<script src="admin/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="admin/assets/vendor/js/menu.js"></script>
 
-    <!-- Page JS -->
-    <script src="admin/assets/js/dashboards-analytics.js"></script>
-    <script>
-        function updateCheckboxStatus(checked) {
-            var checkboxStatus = checked ? 1 : 0;
+<!-- endbuild -->
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "admin/Settings/settings.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    if (response.status === 'success') {
-                        console.log('Checkbox status updated successfully');
-                    } else {
-                        console.error('Failed to update checkbox status');
-                    }
-                }
-            };
-            xhr.send("checkbox_status=" + checkboxStatus);
-        }
+<!-- Vendors JS -->
+<script src="admin/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<script src="admin/assets/vendor/libs/chartjs/chartjs.js"></script>
 
-        window.onload = function () {
-            var checkbox = document.getElementById('settingsCheckbox');
-            checkbox.addEventListener('change', function () {
-                updateCheckboxStatus(this.checked);
-            });
-        }
-    </script>
-
-</body>
-
-</html>
+<!-- Main JS -->
+<script src="admin/assets/js/main.js"></script>
+<!-- Page JS -->
+<script src="admin/assets/js/dashboards-analytics.js"></script>

@@ -27,6 +27,16 @@ if ($adminDetails) {
     echo "Admin details not found.";
 }
 
+
+$query = "SELECT SUM(CASE WHEN isaccepted = 'yes' THEN paid ELSE 0 END) AS total_profit FROM user_cred";
+$result = $con->query($query);
+
+$totalProfit = 0;
+if ($result && $row = $result->fetch_assoc()) {
+    $totalProfit = $row['total_profit'] ?? 0;
+}
+
+
 $con->close();
 ?>
 
@@ -46,7 +56,8 @@ $con->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
+    <base href="https://tedxmanaratalfaroukschool.com/">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +83,6 @@ $con->close();
     <!-- Helpers -->
     <script src="admin/assets/vendor/js/helpers.js"></script>
     <script src="admin/assets/js/config.js"></script>
-    <script src="admin/data/analytics_data.js"></script> 
 
 </head>
 
@@ -87,7 +97,6 @@ $con->close();
             <!-- Menu -->
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
 
                 <div class="app-brand demo pb-4 pt-4 ">
                     <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
@@ -258,11 +267,29 @@ $con->close();
                     </li>
                     <!-- e-commerce-app menu end -->
                     <li class="menu-item">
-                        <a href="admin/Tickets/tickets.php?userFilter=all" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bx-user'></i>
                             <div class="text-truncate" data-i18n="Users">Users</div>
                         </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="admin/Tickets/single.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Single Tickets">Single Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/vip.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="VIP Tickets">VIP Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/family.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Family Tickets">Family Tickets</div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+                    
                     <li class="menu-item ">
                         <a href="admin/Settings/settings.php" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
@@ -348,7 +375,7 @@ $con->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                             alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -358,7 +385,7 @@ $con->close();
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                             alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
@@ -416,11 +443,11 @@ $con->close();
                                     <div class="col-6 mb-6">
                                         <div class="card h-100">
                                             <div class="card-body pb-0">
-                                                <span class="d-block fw-medium mb-1">Gender</span>
+                                                <span class="d-block fw-medium mb-1">Users</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
-                                                    <span id="totalUsers"></span>
+                                                <span id="totalUsers">Loading...</span>
                                                 </h4>
-                                                <div id="genderChart"></div>
+                                                <div id="genderChart2"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -428,10 +455,10 @@ $con->close();
                                         <div class="card h-100">
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Ages</span>
-                                                <h4 class="card-title mb-0 mb-lg-4">Total
-                                                    <span id="totalUsers"></span>
+                                                <h4 class="card-title mb-0 mb-lg-4">Users age are
+                                                <span id=""></span>
                                                 </h4>
-                                                <div id="ageChart"></div>
+                                                <div id="ageChart2"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -444,9 +471,20 @@ $con->close();
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">From MFIS</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
-                                                    <span id="totalUsers"></span>
+                                                    <span id="mfis"></span>
                                                 </h4>
-                                                <div id="mfisChart"></div>
+                                                <div id="mfisChart222"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-6">
+                                        <div class="card h-100">
+                                            <div class="card-body pb-0">
+                                                <span class="d-block fw-medium mb-1">Total Profit</span>
+                                                <h4 class="card-title mb-0 mb-lg-4">Total
+                                                    <span id="profit"><?php echo number_format($totalProfit); ?></span>
+                                                </h4>
+                                                <div id="profit"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -454,10 +492,10 @@ $con->close();
                                         <div class="card h-100">
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Login Type</span>
-                                                <h4 class="card-title mb-0 mb-lg-4">Total
-                                                    <span id="totalUsers"></span>
+                                                <h4 class="card-title mb-0 mb-lg-4">Users are
+                                                    <span id=""></span>
                                                 </h4>
-                                                <div id="loginChart"></div>
+                                                <div id="loginChart22"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -480,10 +518,10 @@ $con->close();
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-6">
                                             <div class="d-flex flex-column align-items-center gap-1">
-                                                <h3 class="mb-1">8</h3>
-                                                <small>Total User Today</small>
+                                                <h3 class="mb-1" id="totalUsers2">Loading...</h3>
+                                                <small>Total Users</small>
                                             </div>
-                                            <div id="eChart"></div>
+                                            <div id="eChart22"></div>
                                         </div>
                                         <ul class="p-0 m-0">
                                             <li class="d-flex align-items-center mb-5">
@@ -498,7 +536,7 @@ $con->close();
                                                     </div>
                                                     <div class="user-progress">
                                                         <h6 class="mb-0">
-                                                            <span id="enteredEventCount"></span>
+                                                            <span id="entered_count"></span>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -515,7 +553,7 @@ $con->close();
                                                     </div>
                                                     <div class="user-progress">
                                                         <h6 class="mb-0">
-                                                            <span id="notEnteredEventCount"></span>
+                                                            <span id="not_entered_count"></span>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -532,7 +570,41 @@ $con->close();
                                                     </div>
                                                     <div class="user-progress">
                                                         <h6 class="mb-0">
-                                                            <span id="usedDinnerCount"></span>
+                                                            <span id="used_dinner_count"></span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex align-items-center mb-5">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                <span class="avatar-initial rounded bg-label-secondary"><i
+                                                            class='bx bx-football'></i></span>
+                                                </div>
+                                                <div
+                                                    class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Didn't Eat Dinner</h6>
+                                                    </div>
+                                                    <div class="user-progress">
+                                                        <h6 class="mb-0">
+                                                            <span id="not_used_dinner_count"></span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex align-items-center mb-5">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <span class="avatar-initial rounded bg-label-info"><i
+                                                            class='bx bx-home-alt'></i></span>
+                                                </div>
+                                                <div
+                                                    class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Ate Breakfast</h6>
+                                                    </div>
+                                                    <div class="user-progress">
+                                                        <h6 class="mb-0">
+                                                            <span id="used_breakfast_count"></span>
                                                         </h6>
                                                     </div>
                                                 </div>
@@ -545,15 +617,16 @@ $con->close();
                                                 <div
                                                     class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                     <div class="me-2">
-                                                        <h6 class="mb-0">Didn't Eat Dinner</h6>
+                                                        <h6 class="mb-0">Didn't Eat breakfast</h6>
                                                     </div>
                                                     <div class="user-progress">
                                                         <h6 class="mb-0">
-                                                            <span id="notUsedDinnerCount"></span>
+                                                            <span id="not_used_breakfast_count"></span>
                                                         </h6>
                                                     </div>
                                                 </div>
                                             </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -568,7 +641,7 @@ $con->close();
                                         
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="gardesChart" class="chartjs" data-height="337"></canvas>
+                                        <canvas id="gardesChart2222" class="chartjs" data-height="337"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -1019,6 +1092,57 @@ $con->close();
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+
+                 <!--                                   DATA SYSTEMMM (IMPORTANTT)                                            -->
+
+    <script>
+    function fetchCounts() {
+        fetch('admin/data/getCounts.php') 
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayCounts(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('totalUsers').innerText = 'Error loading data';
+                document.getElementById('totalUsers2').innerText = 'Error loading data';
+                document.getElementById('mfis').innerText = 'Error loading data';
+                document.getElementById('entered_count').innerText = 'Error loading data';
+                document.getElementById('not_entered_count').innerText = 'Error loading data';
+                document.getElementById('used_dinner_count').innerText = 'Error loading data';
+                document.getElementById('not_used_dinner_count').innerText = 'Error loading data';
+                document.getElementById('used_breakfast_count').innerText = 'Error loading data';
+                document.getElementById('not_used_breakfast_count').innerText = 'Error loading data';
+            });
+    }
+
+    
+    function displayCounts(data) {
+        const totalUsers = (data.paid_count || 0) + (data.unpaid_count || 0) + (data.rejected_count || 0);
+        const totalUsers2 = (data.paid_count || 0) + (data.unpaid_count || 0) + (data.rejected_count || 0);
+        document.getElementById('totalUsers').innerText = totalUsers; 
+        document.getElementById('totalUsers2').innerText = totalUsers2; 
+        document.getElementById('mfis').innerText = data.mfis_count || 0; 
+        document.getElementById('entered_count').innerText = data.entered_count || 0;
+        document.getElementById('not_entered_count').innerText = data.not_entered_count || 0; 
+        document.getElementById('used_dinner_count').innerText = data.used_dinner_count || 0;
+        document.getElementById('not_used_dinner_count').innerText = data.not_used_dinner_count || 0;
+        document.getElementById('used_breakfast_count').innerText = data.used_breakfast_count || 0  ; 
+        document.getElementById('not_used_breakfast_count').innerText = data.not_used_breakfast_count || 0; 
+    }
+
+    
+    window.onload = fetchCounts;
+</script>
+
+   <!--                                          END OF DATA SYSTEMMM (IMPORTANTT)                                            -->
+
+    
 
     <script src="admin/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="admin/assets/vendor/libs/popper/popper.js"></script>

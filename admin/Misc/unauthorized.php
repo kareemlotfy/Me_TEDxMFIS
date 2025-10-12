@@ -37,7 +37,7 @@ $con->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="https://tedxmanaratalfaroukschool.com/">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -90,7 +90,7 @@ $con->close();
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
 
-                <div class="app-brand demo pb-4 pt-4 ">
+            <div class="app-brand demo pb-4 pt-4 ">
                     <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
                         <div class="logo-container">
                             <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
@@ -349,7 +349,7 @@ $con->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                             alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -359,7 +359,7 @@ $con->close();
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                             alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>

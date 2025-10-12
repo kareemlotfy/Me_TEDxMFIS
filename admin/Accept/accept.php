@@ -1,17 +1,17 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+include("../Misc/db_conn.php");
+require("../Misc/functions.php");
 
-require '../phpmailer/src/Exception.php';
-require '../phpmailer/src/PHPMailer.php';
-require '../phpmailer/src/SMTP.php';
-include '../phpqrcode/qrlib.php'; // Include the QRcode library
+adminLogin();
+
+include '../phpqrcode/qrlib.php'; // QRcode library
 
 // Generates a QR code file and returns its path
-function generateQRCode($data, $uniqueId) {
+function generateQRCode($data, $uniqueId, $size = 20) {
     $qrCodeFile = "../qrcodes/qrcode_$uniqueId.png";
-    QRcode::png($data, $qrCodeFile);
+    $matrixPointSize = $size;
+    QRcode::png($data, $qrCodeFile, QR_ECLEVEL_L, $matrixPointSize);
     return $qrCodeFile;
 }
 
@@ -20,94 +20,172 @@ function mergeQRWithTicket($qrCodeFile, $uniqueId) {
     $ticketTemplate = imagecreatefrompng('../Ticket_Design.png');
     $qrCode = imagecreatefrompng($qrCodeFile);
 
-    $qrCodeWidth = imagesx($qrCode);
-    $qrCodeHeight = imagesy($qrCode);
+    // Resize QR
+    $targetWidth = 168;
+    $targetHeight = 168;
 
-    // Adjust position if necessary
-    $positionX = 0;
-    $positionY = 0;
+    $qrCodeResized = imagecreatetruecolor($targetWidth, $targetHeight);
+    imagecopyresampled(
+        $qrCodeResized, $qrCode,
+        0, 0, 0, 0,
+        $targetWidth, $targetHeight,
+        imagesx($qrCode), imagesy($qrCode)
+    );
 
-    imagecopy($ticketTemplate, $qrCode, $positionX, $positionY, 0, 0, $qrCodeWidth, $qrCodeHeight);
+    $positionX = 1280;
+    $positionY = 59;
+
+    imagecopy($ticketTemplate, $qrCodeResized, $positionX, $positionY, 0, 0, $targetWidth, $targetHeight);
 
     $mergedFilePath = "../qrcodes/merged_qr_ticket_$uniqueId.png";
     imagepng($ticketTemplate, $mergedFilePath);
 
     imagedestroy($qrCode);
+    imagedestroy($qrCodeResized);
     imagedestroy($ticketTemplate);
 
     return $mergedFilePath;
 }
 
-// Sends an email with the QR code attachment
-function sendQRCodeEmail($to, $subject, $message, $qrCodeFile) {
-    $mail = new PHPMailer(true);
-
-    try {
-        // SMTP settings
-        $mail->SMTPDebug = 0;
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'elmahyy.1122007@gmail.com';
-        $mail->Password = 'iudp uqvr acnt eonx';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
-
-        // Recipients
-        $mail->setFrom('elmahyy.1122007@gmail.com', 'TEDxManaratAlFaroukSchool');
-        $mail->addAddress($to);
-
-        // Attach QR code
-        $mail->addAttachment($qrCodeFile, 'qrcode.png');
-
-        // Email content
-        $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $message;
-
-        $mail->send();
-        echo "QR code email sent to $to successfully.<br>";
-    } catch (Exception $e) {
-        echo "Failed to send QR code email. Error: {$mail->ErrorInfo}<br>";
-    }
-}
 
 // Generates a secure unique ID
 function generateUniqueURL($length = 10) {
     return bin2hex(random_bytes($length));
 }
 
+// Insert email into queue
+function queueEmail($con, $userId, $userEmail, $subject, $message, $attachmentPath) {
+    $insertQueue = $con->prepare("INSERT INTO email_queue (`user_id`, `email`, `subject`, `message`, `attachment_path`, `status`) VALUES (?, ?, ?, ?, ?, 'pending')");
+    if (!$insertQueue) {
+        die("SQL Error (queueEmail): " . $con->error);
+    }
+
+    $insertQueue->bind_param("issss", $userId, $userEmail, $subject, $message, $attachmentPath);
+    $insertQueue->execute();
+    $insertQueue->close();
+}
+
 // Main script execution
 if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
     $userId = intval($_GET['id']);
-    include("../Misc/db_conn.php");
 
-    // Generate a unique ID and update the database
-    $uniqueId = generateUniqueURL();
-    $updateSql = $con->prepare("UPDATE user_cred SET isaccepted = 'yes', ticket_id = ? WHERE id = ?");
-    $updateSql->bind_param("si", $uniqueId, $userId);
-    $updateSql->execute();
-    $updateSql->close();
+    // Retrieve the group ID for the selected user
+    $getGroupSql = $con->prepare("SELECT group_id FROM user_cred WHERE id = ?");
+    $getGroupSql->bind_param("i", $userId);
+    $getGroupSql->execute();
+    $getGroupSql->bind_result($groupId);
+    $getGroupSql->fetch();
+    $getGroupSql->close();
 
-    // Retrieve user email and unique ID
-    $getUserDetailsSql = $con->prepare("SELECT email, ticket_id FROM user_cred WHERE id = ?");
-    $getUserDetailsSql->bind_param("i", $userId);
-    $getUserDetailsSql->execute();
-    $getUserDetailsSql->bind_result($userEmail, $uniqueId);
+    if ($groupId) {
+        // If group ID exists, process all users in that group
+        $getUsersSql = $con->prepare("SELECT id, email FROM user_cred WHERE group_id = ?");
+        $getUsersSql->bind_param("s", $groupId);
+        $getUsersSql->execute();
+        $result = $getUsersSql->get_result();
+        $users = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free();
+        $getUsersSql->close();
 
-    if ($getUserDetailsSql->fetch()) {
-        $qrCodeFile = generateQRCode('localhost/TEDxManaratAlfaroukSchool/qr-panel/qrpanel.php/#' . $uniqueId, $uniqueId);
-        $mergedFilePath = mergeQRWithTicket($qrCodeFile, $uniqueId);
+        foreach ($users as $user) {
+            $userEmail = $user['email'];
+            $userId = $user['id'];
+            $uniqueId = generateUniqueURL();
 
-        $emailMessage = 'Great news! Your ticket 🎫 for TEDxManaratAlFaroukSchool is confirmed! 🙌 <br> <br> 📅 Date: [Event Date] <br> 📍 Location: <a href="https://maps.app.goo.gl/kDEvHWHKKo9ffMCy5" target="_blank">Click here</a> <br> <br> Cheers, <br> TEDxManaratAlFaroukSchool';
-        sendQRCodeEmail($userEmail, 'TEDxManaratAlFaroukSchool Ticket', $emailMessage, $mergedFilePath);
+            // Update the user status to 'accepted' and store the unique ticket ID
+            $updateSql = $con->prepare("UPDATE user_cred SET isaccepted = 'yes', ticket_id = ? WHERE id = ?");
+            $updateSql->bind_param("si", $uniqueId, $userId);
+            $updateSql->execute();
+            $updateSql->close();
+
+            // Generate QR code and merge with ticket template
+            $qrCodeFile = generateQRCode('https://tedxmanaratalfaroukschool.com/qr-panel/qrpanel.php/#' . $uniqueId, $uniqueId, 20);
+            $mergedFilePath = mergeQRWithTicket($qrCodeFile, $uniqueId);
+
+            // Prepare the email message
+            $emailMessage = 'Great news! Your group ticket offer for TEDxManaratAlFaroukSchool is confirmed! <br> <br> Date: [6/12/2024] <br> Location: <a href="https://maps.app.goo.gl/kDEvHWHKKo9ffMCy5" target="_blank">Click here</a> <br><br> Dear Attendee,
+
+<br>
+1. Make sure to bring your ticket. Come on time.
+<br>
+2. Remain in your seats during the talks. (Gates will be closed, no entry or exit during the talks.)
+<br>
+3. No flash photography or video taking.
+<br>
+4. Food and drinks are strictly not allowed inside the auditorium.
+<br>
+5. Phones should be in silent mode. Side talk, walking, or any distraction methods during talks are not allowed.
+<br>
+6. Dress code is smart casual.
+<br>
+7. Organizers are not liable or responsible for the loss of any personal belongings during the event.
+<br>
+<br>
+
+Manarat Al Farouk School
+1st Settlement - New Cairo
+6.12.2024 <br><br><br> <br> Cheers, <br> TEDxManaratAlFaroukSchool';
+
+            // Queue the email instead of sending immediately
+            queueEmail($con, $userId, $userEmail, 'TEDxManaratAlFaroukSchool Ticket', $emailMessage, $mergedFilePath);
+        }
+
+        echo "All users in the group with ID $groupId have been accepted, and QR codes have been queued for sending.";
+    } else {
+        // If group ID is null, proceed with the old logic
+        $uniqueId = generateUniqueURL();
+        $updateSql = $con->prepare("UPDATE user_cred SET isaccepted = 'yes', ticket_id = ? WHERE id = ?");
+        $updateSql->bind_param("si", $uniqueId, $userId);
+        $updateSql->execute();
+        $updateSql->close();
+
+        // Retrieve user email for the single user
+        $getUserDetailsSql = $con->prepare("SELECT email FROM user_cred WHERE id = ?");
+        $getUserDetailsSql->bind_param("i", $userId);
+        $getUserDetailsSql->execute();
+        $result = $getUserDetailsSql->get_result();
+        $user = $result->fetch_assoc();
+        $getUserDetailsSql->close();
+
+        if ($user) {
+            $userEmail = $user['email'];
+            $qrCodeFile = generateQRCode('https://tedxmanaratalfaroukschool.com/qr-panel/qrpanel.php/#' . $uniqueId, $uniqueId, 20);
+            $mergedFilePath = mergeQRWithTicket($qrCodeFile, $uniqueId);
+
+            $emailMessage = 'Great news! Your ticket for TEDxManaratAlFaroukSchool is confirmed! <br> <br> Date: [6/12/2024] <br> Location: <a href="https://maps.app.goo.gl/kDEvHWHKKo9ffMCy5" target="_blank">Click here</a> <br><br> Dear Attendee,
+
+<br>
+1. Make sure to bring your ticket. Come on time.
+<br>
+2. Remain in your seats during the talks. (Gates will be closed, no entry or exit during the talks.)
+<br>
+3. No flash photography or video taking.
+<br>
+4. Food and drinks are strictly not allowed inside the auditorium.
+<br>
+5. Phones should be in silent mode. Side talk, walking, or any distraction methods during talks are not allowed.
+<br>
+6. Dress code is smart casual.
+<br>
+7. Organizers are not liable or responsible for the loss of any personal belongings during the event.
+<br>
+<br>
+
+Manarat Al Farouk School
+1st Settlement - New Cairo
+6.12.2024 <br><br><br> <br> Cheers, <br> TEDxManaratAlFaroukSchool';
+
+            // Queue the email
+            queueEmail($con, $userId, $userEmail, 'TEDxManaratAlFaroukSchool Ticket', $emailMessage, $mergedFilePath);
+        }
+
+        echo "User with ID $userId has been accepted, and QR code has been queued for sending.";
     }
 
-    $getUserDetailsSql->close();
     $con->close();
 
     // Redirect
-    header("Location: ../Tickets/tickets.php?userFilter=all");
+    header("Location: ../Tickets/single.php?userFilter=all");
     exit();
 } else {
     // Handle error

@@ -103,7 +103,8 @@ $con->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
+         <base href="https://tedxmanaratalfaroukschool.com/">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -159,9 +160,8 @@ $con->close();
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
-
                 <div class="app-brand demo pb-4 pt-4 ">
-                <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
+                    <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
                         <div class="logo-container">
                             <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
                                 class="tedx-logo" id="tedx_logo" >
@@ -181,7 +181,7 @@ $con->close();
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item ">
+                    <li class="menu-item">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
                             <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
@@ -329,13 +329,31 @@ $con->close();
                     </li>
                     <!-- e-commerce-app menu end -->
                     <li class="menu-item">
-                        <a href="admin/Tickets/tickets.php?userFilter=all" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bx-user'></i>
                             <div class="text-truncate" data-i18n="Users">Users</div>
                         </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="admin/Tickets/single.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Single Tickets">Single Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/vip.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="VIP Tickets">VIP Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/family.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Family Tickets">Family Tickets</div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="menu-item ">
-                        <a href="admin/Settings/settings.php" class="menu-link ">
+                    
+                    <li class="menu-item">
+                        <a href="admin/Settings/settings.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
@@ -419,7 +437,7 @@ $con->close();
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                             alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -429,7 +447,7 @@ $con->close();
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                             alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
@@ -492,7 +510,7 @@ $con->close();
                                     <div
                                         class="user-profile-header d-flex flex-column flex-lg-row text-sm-start text-center mb-8">
                                         <div class="flex-shrink-0 mt-1 mx-sm-0 mx-auto">
-                                            <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                            <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                 alt="user image"
                                                 class="d-block h-auto ms-0 ms-sm-6 rounded-3 user-profile-img">
                                         </div>

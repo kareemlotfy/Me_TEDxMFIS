@@ -1,43 +1,59 @@
-<?php 
-                                            //DASHBOARD Counting Data SYSTEM //
+<?php
+// Include database connection and required functions
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
 
-// JSON data (VERY IMPORTANT)
+// Set the header for JSON response
 header("Content-Type: application/json");
 
-// database queries
-$queries = [
-    'paid_count' => "SELECT COUNT(*) as paid_count FROM user_cred WHERE isaccepted = 'yes'",
-    'unpaid_count' => "SELECT COUNT(*) as unpaid_count FROM user_cred WHERE isaccepted = 'no'",
-    'male_count' => "SELECT COUNT(*) as male_count FROM user_cred WHERE gender = 'Male'",
-    'female_count' => "SELECT COUNT(*) as female_count FROM user_cred WHERE gender = 'Female'",
-    'above_18_count' => "SELECT COUNT(*) as above_18_count FROM user_cred WHERE age > 18",
-    'under_18_count' => "SELECT COUNT(*) as under_18_count FROM user_cred WHERE age <= 18",
-    'mfis_count' => "SELECT COUNT(*) as mfis_count FROM user_cred WHERE st_mfis = 'yes'",
-    'not_mfis_count' => "SELECT COUNT(*) as not_mfis_count FROM user_cred WHERE st_mfis = 'no'",
-    'student_in_school_count' => "SELECT COUNT(*) as student_in_school_count FROM user_cred WHERE login_type = 'Student In School'",
-    'student_in_college_count' => "SELECT COUNT(*) as student_in_college_count FROM user_cred WHERE login_type = 'Student In College'",
-    'parent_count' => "SELECT COUNT(*) as parent_count FROM user_cred WHERE login_type = 'Parent'",
-    'entered_count' => "SELECT COUNT(*) as entered_count FROM user_cred WHERE enter_status = 'yes'",
-    'not_entered_count' => "SELECT COUNT(*) as not_entered_count FROM user_cred WHERE enter_status = 'no'",
-    'used_dinner_count' => "SELECT COUNT(*) as used_dinner_count FROM user_cred WHERE dinner_status = 'yes'",
-    'not_used_dinner_count' => "SELECT COUNT(*) as not_used_dinner_count FROM user_cred WHERE dinner_status = 'no'",
-];
-
-$response = [];
-
-foreach ($queries as $key => $query) {
-    $result = $con->query($query);
-    if ($result) {
-        $row = $result->fetch_assoc();
-        $response[$key] = $row[array_keys($row)[0]];
-    } else {
-        $response[$key] = 0;
-    }
+// Check the connection
+if ($con->connect_error) {
+    die(json_encode(['error' => 'Connection failed: ' . $con->connect_error]));
 }
 
+// Combine related queries into a single query using conditional aggregation
+$query = "
+    SELECT 
+        SUM(isaccepted = 'yes') AS paid_count,
+        SUM(isaccepted = 'no') AS unpaid_count,
+        SUM(isaccepted = 'reject') AS rejected_count,
+        SUM(gender = 'Male') AS male_count,
+        SUM(gender = 'Female') AS female_count,
+        SUM(age >= 18) AS above_18_count,
+        SUM(age < 18) AS under_18_count,
+        SUM(st_mfis = 'yes') AS mfis_count,
+        SUM(st_mfis = 'no') AS not_mfis_count,
+        SUM(login_type = 'Student In School') AS student_in_school_count,
+        SUM(login_type = 'Student In College') AS student_in_college_count,
+        SUM(login_type = 'Parent') AS parent_count,
+        SUM(enter_status = 'yes') AS entered_count,
+        SUM(enter_status = 'no') AS not_entered_count,
+        SUM(dinner_status = 'yes') AS used_dinner_count,
+        SUM(dinner_status = 'no') AS not_used_dinner_count,
+        SUM(breakfast_status = 'yes') AS used_breakfast_count,
+        SUM(breakfast_status = 'no') AS not_used_breakfast_count,
+        SUM(grade = 'Grade 7') AS grade_7_count,
+        SUM(grade = 'Grade 8') AS grade_8_count,
+        SUM(grade = 'Grade 9') AS grade_9_count,
+        SUM(grade = 'Grade 10') AS grade_10_count,
+        SUM(grade = 'Grade 11') AS grade_11_count,
+        SUM(grade = 'Grade 12') AS grade_12_count
+    FROM user_cred
+";
+
+$result = $con->query($query);
+
+if ($result) {
+    $response = $result->fetch_assoc();
+    // Convert numeric values to integers
+    $response = array_map('intval', $response);
+} else {
+    $response = ['error' => 'Failed to execute query: ' . $con->error];
+}
+
+// Return the response as JSON
 echo json_encode($response);
 
+// Close the database connection
 $con->close();
 ?>

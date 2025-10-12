@@ -45,7 +45,7 @@ if ($adminDetails) {
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="https://tedxmanaratalfaroukschool.com/">
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -290,13 +290,14 @@ if ($adminDetails) {
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
-
                 <div class="app-brand demo pb-4 pt-4 ">
                     <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
-                        <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
-                            id="tedx_logo" style="
-    width: auto;
-    height: 60px;">
+                        <div class="logo-container">
+                            <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
+                                class="tedx-logo" id="tedx_logo" >
+                            <img src="admin\assets\img\logos\x-art.png" class="x-logo" alt="x-logo" >
+                        </div>
+                        
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -310,7 +311,7 @@ if ($adminDetails) {
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item ">
+                    <li class="menu-item">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
                             <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
@@ -458,13 +459,31 @@ if ($adminDetails) {
                     </li>
                     <!-- e-commerce-app menu end -->
                     <li class="menu-item">
-                        <a href="admin/Tickets/tickets.php?userFilter=all" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bx-user'></i>
                             <div class="text-truncate" data-i18n="Users">Users</div>
                         </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="admin/Tickets/single.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Single Tickets">Single Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/vip.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="VIP Tickets">VIP Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/family.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Family Tickets">Family Tickets</div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="menu-item active open">
-                        <a href="admin/Settings/settings.php" class="menu-link ">
+                    
+                    <li class="menu-item">
+                        <a href="admin/Settings/settings.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
@@ -548,7 +567,7 @@ if ($adminDetails) {
                                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                             alt class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
@@ -558,7 +577,7 @@ if ($adminDetails) {
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                             alt class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
@@ -621,7 +640,7 @@ if ($adminDetails) {
                                     <div
                                         class="user-profile-header d-flex flex-column flex-lg-row text-sm-start text-center mb-8">
                                         <div class="flex-shrink-0 mt-1 mx-sm-0 mx-auto">
-                                            <img src="admin/Profile/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
+                                            <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
                                                 alt="user image"
                                                 class="d-block h-auto ms-0 ms-sm-6 rounded-3 user-profile-img">
                                         </div>
@@ -648,7 +667,7 @@ if ($adminDetails) {
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <a href="javascript:void(0)" class="btn btn-primary mb-1">
+                                                <a href="admin/Profile/edit_account.php" class="btn btn-primary mb-1">
                                                     <i class='bx bx-edit bx-sm me-2'></i>Edit Account
                                                 </a>
                                             </div>
@@ -735,8 +754,7 @@ if ($adminDetails) {
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body mx-0 flex-grow-0 p-6 h-100">
-                    <form method="POST" class="add-new-user pt-0 fv-plugins-bootstrap5 fv-plugins-framework"
-                        id="addNewAdminForm">
+                    <form method="POST" class="add-new-user pt-0 fv-plugins-bootstrap5 fv-plugins-framework" id="addNewAdminForm">
                         <div class="mb-6 fv-plugins-icon-container">
                             <label class="form-label" for="name">Full Name</label>
                             <input type="text" class="form-control" placeholder="John Doe" name="new_name" id="new_name"
@@ -775,9 +793,9 @@ if ($adminDetails) {
                                 placeholder="Enter a strong password">
                         </div>
                         <div class="mb-6">
-                            <label class="form-label" for="committee">Committee</label>
+                            <label class="form-label" for="commitee">Commitee</label>
                             <div class="position-relative">
-                                <select name="new_committee" id="new_committee" required
+                                <select name="new_commitee" id="new_commitee" required
                                     class="select2 form-select select2-hidden-accessible" tabindex="-1"
                                     aria-hidden="true">
                                     <option value="" disabled selected>Select Committee</option>
@@ -819,7 +837,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newName = $frm_data['new_name'];
     $newUsername = $frm_data['new_username'];
     $newPassword = $frm_data['new_password'];
-    $newCommittee = $frm_data['new_committee'];
+    $newCommittee = $frm_data['new_commitee'];
     $newPosition = $frm_data['new_position'];
     $newEmail = $frm_data['new_email'];
 
@@ -831,7 +849,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         addBodyClassAndStyle();
     } else {
         // Check if username or email already exists
-        $check_query = "SELECT * FROM admin_cred WHERE admin_username = ? OR email = ?";
+        $check_query = "SELECT * FROM admin_cred WHERE admin_username = ? OR admin_email = ?";
         $check_stmt = $con->prepare($check_query);
         $check_stmt->bind_param("ss", $newUsername, $newEmail);
         $check_stmt->execute();
@@ -843,7 +861,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             if (!empty($newName) && !empty($newUsername) && !empty($newPassword) && !empty($newCommittee) && !empty($newPosition) && !empty($newEmail)) {
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                $insert_query = "INSERT INTO admin_cred (admin_name, admin_username, admin_pass, admin_committee, admin_position, email) VALUES (?, ?, ?, ?, ?, ?)";
+                $insert_query = "INSERT INTO admin_cred (admin_name, admin_username, admin_pass, admin_commitee, admin_position, admin_email) VALUES (?, ?, ?, ?, ?, ?)";
                 $insert_stmt = $con->prepare($insert_query);
                 $insert_stmt->bind_param("ssssss", $newName, $newUsername, $hashedPassword, $newCommittee, $newPosition, $newEmail);
 

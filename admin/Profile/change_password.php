@@ -1,7 +1,8 @@
 <?php
-session_start();
+
 include '../Misc/db_conn.php'; // Ensure your DB connection is included
 include '../Misc/functions.php'; // Ensure your DB connection is included
+adminLogin();
 
 // Assuming you store the admin's ID in the session
 $admin_id = $_SESSION['adminId'];
@@ -27,19 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verify the current password
     if (!password_verify($currentPassword, $hashedPassword)) {
-        alert("error","Error",'Current password is incorrect.');
+        alert("error", "", "Error",'Current password is incorrect.',"close");
         exit();
     }
 
     // Check if the new password matches the confirmation password
     if ($newPassword !== $confirmPassword) {
-        alert("error","Error",'New password and confirmation password do not match.');
+        alert("error", "", "Error",'New password and confirmation password do not match.', "close");
         exit();
     }
 
     // Check if the new password meets the requirements
     if (strlen($newPassword) < 8 || !preg_match('/[a-z]/', $newPassword) || !preg_match('/[\d\s\W]/', $newPassword)) {
-        alert("error","Error",'Password does not meet the requirements.');
+        alert("error", "", "Error",'Password does not meet the requirements.', "close");
         exit();
     }
 
@@ -51,16 +52,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Check if prepare() was successful
     if ($stmt === false) {
-        alert("error","Error",'Prepare failed: ' . htmlspecialchars($con->error));
+        alert("error", "", "Error",'Prepare failed: ' . htmlspecialchars($con->error), "close");
         exit();
     }
     
     $stmt->bind_param("si", $newHashedPassword, $admin_id);
     if ($stmt->execute()) {
-        alert("success","Success",'Password changed successfully!');
+        alert("success", "", "Success",'Password changed successfully!', "close");
         exit();
     } else {
-        alert("error","Error",'Failed to update password.');
+        alert("error","","Error",'Failed to update password.' , "close");
         exit();
     }
 

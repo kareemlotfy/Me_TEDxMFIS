@@ -1,7 +1,7 @@
 <?php
 // permissions.php
 
-$mysqli = new mysqli("localhost", "root", "", "tedx");
+$mysqli = new mysqli("localhost", "u654105294_tedxmfisun", "TEDxMFIS@DB@Password1", "u654105294_tedxmfis");
 
 // Check connection
 if ($mysqli->connect_error) {

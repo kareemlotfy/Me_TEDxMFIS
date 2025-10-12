@@ -1,98 +1,15 @@
 <?php
 require("db_conn.php");
-
-// Check if the user is authenticated, otherwise redirect to the login page
-// You should have a more robust authentication mechanism in a real-world scenario
 session_start();
+
 if (!isset($_SESSION["authenticated"]) || $_SESSION["authenticated"] !== true) {
     header("Location: ../index.php");
     exit();
 }
 
-// Function (CSS) to see error or success
 function getMessageClass($success) {
     return $success ? "success" : "error";
 }
-
-// check form
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Get the ticket ID from the form
-
-    $ticket_id = $_POST['ticket_id'];
-
-    // Check if Enter Event button is pressed
-
-    if(isset($_POST['enter_event'])) {
-
-        // Check the current status of the ticket ID
-
-        $sql_check_status = "SELECT enter_status FROM user_cred WHERE ticket_id = ?";
-        $stmt_check_status = $conn->prepare($sql_check_status);
-        $stmt_check_status->bind_param("s", $ticket_id);
-        $stmt_check_status->execute();
-        $result_check_status = $stmt_check_status->get_result();
-
-        if ($result_check_status->num_rows > 0) {
-            $row = $result_check_status->fetch_assoc();
-            if ($row['enter_status'] == 'yes') {
-                echo "<span class='" . getMessageClass(false) . "'>Error: Ticket ID has already been used to enter the event</span>";
-            } else {
-                // Update the enter_status field to yes for the ticket ID
-
-                $sql = "UPDATE user_cred SET enter_status = 'yes' WHERE ticket_id = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $ticket_id);
-
-                if ($stmt->execute()) {
-                    echo "<span class='" . getMessageClass(true) . "'>Enter Event status updated successfully</span>";
-                } else {
-                    echo "<span class='" . getMessageClass(false) . "'>Error updating Enter Event status: " . $stmt->error . "</span>";
-                }
-            }
-        } else {
-            echo "<span class='" . getMessageClass(false) . "'>Error: Ticket ID not found</span>";
-        }
-    }
-
-    // Check if the Dinner Event button is pressed
-
-    if(isset($_POST['dinner_event'])) {
-
-        // Check the current status of the ticket ID
-
-        $sql_check_status = "SELECT dinner_status FROM user_cred WHERE ticket_id = ?";
-        $stmt_check_status = $conn->prepare($sql_check_status);
-        $stmt_check_status->bind_param("s", $ticket_id);
-        $stmt_check_status->execute();
-        $result_check_status = $stmt_check_status->get_result();
-
-        if ($result_check_status->num_rows > 0) {
-            $row = $result_check_status->fetch_assoc();
-            if ($row['dinner_status'] == 'yes') {
-                echo "<span class='" . getMessageClass(false) . "'>Error: Ticket ID has already been used to attend the dinner event</span>";
-            } else {
-
-                // Update the dinner_status field to yes for the ticket ID
-
-                $sql = "UPDATE user_cred SET dinner_status = 'yes' WHERE ticket_id = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $ticket_id);
-
-                if ($stmt->execute()) {
-                    echo "<span class='" . getMessageClass(true) . "'>Dinner Event status updated successfully</span>";
-                } else {
-                    echo "<span class='" . getMessageClass(false) . "'>Error updating Dinner Event status: " . $stmt->error . "</span>";
-                }
-            }
-        } else {
-            echo "<span class='" . getMessageClass(false) . "'>Error: Ticket ID not found</span>";
-        }
-    }
-}
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -100,38 +17,103 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEDx Manarat AlFarouk School</title>
-    <link rel="stylesheet" href="style.css">
+    <title>TEDx Event Management</title>
+    <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
+    <link rel="stylesheet" href="../../admin/assets/vendor/css/core.css">
+    <link rel="stylesheet" href="../../admin/assets/vendor/css/theme-default.css">
+    <link rel="stylesheet" href="../../admin/assets/vendor/css/pages/page-auth.css">
     <style>
         #statusMessage {
             font-weight: bold;
-            margin-top: 10px;
+            margin: 10px;
         }
-        .success {
-            color: green;
-        }
-        .error {
-            color: red;
-        }
+        .success { color: green; }
+        .error { color: red; }
     </style>
 </head>
 <body>
-    <form method="post">
-        
-        <input type="text" name="ticket_id" id="ticket_id" placeholder="Enter Ticket ID">
-        <input type="submit" name="enter_event" value="Enter Event">
-        <input type="submit" name="dinner_event" value="Dinner Event">
-        <button type="button" id="autoFillButton">Auto Fill Ticket ID</button>
-        <a href="../logout.php">Logout</a>
-    </form>
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <div class="card">
+                <div class="card-body">
+                    <div class="app-brand justify-content-center">
+                        <a href="#" class="app-brand-link gap-2">
+                            <img src="../../admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo" style="height: 70px;">
+                        </a>
+                    </div>
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="ticket_id" class="form-label" style="font-size:20px;">Ticket ID</label>
+                            <input type="text" name="ticket_id" id="ticket_id" required class="form-control">
+                        </div>
 
-    <script>
-        document.getElementById("autoFillButton").addEventListener("click", function() {
-            var url = window.location.href;
-            var ticketIdIndex = url.indexOf("#") + 1;
-            var ticketId = url.substring(ticketIdIndex);
-            document.getElementById("ticket_id").value = ticketId;
-        });
-    </script>
+                        <?php
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ticket_id'])) {
+                            $ticket_id = trim($_POST['ticket_id']);
+                            $event = $_POST['event_type'] ?? null;
+
+                            if ($event) {
+                                $status_column = $event . "_status";
+
+                                $sql_check_status = "SELECT $status_column FROM user_cred WHERE ticket_id = ?";
+                                $stmt_check_status = $conn->prepare($sql_check_status);
+                                $stmt_check_status->bind_param("s", $ticket_id);
+                                $stmt_check_status->execute();
+                                $result = $stmt_check_status->get_result();
+
+                                if ($result->num_rows > 0) {
+                                    $row = $result->fetch_assoc();
+                                    if ($row[$status_column] === 'yes') {
+                                        echo "<span class='" . getMessageClass(false) . "'>Error: Ticket ID has already been used for this event</span>";
+                                    } else {
+                                        $sql_update = "UPDATE user_cred SET $status_column = 'yes' WHERE ticket_id = ?";
+                                        $stmt_update = $conn->prepare($sql_update);
+                                        $stmt_update->bind_param("s", $ticket_id);
+
+                                        if ($stmt_update->execute()) {
+                                            echo "<span class='" . getMessageClass(true) . "'>Successfully marked attendance for $event event</span>";
+                                        } else {
+                                            echo "<span class='" . getMessageClass(false) . "'>Error updating status: " . $stmt_update->error . "</span>";
+                                        }
+                                    }
+                                } else {
+                                    echo "<span class='" . getMessageClass(false) . "'>Error: Ticket ID not found</span>";
+                                }
+                            } else {
+                                echo "<span class='" . getMessageClass(false) . "'>Error: No event type selected</span>";
+                            }
+                        }
+                        $conn->close();
+                        ?>
+
+                        <div class="mb-3">
+                            <button class="btn btn-primary d-grid w-100 btn1" type="button" id="autoFillButton">Auto Fill Ticket ID</button>
+                        </div>
+                        <div class="mb-3">
+                            <select name="event_type" class="form-control" required>
+                                <option value="" disabled selected>Select An Option</option>
+                                <option value="enter">Enter Event</option>
+                                <option value="dinner">Dinner Event</option>
+                                <option value="breakfast">Breakfast Event</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" value="Submit" class="btn btn-primary d-grid w-100">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("autoFillButton").addEventListener("click", function () {
+        var url = window.location.href;
+        var ticketIdIndex = url.indexOf("#") + 1;
+        var ticketId = url.substring(ticketIdIndex);
+        document.getElementById("ticket_id").value = ticketId;
+    });
+</script>
 </body>
 </html>
