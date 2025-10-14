@@ -199,9 +199,9 @@ $con->close();
 
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
-                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
-                <li><a href="#speakers" class="nav-link" data-section="speakers">Speakers</a></li>
-                <li><a href="#schedule" class="nav-link" data-section="schedule">Schedule</a></li>
+                <li><a href="About\index.html" class="nav-link" >About</a></li>
+                <li><a href="Speakers\index.php" class="nav-link" >Speakers</a></li>
+                <li><a href="Sponsors\index.php" class="nav-link" >Sponsors</a></li>
                 <li><a href="#tickets" class="nav-cta"><span>Get Tickets</span></a></li>
             </ul>
 
@@ -815,12 +815,12 @@ $con->close();
                         </div>
                     </div>
 
-                    <button class="ticket-cta" onclick="handleTicketPurchase()">
+                    <a class="ticket-cta" href="Tickets\Early_Bird_Form\index.php">
                         <span>
                             Reserve My Early Bird Ticket Now
                             <span class="cta-subtext">🔒 Secure checkout • Instant confirmation</span>
                         </span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -902,11 +902,10 @@ $con->close();
         document.querySelector('.phase-icon').textContent = '🦉';
 
         // Update prices
-        document.getElementById('currentPrice').textContent = ' + LATE_OWL_PRICE;
+        document.getElementById('currentPrice').textContent = LATE_OWL_PRICE;
         document.getElementById('nextPrice').textContent = 'Sold Out';
 
         // Update ticket card
-        document.getElementById('ticketBadge').innerHTML = '🦉 Late Owl';
         document.getElementById('ticketName').textContent = 'Late Owl Ticket';
         document.getElementById('ticketPrice').textContent = LATE_OWL_PRICE;
         document.getElementById('savings').textContent = 'Limited spots remaining!';
@@ -924,6 +923,7 @@ $con->close();
                 Reserve My Late Owl Ticket Now
                 <span class="cta-subtext">🔒 Secure checkout • Instant confirmation</span>
             `;
+        document.querySelector('.ticket-cta').href = 'Tickets\Late_Owl_Form\index.php'; // Update with actual purchase link
 
         // Add animation to indicate change
         document.querySelector('.ticket-card').style.animation = 'none';
@@ -948,18 +948,6 @@ $con->close();
         }
     }
 
-    // Handle ticket purchase
-    function handleTicketPurchase() {
-        const phase = currentPhase === 'early-bird' ? 'Early Bird' : 'Late Owl';
-        const price = currentPhase === 'early-bird' ? EARLY_BIRD_PRICE : LATE_OWL_PRICE;
-
-        // In production, this would redirect to your payment gateway
-        alert(
-            `Redirecting to checkout...\n\nTicket Type: ${phase}\nPrice: ${price}\n\nThis would connect to your payment processor (Stripe, PayPal, etc.)`
-        );
-
-        // Example: window.location.href = '/checkout?type=' + currentPhase + '&price=' + price;
-    }
 
     // Initialize
     updateCountdown();
@@ -1189,8 +1177,6 @@ $con->close();
     <script>
     // Elements
     const mainNav = document.getElementById('mainNav');
-    const progressBar = document.getElementById('progressBar');
-    const sectionNav = document.getElementById('sectionNav');
     const scrollTop = document.getElementById('scrollTop');
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -1199,14 +1185,6 @@ $con->close();
     const sectionDots = document.querySelectorAll('.section-dot');
 
     let lastScroll = 0;
-
-    // Progress Bar Update
-    function updateProgressBar() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const progress = (scrollTop / scrollHeight) * 100;
-        progressBar.style.transform = `scaleX(${progress / 100})`;
-    }
 
     // Hide/Show Nav on Scroll
     function handleNavScroll() {
@@ -1232,50 +1210,10 @@ $con->close();
         const scrollPosition = window.pageYOffset;
 
         if (scrollPosition > 300) {
-            sectionNav.classList.add('visible');
             scrollTop.classList.add('visible');
         } else {
-            sectionNav.classList.remove('visible');
             scrollTop.classList.remove('visible');
         }
-    }
-
-    // Update Active Section
-    function updateActiveSection() {
-        const sections = document.querySelectorAll('section');
-        const scrollPosition = window.pageYOffset + 200;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                // Update nav links
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-section') === sectionId) {
-                        link.classList.add('active');
-                    }
-                });
-
-                // Update mobile menu links
-                mobileMenuLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-section') === sectionId) {
-                        link.classList.add('active');
-                    }
-                });
-
-                // Update section dots
-                sectionDots.forEach(dot => {
-                    dot.classList.remove('active');
-                    if (dot.getAttribute('data-section') === sectionId) {
-                        dot.classList.add('active');
-                    }
-                });
-            }
-        });
     }
 
     // Smooth Scroll
@@ -1344,14 +1282,12 @@ $con->close();
 
     // Scroll Events
     window.addEventListener('scroll', () => {
-        updateProgressBar();
         handleNavScroll();
         handleElementsVisibility();
         updateActiveSection();
     });
 
     // Initial calls
-    updateProgressBar();
     updateActiveSection();
     handleElementsVisibility();
     </script>
@@ -1411,14 +1347,22 @@ $con->close();
         const y = (e.clientY / window.innerHeight - 0.5) * 30;
         boxScene.style.transform = `rotateX(${20 + y}deg) rotateY(${x}deg)`;
     });
+
+    // Toggle FAQ accordion
+    function toggleFAQ(element) {
+        // Close all other FAQs
+        const allFAQs = document.querySelectorAll('.faq-item');
+        allFAQs.forEach(faq => {
+            if (faq !== element && faq.classList.contains('active')) {
+                faq.classList.remove('active');
+            }
+        });
+
+        // Toggle clicked FAQ
+        element.classList.toggle('active');
+    }
     </script>
-    <script>
-    document.getElementById('actionLink').addEventListener('click', function(event) {
-        <?php if ($checkbox_status): ?>
-        event.preventDefault(); // Prevent action if link is disabled
-        <?php endif; ?>
-    });
-    </script>
+
 
     <script src="script-home.js"></script>
 </body>
