@@ -375,7 +375,7 @@ $con->close();
         </div>
 
         <!-- What Makes Us Different -->
-        <div class="different-container">
+        <!-- <div class="different-container">
             <div class="different-header">
                 <h2>What Makes Us Different</h2>
             </div>
@@ -422,7 +422,7 @@ $con->close();
                         spark lasting transformation.</p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Final CTA -->
         <div class="about-cta">
@@ -442,10 +442,10 @@ $con->close();
         <div class="spotlight" id="spotlight"></div>
 
         <!-- Section Header -->
-        <div class="speakers-header">
-            <div class="speakers-tag">Meet The Minds</div>
-            <h1 class="speakers-title">Our Speakers</h1>
-            <p class="speakers-subtitle">
+        <div class="section-header">
+            <div class="section-tag">Meet The Minds</div>
+            <h1 class="section-title">Our Speakers</h1>
+            <p class="section-subtitle">
                 Visionaries, innovators, and rule-breakers who dared to think differently and transformed their fields
             </p>
         </div>
@@ -455,7 +455,6 @@ $con->close();
             <div class="speakers-grid">
                 <!-- Featured Speaker -->
                 <div class="speaker-card featured">
-                    <div class="break-indicator">💥</div>
                     <div class="speaker-image-container">
                         <img src="images\speakers_page\abouzaid.png" alt="Dr. Sarah Chen" class="speaker-image">
                         <div class="expertise-tags">
@@ -485,7 +484,6 @@ $con->close();
 
                 <!-- Regular Speakers -->
                 <div class="speaker-card">
-                    <div class="break-indicator">💡</div>
                     <div class="speaker-image-container">
                         <img src="images\speakers_page\abouzaid.png" alt="Ahmed Hassan" class="speaker-image">
                         <div class="expertise-tags">
@@ -512,7 +510,6 @@ $con->close();
                 </div>
 
                 <div class="speaker-card">
-                    <div class="break-indicator">🎨</div>
                     <div class="speaker-image-container">
                         <img src="images\speakers_page\abouzaid.png" alt="Maya Rodriguez" class="speaker-image">
                         <div class="expertise-tags">
@@ -539,7 +536,6 @@ $con->close();
                 </div>
 
                 <div class="speaker-card">
-                    <div class="break-indicator">🚀</div>
                     <div class="speaker-image-container">
                         <img src="images\speakers_page\abouzaid.png" alt="Dr. James Park" class="speaker-image">
                         <div class="expertise-tags">
@@ -566,7 +562,6 @@ $con->close();
                 </div>
 
                 <div class="speaker-card">
-                    <div class="break-indicator">🌍</div>
                     <div class="speaker-image-container">
                         <img src="images\speakers_page\abouzaid.png" alt="Fatima Al-Sayed" class="speaker-image">
                         <div class="expertise-tags">
@@ -627,53 +622,115 @@ $con->close();
         <div class="tickets-bg"></div>
 
         <!-- Section Header -->
-        <div class="tickets-header">
-            <div class="tickets-tag">Limited Time Offer</div>
-            <h1 class="tickets-title">Secure Your Spot</h1>
-            <p class="tickets-subtitle">
+        <div class="section-header">
+            <div class="section-tag">Limited Time Offer</div>
+            <h1 class="section-title">Secure Your Spot</h1>
+            <p class="section-subtitle">
                 Get your ticket now before prices increase. Early birds save more!
             </p>
         </div>
 
         <!-- Section Content -->
         <div class="section-content">
-            <!-- Phase Indicator -->
-            <div class="phase-indicator">
-                <div class="phase-content">
-                    <div class="phase-header">
-                        <div class="phase-icon">🐦</div>
-                        <h2 class="phase-title" id="phaseTitle">Early Bird Phase Active</h2>
-                        <p class="phase-message" id="phaseMessage">Lock in the lowest price before it's gone forever</p>
-                    </div>
+            <div class="container1">
+                <!-- Phase Indicator -->
+                <div class="phase-indicator">
+                    <div class="phase-content">
+                        <div class="phase-header">
+                            <div class="phase-icon">🐦</div>
+                            <h2 class="phase-title" id="phaseTitle">Early Bird Phase Active</h2>
+                            <p class="phase-message" id="phaseMessage">Lock in the lowest price before it's gone forever
+                            </p>
+                        </div>
 
-                    <div class="phase-countdown">
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="days">00</span>
-                            <span class="countdown-label">Days</span>
+                        <div class="phase-countdown">
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="days">00</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="hours">00</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="minutes">00</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="seconds">00</span>
+                                <span class="countdown-label">Seconds</span>
+                            </div>
                         </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="hours">00</span>
-                            <span class="countdown-label">Hours</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="minutes">00</span>
-                            <span class="countdown-label">Minutes</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="seconds">00</span>
-                            <span class="countdown-label">Seconds</span>
+
+                        <div class="price-comparison">
+                            <div class="price-box current">
+                                <div class="price-label-small">Current Price</div>
+                                <div class="price-value" id="currentPrice">EGP 550</div>
+                            </div>
+                            <div class="price-arrow">→</div>
+                            <div class="price-box next">
+                                <div class="price-label-small">After Deadline</div>
+                                <div class="price-value" id="nextPrice">EGP 650</div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="price-comparison">
-                        <div class="price-box current">
-                            <div class="price-label-small">Current Price</div>
-                            <div class="price-value" id="currentPrice">$50</div>
+                </div>
+                <!-- FAQ -->
+                <div class="faq-section">
+                    <h2 class="faq-title">Common Questions</h2>
+                    <div class="faq-grid">
+                        <div class="faq-item" onclick="toggleFAQ(this)">
+                            <div class="faq-question-wrapper">
+                                <div class="faq-question">When is the Early Bird deadline?</div>
+                                <div class="faq-toggle"></div>
+                            </div>
+                            <div class="faq-answer-wrapper">
+                                <p class="faq-answer">
+                                    Early Bird tickets are available until November 30th, 2025, or until they sell out
+                                    (whichever comes first). After that, Late Owl tickets will be available at a higher
+                                    price.
+                                </p>
+                            </div>
                         </div>
-                        <div class="price-arrow">→</div>
-                        <div class="price-box next">
-                            <div class="price-label-small">After Deadline</div>
-                            <div class="price-value" id="nextPrice">$75</div>
+
+                        <div class="faq-item" onclick="toggleFAQ(this)">
+                            <div class="faq-question-wrapper">
+                                <div class="faq-question">What's the difference between Early Bird and Late Owl?</div>
+                                <div class="faq-toggle"></div>
+                            </div>
+                            <div class="faq-answer-wrapper">
+                                <p class="faq-answer">
+                                    Both tickets include exactly the same benefits and access. The only difference is
+                                    the price - Early Bird tickets are $50 while Late Owl tickets are $75. Same
+                                    experience, different timing!
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFAQ(this)">
+                            <div class="faq-question-wrapper">
+                                <div class="faq-question">Can I get a refund if I can't attend?</div>
+                                <div class="faq-toggle"></div>
+                            </div>
+                            <div class="faq-answer-wrapper">
+                                <p class="faq-answer">
+                                    Yes! We offer full refunds up to 7 days before the event. After that, tickets are
+                                    non-refundable but can be transferred to another person.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" onclick="toggleFAQ(this)">
+                            <div class="faq-question-wrapper">
+                                <div class="faq-question">Is there a group discount available?</div>
+                                <div class="faq-toggle"></div>
+                            </div>
+                            <div class="faq-answer-wrapper">
+                                <p class="faq-answer">
+                                    For groups of 5 or more, please contact us at tickets@tedxmafs.com for special group
+                                    rates. We offer custom packages for schools and organizations.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -692,10 +749,10 @@ $con->close();
 
                     <div class="ticket-price">
                         <div class="price-amount">
-                            <span class="price-currency">$</span><span id="ticketPrice">50</span>
+                            <span class="price-currency">EGP</span><span id="ticketPrice">550</span>
                         </div>
                         <p class="price-label">Per Person</p>
-                        <span class="price-savings" id="savings">Save $25 from regular price!</span>
+                        <span class="price-savings" id="savings">Save 100 EGP from regular price!</span>
                     </div>
 
                     <div class="spots-alert">
@@ -714,44 +771,44 @@ $con->close();
                         <h4 class="includes-title">What's Included</h4>
                         <div class="includes-grid">
                             <div class="include-item">
-                                <span class="include-icon">🎤</span>
+
                                 <div class="include-text">
-                                    <strong>All Speaker Sessions</strong>
-                                    Access to 10+ incredible talks from world-class speakers
+                                    <strong> <span class="include-icon">🎤</span> All Speaker Sessions</strong>
+                                    Access to 7+ incredible talks from world-class speakers
                                 </div>
                             </div>
                             <div class="include-item">
-                                <span class="include-icon">🤝</span>
+
                                 <div class="include-text">
-                                    <strong>Networking Breaks</strong>
-                                    Coffee breaks and mixer sessions with attendees
+                                    <strong><span class="include-icon">🤝</span> Sponsers Area</strong>
+                                    Access to all student activities, sponsers and games
                                 </div>
                             </div>
                             <div class="include-item">
-                                <span class="include-icon">📚</span>
+
                                 <div class="include-text">
-                                    <strong>Event Materials</strong>
-                                    Official program, notebook, and exclusive content
+                                    <strong><span class="include-icon">🔒</span>Secure Payment</strong>
+                                    Your transaction is encrypted and 100% secure
                                 </div>
                             </div>
                             <div class="include-item">
-                                <span class="include-icon">🎓</span>
+
                                 <div class="include-text">
-                                    <strong>TEDx Certificate</strong>
-                                    Official certificate of attendance from TEDx
+                                    <strong><span class="include-icon">📧</span> Instant Confirmation</strong>
+                                    Receive your ticket immediately via email
                                 </div>
                             </div>
                             <div class="include-item">
-                                <span class="include-icon">🍽️</span>
+
                                 <div class="include-text">
-                                    <strong>Refreshments</strong>
-                                    Complimentary snacks, beverages, and lunch
+                                    <strong> <span class="include-icon">🍽️</span> Refreshments</strong>
+                                    Breakfast, lunch, and snack break
                                 </div>
                             </div>
                             <div class="include-item">
-                                <span class="include-icon">📸</span>
+
                                 <div class="include-text">
-                                    <strong>Event Photos</strong>
+                                    <strong> <span class="include-icon">📸</span> Event Photos</strong>
                                     Professional photography and access to event gallery
                                 </div>
                             </div>
@@ -768,59 +825,8 @@ $con->close();
             </div>
         </div>
 
-        <!-- Trust Signals -->
-        <div class="trust-signals">
-            <div class="trust-item">
-                <div class="trust-icon">🔒</div>
-                <div class="trust-title">Secure Payment</div>
-                <p class="trust-text">Your transaction is encrypted and 100% secure</p>
-            </div>
-            <div class="trust-item">
-                <div class="trust-icon">📧</div>
-                <div class="trust-title">Instant Confirmation</div>
-                <p class="trust-text">Receive your ticket immediately via email</p>
-            </div>
-            <div class="trust-item">
-                <div class="trust-icon">🎫</div>
-                <div class="trust-title">Easy Refund</div>
-                <p class="trust-text">Full refund available up to 7 days before event</p>
-            </div>
-        </div>
 
-        <!-- FAQ -->
-        <div class="faq-section">
-            <h2 class="faq-title">Common Questions</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question">When is the Early Bird deadline?</div>
-                    <p class="faq-answer">
-                        Early Bird tickets are available until November 30th, 2025, or until they sell out (whichever
-                        comes first). After that, Late Owl tickets will be available at a higher price.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">What's the difference between Early Bird and Late Owl?</div>
-                    <p class="faq-answer">
-                        Both tickets include exactly the same benefits and access. The only difference is the price -
-                        Early Bird tickets are $50 while Late Owl tickets are $75. Same experience, different timing!
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Can I get a refund if I can't attend?</div>
-                    <p class="faq-answer">
-                        Yes! We offer full refunds up to 7 days before the event. After that, tickets are non-refundable
-                        but can be transferred to another person.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Is there a group discount available?</div>
-                    <p class="faq-answer">
-                        For groups of 5 or more, please contact us at tickets@tedxmafs.com for special group rates. We
-                        offer custom packages for schools and organizations.
-                    </p>
-                </div>
-            </div>
-        </div>
+
     </section>
 
     <!-- Scroll to Top -->
@@ -832,8 +838,8 @@ $con->close();
     const EARLY_BIRD_DEADLINE = new Date('2025-11-30T23:59:59').getTime();
     const EVENT_DATE = new Date('2025-12-31T18:00:00').getTime();
 
-    const EARLY_BIRD_PRICE = 50;
-    const LATE_OWL_PRICE = 75;
+    const EARLY_BIRD_PRICE = 550;
+    const LATE_OWL_PRICE = 650;
     const EARLY_BIRD_SPOTS = 200;
     const LATE_OWL_SPOTS = 300;
 
@@ -950,7 +956,7 @@ $con->close();
         // In production, this would redirect to your payment gateway
         alert(
             `Redirecting to checkout...\n\nTicket Type: ${phase}\nPrice: ${price}\n\nThis would connect to your payment processor (Stripe, PayPal, etc.)`
-            );
+        );
 
         // Example: window.location.href = '/checkout?type=' + currentPhase + '&price=' + price;
     }
@@ -1413,78 +1419,8 @@ $con->close();
         <?php endif; ?>
     });
     </script>
-    <!-- <script src="/script.js"></script> -->
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('.schedule_container').slick({
-            infinite: false,
-            slidesToShow: 5,
-            slidesToScroll: 3,
-            autoplay: false,
-            dots: true,
-            // autoplaySpeed: 2000,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 1,
-                        infinite: false,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 799,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 479,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        dots: true
-                    }
-                }
-            ]
-        });
-    });
-    </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var splide = new Splide('.splide', {
-            type: 'loop',
-            perPage: 4,
-            perMove: 1,
-            direction: 'ltr',
-            pagination: true,
-            paginationDirection: 'ltr',
-            drag: true,
-            snap: true,
-            arrows: false,
-            autoplay: true,
-            pauseOnHover: true,
-            pauseOnFocus: true,
-            breakpoints: {
-                1200: {
-                    perPage: 3,
-                },
-                850: {
-                    perPage: 2,
-                },
-                600: {
-                    perPage: 1,
-                },
-            },
-        });
-        splide.mount();
-    });
-    </script>
-    <script src="assets\splide-4.1.3\splide-4.1.3\dist\js\splide.min.js"></script>
+
     <script src="script-home.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>
