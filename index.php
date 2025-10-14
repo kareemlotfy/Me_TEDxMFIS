@@ -225,7 +225,7 @@ $con->close();
     </div>
 
 
-    <section class="hero">
+    <section class="hero" id="home">
         <!-- Animated Grid Background -->
         <div class="grid-bg"></div>
 
@@ -319,9 +319,6 @@ $con->close();
             </p>
         </div>
 
-        <!-- Three Stages Story -->
-        <!-- REMOVED: story-container section -->
-
         <!-- TEDx Mission -->
         <div class="mission-container">
             <div class="mission-split">
@@ -359,20 +356,20 @@ $con->close();
         <div class="stats-container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number" data-target="10">0</span>
+                    <span class="stat-number" data-target="80">0</span>
                     <span class="stat-label">Speakers</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" data-target="500">0</span>
+                    <span class="stat-number" data-target="3500">0</span>
                     <span class="stat-label">Attendees</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number" data-target="8">0</span>
-                    <span class="stat-label">Hours of Content</span>
+                    <span class="stat-label">Generations</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" data-target="1000">0</span>
-                    <span class="stat-label">Ideas Shared</span>
+                    <span class="stat-number" data-target="150">0</span>
+                    <span class="stat-label">Sponser</span>
                 </div>
             </div>
         </div>
@@ -437,20 +434,635 @@ $con->close();
             </a>
         </div>
     </section>
+    <section class="speakers-section" id="speakers">
+        <!-- Animated Background -->
+        <div class="speakers-bg"></div>
 
-    <!-- Section Navigation (Side Dots) -->
-    <div class="section-nav" id="sectionNav">
-        <div class="section-dot active" data-section="home" data-label="Home"></div>
-        <div class="section-dot" data-section="about" data-label="About Us"></div>
-        <div class="section-dot" data-section="speakers" data-label="Speakers"></div>
-        <div class="section-dot" data-section="schedule" data-label="Schedule"></div>
-        <div class="section-dot" data-section="tickets" data-label="Tickets"></div>
-    </div>
+        <!-- Spotlight Effect -->
+        <div class="spotlight" id="spotlight"></div>
+
+        <!-- Section Header -->
+        <div class="speakers-header">
+            <div class="speakers-tag">Meet The Minds</div>
+            <h1 class="speakers-title">Our Speakers</h1>
+            <p class="speakers-subtitle">
+                Visionaries, innovators, and rule-breakers who dared to think differently and transformed their fields
+            </p>
+        </div>
+
+        <!-- Speakers Grid -->
+        <div class="speakers-container">
+            <div class="speakers-grid">
+                <!-- Featured Speaker -->
+                <div class="speaker-card featured">
+                    <div class="break-indicator">💥</div>
+                    <div class="speaker-image-container">
+                        <img src="images\speakers_page\abouzaid.png" alt="Dr. Sarah Chen" class="speaker-image">
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Innovation</span>
+                            <span class="expertise-tag">AI Ethics</span>
+                            <span class="expertise-tag">Featured</span>
+                        </div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Dr. Sarah Chen</h3>
+                        <p class="speaker-title">AI Ethics Pioneer & Tech Philosopher</p>
+                        <p class="speaker-bio">
+                            Leading researcher in artificial intelligence ethics with over 15 years of experience. Sarah
+                            has advised governments and tech giants on responsible AI development, challenging the
+                            industry to think beyond profits.
+                        </p>
+                        <div class="speaker-topic">
+                            <strong>Talk:</strong> "Breaking the Algorithm: How AI Can Serve Humanity, Not Replace It"
+                        </div>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                            <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                            <a href="#" class="social-link" aria-label="Website">🌐</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regular Speakers -->
+                <div class="speaker-card">
+                    <div class="break-indicator">💡</div>
+                    <div class="speaker-image-container">
+                        <img src="images\speakers_page\abouzaid.png" alt="Ahmed Hassan" class="speaker-image">
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Entrepreneurship</span>
+                            <span class="expertise-tag">Social Impact</span>
+                        </div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Ahmed Hassan</h3>
+                        <p class="speaker-title">Social Entrepreneur & Change Maker</p>
+                        <p class="speaker-bio">
+                            Founded three successful social enterprises addressing education inequality in MENA. Ahmed's
+                            unconventional approach has impacted over 100,000 students.
+                        </p>
+                        <div class="speaker-topic">
+                            <strong>Talk:</strong> "Profit With Purpose: Building Businesses That Change Lives"
+                        </div>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">in</a>
+                            <a href="#" class="social-link">𝕏</a>
+                            <a href="#" class="social-link">🌐</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speaker-card">
+                    <div class="break-indicator">🎨</div>
+                    <div class="speaker-image-container">
+                        <img src="images\speakers_page\abouzaid.png" alt="Maya Rodriguez" class="speaker-image">
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Art</span>
+                            <span class="expertise-tag">Activism</span>
+                        </div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Maya Rodriguez</h3>
+                        <p class="speaker-title">Visual Artist & Cultural Activist</p>
+                        <p class="speaker-bio">
+                            Uses art as a tool for social commentary and change. Her installations have been featured in
+                            30+ countries, challenging viewers to see the world differently.
+                        </p>
+                        <div class="speaker-topic">
+                            <strong>Talk:</strong> "Art as Rebellion: Painting Outside the Lines of Society"
+                        </div>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">in</a>
+                            <a href="#" class="social-link">𝕏</a>
+                            <a href="#" class="social-link">🌐</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speaker-card">
+                    <div class="break-indicator">🚀</div>
+                    <div class="speaker-image-container">
+                        <img src="images\speakers_page\abouzaid.png" alt="Dr. James Park" class="speaker-image">
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Neuroscience</span>
+                            <span class="expertise-tag">Performance</span>
+                        </div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Dr. James Park</h3>
+                        <p class="speaker-title">Neuroscientist & Peak Performance Coach</p>
+                        <p class="speaker-bio">
+                            Bridges neuroscience and human potential. His research on neuroplasticity has helped
+                            thousands break mental barriers and achieve extraordinary results.
+                        </p>
+                        <div class="speaker-topic">
+                            <strong>Talk:</strong> "Rewiring Success: The Science of Breaking Mental Boxes"
+                        </div>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">in</a>
+                            <a href="#" class="social-link">𝕏</a>
+                            <a href="#" class="social-link">🌐</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speaker-card">
+                    <div class="break-indicator">🌍</div>
+                    <div class="speaker-image-container">
+                        <img src="images\speakers_page\abouzaid.png" alt="Fatima Al-Sayed" class="speaker-image">
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Sustainability</span>
+                            <span class="expertise-tag">Climate</span>
+                        </div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Fatima Al-Sayed</h3>
+                        <p class="speaker-title">Environmental Scientist & Climate Innovator</p>
+                        <p class="speaker-bio">
+                            Developed groundbreaking sustainable solutions for water scarcity in arid regions. Her work
+                            challenges conventional environmental approaches.
+                        </p>
+                        <div class="speaker-topic">
+                            <strong>Talk:</strong> "Desert Innovation: Solving Tomorrow's Problems Today"
+                        </div>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">in</a>
+                            <a href="#" class="social-link">𝕏</a>
+                            <a href="#" class="social-link">🌐</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TBA Card -->
+                <div class="speaker-card tba">
+                    <div class="speaker-image-container">
+                        <div class="tba-icon">❓</div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Mystery Speaker</h3>
+                        <p class="speaker-title">To Be Announced</p>
+                        <p class="speaker-bio">
+                            We're finalizing our lineup with more incredible minds who've shattered conventions in their
+                            fields. Stay tuned for the reveal!
+                        </p>
+                        <div class="speaker-topic">
+                            <strong>Coming Soon:</strong> A talk that will blow your mind 🤯
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="speakers-cta">
+            <h3>Don't Miss These Extraordinary Minds</h3>
+            <p>Limited seats available. Secure your spot to experience ideas that will reshape your thinking.</p>
+            <a href="#tickets" class="cta-button">
+                <span>Reserve Your Seat Now →</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="tickets-section" id="tickets">
+        <!-- Background -->
+        <div class="tickets-bg"></div>
+
+        <!-- Section Header -->
+        <div class="tickets-header">
+            <div class="tickets-tag">Limited Time Offer</div>
+            <h1 class="tickets-title">Secure Your Spot</h1>
+            <p class="tickets-subtitle">
+                Get your ticket now before prices increase. Early birds save more!
+            </p>
+        </div>
+
+        <!-- Section Content -->
+        <div class="section-content">
+            <!-- Phase Indicator -->
+            <div class="phase-indicator">
+                <div class="phase-content">
+                    <div class="phase-header">
+                        <div class="phase-icon">🐦</div>
+                        <h2 class="phase-title" id="phaseTitle">Early Bird Phase Active</h2>
+                        <p class="phase-message" id="phaseMessage">Lock in the lowest price before it's gone forever</p>
+                    </div>
+
+                    <div class="phase-countdown">
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="days">00</span>
+                            <span class="countdown-label">Days</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="hours">00</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="minutes">00</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="seconds">00</span>
+                            <span class="countdown-label">Seconds</span>
+                        </div>
+                    </div>
+
+                    <div class="price-comparison">
+                        <div class="price-box current">
+                            <div class="price-label-small">Current Price</div>
+                            <div class="price-value" id="currentPrice">$50</div>
+                        </div>
+                        <div class="price-arrow">→</div>
+                        <div class="price-box next">
+                            <div class="price-label-small">After Deadline</div>
+                            <div class="price-value" id="nextPrice">$75</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Ticket Card -->
+            <div class="ticket-container">
+                <div class="ticket-card">
+
+                    <div class="ticket-header">
+                        <h3 class="ticket-name" id="ticketName">Early Bird Ticket</h3>
+                        <p class="ticket-description">
+                            Full access to TEDxManaratAlFaroukSchool 2025 - Out of the Box
+                        </p>
+                    </div>
+
+                    <div class="ticket-price">
+                        <div class="price-amount">
+                            <span class="price-currency">$</span><span id="ticketPrice">50</span>
+                        </div>
+                        <p class="price-label">Per Person</p>
+                        <span class="price-savings" id="savings">Save $25 from regular price!</span>
+                    </div>
+
+                    <div class="spots-alert">
+                        <span class="spots-icon">⚠️</span>
+                        <div>
+                            <p class="spots-text">
+                                Only <span class="spots-number" id="spotsRemaining">87</span> Early Bird tickets left!
+                            </p>
+                            <div class="spots-bar">
+                                <div class="spots-fill" id="spotsFill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ticket-includes">
+                        <h4 class="includes-title">What's Included</h4>
+                        <div class="includes-grid">
+                            <div class="include-item">
+                                <span class="include-icon">🎤</span>
+                                <div class="include-text">
+                                    <strong>All Speaker Sessions</strong>
+                                    Access to 10+ incredible talks from world-class speakers
+                                </div>
+                            </div>
+                            <div class="include-item">
+                                <span class="include-icon">🤝</span>
+                                <div class="include-text">
+                                    <strong>Networking Breaks</strong>
+                                    Coffee breaks and mixer sessions with attendees
+                                </div>
+                            </div>
+                            <div class="include-item">
+                                <span class="include-icon">📚</span>
+                                <div class="include-text">
+                                    <strong>Event Materials</strong>
+                                    Official program, notebook, and exclusive content
+                                </div>
+                            </div>
+                            <div class="include-item">
+                                <span class="include-icon">🎓</span>
+                                <div class="include-text">
+                                    <strong>TEDx Certificate</strong>
+                                    Official certificate of attendance from TEDx
+                                </div>
+                            </div>
+                            <div class="include-item">
+                                <span class="include-icon">🍽️</span>
+                                <div class="include-text">
+                                    <strong>Refreshments</strong>
+                                    Complimentary snacks, beverages, and lunch
+                                </div>
+                            </div>
+                            <div class="include-item">
+                                <span class="include-icon">📸</span>
+                                <div class="include-text">
+                                    <strong>Event Photos</strong>
+                                    Professional photography and access to event gallery
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="ticket-cta" onclick="handleTicketPurchase()">
+                        <span>
+                            Reserve My Early Bird Ticket Now
+                            <span class="cta-subtext">🔒 Secure checkout • Instant confirmation</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust Signals -->
+        <div class="trust-signals">
+            <div class="trust-item">
+                <div class="trust-icon">🔒</div>
+                <div class="trust-title">Secure Payment</div>
+                <p class="trust-text">Your transaction is encrypted and 100% secure</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">📧</div>
+                <div class="trust-title">Instant Confirmation</div>
+                <p class="trust-text">Receive your ticket immediately via email</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🎫</div>
+                <div class="trust-title">Easy Refund</div>
+                <p class="trust-text">Full refund available up to 7 days before event</p>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2 class="faq-title">Common Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">When is the Early Bird deadline?</div>
+                    <p class="faq-answer">
+                        Early Bird tickets are available until November 30th, 2025, or until they sell out (whichever
+                        comes first). After that, Late Owl tickets will be available at a higher price.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What's the difference between Early Bird and Late Owl?</div>
+                    <p class="faq-answer">
+                        Both tickets include exactly the same benefits and access. The only difference is the price -
+                        Early Bird tickets are $50 while Late Owl tickets are $75. Same experience, different timing!
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I get a refund if I can't attend?</div>
+                    <p class="faq-answer">
+                        Yes! We offer full refunds up to 7 days before the event. After that, tickets are non-refundable
+                        but can be transferred to another person.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is there a group discount available?</div>
+                    <p class="faq-answer">
+                        For groups of 5 or more, please contact us at tickets@tedxmafs.com for special group rates. We
+                        offer custom packages for schools and organizations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Scroll to Top -->
     <div class="scroll-top" id="scrollTop"></div>
 
     <!-- JavaScript -->
+    <script>
+    // Configuration - SET YOUR ACTUAL DATES HERE
+    const EARLY_BIRD_DEADLINE = new Date('2025-11-30T23:59:59').getTime();
+    const EVENT_DATE = new Date('2025-12-31T18:00:00').getTime();
+
+    const EARLY_BIRD_PRICE = 50;
+    const LATE_OWL_PRICE = 75;
+    const EARLY_BIRD_SPOTS = 200;
+    const LATE_OWL_SPOTS = 300;
+
+    // Simulate sold tickets (you'd get this from your backend)
+    let soldEarlyBird = 113; // 200 - 87 remaining
+    let soldLateOwl = 0;
+
+    // Current phase tracking
+    let currentPhase = 'early-bird'; // or 'late-owl'
+
+    // Update countdown timer
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const isEarlyBird = now < EARLY_BIRD_DEADLINE;
+
+        // Determine which deadline to count down to
+        const targetDate = isEarlyBird ? EARLY_BIRD_DEADLINE : EVENT_DATE;
+        const distance = targetDate - now;
+
+        // Calculate time units
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Update display
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+        // Check if we need to switch phases
+        if (currentPhase === 'early-bird' && !isEarlyBird) {
+            switchToLateOwl();
+        }
+
+        // If countdown is over
+        if (distance < 0) {
+            if (currentPhase === 'late-owl') {
+                document.querySelector('.phase-indicator').innerHTML = `
+                        <div class="phase-content">
+                            <div class="phase-header">
+                                <div class="phase-icon">🎉</div>
+                                <h2 class="phase-title">Tickets Sold Out!</h2>
+                                <p class="phase-message">Thank you for your interest. Join our waitlist for future events.</p>
+                            </div>
+                        </div>
+                    `;
+            }
+        }
+    }
+
+    // Switch to Late Owl phase
+    function switchToLateOwl() {
+        currentPhase = 'late-owl';
+
+        // Update phase indicator
+        document.getElementById('phaseTitle').textContent = 'Late Owl Phase Active';
+        document.getElementById('phaseMessage').textContent = 'Last chance to secure your spot!';
+        document.querySelector('.phase-icon').textContent = '🦉';
+
+        // Update prices
+        document.getElementById('currentPrice').textContent = ' + LATE_OWL_PRICE;
+        document.getElementById('nextPrice').textContent = 'Sold Out';
+
+        // Update ticket card
+        document.getElementById('ticketBadge').innerHTML = '🦉 Late Owl';
+        document.getElementById('ticketName').textContent = 'Late Owl Ticket';
+        document.getElementById('ticketPrice').textContent = LATE_OWL_PRICE;
+        document.getElementById('savings').textContent = 'Limited spots remaining!';
+        document.getElementById('savings').style.background = 'rgba(255, 193, 7, 0.2)';
+        document.getElementById('savings').style.borderColor = 'rgba(255, 193, 7, 0.4)';
+        document.getElementById('savings').style.color = '#FFC107';
+
+        // Update spots
+        const remaining = LATE_OWL_SPOTS - soldLateOwl;
+        document.getElementById('spotsRemaining').textContent = remaining;
+        updateSpotsBar(soldLateOwl, LATE_OWL_SPOTS);
+
+        // Update CTA button
+        document.querySelector('.ticket-cta span').innerHTML = `
+                Reserve My Late Owl Ticket Now
+                <span class="cta-subtext">🔒 Secure checkout • Instant confirmation</span>
+            `;
+
+        // Add animation to indicate change
+        document.querySelector('.ticket-card').style.animation = 'none';
+        setTimeout(() => {
+            document.querySelector('.ticket-card').style.animation = 'phaseSwitch 0.8s ease';
+        }, 10);
+    }
+
+    // Update spots remaining bar
+    function updateSpotsBar(sold, total) {
+        const percentage = (sold / total) * 100;
+        const spotsFill = document.getElementById('spotsFill');
+        spotsFill.style.width = percentage + '%';
+
+        // Change color based on availability
+        if (percentage > 80) {
+            spotsFill.style.background = 'linear-gradient(90deg, #EB0028, #ff6b9d)';
+        } else if (percentage > 60) {
+            spotsFill.style.background = 'linear-gradient(90deg, #FF9800, #FFC107)';
+        } else {
+            spotsFill.style.background = 'linear-gradient(90deg, #4CAF50, #8BC34A)';
+        }
+    }
+
+    // Handle ticket purchase
+    function handleTicketPurchase() {
+        const phase = currentPhase === 'early-bird' ? 'Early Bird' : 'Late Owl';
+        const price = currentPhase === 'early-bird' ? EARLY_BIRD_PRICE : LATE_OWL_PRICE;
+
+        // In production, this would redirect to your payment gateway
+        alert(
+            `Redirecting to checkout...\n\nTicket Type: ${phase}\nPrice: ${price}\n\nThis would connect to your payment processor (Stripe, PayPal, etc.)`
+            );
+
+        // Example: window.location.href = '/checkout?type=' + currentPhase + '&price=' + price;
+    }
+
+    // Initialize
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Initial spots bar update
+    const currentSold = currentPhase === 'early-bird' ? soldEarlyBird : soldLateOwl;
+    const currentTotal = currentPhase === 'early-bird' ? EARLY_BIRD_SPOTS : LATE_OWL_SPOTS;
+    updateSpotsBar(currentSold, currentTotal);
+
+    // Simulate random ticket sales (remove in production)
+    setInterval(() => {
+        if (currentPhase === 'early-bird' && soldEarlyBird < EARLY_BIRD_SPOTS) {
+            if (Math.random() > 0.7) { // 30% chance every 5 seconds
+                soldEarlyBird++;
+                const remaining = EARLY_BIRD_SPOTS - soldEarlyBird;
+                document.getElementById('spotsRemaining').textContent = remaining;
+                updateSpotsBar(soldEarlyBird, EARLY_BIRD_SPOTS);
+            }
+        } else if (currentPhase === 'late-owl' && soldLateOwl < LATE_OWL_SPOTS) {
+            if (Math.random() > 0.8) { // 20% chance
+                soldLateOwl++;
+                const remaining = LATE_OWL_SPOTS - soldLateOwl;
+                document.getElementById('spotsRemaining').textContent = remaining;
+                updateSpotsBar(soldLateOwl, LATE_OWL_SPOTS);
+            }
+        }
+    }, 5000);
+
+    // Add phase switch animation
+    const style = document.createElement('style');
+    style.textContent = `
+            @keyframes phaseSwitch {
+                0% { transform: perspective(1000px) rotateY(0deg); opacity: 1; }
+                50% { transform: perspective(1000px) rotateY(90deg); opacity: 0.5; }
+                100% { transform: perspective(1000px) rotateY(0deg); opacity: 1; }
+            }
+        `;
+    document.head.appendChild(style);
+
+    // Smooth scroll for any anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    </script>
+    <script>
+    // Spotlight follows mouse
+    const spotlight = document.getElementById('spotlight');
+    const speakersSection = document.querySelector('.speakers-section');
+
+    speakersSection.addEventListener('mousemove', (e) => {
+        const rect = speakersSection.getBoundingClientRect();
+        const x = e.clientX;
+        const y = e.clientY;
+
+        spotlight.style.left = x + 'px';
+        spotlight.style.top = y + 'px';
+    });
+
+    // 3D card tilt effect
+    document.querySelectorAll('.speaker-card:not(.tba)').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const percentX = (x - centerX) / centerX;
+            const percentY = (y - centerY) / centerY;
+
+            const rotateY = percentX * 10;
+            const rotateX = -percentY * 10;
+
+            card.style.transform = `
+                    translateY(-30px) 
+                    translateZ(50px) 
+                    rotateX(${rotateX}deg) 
+                    rotateY(${rotateY}deg)
+                `;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+
+    // Smooth scroll for CTA
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    </script>
     <script>
     // Counter Animation
     function animateCounter(element) {
