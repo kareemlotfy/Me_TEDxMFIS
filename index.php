@@ -199,9 +199,9 @@ $con->close();
 
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
-                <li><a href="About\index.html" class="nav-link" >About</a></li>
-                <li><a href="Speakers\index.php" class="nav-link" >Speakers</a></li>
-                <li><a href="Sponsors\index.php" class="nav-link" >Sponsors</a></li>
+                <li><a href="About\index.html" class="nav-link">About</a></li>
+                <li><a href="Speakers\index.php" class="nav-link">Speakers</a></li>
+                <li><a href="Sponsors\index.php" class="nav-link">Sponsors</a></li>
                 <li><a href="#tickets" class="nav-cta"><span>Get Tickets</span></a></li>
             </ul>
 
@@ -828,6 +828,362 @@ $con->close();
 
 
     </section>
+    <!-- Start Testimonials Section -->
+    <section class="splide" aria-label="Splide Basic HTML Example" id="testimonials">
+        <div class="inner_content  body_section">
+            <div class="spacing_size spacing_size-initial" style="height:50px;"></div>
+            <!-- Special Heading Container -->
+            <div class="section-header">
+                <div class="section-tag">They Say</div>
+                <h1 class="section-title">Testimonials</h1>
+                <p class="section-subtitle">
+                    Our attendees feedback
+                </p>
+            </div>
+        </div>
+        <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
+        <div class="testimonials_container splide__track">
+            <div class="testimonials_container splide__list">
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">It was really interesting and everyone in the team made a very good
+                            job</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">halamohammedshamel</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">It was amazing and the speakers were incredible and the team work
+                            was perfect</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">farida__zz</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">You need to do another oneee</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">layal6095</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">The best event I've ever entered bgd 💖</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">ritallossama</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">It was soo good 💗 and thank you for this best event 😘</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">jowairiahhany</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">I loved the speakers so much and I really learned a lot from them
+                        </p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">gelsy.ibrahim</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">The event was AMAZING</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">l.haneenn</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">Youm touhfa bgd ktr 5rkom bgd 4okran 3la elmghod w el48l dh 💗💗💗
+                        </p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">rokaia_hussein1</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">The best event in the world really this is the 3rd time and it was
+                            the best 💗</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">janaabdelkader48</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">Perfect bgd elspeakres kolhom kano inspiring awy sponsors were
+                            amazing w elteam was so friendly</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">_haneenhesham__</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">AMAZING</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">malak_wael_hosny</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">Amazing loved it had so much fun too ❤❤</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">ghena.samehh</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">it was amazing no complaints</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">yasmineayman47</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">100/10</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">omarmohamed_nagy</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial_item splide__slide">
+                    <div class="testimonial_content">
+                        <div class="testimonial_titles">
+                            <div class="testimonial_date">9 December, 2024</div>
+                            <div class="testimonial_event">ما وراء الكواليس</div>
+                        </div>
+                        <p class="testimonial_text">Outstanding</p>
+                    </div>
+                    <div class="testimonial_meta">
+                        <div class="testimonial_image">
+                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                                style="width:50px; height:50px; ">
+                        </div>
+                        <div class="testimonial_meta_names">
+                            <h3 class="testimonial_name">_.yarakamal._</h3>
+                            <span class="testimonial_status">[Attendee]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="spacing_size spacing_size-initial" style="height:110px;"></div>
+    </section>
+    <!-- End Testimonials Section -->
+    <footer>
+        <div class="inner_content">
+            <div class="footer-container">
+                <div class="fc-col1">
+                    <img src="images\TEDx_logo_place2_RGB_CS2_page-0003.png" alt="TEDxManaratAlFarouk logo"
+                        class="brand">
+                </div>
+                <div class="fc-col2">
+                    <div class="footer-text">
+                        This independent TEDx event is operated under license from TED.
+                    </div>
+                    <!-- <ul class="fc-menu">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Speakers</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Sponsors</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Tickets</a></li>
+                    </ul> -->
+                </div>
+                <div class="fc-col3">
+                    <!-- <ul class="fc-media-icons">
+                        <li class="facebook-icon"><a href="https://www.facebook.com/TEDxManaratAlFarouk/"
+                                target="_blank"></a></li>
+                        <li class="instagram-icon"><a href="https://www.instagram.com/tedx.manaratalfaroukschool/"
+                                target="_blank"></a></li>
+                        <li class="linkedin-icon"><a href="https://eg.linkedin.com/company/tedxmanaratalfaroukschool"
+                                target="_blank"></a></li>
+                        <li class="tiktok-icon"><a href="https://www.tiktok.com/@tedxmfis" target="_blank"><i
+                                    class="fa-brands fa-tiktok"></i></a></li>
+                    </ul> -->
+                    <ul class="speaker-social" style="opacity: 1; margin-top: 0px; transform: translateY(0px);">
+                        <a href="https://www.facebook.com/TEDxManaratAlFarouk/" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/tedx.manaratalfaroukschool/" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://eg.linkedin.com/company/tedxmanaratalfaroukschool" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.tiktok.com/@tedxmfis" class="social-link"><i class="fa-brands fa-tiktok"></i></a></li></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scroll to Top -->
     <div class="scroll-top" id="scrollTop"></div>
@@ -923,7 +1279,8 @@ $con->close();
                 Reserve My Late Owl Ticket Now
                 <span class="cta-subtext">🔒 Secure checkout • Instant confirmation</span>
             `;
-        document.querySelector('.ticket-cta').href = 'Tickets\Late_Owl_Form\index.php'; // Update with actual purchase link
+        document.querySelector('.ticket-cta').href =
+            'Tickets\Late_Owl_Form\index.php'; // Update with actual purchase link
 
         // Add animation to indicate change
         document.querySelector('.ticket-card').style.animation = 'none';
@@ -1284,11 +1641,9 @@ $con->close();
     window.addEventListener('scroll', () => {
         handleNavScroll();
         handleElementsVisibility();
-        updateActiveSection();
     });
 
     // Initial calls
-    updateActiveSection();
     handleElementsVisibility();
     </script>
     <script>
@@ -1362,7 +1717,37 @@ $con->close();
         element.classList.toggle('active');
     }
     </script>
-
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var splide = new Splide('.splide', {
+            type: 'loop',
+            perPage: 4,
+            perMove: 1,
+            direction: 'ltr',
+            pagination: true,
+            paginationDirection: 'ltr',
+            drag: true,
+            snap: true,
+            arrows: false,
+            autoplay: true,
+            pauseOnHover: true,
+            pauseOnFocus: true,
+            breakpoints: {
+                1200: {
+                    perPage: 3,
+                },
+                850: {
+                    perPage: 2,
+                },
+                600: {
+                    perPage: 1,
+                },
+            },
+        });
+        splide.mount();
+    });
+    </script>
+    <script src="assets\splide-4.1.3\splide-4.1.3\dist\js\splide.min.js"></script>
 
     <script src="script-home.js"></script>
 </body>

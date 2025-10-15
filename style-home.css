@@ -2456,7 +2456,7 @@ body {
 
 /* Responsive */
 @media (max-width: 968px) {
-  .section-content{
+  .section-content {
     grid-template-columns: auto;
   }
   .tickets-section {
@@ -2501,3 +2501,225 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Testimonials Start */
+
+#testimonials .inner_content {
+  width: 100%;
+}
+.testimonials_container {
+  position: relative;
+  /* z-index: 1; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  width: 100%;
+}
+.testimonial_item {
+  padding: 20px 15px 0;
+  transition: transform 0.3s;
+}
+.testimonial_item:hover {
+  transform: translateY(-20px);
+  .testimonial_content{
+      box-shadow: 0 50px 100px rgba(235, 0, 40, 0.4),
+    0 0 150px rgba(235, 0, 40, 0.2);
+  }
+}
+.testimonial_content {
+  position: relative;
+  padding: 30px 40px 40px;
+  border-radius: 10px;
+  background: rgba(235, 0, 40, 0.1);
+  border: 2px solid rgba(235, 0, 40, 0.3);
+  box-shadow: 0 15px 38px 0 rgba(0, 0, 0, 0.1);
+}
+/* .testimonial_content::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  transform-origin: 50%;
+  transform: translate(-50%) rotate(45deg);
+  border-radius: inherit;
+  background-color: inherit;
+  bottom: -15px;
+  left: 65px;
+} */
+.testimonial_text {
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0;
+  color: #616161;
+}
+.testimonial_meta {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+}
+.testimonial_image {
+  margin-right: 20px;
+  margin-left: 40px;
+}
+.testimonial_image img {
+  border-radius: 50%;
+}
+
+.testimonial_name {
+  font-weight: 400;
+  font-family: "Rubik", "sans serif";
+  font-size: 22px;
+  line-height: 1.65;
+  color: #242424;
+}
+.testimonial_status {
+  line-height: 1.4;
+  font-size: 14px;
+  display: block;
+  color: var(--ted-color);
+  font-family: "Rubik", "sans serif";
+}
+.testimonial_titles {
+  padding-bottom: 10px;
+  color: #afafaf;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.splide__pagination__page.is-active {
+  background: var(--ted-color);
+}
+.splide__pagination {
+  bottom: 55px;
+}
+/* Testimonials End */
+
+/* Footer */
+footer {
+    /* background-color: #fff; */
+    color: #333;
+    padding: 1em;
+    display: grid;
+    place-items: center;
+}
+
+.footer-container {
+    border-top: 1px solid #c7c7c7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background: #fff; */
+    padding: 1em 0;
+}
+
+.fc-col1 {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-basis: 25%;
+}
+
+footer .brand {
+    margin: 10px 0;
+    width: auto;
+    height: 60px;
+}
+
+.fc-brand {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: 900;
+}
+
+.fc-col2 {
+    display: flex;
+    justify-content: center;
+    flex-basis: 50%;
+}
+
+.fc-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.fc-menu li {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.fc-col3 {
+    display: flex;
+    justify-content: end;
+    flex-basis: 25%;
+}
+
+.fc-media-icons {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.fc-media-icons li {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    margin: 0.5em;
+    border-radius: 50%;
+}
+
+.footer-text {
+    width: 100%;
+    font-weight: 300;
+    color: #6b6373;
+    text-align: center;
+}
+
+.fc-media-icons i {
+    font-size: 20px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.fc-media-icons a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 20px;
+}
+
+.facebook-icon i:hover {
+    color: #2d4373;
+}
+
+.instagram-icon i:hover {
+    color: #c13584;
+}
+
+.tiktok-icon i:hover {
+    color: #cf2929;
+}
+
+.linkedin-icon i:hover {
+    color: #005582;
+}
+
+@media screen and (max-width: 810px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+}
+
+/* End Footer */
