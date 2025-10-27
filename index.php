@@ -188,7 +188,7 @@ $con->close();
 </head>
 
 <body class="home_page">
-    <div class="cursor"></div>
+    <!-- <div class="cursor"></div> -->
 
     <!-- Main Navigation -->
     <nav class="main-nav" id="mainNav">
@@ -587,6 +587,32 @@ $con->close();
                     </div>
                 </div>
 
+                <div class="speaker-card tba">
+                    <div class="speaker-image-container">
+                        <img src="images\mistryspeaker.jpg" alt="Fatima Al-Sayed" class="speaker-image">
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Sustainability</span>
+                            <span class="expertise-tag">Climate</span>
+                        </div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Fatima Al-Sayed</h3>
+                        <p class="speaker-title">Environmental Scientist & Climate Innovator</p>
+                        <p class="speaker-bio">
+                            Developed groundbreaking sustainable solutions for water scarcity in arid regions. Her work
+                            challenges conventional environmental approaches.
+                        </p>
+                        <div class="speaker-topic">
+                            <strong>Talk:</strong> "Desert Innovation: Solving Tomorrow's Problems Today"
+                        </div>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">in</a>
+                            <a href="#" class="social-link">𝕏</a>
+                            <a href="#" class="social-link">🌐</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- TBA Card -->
                 <div class="speaker-card tba">
                     <div class="speaker-image-container">
@@ -829,9 +855,7 @@ $con->close();
 
     </section>
     <!-- Start Testimonials Section -->
-    <section class="splide" aria-label="Splide Basic HTML Example" id="testimonials">
-        <div class="inner_content  body_section">
-            <div class="spacing_size spacing_size-initial" style="height:50px;"></div>
+    <section class="splide testimonial-section" aria-label="Splide Basic HTML Example" id="testimonials">
             <!-- Special Heading Container -->
             <div class="section-header">
                 <div class="section-tag">They Say</div>
@@ -840,8 +864,6 @@ $con->close();
                     Our attendees feedback
                 </p>
             </div>
-        </div>
-        <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
         <div class="testimonials_container splide__track">
             <div class="testimonials_container splide__list">
                 <div class="testimonial_item splide__slide">
@@ -1140,7 +1162,6 @@ $con->close();
 
 
         </div>
-        <div class="spacing_size spacing_size-initial" style="height:110px;"></div>
     </section>
     <!-- End Testimonials Section -->
     <footer>
@@ -1191,7 +1212,7 @@ $con->close();
     <!-- JavaScript -->
     <script>
     // Configuration - SET YOUR ACTUAL DATES HERE
-    const EARLY_BIRD_DEADLINE = new Date('2025-11-30T23:59:59').getTime();
+    const EARLY_BIRD_DEADLINE = new Date('2025-09-30T23:59:59').getTime();
     const EVENT_DATE = new Date('2025-12-31T18:00:00').getTime();
 
     const EARLY_BIRD_PRICE = 550;

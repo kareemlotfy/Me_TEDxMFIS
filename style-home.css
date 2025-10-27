@@ -4,16 +4,22 @@
   box-sizing: border-box;
 }
 
+:root {
+    --ted-color: rgb(235,0,40);
+    --dark: #333;
+    --light: #fff;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #000;
   color: #fff;
   overflow-x: hidden;
-  cursor: none;
+  /* cursor: none; */
 }
 
 /* Custom Cursor */
-.cursor {
+/* .cursor {
   position: fixed;
   width: 20px;
   height: 20px;
@@ -46,7 +52,7 @@ body {
     opacity: 0;
     transform: scale(0);
   }
-}
+} */
 
 /* Hero Container */
 .hero {
@@ -2507,6 +2513,9 @@ body {
 #testimonials .inner_content {
   width: 100%;
 }
+.testimonial-section{
+  padding: 8rem 0rem;
+}
 .testimonials_container {
   position: relative;
   /* z-index: 1; */
@@ -2527,8 +2536,8 @@ body {
 .testimonial_item:hover {
   transform: translateY(-20px);
   .testimonial_content{
-      box-shadow: 0 50px 100px rgba(235, 0, 40, 0.4),
-    0 0 150px rgba(235, 0, 40, 0.2);
+      box-shadow: 0 20px 40px rgba(235, 0, 40, 0.4),
+    0 0 40px rgba(235, 0, 40, 0.2);
   }
 }
 .testimonial_content {
@@ -2574,10 +2583,10 @@ body {
 
 .testimonial_name {
   font-weight: 400;
-  font-family: "Rubik", "sans serif";
+  font-family: "Rubik", "serif";
   font-size: 22px;
   line-height: 1.65;
-  color: #242424;
+  color: #fff;
 }
 .testimonial_status {
   line-height: 1.4;
