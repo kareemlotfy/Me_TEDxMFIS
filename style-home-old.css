@@ -1,10 +1,9 @@
-
 /* Home Hero Start */
 .home_header {
-    min-height: calc(120vh);
+    min-height: calc(104vh);
     width: 100%;
-    background-image: url(../images/final-hero-image.png);
-    background-position: center;
+    background-image: url(images/final-hero-image.png);
+    background-position: bottom;
     background-size: cover;
     position: relative;
 }
@@ -22,13 +21,13 @@
 .hero_text_box h1 {
     color: var(--dark);
     font-size: 60px;
-    font-weight: var(--fontWx6);
+    font-weight: 400;
     position: relative;
     line-height: 1;
     margin: 0 auto 20px;
 }
 
-.hero_text_box h1 .text{
+.hero_text_box h1 .text {
     font-family: "Raleway", sans-serif;
 
 }
@@ -40,12 +39,12 @@
 }
 
 .hero_text_box .second-part {
-    font-weight: var(--fontWx4);
+    font-weight: 500;
 }
 
 .hero_text_box .first-part {
-    font-weight: var(--fontWx8);
     color: var(--ted-color);
+    font-weight: 900;
 }
 
 .typing_effect {
@@ -115,6 +114,12 @@
     }
 }
 
+@media (max-width:1340px) {
+    .home_header {
+        background-image: url(images/hero-laptop.png);
+    }
+}
+
 @media (max-width:960px) {
     .hero_text_box h1 .text {
         font-size: 50px;
@@ -135,7 +140,11 @@
     }
 }
 
-@media (max-width:770px) {
+@media (max-width:810px) {
+    .home_header {
+        background-image: url(images/hero-tablet.png);
+    }
+
     .hero_text_box h1 .text {
         font-size: 40px;
     }
@@ -145,7 +154,12 @@
     }
 }
 
+
 @media (max-width:640px) {
+    .home_header {
+        background-image: url(images/hero-mobile.png);
+    }
+
     .hero_text_box h1 .text {
         font-size: 35px;
     }
@@ -159,13 +173,53 @@
     }
 }
 
-@media (max-width:390px) {
-    .hero_text_box h1 {
+@media (max-width:570px) {
+    .hero_text_box h1 .text {
+        font-size: 30px;
+    }
+
+    .hero_text_box h1 .text2 {
         font-size: 25px;
     }
 
     .hero_text_box .first-part {
+        font-size: 30px;
+    }
+}
+
+@media (max-width:490px) {
+    .hero_text_box h1 {
+        font-size: 40px;
+    }
+
+    .home_header {
+        background-image: url(images/mobile2.png);
+    }
+
+    .hero_text_box h1 .text {
+        font-size: 27px;
+    }
+
+    .hero_text_box h1 .text2 {
+        font-size: 20px;
+    }
+
+    .hero_text_box .first-part {
         font-size: 25px;
+    }
+}
+
+@media (max-width:410px) {
+    .hero_text_box h1 .text {
+        font-size: 20px;
+    }
+
+    .hero_text_box h1 .text2 {
+        font-size: 17px;
+    }
+
+    .hero_text_box .first-part {
+        font-size: 20px;
     }
 }
 
@@ -184,6 +238,7 @@
     font-weight: 800;
     margin: 0;
     text-transform: uppercase;
+    font-family: 'Rubik', 'sans-serif';
 }
 
 .sub-special-heading {
@@ -312,6 +367,10 @@
     .description {
         font-size: 14px;
     }
+
+    .heading_description {
+        width: 450px;
+    }
 }
 
 @media (max-width:600px) {
@@ -341,7 +400,8 @@
     .sub-special-heading {
         margin: -30px 0 10px;
     }
-    .heading_description{
+
+    .heading_description {
         width: 400px;
     }
 }
@@ -352,10 +412,11 @@
     }
 
     .sub-special-heading {
-        font-size:16px;
+        font-size: 16px;
         margin: -25px 0 10px;
     }
-    .heading_description{
+
+    .heading_description {
         width: 300px;
     }
 }
@@ -366,10 +427,11 @@
     }
 
     .sub-special-heading {
-        font-size:13px;
+        font-size: 13px;
         margin: -20px 0 10px;
     }
-    .heading_description{
+
+    .heading_description {
         width: 250px;
     }
 }
@@ -627,7 +689,7 @@
 .seconds {
     font-size: 80px;
     font-weight: 500;
-    font-family: "Raleway", sans-serif;
+    font-family: "rubik", sans-serif;
 }
 
 .time-counter .part-title {
@@ -639,7 +701,7 @@
 .column {
     font-size: 55px;
     font-weight: 500;
-    font-family: var(--font-Poppins);
+    font-family: 'Poppins';
     color: #ebeced;
 }
 
@@ -823,7 +885,7 @@
 
 /* Schedule Start */
 #schedule {
-    background-image: url(../images/section_02.jpg@id=250);
+    background-image: url(images/section_02.jpg@id=250);
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
@@ -1233,10 +1295,12 @@
     .speaker-img img {
         width: 300px;
     }
+
     .speaker-nav {
         width: 280px;
     }
-    .speaker-card{
+
+    .speaker-card {
         width: 350px;
     }
 }
@@ -1245,10 +1309,12 @@
     .speaker-img img {
         width: 270px;
     }
+
     .speaker-nav {
         width: 250px;
     }
-    .speaker-card{
+
+    .speaker-card {
         width: 300px;
     }
 }
@@ -1257,13 +1323,16 @@
     .speaker-img img {
         width: 210px;
     }
+
     .speaker-nav {
         width: 185px;
     }
-    .speaker-card{
+
+    .speaker-card {
         width: 240px;
     }
 }
+
 /* Speaker End */
 
 
@@ -1286,9 +1355,6 @@
 .video-container {
     position: relative;
     margin: auto;
-    border-radius: 12px;
-    box-shadow: 0 5px 25px rgba(1 1 1 / 35%);
-    height: 600px;
     margin-bottom: 60px;
     z-index: 2;
 }
@@ -1414,7 +1480,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
     flex-basis: 40%;
     width: 100%;
     border-radius: 12px 12px 0 0;
@@ -1424,25 +1489,34 @@
 .ticket-price {
     font-size: 40px;
     font-weight: 600;
-    font-family: "Raleway", sans-serif;
+    font-family: "rubik", sans-serif;
     margin-bottom: 10px;
     color: var(--light);
+    text-align: center;
+}
+
+.tp-gap {
+    margin: 25px;
 }
 
 .ticket-description {
     flex-basis: 50%;
-    padding: 30px;
+    flex-direction: column;
+    /* padding: 30px; */
     display: flex;
     align-items: center;
 }
 
 .ticket-description ul {
     list-style: none;
+    padding-top: 20px;
     text-align: center;
 }
 
 .ticket-description li {
-    margin: 0 0 10px 0;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    font-family: Rubic, sans-serif;
 }
 
 .ticket-button {
@@ -1454,7 +1528,7 @@
 }
 
 .ticket-button a {
-    width: 155px;
+    width: 163px;
     text-align: center;
     padding: 14px 30px;
     border: 1px solid var(--ted-color);
@@ -1490,7 +1564,7 @@
     .tickets-container {
         gap: 0;
     }
-    
+
     .ticket-card {
         width: 260px;
     }
@@ -1506,7 +1580,8 @@
         flex-wrap: wrap;
         gap: 80px;
     }
-    .tickets-text-container .ticket_heading_description{
+
+    .tickets-text-container .ticket_heading_description {
         text-align: center;
     }
 }
@@ -1532,6 +1607,7 @@
         flex-wrap: wrap;
         gap: 80px;
     }
+
     .tickets-text-container {
         padding: 30px;
     }
@@ -1619,3 +1695,98 @@
 
 /* Video + Tickets End */
 
+/* Testimonials Start */
+
+#testimonials .inner_content{
+    width: 100%;
+}
+.testimonials_container{
+    position: relative;
+    /* z-index: 1; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    width: 100%;
+}
+.testimonial_item{
+    padding: 20px 15px 0;
+    transition: transform .3s;
+}
+.testimonial_item:hover{
+    transform: translateY(-20px);
+}
+.testimonial_content{
+    position: relative;
+    padding: 30px 40px 40px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 15px 38px 0 rgba(0, 0, 0, 0.1);
+}
+.testimonial_content::after{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    transform-origin: 50%;
+    transform: translate(-50%) rotate(45deg);
+    border-radius: inherit;
+    background-color: inherit;
+    bottom: -15px;
+    left: 65px;
+
+}
+.testimonial_text{
+    font-size: 16px;
+    line-height: 1.9;
+    letter-spacing: 0;
+    color: #616161;
+}
+.testimonial_meta{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+}
+.testimonial_image{
+    margin-right: 20px;
+    margin-left: 40px;
+}
+.testimonial_image img{
+    border-radius: 50%;
+}
+
+.testimonial_name{
+    font-weight: 400;
+    font-family: 'Rubik', 'sans serif';
+    font-size: 22px;
+    line-height: 1.65;
+    color: #242424;
+}
+.testimonial_status{
+    line-height: 1.4;
+    font-size: 14px;
+    display: block;
+    color: var(--ted-color);
+    font-family: 'Rubik', 'sans serif';
+}
+.testimonial_titles{
+    padding-bottom: 10px;
+    color: #afafaf;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.splide__pagination__page.is-active {
+    background: var(--ted-color);
+}
+.splide__pagination{
+    bottom: 55px;
+}
+/* Testimonials End */

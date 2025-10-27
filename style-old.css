@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Borel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://cdn-uicons.flaticon.com/2.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css');
-@import url('https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
-@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
+
 
 :root {
     --ted-color: #e62b1e;
@@ -62,7 +61,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Rubik', sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -346,7 +344,6 @@ nav .burger {
         text-align: left;
         z-index: 2;
         transition: 1s;
-        /* display: none; */
     }
 
     nav .burger {
@@ -384,15 +381,11 @@ nav .burger {
         color: #333;
     }
 
-    .speakers_page nav .fa-bars,
-    .about_page nav .fa-bars,
-    .sponsors_page nav .fa-bars,
-    .butTicket_page nav .fa-bars {
+    .speakers_page nav .burger,
+    .about_page nav .burger,
+    .sponsors_page nav .burger,
+    .butTicket_page nav .burger {
         color: #fff;
-    }
-
-    #navLinks {
-        background-color: #fff;
     }
 }
 
@@ -405,57 +398,49 @@ nav .burger {
     font-size: 110px;
     color: #fff;
     position: absolute;
-    bottom: -40px;
+    bottom: -35px;
     font-weight: 900;
     text-transform: uppercase;
 }
 
-@media (max-width:766px) {
+@media (max-width:640px) {
+    #banner .text {
+        font-size: 100px;
+        bottom: -32px;
+    }
+}
+
+@media (max-width:550px) {
     #banner .text {
         font-size: 90px;
         bottom: -30px;
     }
 }
 
-@media (max-width:640px) {
+@media (max-width:494px) {
     #banner .text {
         font-size: 80px;
         bottom: -28px;
     }
 }
 
-@media (max-width:540px) {
+@media (max-width: 440px) {
     #banner .text {
         font-size: 70px;
-        bottom: -26px;
-    }
-}
-
-@media (max-width:480px) {
-    #banner .text {
-        font-size: 60px;
         bottom: -24px;
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 390px) {
     #banner .text {
-        font-size: 50px;
+        font-size: 65px;
         bottom: -20px;
     }
 }
-
-@media (max-width: 360px) {
+@media (max-width: 365px) {
     #banner .text {
-        font-size: 45px;
-        bottom: -16px;
-    }
-}
-
-@media (max-width: 320px) {
-    #banner .text {
-        font-size: 40px;
-        bottom: -11px;
+        font-size: 55px;
+        bottom: -18px;
     }
 }
 
@@ -482,19 +467,19 @@ nav .burger {
 }
 
 .speakers_banner {
-    background-image: url(../user/images/bg-mic.jpg);
+    background-image: url(images/bg-mic.jpg);
 }
 
 .about_banner {
-    background-image: url(../user/images/bg-chairs.jpg);
+    background-image: url(images/bg-chairs.jpg);
 }
 
 .tickers_banner {
-    background-image: url(../user/images/page-title-3.jpg);
+    background-image: url(images/page-title-3.jpg);
 }
 
 .sponsers_banner {
-    background-image: url(../user/images/bg-chairs.jpg);
+    background-image: url(images/bg-chairs.jpg);
 }
 
 /* Banners End */
@@ -523,7 +508,7 @@ dialog {
 }
 
 .error,
-.succes {
+.success {
     overflow: hidden;
     position: relative;
     background-color: #ffffff;
@@ -724,6 +709,10 @@ footer .brand {
 
 .instagram-icon i:hover {
     color: #c13584;
+}
+
+.tiktok-icon i:hover {
+    color: #cf2929;
 }
 
 .linkedin-icon i:hover {

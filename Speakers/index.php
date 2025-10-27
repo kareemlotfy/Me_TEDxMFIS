@@ -5,20 +5,25 @@
 <head>
 
     <!--GOOGLE -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JXGKTBFNV3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXGKTBFNV3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-JXGKTBFNV3');
-</script>
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-JXGKTBFNV3');
+    </script>
 
     <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover inspiring talks and profiles of the speakers at TEDxManaratAlFaroukSchool. Meet the minds shaping the future and sharing impactful ideas.">
-    <meta name="keywords" content="TEDxManaratAlFaroukSchool, TEDx speakers, TED speakers, inspiring talks, speaker profiles, speakers, ted, mfis, event">
+    <meta name="description"
+        content="Discover inspiring talks and profiles of the speakers at TEDxManaratAlFaroukSchool. Meet the minds shaping the future and sharing impactful ideas.">
+    <meta name="keywords"
+        content="TEDxManaratAlFaroukSchool, TEDx speakers, TED speakers, inspiring talks, speaker profiles, speakers, ted, mfis, event">
     <meta name="robots" content="index, follow">
     <meta name="referrer" content="no-referrer">
     <meta name="author" content="TEDxManaratAlFaroukSchool">
@@ -32,18 +37,11 @@
     <!-- Base URL -->
     <base href="https://tedxmanaratalfaroukschool.com/">
 
-    <!-- Slick Files -->
-    <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="assets\slick-1.8.1\slick-1.8.1\slick\slick.css"/>
-    <link rel="stylesheet" type="text/css" href="assets\slick-1.8.1\slick-1.8.1\slick\slick-theme.css"/>
-
-    <!-- jQuery (required for Slick) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Slick JavaScript -->
-    <script type="text/javascript" src="assets\slick-1.8.1\slick-1.8.1\slick\slick.min.js"></script>
-
-
+    
+    <!-- Splide CSS -->
+    <link rel="stylesheet" href="assets\splide-4.1.3\splide-4.1.3\dist\css\splide-core.min.css">
+    <link rel="stylesheet" href="assets\splide-4.1.3\splide-4.1.3\dist\css\splide.min.css">
+    <link rel="stylesheet" href="assets\splide-4.1.3\splide-4.1.3\dist\css\themes\splide-default.min.css">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-home.css">
@@ -53,7 +51,7 @@
 </head>
 
 <body class="speakers_page">
-    
+
     <div class="loader-container">
         <svg viewBox="102 10 300 200" width="100%" height="100%">
             <text x="50%" y="50%" dy=".32em" text-anchor="middle" class="text-body-1">TEDx</text>
@@ -65,12 +63,11 @@
         <!-- Navigation -->
         <nav class="banners_navbar" id="navbar">
             <!-- Logo -->
-            <a href=""><img src="images\TEDx_logo_place2_RGB_CS2_page-0003.png" alt="tedx logo"
-                    id="tedx_logo"></a>
+            <a href=""><img src="images\TEDx_logo_place2_RGB_CS2_page-0003.png" alt="tedx logo" id="tedx_logo"></a>
 
             <!-- Nav Links -->
             <div class="nav-links" id="navLinks">
-                <i class="fa-solid fa-xmark  burger mark" onclick="hideMenu()"  style="color:#333;"></i>
+                <i class="fa-solid fa-xmark  burger mark" onclick="hideMenu()" style="color:#333;"></i>
                 <ul>
                     <li><a href="" class="nav_text ">Home</a></li>
                     <li><a href="Speakers/" class="nav_text">Speakers</a></li>
@@ -100,9 +97,10 @@
         <section class="body_section speakers_section" id="meccano_speakers">
             <div class="inner_content">
                 <div class="special-heading-container">
-                    <button type="button" class="slick-prev"><</button>
-                    <div class="special-heading">Meccano</div>
-                    <button type="button" class="slick-next">></button>
+                    <button type="button" class="slick-prev">
+                        << /button>
+                            <div class="special-heading">Meccano</div>
+                            <button type="button" class="slick-next">></button>
                 </div>
                 <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
                 <!-- Speakers Cards Container -->
@@ -124,8 +122,8 @@
                         </div>
                     </div>
 
-                      <!-- Speaker Card 4 -->
-                      <div class="speaker-card">
+                    <!-- Speaker Card 4 -->
+                    <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
                             <img src="images/generation/meccano/ahmed-shahin.jpg" alt="speaker image">
@@ -135,12 +133,12 @@
                         <div class="speaker-info">
                             <!-- Social Media Links -->
                             <div class="speaker-nav">
-                                <a href="https://www.facebook.com/AhmedShahinOfficial/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-facebook-f"></i></a>
-                                <a href="https://www.linkedin.com/in/ahmedshahinofficial" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/ahmedshahinofficial" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.facebook.com/AhmedShahinOfficial/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/ahmedshahinofficial" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="https://www.instagram.com/ahmedshahinofficial" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="https://x.com/Coach_Shahin" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -204,8 +202,8 @@
                     </div>
 
 
-                      <!-- Speaker Card 2 -->
-                      <div class="speaker-card">
+                    <!-- Speaker Card 2 -->
+                    <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
                             <img src="images/generation/meccano/zeyad.jpg" alt="speaker image">
@@ -219,8 +217,8 @@
                                         class="fa-brands fa-facebook-f"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/zeyad_nofal1/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/zeyad_nofal1/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -244,12 +242,12 @@
                         <div class="speaker-info">
                             <!-- Social Media Links -->
                             <div class="speaker-nav">
-                                <a href="https://www.facebook.com/ahmed.abouzaid.58/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-facebook-f"></i></a>
-                                <a href="https://eg.linkedin.com/in/ahmed-abouzaid-abab75b7" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/abouzaid_official/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.facebook.com/ahmed.abouzaid.58/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="https://eg.linkedin.com/in/ahmed-abouzaid-abab75b7" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="https://www.instagram.com/abouzaid_official/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -263,7 +261,7 @@
                     <!-- New Div with Image -->
 
 
-                  
+
                     <!-- Speaker Card 5 -->
                     <div class="speaker-card">
                         <!-- Speaker Image -->
@@ -277,8 +275,8 @@
                             <div class="speaker-nav">
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-facebook-f"></i></a>
-                                <a href="https://www.linkedin.com/in/ahmedyassinyusuf/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-linkedin"></i></a>
+                                <a href="https://www.linkedin.com/in/ahmedyassinyusuf/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-instagram"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
@@ -301,12 +299,12 @@
                         <div class="speaker-info">
                             <!-- Social Media Links -->
                             <div class="speaker-nav">
-                                <a href="https://www.facebook.com/amrsherif.yt/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-facebook-f"></i></a>
-                                <a href="https://www.youtube.com/c/AmrSherifofficial" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-youtube"></i></a>
-                                <a href="https://www.instagram.com/amr.sherif.adel" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.facebook.com/amrsherif.yt/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="https://www.youtube.com/c/AmrSherifofficial" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+                                <a href="https://www.instagram.com/amr.sherif.adel" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="https://x.com/amr_sherif_adel" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -403,9 +401,10 @@
         <section class="body_section speakers_section" id="luminous_speakers">
             <div class="inner_content">
                 <div class="special-heading-container">
-                    <button type="button" class="slick-prev"><</button>
-                    <div class="special-heading">Luminous</div>
-                    <button type="button" class="slick-next">></button>
+                    <button type="button" class="slick-prev">
+                        << /button>
+                            <div class="special-heading">Luminous</div>
+                            <button type="button" class="slick-next">></button>
                 </div>
                 <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
                 <!-- Speakers Cards Container -->
@@ -463,12 +462,12 @@
                         <div class="speaker-info">
                             <!-- Social Media Links -->
                             <div class="speaker-nav">
-                                <a href="https://www.facebook.com/AhmedShahinOfficial/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-facebook-f"></i></a>
-                                <a href="https://www.linkedin.com/in/ahmedshahinofficial" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/ahmedshahinofficial" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.facebook.com/AhmedShahinOfficial/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/ahmedshahinofficial" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="https://www.instagram.com/ahmedshahinofficial" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="https://x.com/Coach_Shahin" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -481,7 +480,7 @@
 
 
 
-                  
+
 
                     <!-- Speaker Card 3 -->
                     <div class="speaker-card">
@@ -572,12 +571,12 @@
                         <div class="speaker-info">
                             <!-- Social Media Links -->
                             <div class="speaker-nav">
-                                <a href="https://www.facebook.com/moustafa.abousamra/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-facebook-f"></i></a>
+                                <a href="https://www.facebook.com/moustafa.abousamra/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/moustafaabousamra/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/moustafaabousamra/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -613,8 +612,8 @@
                             <div class="speaker-job">[Speaker]</div>
                         </div>
                     </div>
-                     <!-- Speaker Cards -->
-                     <div class="speaker-card">
+                    <!-- Speaker Cards -->
+                    <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
                             <img src="images/speakers_page/rawam-tarek.jpg" alt="speaker image">
@@ -650,7 +649,8 @@
                         <div class="speaker-info">
                             <!-- Social Media Links -->
                             <div class="speaker-nav">
-                                <a href="https://www.facebook.com/p/Khaled-El-Degwy-Energize-100063756968223/" target="_blank" rel="noopener noreferrer"><i
+                                <a href="https://www.facebook.com/p/Khaled-El-Degwy-Energize-100063756968223/"
+                                    target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-facebook-f"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-linkedin"></i></a>
@@ -706,8 +706,8 @@
                                         class="fa-brands fa-facebook-f"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/mohamedfadl" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/mohamedfadl" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -728,12 +728,12 @@
                         <div class="speaker-info">
                             <!-- Social Media Links -->
                             <div class="speaker-nav">
-                                <a href="https://www.facebook.com/ehab.elhamzawy.9/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-facebook-f"></i></a>
+                                <a href="https://www.facebook.com/ehab.elhamzawy.9/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/ehabelhamzawy/" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/ehabelhamzawy/" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -758,8 +758,8 @@
                                         class="fa-brands fa-facebook-f"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://www.instagram.com/juayriaskitchen" target="_blank" rel="noopener noreferrer"><i
-                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/juayriaskitchen" target="_blank"
+                                    rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
                                 <a href="" target="_blank" rel="noopener noreferrer"><i
                                         class="fa-brands fa-twitter"></i></a>
                             </div>
@@ -774,14 +774,15 @@
             </div>
         </section>
 
-         <!-- Eunoia Section -->
+        <!-- Eunoia Section -->
 
-         <section class="body_section speakers_section" id="eunoia_speakers">
+        <section class="body_section speakers_section" id="eunoia_speakers">
             <div class="inner_content">
                 <div class="special-heading-container">
-                    <button type="button" class="slick-prev"><</button>
-                    <div class="special-heading">EUNOIA</div>
-                    <button type="button" class="slick-next">></button>
+                    <button type="button" class="slick-prev">
+                        << /button>
+                            <div class="special-heading">EUNOIA</div>
+                            <button type="button" class="slick-next">></button>
                 </div>
                 <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
                 <!-- Speakers Cards Container -->
@@ -1148,20 +1149,21 @@
                         </div>
                     </div>
 
-                    
+
 
                 </div>
             </div>
         </section>
 
-         <!-- Dimensions Section -->
+        <!-- Dimensions Section -->
 
-         <section class="body_section speakers_section" id="Dimensions_speakers">
+        <section class="body_section speakers_section" id="Dimensions_speakers">
             <div class="inner_content">
                 <div class="special-heading-container">
-                    <button type="button" class="slick-prev"><</button>
-                    <div class="special-heading">Dimensions</div>
-                    <button type="button" class="slick-next">></button>
+                    <button type="button" class="slick-prev">
+                        << /button>
+                            <div class="special-heading">Dimensions</div>
+                            <button type="button" class="slick-next">></button>
                 </div>
                 <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
                 <!-- Speakers Cards Container -->
@@ -1186,7 +1188,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/hossam-heikal.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/hossam-heikal.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1271,7 +1273,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/eslam-wageed.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/eslam-wageed.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1297,7 +1299,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/nour-samir.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/nour-samir.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1323,7 +1325,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/farida-elsharkawy.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/farida-elsharkawy.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1349,7 +1351,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/kareem-khaled.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/kareem-khaled.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1375,7 +1377,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/mahmoud-youssef.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/mahmoud-youssef.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1401,7 +1403,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/mohamed-elsawy.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/mohamed-elsawy.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1426,7 +1428,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/mohamed-hamed.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/mohamed-hamed.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1451,7 +1453,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/dimensions/sahar-elbazar.jpg" alt="speaker image">
+                            <img src="images/generation/dimensions/sahar-elbazar.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1483,9 +1485,10 @@
         <section class="body_section speakers_section" id="Semicolon_speakers">
             <div class="inner_content">
                 <div class="special-heading-container">
-                    <button type="button" class="slick-prev"><</button>
-                    <div class="special-heading">Semicolon</div>
-                    <button type="button" class="slick-next">></button>
+                    <button type="button" class="slick-prev">
+                        << /button>
+                            <div class="special-heading">Semicolon</div>
+                            <button type="button" class="slick-next">></button>
                 </div>
                 <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
                 <!-- Speakers Cards Container -->
@@ -1510,7 +1513,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/semicolon/lena-fakhany.png" alt="speaker image">
+                            <img src="images/generation/semicolon/lena-fakhany.png" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1595,7 +1598,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/semicolon/asmaa-abdelhamed.jpg" alt="speaker image">
+                            <img src="images/generation/semicolon/asmaa-abdelhamed.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1621,7 +1624,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/semicolon/sama-atef.png" alt="speaker image">
+                            <img src="images/generation/semicolon/sama-atef.png" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1647,7 +1650,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/semicolon/seif-selim.jpg" alt="speaker image">
+                            <img src="images/generation/semicolon/seif-selim.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1673,7 +1676,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/semicolon/mahmoud-tamer.jpg" alt="speaker image">
+                            <img src="images/generation/semicolon/mahmoud-tamer.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1695,20 +1698,21 @@
                             <div class="speaker-job">[Speaker]</div>
                         </div>
                     </div>
-                   
+
 
                 </div>
             </div>
         </section>
 
-          <!-- Secret Code Section -->
+        <!-- Secret Code Section -->
 
-          <section class="body_section speakers_section" id="SecretCode_speakers">
+        <section class="body_section speakers_section" id="SecretCode_speakers">
             <div class="inner_content">
                 <div class="special-heading-container">
-                    <button type="button" class="slick-prev"><</button>
-                    <div class="special-heading">Secret Code</div>
-                    <button type="button" class="slick-next">></button>
+                    <button type="button" class="slick-prev">
+                        << /button>
+                            <div class="special-heading">Secret Code</div>
+                            <button type="button" class="slick-next">></button>
                 </div>
                 <div class="spacing_size spacing_size-initial" style="height:30px;"></div>
                 <!-- Speakers Cards Container -->
@@ -1733,7 +1737,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/secretcode/hossam-heikal.jpg" alt="speaker image">
+                            <img src="images/generation/secretcode/hossam-heikal.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1818,7 +1822,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/secretcode/mohamed-moustafa.jpg" alt="speaker image">
+                            <img src="images/generation/secretcode/mohamed-moustafa.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1844,7 +1848,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/secretcode/reham-elnidany.jpg" alt="speaker image">
+                            <img src="images/generation/secretcode/reham-elnidany.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1870,7 +1874,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/secretcode/ziad-tarek.jpg" alt="speaker image">
+                            <img src="images/generation/secretcode/ziad-tarek.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1896,7 +1900,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/secretcode/bassel-yasser.jpg" alt="speaker image">
+                            <img src="images/generation/secretcode/bassel-yasser.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1922,7 +1926,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/secretcode/nada-raafat.jpg" alt="speaker image">
+                            <img src="images/generation/secretcode/nada-raafat.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1948,7 +1952,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/secretcode/hesham-afifi.jpg" alt="speaker image">
+                            <img src="images/generation/secretcode/hesham-afifi.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1973,7 +1977,7 @@
                     <div class="speaker-card">
                         <!-- Speaker Image -->
                         <div class="speaker-img">
-                        <img src="images/generation/secretcode/hanan-saied.jpg" alt="speaker image">
+                            <img src="images/generation/secretcode/hanan-saied.jpg" alt="speaker image">
                         </div>
 
                         <!-- Speaker Information -->
@@ -1995,7 +1999,7 @@
                             <div class="speaker-job">[Speaker]</div>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </section>
@@ -2031,8 +2035,8 @@
                                 target="_blank"><i class="fab fa-instagram"></i></a></li>
                         <li class="linkedin-icon"><a href="https://eg.linkedin.com/company/tedxmanaratalfaroukschool"
                                 target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                        <li class="tiktok-icon"><a href="https://www.tiktok.com/@tedxmfis"
-                                target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>
+                        <li class="tiktok-icon"><a href="https://www.tiktok.com/@tedxmfis" target="_blank"><i
+                                    class="fa-brands fa-tiktok"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -2043,21 +2047,23 @@
 <div class="cursor2"></div> -->
 
     <script src="script.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.speakers-slider').slick({
-                dots: true,
-                infinite: true,
-                speed: 300,
-                slidesToShow: 1,
-                adaptiveHeight: true,
-                prevArrow: $('.slick-prev'),
-                nextArrow: $('.slick-next'),
-            });
+    <script src="assets\splide-4.1.3\splide-4.1.3\dist\js\splide.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var splide = new Splide('.speakers-slider', {
+            type: 'loop',
+            perPage: 1,
+            speed: 300,
+            pagination: true,
+            arrows: true,
+            height: 'auto',
         });
+
+        splide.mount();
+    });
     </script>
-    
-    
+
+
 </body>
 
 </html>
