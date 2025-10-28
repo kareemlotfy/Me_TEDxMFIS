@@ -144,7 +144,7 @@
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (38).png"
+                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (38).webp"
                                         alt="gallaria">
                                 </div>
                             </li>
@@ -287,13 +287,13 @@
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (16).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsers/sponser  (16).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (17).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsers/sponser  (17).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
@@ -317,7 +317,7 @@
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (21).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsers/sponser  (21).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
@@ -329,7 +329,7 @@
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (23).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsers/sponser  (23).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
@@ -347,13 +347,13 @@
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (26).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsers/sponser  (26).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (27).png"
+                                    <img  style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsers/sponser  (27).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
@@ -377,7 +377,7 @@
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (31).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsers/sponser  (31).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
@@ -401,7 +401,7 @@
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (35).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsers/sponser  (35).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
@@ -539,7 +539,7 @@
             type: 'loop',
             perPage: 4,
             perMove: 1,
-            autoplay: true,
+            autoplay: false,
             interval: 2000,
             pagination: false,
             arrows: false,
