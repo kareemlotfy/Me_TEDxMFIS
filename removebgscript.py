@@ -5,7 +5,7 @@ from PIL import Image
 import time
 
 # Your remove.bg API key
-REMOVE_BG_API_KEY = 'QhKZ7JUAiQ78Dh6mH7tRfDbg'
+REMOVE_BG_API_KEY = 'Do3NhmRtaA29cMJVad7Rv38k'
 
 def remove_bg(image_path):
     with open(image_path, 'rb') as file:
@@ -36,16 +36,16 @@ def process_images(input_folder, output_folder):
             if image_no_bg:
                 output_path = os.path.join(output_folder, os.path.splitext(filename)[0] + '.webp')
                 image_no_bg.save(output_path, format='WEBP')
-                print(f"✅ Saved: {output_path}")
+                print(f" Saved: {output_path}")
         except Exception as e:
-            print(f"❌ Error processing {filename}: {e}")
+            print(f" Error processing {filename}: {e}")
         
         # Wait 60 sec after every 10 images
         if i % 10 == 0:
-            print("⏸️ Processed 10 images, waiting 60 seconds...")
+            print(" Processed 10 images, waiting 60 seconds...")
             time.sleep(60)
 
 if __name__ == '__main__':
     input_folder = r'C:\Users\karee\xampp\htdocs\Me_TEDxMFIS\images\sponsers'   # ← change this
-    output_folder = r'C:\Users\karee\xampp\htdocs\Me_TEDxMFIS\images\new sponsers' # ← change this
+    output_folder = r'C:\Users\karee\xampp\htdocs\Me_TEDxMFIS\images\new sponsors' # ← change this
     process_images(input_folder, output_folder)
