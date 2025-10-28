@@ -194,7 +194,7 @@ $con->close();
     <nav class="main-nav" id="mainNav">
         <div class="nav-container">
             <a href="#home" class="nav-logo">
-                <img src="images\TEDx_logo_place2_RGB_CS2_page-0003.png" alt="">
+                <img src="images\tedx-logo-white.png" alt="">
             </a>
 
             <ul class="nav-links">

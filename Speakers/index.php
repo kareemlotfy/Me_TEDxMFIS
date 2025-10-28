@@ -63,7 +63,7 @@
         <!-- Navigation -->
         <nav class="banners_navbar" id="navbar">
             <!-- Logo -->
-            <a href=""><img src="images\TEDx_logo_place2_RGB_CS2_page-0003.png" alt="tedx logo" id="tedx_logo"></a>
+            <a href=""><img src="tedx-logo-white.png" alt="tedx logo" id="tedx_logo"></a>
 
             <!-- Nav Links -->
             <div class="nav-links" id="navLinks">
