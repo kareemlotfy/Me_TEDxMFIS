@@ -222,7 +222,7 @@
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (5).png"
+                                    <img class="sponsor_card_img" src="images/sponsers/sponser  (4).webp"
                                         alt="books bike">
                                 </div>
                             </li>

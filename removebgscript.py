@@ -46,6 +46,6 @@ def process_images(input_folder, output_folder):
             time.sleep(60)
 
 if __name__ == '__main__':
-    input_folder = r'G:\xampp\htdocs\Me_TEDxMFIS\images\sponsers'   # ← change this
-    output_folder = r'G:\xampp\htdocs\Me_TEDxMFIS\images\new sponsors' # ← change this
+    input_folder = r'C:\Users\karee\xampp\htdocs\Me_TEDxMFIS\images\sponsers'   # ← change this
+    output_folder = r'C:\Users\karee\xampp\htdocs\Me_TEDxMFIS\images\new sponsers' # ← change this
     process_images(input_folder, output_folder)
