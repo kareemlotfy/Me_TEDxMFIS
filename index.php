@@ -85,7 +85,7 @@ $con->close();
     <meta property="og:description"
         content="Learn about TEDxManaratAlFaroukSchool, an independent TEDx event dedicated to sharing ideas and inspiring the community through impactful talks and innovative thinking.">
 
-    <meta property="og:image" content="https://www.tedxmanaratalfaroukschool.com/images/TEDxMFIS.jpeg">
+    <meta property="og:image" content="https://www.tedxmanaratalfaroukschool.com/images/TEDxMFIS.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/jpeg">
@@ -102,7 +102,7 @@ $con->close();
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="TEDx Manarat AlFarouk School">
     <meta name="twitter:description" content="Join TEDxManaratAlFaroukSchool for inspiring talks on innovative ideas.">
-    <meta name="twitter:image" content="https://www.tedxmanaratalfaroukschool.com/images/TEDxMFIS.jpeg">
+    <meta name="twitter:image" content="https://www.tedxmanaratalfaroukschool.com/images/TEDxMFIS.webp">
 
 
 
@@ -111,8 +111,8 @@ $con->close();
         onload="this.onload=null;this.rel='stylesheet'">
 
     <!-- Favicon -->
-    <link rel="icon" href="https://www.tedxmanaratalfaroukschool.com/images/x-art.png" type="image/x-icon">
-    <link rel="shortcut icon" href="https://www.tedxmanaratalfaroukschool.com/images/x-art.png" type="image/x-icon">
+    <link rel="icon" href="https://www.tedxmanaratalfaroukschool.com/images/x-art.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="https://www.tedxmanaratalfaroukschool.com/images/x-art.webp" type="image/x-icon">
 
     <!-- Slick Files -->
     <!-- Slick CSS -->
@@ -157,7 +157,7 @@ $con->close();
         "name": "TEDxManaratAlFaroukSchool",
         "url": "https://www.tedxmanaratalfaroukschool.com/",
         "description": "An independent TEDx event sharing inspiring ideas.",
-        "logo": "https://www.tedxmanaratalfaroukschool.com/images/x-art.png",
+        "logo": "https://www.tedxmanaratalfaroukschool.com/images/x-art.webp",
         "sameAs": [
             "https://www.facebook.com/TEDxManaratAlFarouk/",
             "https://www.instagram.com/tedx.manaratalfaroukschool/",
@@ -168,7 +168,7 @@ $con->close();
             "@type": "VideoObject",
             "name": "TEDxManaratAlFaroukSchool Video",
             "description": "An inspiring video showcasing TEDxManaratAlFaroukSchool's journey and ideas worth spreading.",
-            "thumbnailUrl": "https://tedxmanaratalfaroukschool.com/images/videothub.jpg",
+            "thumbnailUrl": "https://tedxmanaratalfaroukschool.com/images/videothub.webp",
             "uploadDate": "2024-11-16T06:28:45+00:00",
             "contentUrl": "https://player.vimeo.com/video/1029355746",
             "embedUrl": "https://player.vimeo.com/video/1029355746",
@@ -178,7 +178,7 @@ $con->close();
                 "name": "TEDxManaratAlFaroukSchool",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://www.tedxmanaratalfaroukschool.com/images/TEDxMFIS.jpeg"
+                    "url": "https://www.tedxmanaratalfaroukschool.com/images/TEDxMFIS.webp"
                 }
             }
         }
@@ -194,7 +194,7 @@ $con->close();
     <nav class="main-nav" id="mainNav">
         <div class="nav-container">
             <a href="#home" class="nav-logo">
-                <img src="images\tedx-logo-white.png" alt="">
+                <img src="images\tedx-logo-white.webp" alt="">
             </a>
 
             <ul class="nav-links">
@@ -456,7 +456,7 @@ $con->close();
                 <!-- Featured Speaker -->
                 <div class="speaker-card featured">
                     <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.png" alt="Dr. Sarah Chen" class="speaker-image">
+                        <img src="images\speakers_page\abouzaid.webp" alt="Dr. Sarah Chen" class="speaker-image">
                         <div class="expertise-tags">
                             <span class="expertise-tag">Innovation</span>
                             <span class="expertise-tag">AI Ethics</span>
@@ -485,7 +485,7 @@ $con->close();
                 <!-- Regular Speakers -->
                 <div class="speaker-card">
                     <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.png" alt="Ahmed Hassan" class="speaker-image">
+                        <img src="images\speakers_page\abouzaid.webp" alt="Ahmed Hassan" class="speaker-image">
                         <div class="expertise-tags">
                             <span class="expertise-tag">Entrepreneurship</span>
                             <span class="expertise-tag">Social Impact</span>
@@ -511,7 +511,7 @@ $con->close();
 
                 <div class="speaker-card">
                     <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.png" alt="Maya Rodriguez" class="speaker-image">
+                        <img src="images\speakers_page\abouzaid.webp" alt="Maya Rodriguez" class="speaker-image">
                         <div class="expertise-tags">
                             <span class="expertise-tag">Art</span>
                             <span class="expertise-tag">Activism</span>
@@ -537,7 +537,7 @@ $con->close();
 
                 <div class="speaker-card">
                     <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.png" alt="Dr. James Park" class="speaker-image">
+                        <img src="images\speakers_page\abouzaid.webp" alt="Dr. James Park" class="speaker-image">
                         <div class="expertise-tags">
                             <span class="expertise-tag">Neuroscience</span>
                             <span class="expertise-tag">Performance</span>
@@ -563,7 +563,7 @@ $con->close();
 
                 <div class="speaker-card">
                     <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.png" alt="Fatima Al-Sayed" class="speaker-image">
+                        <img src="images\speakers_page\abouzaid.webp" alt="Fatima Al-Sayed" class="speaker-image">
                         <div class="expertise-tags">
                             <span class="expertise-tag">Sustainability</span>
                             <span class="expertise-tag">Climate</span>
@@ -589,7 +589,7 @@ $con->close();
 
                 <div class="speaker-card tba">
                     <div class="speaker-image-container">
-                        <img src="images\mistryspeaker.jpg" alt="Fatima Al-Sayed" class="speaker-image">
+                        <img src="images\mistryspeaker.webp" alt="Fatima Al-Sayed" class="speaker-image">
                         <div class="expertise-tags">
                             <span class="expertise-tag">Sustainability</span>
                             <span class="expertise-tag">Climate</span>
@@ -877,7 +877,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -897,7 +897,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -916,7 +916,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -935,7 +935,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -954,7 +954,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -974,7 +974,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -993,7 +993,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1013,7 +1013,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1033,7 +1033,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1053,7 +1053,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1072,7 +1072,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1091,7 +1091,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1110,7 +1110,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1129,7 +1129,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1148,7 +1148,7 @@ $con->close();
                     </div>
                     <div class="testimonial_meta">
                         <div class="testimonial_image">
-                            <img decoding="async" src="images\default-pic.jpg" alt="Ay Had"
+                            <img decoding="async" src="images\default-pic.webp" alt="Ay Had"
                                 style="width:50px; height:50px; ">
                         </div>
                         <div class="testimonial_meta_names">
@@ -1168,7 +1168,7 @@ $con->close();
         <div class="inner_content">
             <div class="footer-container">
                 <div class="fc-col1">
-                    <img src="images\tedx-logo-white.png" alt="TEDxManaratAlFarouk logo"
+                    <img src="images\tedx-logo-white.webp" alt="TEDxManaratAlFarouk logo"
                         class="brand">
                 </div>
                 <div class="fc-col2">
@@ -1624,22 +1624,7 @@ $con->close();
         });
     });
 
-    // Navigation link clicks
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = link.getAttribute('href');
-            smoothScroll(target);
-        });
-    });
 
-    // Section dot clicks
-    sectionDots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            const section = dot.getAttribute('data-section');
-            smoothScroll(`#${section}`);
-        });
-    });
 
     // Scroll to top
     scrollTop.addEventListener('click', () => {
