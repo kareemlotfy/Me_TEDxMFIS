@@ -533,6 +533,7 @@ footer .brand {
     padding: 35px 15px 0;
     width: 1200px;
     box-sizing: border-box;
+    margin: auto;
 }
 
 /* Responsive Part */
@@ -558,139 +559,6 @@ footer .brand {
 @media (max-width:600px) {
     .inner_content {
         width: 100%;
-    }
-}
-
-@media (max-width: 600px) {
-    .body_section {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-}
-
-@media (max-width: 575px) {
-    .body_section {
-        padding-left: 13.75px;
-        padding-right: 13.75px;
-    }
-}
-
-@media (max-width: 550px) {
-    .body_section {
-        padding-left: 12.5px;
-        padding-right: 12.5px;
-    }
-}
-
-@media (max-width: 536px) {
-    .body_section {
-        padding-left: 11.8121px;
-        padding-right: 11.8121px;
-    }
-}
-
-@media (max-width: 525px) {
-    .body_section {
-        padding-left: 11.25px;
-        padding-right: 11.25px;
-    }
-}
-
-@media (max-width: 500px) {
-    .body_section {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
-
-@media (max-width: 487px) {
-    .body_section {
-        padding-left: 9.35925px;
-        padding-right: 9.35925px;
-    }
-}
-
-@media (max-width: 475px) {
-    .body_section {
-        padding-left: 8.75px;
-        padding-right: 8.75px;
-    }
-}
-
-@media (max-width: 450px) {
-    .body_section {
-        padding-left: 7.5px;
-        padding-right: 7.5px;
-    }
-}
-
-@media (max-width: 432px) {
-    .body_section {
-        padding-left: 6.60925px;
-        padding-right: 6.60925px;
-    }
-}
-
-@media (max-width: 425px) {
-    .body_section {
-        padding-left: 6.25px;
-        padding-right: 6.25px;
-    }
-}
-
-@media (max-width: 411px) {
-    .body_section {
-        padding-left: 5.56212px;
-        padding-right: 5.56212px;
-    }
-}
-
-@media (max-width: 400px) {
-    .body_section {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-}
-
-@media (max-width: 375px) {
-    .body_section {
-        padding-left: 3.75px;
-        padding-right: 3.75px;
-    }
-}
-
-@media (max-width: 368px) {
-    .body_section {
-        padding-left: 3.40575px;
-        padding-right: 3.40575px;
-    }
-}
-
-@media (max-width: 350px) {
-    .body_section {
-        padding-left: 2.5px;
-        padding-right: 2.5px;
-    }
-}
-
-@media (max-width: 325px) {
-    .body_section {
-        padding-left: 1.25px;
-        padding-right: 1.25px;
-    }
-}
-
-@media (max-width: 300px) {
-    .body_section {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}
-
-@media (max-width: 275px) {
-    .body_section {
-        padding-left: 0;
-        padding-right: 0;
     }
 }
 

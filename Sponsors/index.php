@@ -95,331 +95,316 @@
 
         <section class="body_section" id="" style="padding:0px;">
             <div class="inner_content">
-                <div style=" margin-bottom: 90px;">
-                    <h1 style="font-size: 36px; font-weight: bold; margin-bottom: 10px; color: #fff;">Meet Our Official
-                        Sponsors & Partners</h1>
-                    <p style="font-size: 16px; color: #666;">TEDx Manarat Alfarouk School wouldn’t be possible without
-                        our
-                        awesome sponsors!</p>
+                <div  class="sub-header">
+                    <h1>Meet Our Official Sponsors & Partners</h1>
+                    <p>TEDx Manarat Alfarouk School wouldn’t be possible without our awesome sponsors!</p>
                 </div>
-                <div class="sponsor_slick_title">
-                    <h4><span style="font-weight: 400;" class="genesisexpo_font-weight">Official Sponsors <span
-                                style="opacity:50%;font-size:16px;">( Generation 6 )</span></h4>
+                <div class="slider_title">
+                    <h4>Official Sponsors <span>( Generation 6 )</span></h4>
                 </div>
                 <div class="splide sponsors_slider slider">
                     <div class="splide__track">
                         <ul class="splide__list">
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (40).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (40).webp"
                                         alt="B-jeweled">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (39).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (39).webp"
                                         alt="withhand">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (46).png" alt="athr">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (46).webp" alt="athr">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (47).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (47).webp"
                                         alt="sh3er school">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (42).png" alt="hefa">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (42).webp" alt="hefa">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (41).png" alt="msrrah">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (41).webp" alt="msrrah">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (38).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (38).webp"
                                         alt="gallaria">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (43).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (43).webp"
                                         alt="one man crew">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (44).png" alt="edres">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (44).webp" alt="edres">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (45).png" alt="stiqa">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (45).webp" alt="stiqa">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (37).png" alt="blu">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (37).webp" alt="blu">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (48).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (48).webp"
                                         alt="uranus education">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (49).png" alt="domety">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (49).webp" alt="domety">
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="divider_custom" style="width:100%; height:1px; background-color:#e4e4e4;"></div>
-                <div class="spacing_size spacing_size-initial" style="height:48px;"></div>
-
-                <div class="genesisexpo_module_spacing">
-                    <div class="spacing_size spacing_size-initial" style="height:28px;"></div>
-                </div>
-                <div class="spacing_size spacing_size-initial" style="height:41px;"></div>
-                <div class="sponsor_slick_title">
-                    <h4><span style="font-weight: 400;" class="genesisexpo_font-weight">Official Sponsors <span
-                                style="opacity:50%;font-size:16px;">( Past Generations )</span></h4>
+                <div class="divider_custom"></div>
+                
+                <div class="slider_title">
+                    <h4>Official Sponsors <span>( Past Generations )</span></h4>
                 </div>
                 <div class="splide sponsors_slider2 slider">
                     <div class="splide__track">
                         <ul class="splide__list">
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (1).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (1).webp"
                                         alt="lets capture">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (2).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (2).webp"
                                         alt="abeer education">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (3).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (3).webp"
                                         alt="al rayah">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (4).png" alt="besa">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (4).webp" alt="besa">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (4).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (5).webp"
                                         alt="books bike">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (6).png" alt="camern">
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (6).webp" alt="camern">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (7).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (7).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (8).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (8).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (9).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (9).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (10).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (10).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (11).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (11).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (12).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (12).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (13).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (13).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (14).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (14).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (15).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (15).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (16).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (16).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (17).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (17).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (18).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (18).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (19).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (19).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (20).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (20).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (21).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (21).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (22).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (22).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (23).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (23).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (24).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (24).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (25).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (25).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (26).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (26).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img  style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (27).png"
+                                    <img  style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (27).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (28).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (28).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (29).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (29).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (30).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (30).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (31).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (31).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (32).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (32).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (33).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (33).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (34).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (34).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (35).png"
+                                    <img style ="filter:grayscale(1);" class="sponsor_card_img" src="images/sponsors/sponser  (35).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                             <li class="splide__slide">
                                 <div class="sponsor_card">
-                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (36).png"
+                                    <img class="sponsor_card_img" src="images/sponsors/sponser  (36).webp"
                                         alt="youthcanhub">
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="divider_custom" style="width:100%; height:1px; background-color:#e4e4e4;"></div>
-                <div class="spacing_size spacing_size-initial" style="height:48px;"></div>
-
-                <div class="genesisexpo_module_spacing">
-                    <div class="spacing_size spacing_size-initial" style="height:28px;"></div>
-                </div>
+                <div class="divider_custom"></div>
             </div>
         </section>
         <footer>

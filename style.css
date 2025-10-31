@@ -28,7 +28,7 @@
 }
 
 .sub-nav{
-  backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px) !important;
 }
 
 .main-nav.hidden {
@@ -818,7 +818,7 @@ dialog {
 
 /* Footer */
 footer {
-    background-color: #fff;
+    /* background-color: #fff; */
     color: #333;
     padding: 1em;
     display: grid;
@@ -830,7 +830,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    /* background: #fff; */
     padding: 1em 0;
 }
 

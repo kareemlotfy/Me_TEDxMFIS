@@ -1168,7 +1168,7 @@ $con->close();
         <div class="inner_content">
             <div class="footer-container">
                 <div class="fc-col1">
-                    <img src="images\TEDx_logo_place2_RGB_CS2_page-0003.png" alt="TEDxManaratAlFarouk logo"
+                    <img src="images\tedx-logo-white.png" alt="TEDxManaratAlFarouk logo"
                         class="brand">
                 </div>
                 <div class="fc-col2">
