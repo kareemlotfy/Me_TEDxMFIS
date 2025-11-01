@@ -28,7 +28,7 @@
     <meta name="author" content="TEDxManaratAlFaroukSchool">
 
     <link rel="stylesheet" href="..\assets\fontawesome-free-6.6.0-web\fontawesome-free-6.6.0-web\css\all.min.css">
-    <link rel="shortcut icon" href="images/x-art.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/x-art.webp" type="image/x-icon">
 
 
     <!-- Splide CSS -->
@@ -55,7 +55,7 @@
     <nav class="main-nav sub-nav" id="mainNav">
         <div class="nav-container">
             <a href="#home" class="nav-logo">
-                <img src="images\tedx-logo-white.png" alt="">
+                <img src="images\tedx-logo-white.webp" alt="">
             </a>
 
             <ul class="nav-links">
@@ -411,7 +411,7 @@
             <div class="inner_content">
                 <div class="footer-container">
                     <div class="fc-col1">
-                        <img src="images\tedx-logo-white.png" alt="TEDxManaratAlFarouk logo"
+                        <img src="images\tedx-logo-white.webp" alt="TEDxManaratAlFarouk logo"
                             class="brand">
                     </div>
                     <div class="fc-col2">

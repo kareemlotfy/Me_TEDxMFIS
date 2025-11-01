@@ -454,7 +454,7 @@ $con->close();
         <div class="speakers-container">
             <div class="speakers-grid">
                 <!-- Featured Speaker -->
-                <div class="speaker-card featured">
+                <div class="speaker-card "> <!-- featured class to increase its size-->
                     <div class="speaker-image-container">
                         <img src="images\speakers_page\abouzaid.webp" alt="Dr. Sarah Chen" class="speaker-image">
                         <div class="expertise-tags">

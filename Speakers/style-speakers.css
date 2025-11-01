@@ -1,3 +1,48 @@
+.special-heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.special-heading {
+    flex: 0 0 auto;
+}
+
+.splide__arrows {
+    flex: 0 0 auto;
+}
+
+.splide__arrow {
+    background: #eb0028;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.splide__arrow:hover {
+    background: #c5001f;
+    transform: scale(1.1);
+}
+
+.splide__arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Hide default arrows if they appear */
+.speakers-slider > .splide__arrows {
+    display: none;
+}
+
 
 .speakers_page .speakers_section .special-heading-container {
     flex-direction: row;
