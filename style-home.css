@@ -1853,12 +1853,13 @@ body {
   }
 
   .expertise-tags {
-    position: static;
+    position: absolute;
     flex-direction: row;
     flex-wrap: wrap;
     opacity: 1;
     transform: none;
     margin-top: 1rem;
+    display: none;
   }
 
   .speaker-bio {
@@ -2510,6 +2511,12 @@ body {
 
 /* Testimonials Start */
 
+@font-face {
+  font-family: 'behindfont';
+  font-weight: bold; /* Define the bold version */
+  src: url('DG-Gaded-Bold.ttf') format('truetype')
+}
+
 #testimonials .inner_content {
   width: 100%;
 }
@@ -2583,7 +2590,6 @@ body {
 
 .testimonial_name {
   font-weight: 400;
-  font-family: "Rubik", "serif";
   font-size: 22px;
   line-height: 1.65;
   color: #fff;
@@ -2601,6 +2607,21 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 5px;
+}
+
+.testimonial_status {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.behind_event {
+    font-family: "behindfont", sans-serif !important;
+    font-size: 15px !important;
+    @media (max-width:770px) {
+        font-size: 10px !important;
+    }
+    @media (max-width:460px) {
+        font-size: 10px !important;
+    }
 }
 
 .splide__pagination__page.is-active {
@@ -2732,3 +2753,217 @@ footer .brand {
 }
 
 /* End Footer */
+
+
+
+/* Special Heading and It's Subs */
+.special-heading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.special-heading {
+    color: #f3f3f3;
+    font-size: 120px;
+    font-weight: 800;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.sub-special-heading {
+    margin: -60px 0 10px 0;
+    font-size: 22px;
+    color: var(--ted-color);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.special-heading-title {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #707070;
+    margin: 0;
+    width: auto;
+}
+
+.heading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.content-under-special-heading {
+    margin-left: 90px;
+}
+
+.heading_description {
+    width: 570px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width:1370px) {
+    .content-under-special-heading {
+        margin-left: 0;
+    }
+}
+
+@media (max-width:1200px) {
+    .content-under-special-heading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+@media (max-width:960px) {
+
+    .special-heading {
+        font-size: 120px;
+    }
+
+    .content-under-special-heading {
+        margin-left: 0;
+    }
+
+    .sub-special-heading {
+        font-size: 22px;
+        margin: -60px 0 10px;
+    }
+
+    .special-heading-title {
+        font-size: 40px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+}
+
+@media (max-width:780px) {
+    .special-heading {
+        font-size: 75px;
+    }
+
+    .sub-special-heading {
+        margin: -45px 0 10px;
+    }
+}
+
+@media (max-width:770px) {
+
+    .special-heading {
+        font-size: 100px;
+    }
+
+    .sub-special-heading {
+        font-size: 20px;
+        margin: -50px 0 10px;
+    }
+
+    .special-heading-title {
+        font-size: 35px;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+}
+
+@media (max-width:640px) {
+
+    .special-heading {
+        font-size: 90px;
+    }
+
+    .sub-special-heading {
+        font-size: 20px;
+        margin: -45px 0 10px;
+    }
+
+    .special-heading-title {
+        font-size: 30px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .heading_description {
+        width: 450px;
+    }
+}
+
+@media (max-width:600px) {
+    .special-heading {
+        font-size: 80px;
+        margin: auto;
+    }
+
+    .special-heading-title {
+        font-size: 30px;
+    }
+
+    .sub-special-heading {
+        margin: -40px 0 10px;
+    }
+}
+
+@media (max-width:525px) {
+    .special-heading {
+        font-size: 60px;
+    }
+
+    .special-heading-title {
+        font-size: 23px;
+    }
+
+    .sub-special-heading {
+        margin: -30px 0 10px;
+    }
+
+    .heading_description {
+        width: 400px;
+    }
+}
+
+@media (max-width:425px) {
+    .special-heading {
+        font-size: 50px;
+    }
+
+    .sub-special-heading {
+        font-size: 16px;
+        margin: -25px 0 10px;
+    }
+
+    .heading_description {
+        width: 300px;
+    }
+}
+
+@media (max-width:330px) {
+    .special-heading {
+        font-size: 40px;
+    }
+
+    .sub-special-heading {
+        font-size: 13px;
+        margin: -20px 0 10px;
+    }
+
+    .heading_description {
+        width: 250px;
+    }
+}
+
+/* Special Heading and It's Subs End */

@@ -1,5 +1,10 @@
 <?php
 require("Misc/db_conn.php");
+require("Misc/security_middleware.php");
+
+// Initialize security middleware
+initSecurityMiddleware();
+
 
 // Function to fetch ticket status (returns same key 'status' like قبل)
 function getTicketStatus($con, $ticket_id) {
@@ -111,8 +116,8 @@ $con->close();
         onload="this.onload=null;this.rel='stylesheet'">
 
     <!-- Favicon -->
-    <link rel="icon" href="https://www.tedxmanaratalfaroukschool.com/images/x-art.webp" type="image/x-icon">
-    <link rel="shortcut icon" href="https://www.tedxmanaratalfaroukschool.com/images/x-art.webp" type="image/x-icon">
+    <link rel="icon" href="images/x-art.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="images/x-art.webp" type="image/x-icon">
 
     <!-- Slick Files -->
     <!-- Slick CSS -->
@@ -130,8 +135,9 @@ $con->close();
     <link rel="stylesheet" href="assets\splide-4.1.3\splide-4.1.3\dist\css\splide.min.css">
     <link rel="stylesheet" href="assets\splide-4.1.3\splide-4.1.3\dist\css\themes\splide-default.min.css">
     <!-- Base URL -->
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <!-- <base href="http://localhost:8000/"> -->
     <!-- <base href="https://tedxmanaratalfaroukschool.com/"> -->
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
@@ -163,25 +169,7 @@ $con->close();
             "https://www.instagram.com/tedx.manaratalfaroukschool/",
             "https://www.tiktok.com/@tedxmfis",
             "https://www.linkedin.com/company/tedxmanaratalfaroukschool"
-        ],
-        "video": {
-            "@type": "VideoObject",
-            "name": "TEDxManaratAlFaroukSchool Video",
-            "description": "An inspiring video showcasing TEDxManaratAlFaroukSchool's journey and ideas worth spreading.",
-            "thumbnailUrl": "https://tedxmanaratalfaroukschool.com/images/videothub.webp",
-            "uploadDate": "2024-11-16T06:28:45+00:00",
-            "contentUrl": "https://player.vimeo.com/video/1029355746",
-            "embedUrl": "https://player.vimeo.com/video/1029355746",
-            "duration": "PT1M",
-            "publisher": {
-                "@type": "Organization",
-                "name": "TEDxManaratAlFaroukSchool",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://www.tedxmanaratalfaroukschool.com/images/TEDxMFIS.webp"
-                }
-            }
-        }
+        ]
     }
     </script>
 
@@ -198,7 +186,7 @@ $con->close();
             </a>
 
             <ul class="nav-links">
-                <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
                 <li><a href="About\index.html" class="nav-link">About</a></li>
                 <li><a href="Speakers\index.php" class="nav-link">Speakers</a></li>
                 <li><a href="Sponsors\index.php" class="nav-link">Sponsors</a></li>
@@ -216,10 +204,10 @@ $con->close();
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu-links">
-            <li><a href="#home" class="mobile-menu-link active" data-section="home">Home</a></li>
-            <li><a href="#about" class="mobile-menu-link" data-section="about">About</a></li>
-            <li><a href="#speakers" class="mobile-menu-link" data-section="speakers">Speakers</a></li>
-            <li><a href="#schedule" class="mobile-menu-link" data-section="schedule">Schedule</a></li>
+            <li><a href="#home" class="mobile-menu-link">Home</a></li>
+            <li><a href="About\index.html" class="mobile-menu-link">About</a></li>
+            <li><a href="Speakers\index.php" class="mobile-menu-link">Speakers</a></li>
+            <li><a href="Sponsors\index.php" class="mobile-menu-link">Sponsors</a></li>
         </ul>
         <a href="#tickets" class="mobile-menu-cta">Get Your Ticket</a>
     </div>
@@ -300,7 +288,7 @@ $con->close();
         <!-- Scroll Indicator -->
         <div class="scroll-indicator">
             <svg viewBox="0 0 30 50">
-                <rect x="5" y="5" rx="15" ry="15" width="20" height="40" />
+                <rect x="5" y="5" rx="10" ry="10" width="20" height="40" />
                 <circle cx="15" cy="15" r="3">
                     <animate attributeName="cy" from="15" to="30" dur="1.5s" repeatCount="indefinite" />
                     <animate attributeName="opacity" from="1" to="0" dur="1.5s" repeatCount="indefinite" />
@@ -356,19 +344,19 @@ $con->close();
         <div class="stats-container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number" data-target="80">0</span>
+                    <span class="stat-number" data-target="90+">0</span>
                     <span class="stat-label">Speakers</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" data-target="3500">0</span>
+                    <span class="stat-number" data-target="4000+">0</span>
                     <span class="stat-label">Attendees</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" data-target="8">0</span>
+                    <span class="stat-number" data-target="7">0</span>
                     <span class="stat-label">Generations</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" data-target="150">0</span>
+                    <span class="stat-number" data-target="49">0</span>
                     <span class="stat-label">Sponser</span>
                 </div>
             </div>
@@ -453,115 +441,41 @@ $con->close();
         <!-- Speakers Grid -->
         <div class="speakers-container">
             <div class="speakers-grid">
-                <!-- Featured Speaker -->
-                <div class="speaker-card "> <!-- featured class to increase its size-->
-                    <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.webp" alt="Dr. Sarah Chen" class="speaker-image">
-                        <div class="expertise-tags">
-                            <span class="expertise-tag">Innovation</span>
-                            <span class="expertise-tag">AI Ethics</span>
-                            <span class="expertise-tag">Featured</span>
-                        </div>
-                    </div>
-                    <div class="speaker-info">
-                        <h3 class="speaker-name">Dr. Sarah Chen</h3>
-                        <p class="speaker-title">AI Ethics Pioneer & Tech Philosopher</p>
-                        <p class="speaker-bio">
-                            Leading researcher in artificial intelligence ethics with over 15 years of experience. Sarah
-                            has advised governments and tech giants on responsible AI development, challenging the
-                            industry to think beyond profits.
-                        </p>
-                        <div class="speaker-topic">
-                            <strong>Talk:</strong> "Breaking the Algorithm: How AI Can Serve Humanity, Not Replace It"
-                        </div>
-                        <div class="speaker-social">
-                            <a href="#" class="social-link" aria-label="LinkedIn">in</a>
-                            <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
-                            <a href="#" class="social-link" aria-label="Website">🌐</a>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Regular Speakers -->
-                <div class="speaker-card">
+                <div class="speaker-card tba">
                     <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.webp" alt="Ahmed Hassan" class="speaker-image">
-                        <div class="expertise-tags">
-                            <span class="expertise-tag">Entrepreneurship</span>
-                            <span class="expertise-tag">Social Impact</span>
-                        </div>
+                        <img src="images\mistryspeaker.webp" alt="mystery speaker" class="speaker-image">
                     </div>
                     <div class="speaker-info">
-                        <h3 class="speaker-name">Ahmed Hassan</h3>
-                        <p class="speaker-title">Social Entrepreneur & Change Maker</p>
+                        <h3 class="speaker-name">Mystery Speaker</h3>
+                        <p class="speaker-title">To Be Announced</p>
                         <p class="speaker-bio">
-                            Founded three successful social enterprises addressing education inequality in MENA. Ahmed's
-                            unconventional approach has impacted over 100,000 students.
+                            We're finalizing our lineup with more incredible minds who've shattered conventions in their
+                            fields. Stay tuned for the reveal!
                         </p>
                         <div class="speaker-topic">
-                            <strong>Talk:</strong> "Profit With Purpose: Building Businesses That Change Lives"
-                        </div>
-                        <div class="speaker-social">
-                            <a href="#" class="social-link">in</a>
-                            <a href="#" class="social-link">𝕏</a>
-                            <a href="#" class="social-link">🌐</a>
+                            <strong>Coming Soon:</strong> A talk that will blow your mind 🤯
                         </div>
                     </div>
                 </div>
-
-                <div class="speaker-card">
+                <div class="speaker-card tba">
                     <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.webp" alt="Maya Rodriguez" class="speaker-image">
-                        <div class="expertise-tags">
-                            <span class="expertise-tag">Art</span>
-                            <span class="expertise-tag">Activism</span>
-                        </div>
+                        <img src="images\mistryspeaker.webp" alt="mystery speaker" class="speaker-image">
                     </div>
                     <div class="speaker-info">
-                        <h3 class="speaker-name">Maya Rodriguez</h3>
-                        <p class="speaker-title">Visual Artist & Cultural Activist</p>
+                        <h3 class="speaker-name">Mystery Speaker</h3>
+                        <p class="speaker-title">To Be Announced</p>
                         <p class="speaker-bio">
-                            Uses art as a tool for social commentary and change. Her installations have been featured in
-                            30+ countries, challenging viewers to see the world differently.
+                            We're finalizing our lineup with more incredible minds who've shattered conventions in their
+                            fields. Stay tuned for the reveal!
                         </p>
                         <div class="speaker-topic">
-                            <strong>Talk:</strong> "Art as Rebellion: Painting Outside the Lines of Society"
-                        </div>
-                        <div class="speaker-social">
-                            <a href="#" class="social-link">in</a>
-                            <a href="#" class="social-link">𝕏</a>
-                            <a href="#" class="social-link">🌐</a>
+                            <strong>Coming Soon:</strong> A talk that will blow your mind 🤯
                         </div>
                     </div>
                 </div>
-
-                <div class="speaker-card">
-                    <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.webp" alt="Dr. James Park" class="speaker-image">
-                        <div class="expertise-tags">
-                            <span class="expertise-tag">Neuroscience</span>
-                            <span class="expertise-tag">Performance</span>
-                        </div>
-                    </div>
-                    <div class="speaker-info">
-                        <h3 class="speaker-name">Dr. James Park</h3>
-                        <p class="speaker-title">Neuroscientist & Peak Performance Coach</p>
-                        <p class="speaker-bio">
-                            Bridges neuroscience and human potential. His research on neuroplasticity has helped
-                            thousands break mental barriers and achieve extraordinary results.
-                        </p>
-                        <div class="speaker-topic">
-                            <strong>Talk:</strong> "Rewiring Success: The Science of Breaking Mental Boxes"
-                        </div>
-                        <div class="speaker-social">
-                            <a href="#" class="social-link">in</a>
-                            <a href="#" class="social-link">𝕏</a>
-                            <a href="#" class="social-link">🌐</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="speaker-card">
+                <!-- Speaker Card -->
+                <!-- <div class="speaker-card">
                     <div class="speaker-image-container">
                         <img src="images\speakers_page\abouzaid.webp" alt="Fatima Al-Sayed" class="speaker-image">
                         <div class="expertise-tags">
@@ -585,38 +499,13 @@ $con->close();
                             <a href="#" class="social-link">🌐</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="speaker-card tba">
-                    <div class="speaker-image-container">
-                        <img src="images\mistryspeaker.webp" alt="Fatima Al-Sayed" class="speaker-image">
-                        <div class="expertise-tags">
-                            <span class="expertise-tag">Sustainability</span>
-                            <span class="expertise-tag">Climate</span>
-                        </div>
-                    </div>
-                    <div class="speaker-info">
-                        <h3 class="speaker-name">Fatima Al-Sayed</h3>
-                        <p class="speaker-title">Environmental Scientist & Climate Innovator</p>
-                        <p class="speaker-bio">
-                            Developed groundbreaking sustainable solutions for water scarcity in arid regions. Her work
-                            challenges conventional environmental approaches.
-                        </p>
-                        <div class="speaker-topic">
-                            <strong>Talk:</strong> "Desert Innovation: Solving Tomorrow's Problems Today"
-                        </div>
-                        <div class="speaker-social">
-                            <a href="#" class="social-link">in</a>
-                            <a href="#" class="social-link">𝕏</a>
-                            <a href="#" class="social-link">🌐</a>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- TBA Card -->
                 <div class="speaker-card tba">
                     <div class="speaker-image-container">
-                        <div class="tba-icon">❓</div>
+                        <img src="images\mistryspeaker.webp" alt="mystery speaker" class="speaker-image">
                     </div>
                     <div class="speaker-info">
                         <h3 class="speaker-name">Mystery Speaker</h3>
@@ -691,12 +580,12 @@ $con->close();
                         <div class="price-comparison">
                             <div class="price-box current">
                                 <div class="price-label-small">Current Price</div>
-                                <div class="price-value" id="currentPrice">EGP 550</div>
+                                <div class="price-value" id="currentPrice"><span>EGP</span> <?php echo $final_price ?></div>
                             </div>
                             <div class="price-arrow">→</div>
                             <div class="price-box next">
                                 <div class="price-label-small">After Deadline</div>
-                                <div class="price-value" id="nextPrice">EGP 650</div>
+                                <div class="price-value" id="nextPrice">EGP <?php echo $final_price_group ?></div>
                             </div>
                         </div>
                     </div>
@@ -712,7 +601,7 @@ $con->close();
                             </div>
                             <div class="faq-answer-wrapper">
                                 <p class="faq-answer">
-                                    Early Bird tickets are available until November 30th, 2025, or until they sell out
+                                    Early Bird tickets are available until December 3rd, 2025, or until they sell out
                                     (whichever comes first). After that, Late Owl tickets will be available at a higher
                                     price.
                                 </p>
@@ -727,7 +616,7 @@ $con->close();
                             <div class="faq-answer-wrapper">
                                 <p class="faq-answer">
                                     Both tickets include exactly the same benefits and access. The only difference is
-                                    the price - Early Bird tickets are $50 while Late Owl tickets are $75. Same
+                                    the price - Early Bird tickets are <?php echo $final_price ?>EGP while Late Owl tickets are <?php echo $final_price_group ?>EGP. Same
                                     experience, different timing!
                                 </p>
                             </div>
@@ -740,8 +629,7 @@ $con->close();
                             </div>
                             <div class="faq-answer-wrapper">
                                 <p class="faq-answer">
-                                    Yes! We offer full refunds up to 7 days before the event. After that, tickets are
-                                    non-refundable but can be transferred to another person.
+                                    No! tickets are non-refundable.
                                 </p>
                             </div>
                         </div>
@@ -753,8 +641,7 @@ $con->close();
                             </div>
                             <div class="faq-answer-wrapper">
                                 <p class="faq-answer">
-                                    For groups of 5 or more, please contact us at tickets@tedxmafs.com for special group
-                                    rates. We offer custom packages for schools and organizations.
+                                    Unfortunately group tickets are not available this year.
                                 </p>
                             </div>
                         </div>
@@ -775,12 +662,12 @@ $con->close();
 
                     <div class="ticket-price">
                         <div class="price-amount">
-                            <span class="price-currency">EGP</span><span id="ticketPrice">550</span>
+                            <span class="price-currency">EGP</span><span id="ticketPrice"><?php echo $final_price ?></span>
                         </div>
                         <p class="price-label">Per Person</p>
-                        <span class="price-savings" id="savings">Save 100 EGP from regular price!</span>
+                        <span class="price-savings" id="savings">Save <?php echo $discount ?> EGP from regular price!</span>
                     </div>
-
+                    <!-- 
                     <div class="spots-alert">
                         <span class="spots-icon">⚠️</span>
                         <div>
@@ -791,7 +678,7 @@ $con->close();
                                 <div class="spots-fill" id="spotsFill"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="ticket-includes">
                         <h4 class="includes-title">What's Included</h4>
@@ -841,8 +728,9 @@ $con->close();
                         </div>
                     </div>
 
-                    <a class="ticket-cta" href="Tickets\Early_Bird_Form\index.php">
-                        <span>
+                    <a class="ticket-cta"
+                        href="Tickets\Early_Bird_Form\index.php" id="ticket-link">
+                        <span id="ticketCtaText">
                             Reserve My Early Bird Ticket Now
                             <span class="cta-subtext">🔒 Secure checkout • Instant confirmation</span>
                         </span>
@@ -856,21 +744,21 @@ $con->close();
     </section>
     <!-- Start Testimonials Section -->
     <section class="splide testimonial-section" aria-label="Splide Basic HTML Example" id="testimonials">
-            <!-- Special Heading Container -->
-            <div class="section-header">
-                <div class="section-tag">They Say</div>
-                <h1 class="section-title">Testimonials</h1>
-                <p class="section-subtitle">
-                    Our attendees feedback
-                </p>
-            </div>
+        <!-- Special Heading Container -->
+        <div class="section-header">
+            <div class="section-tag">They Say</div>
+            <h1 class="section-title">Testimonials</h1>
+            <p class="section-subtitle">
+                Our attendees feedback
+            </p>
+        </div>
         <div class="testimonials_container splide__track">
             <div class="testimonials_container splide__list">
                 <div class="testimonial_item splide__slide">
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">It was really interesting and everyone in the team made a very good
                             job</p>
@@ -890,7 +778,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">It was amazing and the speakers were incredible and the team work
                             was perfect</p>
@@ -910,7 +798,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">You need to do another oneee</p>
                     </div>
@@ -929,7 +817,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">The best event I've ever entered bgd 💖</p>
                     </div>
@@ -948,7 +836,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">It was soo good 💗 and thank you for this best event 😘</p>
                     </div>
@@ -967,7 +855,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">I loved the speakers so much and I really learned a lot from them
                         </p>
@@ -987,7 +875,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">The event was AMAZING</p>
                     </div>
@@ -1006,7 +894,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">Youm touhfa bgd ktr 5rkom bgd 4okran 3la elmghod w el48l dh 💗💗💗
                         </p>
@@ -1026,7 +914,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event" id="behind-title">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">The best event in the world really this is the 3rd time and it was
                             the best 💗</p>
@@ -1046,7 +934,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">Perfect bgd elspeakres kolhom kano inspiring awy sponsors were
                             amazing w elteam was so friendly</p>
@@ -1066,7 +954,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">AMAZING</p>
                     </div>
@@ -1085,7 +973,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">Amazing loved it had so much fun too ❤❤</p>
                     </div>
@@ -1104,7 +992,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">it was amazing no complaints</p>
                     </div>
@@ -1123,7 +1011,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">100/10</p>
                     </div>
@@ -1142,7 +1030,7 @@ $con->close();
                     <div class="testimonial_content">
                         <div class="testimonial_titles">
                             <div class="testimonial_date">9 December, 2024</div>
-                            <div class="testimonial_event">ما وراء الكواليس</div>
+                            <div class="testimonial_event behind_event">ما وراء الكواليس</div>
                         </div>
                         <p class="testimonial_text">Outstanding</p>
                     </div>
@@ -1168,8 +1056,7 @@ $con->close();
         <div class="inner_content">
             <div class="footer-container">
                 <div class="fc-col1">
-                    <img src="images\tedx-logo-white.webp" alt="TEDxManaratAlFarouk logo"
-                        class="brand">
+                    <img src="images\tedx-logo-white.webp" alt="TEDxManaratAlFarouk logo" class="brand">
                 </div>
                 <div class="fc-col2">
                     <div class="footer-text">
@@ -1196,10 +1083,14 @@ $con->close();
                                     class="fa-brands fa-tiktok"></i></a></li>
                     </ul> -->
                     <ul class="speaker-social" style="opacity: 1; margin-top: 0px; transform: translateY(0px);">
-                        <a href="https://www.facebook.com/TEDxManaratAlFarouk/" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/tedx.manaratalfaroukschool/" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="https://eg.linkedin.com/company/tedxmanaratalfaroukschool" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="https://www.tiktok.com/@tedxmfis" class="social-link"><i class="fa-brands fa-tiktok"></i></a></li></a>
+                        <a href="https://www.facebook.com/TEDxManaratAlFarouk/" class="social-link"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/tedx.manaratalfaroukschool/" class="social-link"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://eg.linkedin.com/company/tedxmanaratalfaroukschool" class="social-link"><i
+                                class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.tiktok.com/@tedxmfis" class="social-link"><i
+                                class="fa-brands fa-tiktok"></i></a></li></a>
                     </ul>
                 </div>
             </div>
@@ -1212,17 +1103,12 @@ $con->close();
     <!-- JavaScript -->
     <script>
     // Configuration - SET YOUR ACTUAL DATES HERE
-    const EARLY_BIRD_DEADLINE = new Date('2025-09-30T23:59:59').getTime();
-    const EVENT_DATE = new Date('2025-12-31T18:00:00').getTime();
+    const EARLY_BIRD_DEADLINE = new Date('2025-12-05T23:59:59').getTime();
+    const EVENT_DATE = new Date('2025-12-12T18:00:00').getTime();
 
-    const EARLY_BIRD_PRICE = 550;
-    const LATE_OWL_PRICE = 650;
-    const EARLY_BIRD_SPOTS = 200;
-    const LATE_OWL_SPOTS = 300;
+    const EARLY_BIRD_PRICE = <?php echo $final_price ?>;
+    const LATE_OWL_PRICE = <?php echo $final_price_group ?>;
 
-    // Simulate sold tickets (you'd get this from your backend)
-    let soldEarlyBird = 113; // 200 - 87 remaining
-    let soldLateOwl = 0;
 
     // Current phase tracking
     let currentPhase = 'early-bird'; // or 'late-owl'
@@ -1261,7 +1147,7 @@ $con->close();
                             <div class="phase-header">
                                 <div class="phase-icon">🎉</div>
                                 <h2 class="phase-title">Tickets Sold Out!</h2>
-                                <p class="phase-message">Thank you for your interest. Join our waitlist for future events.</p>
+                                <p class="phase-message">Thank you for your interest. </p>
                             </div>
                         </div>
                     `;
@@ -1279,7 +1165,7 @@ $con->close();
         document.querySelector('.phase-icon').textContent = '🦉';
 
         // Update prices
-        document.getElementById('currentPrice').textContent = LATE_OWL_PRICE;
+        document.getElementById('currentPrice').textContent =LATE_OWL_PRICE;
         document.getElementById('nextPrice').textContent = 'Sold Out';
 
         // Update ticket card
@@ -1290,18 +1176,14 @@ $con->close();
         document.getElementById('savings').style.borderColor = 'rgba(255, 193, 7, 0.4)';
         document.getElementById('savings').style.color = '#FFC107';
 
-        // Update spots
-        const remaining = LATE_OWL_SPOTS - soldLateOwl;
-        document.getElementById('spotsRemaining').textContent = remaining;
-        updateSpotsBar(soldLateOwl, LATE_OWL_SPOTS);
 
         // Update CTA button
-        document.querySelector('.ticket-cta span').innerHTML = `
+        document.getElementById('ticketCtaText').innerHTML = `
                 Reserve My Late Owl Ticket Now
                 <span class="cta-subtext">🔒 Secure checkout • Instant confirmation</span>
             `;
         document.querySelector('.ticket-cta').href =
-            'Tickets\Late_Owl_Form\index.php'; // Update with actual purchase link
+            'Tickets/Late_Owl_Form/index.php'; // Update with actual purchase link
 
         // Add animation to indicate change
         document.querySelector('.ticket-card').style.animation = 'none';
@@ -1310,50 +1192,12 @@ $con->close();
         }, 10);
     }
 
-    // Update spots remaining bar
-    function updateSpotsBar(sold, total) {
-        const percentage = (sold / total) * 100;
-        const spotsFill = document.getElementById('spotsFill');
-        spotsFill.style.width = percentage + '%';
 
-        // Change color based on availability
-        if (percentage > 80) {
-            spotsFill.style.background = 'linear-gradient(90deg, #EB0028, #ff6b9d)';
-        } else if (percentage > 60) {
-            spotsFill.style.background = 'linear-gradient(90deg, #FF9800, #FFC107)';
-        } else {
-            spotsFill.style.background = 'linear-gradient(90deg, #4CAF50, #8BC34A)';
-        }
-    }
 
 
     // Initialize
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
-    // Initial spots bar update
-    const currentSold = currentPhase === 'early-bird' ? soldEarlyBird : soldLateOwl;
-    const currentTotal = currentPhase === 'early-bird' ? EARLY_BIRD_SPOTS : LATE_OWL_SPOTS;
-    updateSpotsBar(currentSold, currentTotal);
-
-    // Simulate random ticket sales (remove in production)
-    setInterval(() => {
-        if (currentPhase === 'early-bird' && soldEarlyBird < EARLY_BIRD_SPOTS) {
-            if (Math.random() > 0.7) { // 30% chance every 5 seconds
-                soldEarlyBird++;
-                const remaining = EARLY_BIRD_SPOTS - soldEarlyBird;
-                document.getElementById('spotsRemaining').textContent = remaining;
-                updateSpotsBar(soldEarlyBird, EARLY_BIRD_SPOTS);
-            }
-        } else if (currentPhase === 'late-owl' && soldLateOwl < LATE_OWL_SPOTS) {
-            if (Math.random() > 0.8) { // 20% chance
-                soldLateOwl++;
-                const remaining = LATE_OWL_SPOTS - soldLateOwl;
-                document.getElementById('spotsRemaining').textContent = remaining;
-                updateSpotsBar(soldLateOwl, LATE_OWL_SPOTS);
-            }
-        }
-    }, 5000);
 
     // Add phase switch animation
     const style = document.createElement('style');
@@ -1378,6 +1222,8 @@ $con->close();
             }
         });
     });
+
+
     </script>
     <script>
     // Spotlight follows mouse
@@ -1623,8 +1469,6 @@ $con->close();
             smoothScroll(target);
         });
     });
-
-
 
     // Scroll to top
     scrollTop.addEventListener('click', () => {

@@ -3,6 +3,8 @@
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
 
+adminLogin();
+
 // Set the header for JSON response
 header("Content-Type: application/json");
 

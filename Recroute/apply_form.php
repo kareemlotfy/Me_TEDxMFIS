@@ -1,4 +1,8 @@
 <?php
+require_once('../Misc/security_middleware.php');
+setCorsHeaders();
+setSecurityHeaders();
+
 
 
 $mysqli = new mysqli("localhost", "root", "", "tedx");

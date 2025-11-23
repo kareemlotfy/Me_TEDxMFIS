@@ -389,7 +389,13 @@ $con->close();
                             </li>
                         </ul>
                     </li>
-                    
+
+                    <li class="menu-item ">
+                        <a href="admin/Storage/" class="menu-link ">
+                            <i class="menu-icon tf-icons bx bx-box"></i>
+                            <div class="text-truncate" data-i18n="Storage">Storage</div>
+                        </a>
+                    </li>
                     <li class="menu-item ">
                         <a href="admin/Settings/settings.php" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-cog"></i>

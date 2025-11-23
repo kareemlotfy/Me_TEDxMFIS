@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="../assets/splide-4.1.3/splide-4.1.3/dist/css/splide.min.css">
     <link rel="stylesheet" href="../assets/splide-4.1.3/splide-4.1.3/dist/css/themes/splide-default.min.css">
 
-    <base href="http://localhost/Me_TEDxMFIS/">
+    <base href="http://localhost/tedxmanaratalfaroukschool/">
 
     <!-- <base href="https://tedxmanaratalfaroukschool.com/"> -->
     
@@ -59,7 +59,7 @@
             </a>
 
             <ul class="nav-links">
-                <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#home" class="nav-link " data-section="home">Home</a></li>
                 <li><a href="About\index.html" class="nav-link">About</a></li>
                 <li><a href="Speakers\index.php" class="nav-link">Speakers</a></li>
                 <li><a href="Sponsors\index.php" class="nav-link">Sponsors</a></li>
@@ -77,10 +77,10 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu-links">
-            <li><a href="#home" class="mobile-menu-link active" data-section="home">Home</a></li>
-            <li><a href="#about" class="mobile-menu-link" data-section="about">About</a></li>
-            <li><a href="#speakers" class="mobile-menu-link" data-section="speakers">Speakers</a></li>
-            <li><a href="#schedule" class="mobile-menu-link" data-section="schedule">Schedule</a></li>
+            <li><a href="#home" class="mobile-menu-link" >Home</a></li>
+            <li><a href="About\index.html" class="mobile-menu-link">About</a></li>
+            <li><a href="Speakers\index.php" class="mobile-menu-link" >Speakers</a></li>
+            <li><a href="Sponsors\index.php" class="mobile-menu-link" >Sponsors</a></li>
         </ul>
         <a href="#tickets" class="mobile-menu-cta">Get Your Ticket</a>
     </div>

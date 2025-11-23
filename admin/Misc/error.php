@@ -110,7 +110,6 @@ $con->close();
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
-
                 <div class="app-brand demo pb-4 pt-4 ">
                     <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
                         <div class="logo-container">
@@ -132,7 +131,7 @@ $con->close();
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item ">
+                    <li class="menu-item active open">
                         <a href="admin/Dashboard/dashboard.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
                             <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
@@ -280,12 +279,36 @@ $con->close();
                     </li>
                     <!-- e-commerce-app menu end -->
                     <li class="menu-item">
-                        <a href="admin/Tickets/tickets.php?userFilter=all" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bx-user'></i>
                             <div class="text-truncate" data-i18n="Users">Users</div>
                         </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="admin/Tickets/single.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Single Tickets">Single Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/vip.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="VIP Tickets">VIP Tickets</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="admin/Tickets/family.php?userFilter=all" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Family Tickets">Family Tickets</div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="menu-item">
+                    
+                    <li class="menu-item ">
+                        <a href="admin/Storage/" class="menu-link ">
+                            <i class="menu-icon tf-icons bx bx-box"></i>
+                            <div class="text-truncate" data-i18n="Storage">Storage</div>
+                        </a>
+                    </li>
+                    <li class="menu-item ">
                         <a href="admin/Settings/settings.php" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div class="text-truncate" data-i18n="Settings">Settings</div>

@@ -1,5 +1,10 @@
 <?php
 session_start();
+require("../Misc/security_middleware.php");
+
+// Initialize security middleware
+initSecurityMiddleware();
+
 include 'functions.php';
 $pdo = pdo_connect_mysql();
 

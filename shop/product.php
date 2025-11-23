@@ -1,4 +1,8 @@
 <?php
+require_once('../Misc/security_middleware.php');
+setCorsHeaders();
+setSecurityHeaders();
+
 // Check to make sure the id parameter is specified in the URL
 if (isset($_GET['id'])) {
     // Prepare statement and execute, prevents SQL injection

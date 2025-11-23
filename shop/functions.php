@@ -1,4 +1,9 @@
 <?php
+require("../Misc/security_middleware.php");
+
+// Initialize security middleware
+initSecurityMiddleware();
+
 function pdo_connect_mysql() {
     // Update the details below with your MySQL details
     $DATABASE_HOST = 'localhost';

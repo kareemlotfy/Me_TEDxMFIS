@@ -354,7 +354,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <input type="text" class="name" id="school" name="school" placeholder=" ">
                                     <label for="location"
                                         class="payment-form-label payment-form-label-required test-resp">State Your
-                                        School, University or Working Field</label>
+                                        School</label>
                                     <i class="fi fi-rr-school icon"></i>
                                 </div>
                             </div>
@@ -458,7 +458,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <ol>
                                     <li style="list-style:none; text-align:center;"><Strong style="color: var(--ted-color)">IF You use Mobile</Strong></li>
                                     <li> <a href="https://ipn.eg/S/maryamelshafie/instapay/8OsbIP">Click this Link</a> it will redirect you to Instapy app OR scan the QR code with the camera of another phone.</li>
-                                    <li>Then enter this amount : <strong id="ticket_total"><?= htmlspecialchars($total_price) ?></strong> EGP</li>
+                                    <li>Then enter this amount : <strong id="ticket_total"><?= htmlspecialchars($early_final) ?></strong> EGP</li>
                                     <li>Confirm the transaction.</li>
                                     <li>Send a screenshot of the transaction to this number: <strong>01505335101</strong> on WhatsApp or
                                         <a href="https://wa.me/201505335101" target="_blank" style="color: green; font-weight:600; text-decoration:none;">Click This Link</a>. </li>
@@ -469,7 +469,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <li style="list-style:none; text-align:center;"><Strong style="color: var(--ted-color)">IF You use ON PC or Laptop</Strong></li>
                                     <li>Open your mobile camera app.</li>
                                     <li>Scan The QR code.</li>
-                                    <li>Then enter this amount : <strong id="ticket_total"><?= htmlspecialchars($total_price) ?></strong> EGP</li>
+                                    <li>Then enter this amount : <strong id="ticket_total"><?= htmlspecialchars($early_final) ?></strong> EGP</li>
                                     <li>Confirm the transaction.</li>
                                     <!-- <li>Send a screenshot of the transaction to this number: <strong>0100026688</strong> on WhatsApp or
                                         <a href="https://wa.me/20100026688" target="_blank" style="color: green; font-weight:600; text-decoration:none;">Click This Link</a>. </li> -->

@@ -11,6 +11,11 @@
     --loader-bg: #fff;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* Main Navigation */
 .main-nav {
@@ -676,7 +681,8 @@
 }
 
 .speakers_banner {
-    background-image: url(images/bg-mic.webp);
+    background-image: url(images/bg-mic2.webp);
+    /* background-image: url(images/bg-mic.webp); */
 }
 
 .about_banner {

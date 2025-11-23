@@ -4,6 +4,10 @@
     </form>
 
 <?php
+require_once('../Misc/security_middleware.php');
+setCorsHeaders();
+setSecurityHeaders();
+
 // The amounts of products to show on each page
 $num_products_on_each_page = 4;
 // The current page - in the URL, will appear as index.php?page=products&p=1, index.php?page=products&p=2, etc...

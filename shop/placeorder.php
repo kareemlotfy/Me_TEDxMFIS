@@ -1,3 +1,7 @@
+<?php
+require_once('../Misc/security_middleware.php');
+initSecurityMiddleware();
+?>
 
 
 <div class="placeorder content-wrapper">

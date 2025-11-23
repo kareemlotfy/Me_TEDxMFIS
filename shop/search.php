@@ -1,4 +1,8 @@
 <?php
+require_once('../Misc/security_middleware.php');
+setCorsHeaders();
+setSecurityHeaders();
+
 // Check if the search query is provided and not empty or consists of only whitespace characters
 if (isset($_GET['query']) && trim($_GET['query']) !== '') {
     // Connect to your database
