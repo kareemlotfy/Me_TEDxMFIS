@@ -89,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 
     $gender = "";
+    $p_phone = "";
     $learning_type = "";
     $login_type = "";
     $st_mfis = "";
@@ -106,8 +107,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($first_name) || empty($last_name) || empty($email) || empty($phone) || empty($age) || empty($location) || empty($frm_data['gender']) || empty($frm_data['login_type']) || empty($frm_data['ted_event']) || empty($frm_data['payment_method'])) {
             alert("error","", "Please fill in all required fields", "Oops! It seems like you missed filling in some required fields. Please make sure to fill in all the mandatory information and try again.", "Close");
             
-        } elseif ($frm_data['age'] < 13) {
-            alert("error","" , "Age Requirement Error", "We're sorry, but you must be at least 13 years old to submit this form. Please ensure you meet the age requirement before proceeding.", "Close");
+        } elseif ($frm_data['age'] < 14) {
+            alert("error","" , "Age Requirement Error", "We're sorry, but you must be at least 14 years old to submit this form. Please ensure you meet the age requirement before proceeding.", "Close");
             
         } elseif (!is_valid_email($email)) {
             alert("error","", "Invalid email format", "The email address you provided is not in a valid format. Please double-check your email address and ensure it follows the correct format (e.g., example@email.com).", "Close");
@@ -138,6 +139,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $learning_type = $frm_data['learning_type'];
             }
 
+            if (empty($frm_data['p_phone'])) {
+                $p_phone = "This Option did't appear to him/her";
+            } else {
+                $p_phone = $frm_data['p_phone'];
+            }
+
 
             if (mysqli_connect_errno()) {
                 die("Connection error: (" . mysqli_connect_errno() . ") " . mysqli_connect_error());
@@ -164,37 +171,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Insert new data
                         $INSERT = "INSERT INTO user_cred 
-                        (first_name, last_name, name, email, phone, age, school, location, ted_event_name, ip_address, browser, operating_system, st_mfis, login_type, ted_event, gender, grade, payment_method, paid, learning_type, ticket_type, ticket_sub_type, submit_date) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+                        (first_name, last_name, name, email, phone, age, school, location, ted_event_name, ip_address, browser, operating_system, st_mfis, login_type, ted_event, gender, grade, payment_method, paid, learning_type, p_phone, ticket_type, ticket_sub_type, submit_date) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
                         $stmt = $con->prepare($INSERT);
 
                         $paid = $late_final;
 
-                        $stmt->bind_param("ssssiissssssssssisssss", 
-                            $first_name, 
-                            $last_name, 
-                            $name, 
-                            $email, 
-                            $phone, 
-                            $age, 
-                            $school, 
-                            $location, 
-                            $ted_event_name, 
-                            $user_ip, 
-                            $user_browser, 
-                            $user_os, 
-                            $st_mfis, 
-                            $login_type, 
-                            $ted_event, 
-                            $gender, 
-                            $grade, 
-                            $pay, 
-                            $paid, 
-                            $learning_type, 
-                            $ticket_type, 
-                            $ticket_sub_type
-                        );
+$stmt->bind_param("sssssissssssssssssissss", 
+    $first_name,
+    $last_name,
+    $name,
+    $email,
+    $phone,
+    $age,
+    $school,
+    $location,
+    $ted_event_name,
+    $user_ip,
+    $user_browser,
+    $user_os,
+    $st_mfis,
+    $login_type,
+    $ted_event,
+    $gender,
+    $grade,
+    $pay,
+    $paid,
+    $learning_type,
+    $p_phone,
+    $ticket_type,
+    $ticket_sub_type
+);
 
 
                         $stmt->execute();
@@ -239,7 +247,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <link rel="shortcut icon" href="images/x-art.png" type="image/x-icon">
     <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="https://tedxmanaratalfaroukschool.com/">
 
 
     <link rel="stylesheet" href="assets\fontawesome-free-6.6.0-web\fontawesome-free-6.6.0-web\css\all.css">
@@ -327,8 +335,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             value="Student In College">
                                         <label class="radio-label login_type" id="college" for="college">Student In
                                             College</label>
-                                        <input type="radio" id="parent" name="login_type" class="radio"
-                                            value="Student In College">
+                                        <input type="radio" id="parent" name="login_type" class="radio" value="Parent">
                                         <label class="radio-label login_type" id="parent" for="parent">Parent</label>
                                     </div>
                                 </div>
@@ -342,6 +349,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <label class="radio-label" for="college">College</label>
                                 </div>
                                 </div> -->
+                                <div class="input_group" id="p_phone">
+                                    <div class="input_box">
+                                        <input type="number" class="name" id="p_phone" name="p_phone" placeholder=" ">
+
+                                        <label for="p_phone"
+                                            class="payment-form-label payment-form-label-required">Parent Phone
+                                            Number</label>
+                                        <!-- <i class="fa fa-phone icon"></i> -->
+                                        <i class="fi fi-rr-phone-call icon"></i>
+                                    </div>
+                                </div>
 
                                 <div class="input_group" id="st-MFIS">
                                     <div class="input_box">
@@ -358,7 +376,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <div class="input_box">
                                         <input type="text" class="name" id="school" name="school" placeholder=" ">
                                         <label for="location"
-                                            class="payment-form-label payment-form-label-required test-resp">State Your School</label>
+                                            class="payment-form-label payment-form-label-required test-resp">State Your
+                                            School</label>
                                         <i class="fi fi-rr-school icon"></i>
                                     </div>
                                 </div>
@@ -460,27 +479,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <!-- InstaPy Dialog -->
                                 <dialog class="payment_details" id="instaPayDialog">
                                     <h2>InstaPay</h2>
-                                    <img src="images/instaqrcode.jpeg" />
+                                    <img src="images/instapayqrcode.jpeg" />
                                     <ol>
                                         <li style="list-style:none; text-align:center;"><Strong
                                                 style="color: var(--ted-color)">IF You use Mobile</Strong></li>
-                                        <li> <a href="https://ipn.eg/S/maryamelshafie/instapay/8OsbIP">Click this
-                                                Link</a>
-                                            it will redirect you to Instapy app OR scan the QR code with the camera of
-                                            another phone.</li>
+                                        <li> <a href="https://ipn.eg/S/maryamelshafie2/instapay/9d5BVu">Click this
+                                                Link</a> it will redirect you to Instapy app OR scan the QR code with
+                                            the camera of another phone.</li>
                                         <li>Then enter this amount : <strong
                                                 id="ticket_total"><?= htmlspecialchars($late_final) ?></strong> EGP
                                         </li>
                                         <li>Confirm the transaction.</li>
                                         <li>Send a screenshot of the transaction to this number:
-                                            <strong>01505335101</strong> on WhatsApp or
-                                            <a href="https://wa.me/201505335101" target="_blank"
+                                            <strong>01035870735</strong> on WhatsApp or
+                                            <a href="https://wa.me/201035870735" target="_blank"
                                                 style="color: green; font-weight:600; text-decoration:none;">Click This
                                                 Link</a>.
                                         </li>
                                         <li>And send a message with the phone number you wrote in the form to the
-                                            WhatsApp
-                                            number above.</li>
+                                            WhatsApp number above.</li>
                                     </ol>
 
                                     <ol>
@@ -492,10 +509,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 id="ticket_total"><?= htmlspecialchars($late_final) ?></strong> EGP
                                         </li>
                                         <li>Confirm the transaction.</li>
-                                        <!-- <li>Send a screenshot of the transaction to this number: <strong>0100026688</strong> on WhatsApp or
-                                        <a href="https://wa.me/20100026688" target="_blank" style="color: green; font-weight:600; text-decoration:none;">Click This Link</a>. </li> -->
+                                        <!-- <li>Send a screenshot of the transaction to this number: <strong>01035870735</strong> on WhatsApp or
+                                        <a href="https://wa.me/201035870735" target="_blank" style="color: green; font-weight:600; text-decoration:none;">Click This Link</a>. </li> -->
                                         <li>Then send a screenshot of the transaction to this number:
-                                            <strong>01505335101</strong> on WhatsApp.
+                                            <strong>01035870735</strong> on WhatsApp.
                                         </li>
                                         <li>Send a message with the phone number you wrote in the form.</li>
                                     </ol>
@@ -507,8 +524,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <ol style="margin-top:20px;">
                                         <li>Make Sure You Entered The Correct Amount</li>
                                         <li>Make Sure To Send the Screenshot to the WhatsApp Number Above to Get Your
-                                            Ticket
-                                        </li>
+                                            Ticket</li>
                                         <li>Make Sure to Send the Correct Number You Wrote in the Form to the WhatsApp
                                             Number</li>
                                     </ol>
@@ -521,27 +537,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 <!-- Cash at School Dialog -->
                                 <dialog class="payment_details" id="cashAtSchoolDialog">
-                                    <h2>Cash at School</h2>
+                                    <h2>Cash at MFIS School</h2>
                                     <p>📍 Location : <a href="https://maps.app.goo.gl/JUi2FjJ8y4J9fkGy6" target="_blank"
                                             rel="noopener noreferrer">MFIS</a></p>
                                     <ol>
                                         <strong>You will receive the ticket by email upon payment.</strong>
                                         <p>You can contact one of the numbers bellow on WhatsApp a day prior to pay for
-                                            your
-                                            ticket at school</p>
+                                            your ticket at school</p>
                                         <br>
-                                        <li>National (Girls)<br>Saja - 0 114 334 3433<br>Rahma -  0 114 150 3289</li>
+                                        <li>National (Girls)<br>Salma - 0 110 725 9620<br>Jana - 0 120 823 1545</li>
                                         <br>
-                                        <li>IGCSE<br>Ahmed ElMahyy - 0 111 140 4422<br>Rovan ahmed - 0 100 333
-                                            9063<br>Moaz
-                                            Hany - 0 101 556 3533<br>Roshan - 0 100 375 3556<br>Lamis Abdullah - 0 109
-                                            550
-                                            0623<br>Belal - 0 111 132 9858</li>
+                                        <li>IG (Girls)<br>Rovan - 0 100 333 9063</li>
                                         <br>
-                                        <li>National (Boys)<br>Omar tamer - 0 103 268 3677<br>Hassan - 0 100 689
-                                            9750<br>Omar ashraf - 0 122 701 5734<br>Moaz M. - 0 106 059 2908<br>Youssef
-                                            - 0
-                                            106 628 5905</li>
+                                        <li>National (Boys)<br>Omar ashraf - 0 122 701 5734<br>Moaz Hany - 0 101 556 3533</li>
+                                        <br>
+                                        <h2>Cash at FIS School</h2>
+                                        <p>📍 Location : <a href="https://maps.app.goo.gl/9qrd5ywT1E1i7zMu5" target="_blank"
+                                            rel="noopener noreferrer">FIS</a></p>
+                                        <li>FIS (Girls)<br>habiba yehia - 0 109 353 8909</li>
                                     </ol>
                                     <div class="input_box">
                                         <button type="button" onclick="closeDialog('cashAtSchoolDialog')">Okay</button>
@@ -689,6 +702,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // hide the elements
         document.getElementById("st-MFIS").style.display = "none";
+        document.getElementById("p_phone").style.display = "none";
         document.getElementById("st-no").style.display = "none";
         document.getElementById("st-yes").style.display = "none";
         document.getElementById("st-yes2").style.display = "none";
@@ -707,6 +721,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             studentRadio.addEventListener('change', function() {
                 if (this.checked) {
                     document.getElementById("st-MFIS").style.display = "flex";
+                    document.getElementById("p_phone").style.display = "flex";
                     document.getElementById("st-no").style.display = "none";
                     document.getElementById("st-yes").style.display = "none";
                     document.getElementById("st-yes2").style.display = "none";
@@ -717,6 +732,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             collegeRadio.addEventListener('change', function() {
                 if (this.checked) {
                     document.getElementById("st-MFIS").style.display = "none";
+                    document.getElementById("p_phone").style.display = "none";
                     document.getElementById("st-no").style.display = "none";
                     document.getElementById("st-yes").style.display = "none";
                     document.getElementById("st-yes2").style.display = "none";
@@ -729,6 +745,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             parentRadio.addEventListener('change', function() {
                 if (this.checked) {
                     document.getElementById("st-MFIS").style.display = "none";
+                    document.getElementById("p_phone").style.display = "none";
                     document.getElementById("st-no").style.display = "none";
                     document.getElementById("st-yes").style.display = "none";
                     document.getElementById("st-yes2").style.display = "none";

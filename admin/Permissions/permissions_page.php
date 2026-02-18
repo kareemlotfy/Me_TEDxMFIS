@@ -9,6 +9,14 @@ $adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after
 $pageId = 8; // Example: replace with the actual page ID you want to check
 
 checkAdminPermission($con, $adminId, $pageId);
+
+date_default_timezone_set('Africa/Cairo');
+
+$now = date("Y-m-d H:i:s");
+
+$update = $con->prepare("UPDATE admin_cred SET last_activity=? WHERE id=?");
+$update->bind_param("si", $now, $adminId);
+$update->execute();
 ?>
 
 <?php
@@ -26,7 +34,6 @@ if ($adminDetails) {
 } else {
     echo "Admin details not found.";
 }
-
 ?>
 
 
@@ -46,6 +53,7 @@ if ($adminDetails) {
 
     <!-- Base -->
     <base href="https://tedxmanaratalfaroukschool.com/">
+    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -144,14 +152,15 @@ if ($adminDetails) {
             height: 12px;
             border-radius: 50%;
             margin-right: 10px;
+            background-color: #c0bebeb2;
         }
 
         .role-color.green {
             background-color: #00ff00;
         }
 
-        .role-color.red {
-            background-color: #ff0000;
+        .role-color.gray {
+            background-color: #c0bebeb2;
         }
 
         .role-color.yellow {
@@ -481,17 +490,17 @@ if ($adminDetails) {
                             </li>
                         </ul>
                     </li>
-
-                    <li class="menu-item ">
-                        <a href="admin/Settings/settings.php" class="menu-link ">
-                            <i class="menu-icon tf-icons bx bx-box"></i>
-                            <div class="text-truncate" data-i18n="Settings">Storage</div>
-                        </a>
-                    </li>
                     <li class="menu-item ">
                         <a href="admin/Storage/" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-box"></i>
                             <div class="text-truncate" data-i18n="Storage">Storage</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item ">
+                        <a href="admin/Settings/settings.php" class="menu-link ">
+                            <i class="menu-icon tf-icons bx bx-cog"></i>
+                            <div class="text-truncate" data-i18n="Settings">Settings</div>
                         </a>
                     </li>
                     <li class="menu-item">
@@ -713,17 +722,19 @@ if ($adminDetails) {
 
     // Display admins and store the first admin's ID
     $first_admin_id = null;
-    while ($admin = $admins->fetch_assoc()) {
-        if ($admin['id'] != $_SESSION["adminId"]) {
-            if ($first_admin_id === null) {
-                $first_admin_id = $admin['id'];
-            }
-            echo "<div class='role-item '>";
-            echo "<span class='role-color green'></span>";
-            echo "<a href='#' onclick='showPermissions(" . htmlspecialchars($admin['id']) . "); return false;'>" . htmlspecialchars($admin['admin_name']) . "</a> <a href='javascript:void(0);' onclick='confirmDelete(" . htmlspecialchars($admin['id']) . "); return false;'><i class='fa-regular fa-trash-can'></i></a>";
-            echo "</div>";
+while ($admin = $admins->fetch_assoc()) {
+    if ($admin['id'] != $_SESSION["adminId"]) {
+        if ($first_admin_id === null) {
+            $first_admin_id = $admin['id'];
         }
+
+        echo "<div class='role-item'>";
+        echo "<span class='role-color' id='admin-dot-" . $admin['id'] . "'></span>";
+        echo "<a href='#' onclick='showPermissions(" . htmlspecialchars($admin['id']) . "); return false;'>" . htmlspecialchars($admin['admin_name']) . "</a> <a href='javascript:void(0);' onclick='confirmDelete(" . htmlspecialchars($admin['id']) . "); return false;'><i class='fa-regular fa-trash-can'></i></a>";
+        echo "</div>";
     }
+}
+
     
     $admins_stmt->close();
     ?>
@@ -1000,6 +1011,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         </script>
+
+<script>
+function refreshAdminStatus() {
+    fetch("admin/Permissions/admin_status.php")
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(admin => {
+                let dot = document.getElementById("admin-dot-" + admin.id);
+
+                if (dot) {
+                    dot.classList.remove("green", "gray");
+                    dot.classList.add(admin.online ? "green" : "gray");
+                }
+            });
+        })
+        .catch(err => console.error(err));
+}
+
+setInterval(refreshAdminStatus, 3000);
+
+</script>
+
 
 </body>
 

@@ -69,7 +69,7 @@ if (isset($_POST["submit"])) {
 
     <title>Login</title>
     <!--Base -->
-    <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />

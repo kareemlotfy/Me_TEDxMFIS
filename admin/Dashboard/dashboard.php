@@ -9,6 +9,14 @@ $adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after
 $pageId = 1; // Example: replace with the actual page ID you want to check
 
 checkAdminPermission($con, $adminId, $pageId);
+
+date_default_timezone_set('Africa/Cairo');
+$now = date("Y-m-d H:i:s");
+
+$update = $con->prepare("UPDATE admin_cred SET last_activity=? WHERE id=?");
+$update->bind_param("si", $now, $adminId);
+$update->execute();
+
 ?>
 
 <?php
@@ -38,6 +46,8 @@ if ($result && $row = $result->fetch_assoc()) {
 
 
 $con->close();
+
+$currentPage = 'dashboard';
 ?>
 
 
@@ -56,8 +66,8 @@ $con->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
-    <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <!-- <base href="https://tedxmanaratalfaroukschool.com/"> -->
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,6 +80,7 @@ $con->close();
     <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
     <link rel="stylesheet" href="admin/assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="admin/assets/vendor/fonts/flag-icons.css" />
+    <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="admin/assets/vendor/css/core.css" />
@@ -96,347 +107,13 @@ $con->close();
 
             <!-- Menu -->
 
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-                <div class="app-brand demo pb-4 pt-4 ">
-                    <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
-                        <div class="logo-container">
-                            <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
-                                class="tedx-logo" id="tedx_logo" >
-                            <img src="admin\assets\img\logos\x-art.png" class="x-logo" alt="x-logo" >
-                        </div>
-                        
-                    </a>
-
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                        <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                    </a>
-                </div>
-
-                <div class="menu-inner-shadow"></div>
-
-
-
-                <ul class="menu-inner py-1">
-                    <!-- Dashboards -->
-                    <li class="menu-item active open">
-                        <a href="admin/Dashboard/dashboard.php" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                            <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
-                        </a>
-                    </li>
-
-                    <!-- e-commerce-app menu start -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class='menu-icon tf-icons bx bx-cart-alt'></i>
-                            <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <div class="text-truncate" data-i18n="Products">Products</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Product List">Product List</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Add Product">Add Product</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Category List">Category List</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <div class="text-truncate" data-i18n="Order">Order</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Order List">Order List</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Order Details">Order Details</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <div class="text-truncate" data-i18n="Customer">Customer</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="All Customers">All Customers</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                            <div class="text-truncate" data-i18n="Customer Details">Customer Details
-                                            </div>
-                                        </a>
-                                        <ul class="menu-sub">
-                                            <li class="menu-item">
-                                                <a href="javascript:void(0);"
-                                                    class="menu-link">
-                                                    <div class="text-truncate" data-i18n="Overview">Overview</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="javascript:void(0);"
-                                                    class="menu-link">
-                                                    <div class="text-truncate" data-i18n="Security">Security</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="javascript:void(0);" class="menu-link">
-                                                    <div class="text-truncate" data-i18n="Address & Billing">Address &
-                                                        Billing</div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Manage Reviews">Manage Reviews</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Referrals">Referrals</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <div class="text-truncate" data-i18n="Settings">Settings</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Store Details">Store Details</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Payments">Payments</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Checkout">Checkout</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Shipping & Delivery">Shipping &
-                                                Delivery</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Locations">Locations</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Notifications">Notifications</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- e-commerce-app menu end -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class='menu-icon tf-icons bx bx-user'></i>
-                            <div class="text-truncate" data-i18n="Users">Users</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="admin/Tickets/single.php?userFilter=all" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Single Tickets">Single Tickets</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="admin/Tickets/vip.php?userFilter=all" class="menu-link">
-                                    <div class="text-truncate" data-i18n="VIP Tickets">VIP Tickets</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="admin/Tickets/family.php?userFilter=all" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Family Tickets">Family Tickets</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="menu-item ">
-                        <a href="admin/Storage/" class="menu-link ">
-                            <i class="menu-icon tf-icons bx bx-box"></i>
-                            <div class="text-truncate" data-i18n="Storage">Storage</div>
-                        </a>
-                    </li>
-                    <li class="menu-item ">
-                        <a href="admin/Settings/settings.php" class="menu-link ">
-                            <i class="menu-icon tf-icons bx bx-cog"></i>
-                            <div class="text-truncate" data-i18n="Settings">Settings</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="admin\Misc\coming-soon.php" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-purchase-tag-alt"></i>
-                            <div class="text-truncate" data-i18n="Coupons ">Coupons</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="admin\Misc\coming-soon.php" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-briefcase"></i>
-                            <div class="text-truncate" data-i18n="Recruit">Recruit</div>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="menu-inner" style="height:60px;">
-                    <li class="menu-item" style="position: absolute; bottom: 10px; margin-top:10px;">
-                        <a href="admin/Login/logout.php" class="menu-link">
-                            <i class="bx bx-power-off bx-sm me-3"></i>
-                            <div class="text-truncate" data-i18n="Log Out">Log Out</div>
-                        </a>
-                    </li>
-                </ul>
-                    
-            </aside>
+            <?php include('../Components/aside.php'); ?>
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
-                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0   d-xl-none ">
-                        <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
-                            <i class="bx bx-menu bx-md"></i>
-                        </a>
-                    </div>
-
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Language -->
-                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0" style="visibility:hidden;">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
-                                    <i class='bx bx-globe bx-sm'></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="en"
-                                            data-text-direction="ltr">
-                                            <span>English</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="fr"
-                                            data-text-direction="ltr">
-                                            <span>French</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="ar"
-                                            data-text-direction="rtl">
-                                            <span>Arabic</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="de"
-                                            data-text-direction="ltr">
-                                            <span>German</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- /Language -->
-
-                            <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-online">
-                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
-                                            alt class="w-px-40 h-auto rounded-circle">
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0 me-3">
-                                                    <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
-                                                            alt class="w-px-40 h-auto rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
-                                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider my-1"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item menu-link" href="admin\Profile\profile.php">
-                                            <i class="bx bx-user bx-sm me-3"></i><span>My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
-                                            <i class="bx bx-edit bx-sm me-3"></i><span>Edit Account</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider my-1"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item menu-link" href="admin/Login/logout.php">
-                                            <i class="bx bx-power-off bx-sm me-3"></i><span>Log Out</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!--/ User -->
-                        </ul>
-                    </div>
-
-
-                    <!-- Search Small Screens -->
-                    <div class="navbar-search-wrapper search-input-wrapper  d-none">
-                        <input type="text" class="form-control search-input container-xxl border-0"
-                            placeholder="Search..." aria-label="Search...">
-                        <i class="bx bx-x bx-md search-toggler cursor-pointer"></i>
-                    </div>
-                </nav>
+                <?php include('../Components/nav.php'); ?>
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
@@ -451,7 +128,7 @@ $con->close();
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Users</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
-                                                <span id="totalUsers">Loading...</span>
+                                                    <span id="totalUsers">Loading...</span>
                                                 </h4>
                                                 <div id="genderChart2"></div>
                                             </div>
@@ -462,7 +139,7 @@ $con->close();
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Ages</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Users age are
-                                                <span id=""></span>
+                                                    <span id=""></span>
                                                 </h4>
                                                 <div id="ageChart2"></div>
                                             </div>
@@ -517,9 +194,10 @@ $con->close();
                                             <h5 class="mb-1 me-2">Event Status</h5>
                                             <p class="card-subtitle">
                                                 <span id="totalUsers"></span> Total
-                                                Users</p>
+                                                Users
+                                            </p>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-6">
@@ -532,8 +210,8 @@ $con->close();
                                         <ul class="p-0 m-0">
                                             <li class="d-flex align-items-center mb-5">
                                                 <div class="avatar flex-shrink-0 me-3">
-                                                    <span class="avatar-initial rounded bg-label-primary"><i
-                                                            class='bx bx-mobile-alt'></i></span>
+                                                    <span class="avatar-initial rounded bg-label-success"><i
+                                                            class='bx bx-check'></i></span>
                                                 </div>
                                                 <div
                                                     class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
@@ -549,8 +227,8 @@ $con->close();
                                             </li>
                                             <li class="d-flex align-items-center mb-5">
                                                 <div class="avatar flex-shrink-0 me-3">
-                                                    <span class="avatar-initial rounded bg-label-success"><i
-                                                            class='bx bx-closet'></i></span>
+                                                    <span class="avatar-initial rounded bg-label-primary"><i
+                                                            class='bx bx-x'></i></span>
                                                 </div>
                                                 <div
                                                     class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
@@ -567,7 +245,7 @@ $con->close();
                                             <li class="d-flex align-items-center mb-5">
                                                 <div class="avatar flex-shrink-0 me-3">
                                                     <span class="avatar-initial rounded bg-label-info"><i
-                                                            class='bx bx-home-alt'></i></span>
+                                                            class='bx bx-burger-alt'></i></span>
                                                 </div>
                                                 <div
                                                     class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
@@ -583,8 +261,8 @@ $con->close();
                                             </li>
                                             <li class="d-flex align-items-center mb-5">
                                                 <div class="avatar flex-shrink-0 me-3">
-                                                <span class="avatar-initial rounded bg-label-secondary"><i
-                                                            class='bx bx-football'></i></span>
+                                                    <span class="avatar-initial rounded bg-label-secondary"><i
+                                                            class='bx bx-x'></i></span>
                                                 </div>
                                                 <div
                                                     class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
@@ -601,7 +279,7 @@ $con->close();
                                             <li class="d-flex align-items-center mb-5">
                                                 <div class="avatar flex-shrink-0 me-3">
                                                     <span class="avatar-initial rounded bg-label-info"><i
-                                                            class='bx bx-home-alt'></i></span>
+                                                            class='bx bx-egg-fried'></i></span>
                                                 </div>
                                                 <div
                                                     class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
@@ -632,7 +310,42 @@ $con->close();
                                                     </div>
                                                 </div>
                                             </li>
-                                            
+                                            <br>
+                                            <li class="d-flex align-items-center mb-5">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <span class="avatar-initial rounded bg-label-info"><i
+                                                            class='bx bx-cookie'></i></span>
+                                                </div>
+                                                <div
+                                                    class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Ate snack</h6>
+                                                    </div>
+                                                    <div class="user-progress">
+                                                        <h6 class="mb-0">
+                                                            <span id="used_snack_count"></span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex align-items-center">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <span class="avatar-initial rounded bg-label-secondary"><i
+                                                            class='bx bx-x'></i></span>
+                                                </div>
+                                                <div
+                                                    class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Didn't Eat snack</h6>
+                                                    </div>
+                                                    <div class="user-progress">
+                                                        <h6 class="mb-0">
+                                                            <span id="not_used_snack_count"></span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -644,7 +357,7 @@ $con->close();
                                 <div class="card" style="height: 100%;">
                                     <div class="card-header header-elements">
                                         <h5 class="card-title mb-0">Grade Analysis</h5>
-                                        
+
                                     </div>
                                     <div class="card-body">
                                         <canvas id="gardesChart2222" class="chartjs" data-height="337"></canvas>
@@ -654,7 +367,7 @@ $con->close();
                             <!--/ Grades Overview -->
 
                             <!-- Google and Events Timeline -->
-                            <div class="col-md-6 col-lg-6 order-4 order-lg-3">
+                            <!-- <div class="col-md-6 col-lg-6 order-4 order-lg-3">
                                 <div class="card text-center h-100">
                                     <div class="card-header nav-align-top">
                                         <ul class="nav nav-pills" role="tablist">
@@ -739,10 +452,10 @@ $con->close();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!--/ Google and Events Timeline -->
                             <!-- Browser and OS table -->
-                            <div class="col-md-6 order-3 order-lg-4 mb-6 mb-lg-0">
+                            <!-- <div class="col-md-6 order-3 order-lg-4 mb-6 mb-lg-0">
                                 <div class="card text-center h-100">
                                     <div class="card-header nav-align-top">
                                         <ul class="nav nav-pills" role="tablist">
@@ -1071,7 +784,7 @@ $con->close();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!--/ Browser and OS table -->
                         </div>
 
@@ -1099,11 +812,11 @@ $con->close();
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
-                 <!--                                   DATA SYSTEMMM (IMPORTANTT)                                            -->
+    <!--                                   DATA SYSTEMMM (IMPORTANTT)                                            -->
 
     <script>
     function fetchCounts() {
-        fetch('admin/data/getCounts.php') 
+        fetch('admin/data/getCounts.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok: ' + response.statusText);
@@ -1124,31 +837,35 @@ $con->close();
                 document.getElementById('not_used_dinner_count').innerText = 'Error loading data';
                 document.getElementById('used_breakfast_count').innerText = 'Error loading data';
                 document.getElementById('not_used_breakfast_count').innerText = 'Error loading data';
+                document.getElementById('used_snack_count').innerText = 'Error loading data';
+                document.getElementById('not_used_snack_count').innerText = 'Error loading data';
             });
     }
 
-    
+
     function displayCounts(data) {
         const totalUsers = (data.paid_count || 0) + (data.unpaid_count || 0) + (data.rejected_count || 0);
-        const totalUsers2 = (data.paid_count || 0) + (data.unpaid_count || 0) + (data.rejected_count || 0);
-        document.getElementById('totalUsers').innerText = totalUsers; 
-        document.getElementById('totalUsers2').innerText = totalUsers2; 
-        document.getElementById('mfis').innerText = data.mfis_count || 0; 
+        const totalUsers2 = (data.paid_count || 0);
+        document.getElementById('totalUsers').innerText = totalUsers;
+        document.getElementById('totalUsers2').innerText = totalUsers2;
+        document.getElementById('mfis').innerText = data.mfis_count || 0;
         document.getElementById('entered_count').innerText = data.entered_count || 0;
-        document.getElementById('not_entered_count').innerText = data.not_entered_count || 0; 
+        document.getElementById('not_entered_count').innerText = data.not_entered_count || 0;
         document.getElementById('used_dinner_count').innerText = data.used_dinner_count || 0;
         document.getElementById('not_used_dinner_count').innerText = data.not_used_dinner_count || 0;
-        document.getElementById('used_breakfast_count').innerText = data.used_breakfast_count || 0  ; 
-        document.getElementById('not_used_breakfast_count').innerText = data.not_used_breakfast_count || 0; 
+        document.getElementById('used_breakfast_count').innerText = data.used_breakfast_count || 0;
+        document.getElementById('not_used_breakfast_count').innerText = data.not_used_breakfast_count || 0;
+        document.getElementById('used_snack_count').innerText = data.used_snack_count || 0;
+        document.getElementById('not_used_snack_count').innerText = data.not_used_snack_count || 0;
     }
 
-    
+
     window.onload = fetchCounts;
-</script>
+    </script>
 
-   <!--                                          END OF DATA SYSTEMMM (IMPORTANTT)                                            -->
+    <!--                                          END OF DATA SYSTEMMM (IMPORTANTT)                                            -->
 
-    
+
 
     <script src="admin/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="admin/assets/vendor/libs/popper/popper.js"></script>

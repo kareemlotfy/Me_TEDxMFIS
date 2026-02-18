@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
     $sql = "UPDATE user_cred SET isaccepted = 'reject' WHERE id = $rowId";
 
     if (mysqli_query($con, $sql)) {
-        header("Location: ../Tickets/tickets.php?userFilter=all");
+        header("Location: ../Tickets/single.php?userFilter=all");
         exit();
     } else {
         echo "Error updating record: " . mysqli_error($con);

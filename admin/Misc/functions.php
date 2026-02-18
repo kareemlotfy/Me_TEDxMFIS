@@ -50,6 +50,17 @@ function checkAdminPermission(mysqli $con, int $adminId, int $pageId): void
     }
 }
 
+function hasPermission(mysqli $con, int $adminId, int $pageId): bool
+{
+    $sql = "SELECT 1 FROM permissions WHERE admin_id = ? AND page_id = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ii", $adminId, $pageId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->num_rows > 0;
+}
+
+
 function getAdminDetails(mysqli $con, int $adminId): ?array
 {
     $sql = "SELECT admin_name, admin_commitee, admin_pic, admin_position, admin_email, admin_username, admin_number FROM admin_cred WHERE id = ?";

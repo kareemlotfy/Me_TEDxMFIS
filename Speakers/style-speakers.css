@@ -44,3 +44,7 @@
 }
 
 
+.speakers-container {
+    min-width: 100vw;
+    translate: -55%;
+}

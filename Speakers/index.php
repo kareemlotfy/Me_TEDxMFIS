@@ -35,7 +35,8 @@
     <link rel="shortcut icon" href="images/x-art.webp" type="image/x-icon">
 
     <!-- Base URL -->
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+     <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
+    <base href="https://tedxmanaratalfaroukschool.com/">
 
 
     <!-- Splide CSS -->
@@ -45,7 +46,6 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="Speakers/style-speakers.css">
-    <link rel="stylesheet" href="style-home-olld.css">
     <link rel="stylesheet" href="style-home.css">
     <!-- Title -->
     <title>TEDx Manarat AlFarouk School</title>
@@ -55,38 +55,38 @@
     <div id="speakers">
 
         <!-- Main Navigation -->
-        <nav class="main-nav sub-nav" id="mainNav">
-            <div class="nav-container">
-                <a href="#home" class="nav-logo">
-                    <img src="images\tedx-logo-white.webp" alt="">
-                </a>
+    <nav class="main-nav sub-nav" id="mainNav">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="images\tedx-logo-white.webp" alt="">
+            </a>
 
-                <ul class="nav-links">
-                    <li><a href="#home" class="nav-link " data-section="home">Home</a></li>
-                    <li><a href="About\index.html" class="nav-link">About</a></li>
-                    <li><a href="Speakers\index.php" class="nav-link">Speakers</a></li>
-                    <li><a href="Sponsors\index.php" class="nav-link">Sponsors</a></li>
-                    <li><a href="#tickets" class="nav-cta"><span>Get Tickets</span></a></li>
-                </ul>
-
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <ul class="mobile-menu-links">
-                <li><a href="#home" class="mobile-menu-link " data-section="home">Home</a></li>
-                <li><a href="#about" class="mobile-menu-link" data-section="about">About</a></li>
-                <li><a href="#speakers" class="mobile-menu-link" data-section="speakers">Speakers</a></li>
-                <li><a href="#schedule" class="mobile-menu-link" data-section="schedule">Schedule</a></li>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+                <li><a href="About\index.html" class="nav-link">About</a></li>
+                <li><a href="Speakers\index.php" class="nav-link">Speakers</a></li>
+                <li><a href="Sponsors\index.php" class="nav-link">Sponsors</a></li>
+                <li><a href="#tickets" class="nav-cta"><span>Get Tickets</span></a></li>
             </ul>
-            <a href="#tickets" class="mobile-menu-cta">Get Your Ticket</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.php" class="mobile-menu-link">Home</a></li>
+            <li><a href="About\index.html" class="mobile-menu-link">About</a></li>
+            <li><a href="Speakers\index.php" class="mobile-menu-link">Speakers</a></li>
+            <li><a href="Sponsors\index.php" class="mobile-menu-link">Sponsors</a></li>
+        </ul>
+        <a href="#tickets" class="mobile-menu-cta">Get Your Ticket</a>
+    </div>
 
 
         <div class="body_section  speakers_banner" id="banner">
@@ -2330,7 +2330,7 @@
             new Splide('.speakers-slider', {
                 type: 'loop',
                 perPage: 1,
-                gap: '1rem',
+                // gap: '1rem',
                 autoplay: false,
                 perMove: 1,
                 interval: 3000,

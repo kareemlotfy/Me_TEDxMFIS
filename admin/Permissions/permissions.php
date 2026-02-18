@@ -82,12 +82,14 @@ if ($admin !== null && $admin_id != 1) {
     echo "<div class='role-edit'>";
     echo "<h2>Permissions for " . htmlspecialchars($admin['admin_name']) . "</h2>";
     echo "<form method='post' action='admin/Permissions/permissions.php' class='toggle-section'>";
-    
+
+    echo "<div style='max-height: 300px; overflow-y: auto; padding-right: 10px;'>";
+
     while ($page = $pages_query->fetch_assoc()) {
         $checked = in_array($page['id'], $permissions) ? "checked" : "";
-        echo "<div class='toggle-item'>";
+        echo "<div class='toggle-item' style='margin-bottom: 5px;'>";
         echo "<span>" . htmlspecialchars($page['name']) . "</span>";
-        echo "<label class='switch'>";
+        echo "<label class='switch' style='float: right;'>";
         echo "<input type='checkbox' name='permissions[]' value='" . htmlspecialchars($page['id']) . "' $checked>";
         echo "<span class='slider'></span>";
         echo "</label>";
@@ -95,9 +97,11 @@ if ($admin !== null && $admin_id != 1) {
     }
     
     echo "<input type='hidden' name='admin_id' value='" . htmlspecialchars($admin_id) . "'>";
-    echo "<input type='submit' value='Save' class='btn btn-primary saveButton'>";
+    echo "<input type='submit' value='Save' class='btn btn-primary saveButton' style='margin-top: 15px;'>";
     echo "</form>";
     echo "</div>";
+    echo "</div>";
+
 } else {
     echo "<div class='role-edit'>";
     echo "<h2>Admin not found or is a super admin.</h2>";

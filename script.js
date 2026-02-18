@@ -1,48 +1,114 @@
 
 
+// Nav JS
+    // Elements
+    const mainNav = document.getElementById('mainNav');
+    const scrollTop = document.getElementById('scrollTop');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+    const sectionDots = document.querySelectorAll('.section-dot');
+
+    let lastScroll = 0;
+
+    // Hide/Show Nav on Scroll
+    function handleNavScroll() {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 100) {
+            mainNav.classList.add('scrolled');
+        } else {
+            mainNav.classList.remove('scrolled');
+        }
+
+        if (currentScroll > lastScroll && currentScroll > 200) {
+            mainNav.classList.add('hidden');
+        } else {
+            mainNav.classList.remove('hidden');
+        }
+
+        lastScroll = currentScroll;
+    }
+
+    // Show/Hide Section Nav and Scroll Top
+    function handleElementsVisibility() {
+        const scrollPosition = window.pageYOffset;
+
+        if (scrollPosition > 300) {
+            scrollTop.classList.add('visible');
+        } else {
+            scrollTop.classList.remove('visible');
+        }
+    }
+
+    // Smooth Scroll
+    function smoothScroll(target) {
+        const element = document.querySelector(target);
+        if (element) {
+            window.scrollTo({
+                top: element.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    // Mobile Menu Toggle
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close mobile menu when link clicked
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const target = link.getAttribute('href');
+            
+            // Check if the link is an anchor (starts with #)
+            if (target.startsWith('#')) {
+                e.preventDefault(); // Stop default only for anchors
+                
+                // Close menu
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                smoothScroll(target);
+            } 
+            // If it doesn't start with # (like 'About/index.html'), 
+            // we do NOTHING here, letting the browser navigate normally.
+        });
+    });
+
+    // Scroll to top
+    scrollTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Logo click
+    document.querySelector('.nav-logo').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Scroll Events
+    window.addEventListener('scroll', () => {
+        handleNavScroll();
+        handleElementsVisibility();
+    });
+
+    // Initial calls
+    handleElementsVisibility();
 
 
 
-
-
-
-// // Cursor
-
-// var cursor = document.querySelector('.cursor');
-// var cursorinner = document.querySelector('.cursor2');
-// var a = document.querySelectorAll('a');
-
-// document.addEventListener('mousemove', function(e){
-// var x = e.clientX;
-// var y = e.clientY;
-// cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`
-// });
-
-// document.addEventListener('mousemove', function(e){
-// var x = e.clientX;
-// var y = e.clientY;
-// cursorinner.style.left = x + 'px';
-// cursorinner.style.top = y + 'px';
-// });
-
-// document.addEventListener('mousedown', function(){
-// cursor.classList.add('click');
-// cursorinner.classList.add('cursorinnerhover')
-// });
-
-// document.addEventListener('mouseup', function(){
-// cursor.classList.remove('click')
-// cursorinner.classList.remove('cursorinnerhover')
-// });
-
-// a.forEach(item => {
-// item.addEventListener('mouseover', () => {
-// cursor.classList.add('hover');
-// });
-// item.addEventListener('mouseleave', () => {
-// cursor.classList.remove('hover');
-// });
-// })
 
 
 // Paralax Effect in About Page
@@ -103,43 +169,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // Paralax End
 
 
-
-// Loader
-document.addEventListener('DOMContentLoaded', function () {
-    const loaderContainer = document.querySelector('.loader-container');
-    setTimeout(() => {
-        loaderContainer.parentNode.removeChild(loaderContainer);
-        document.body.style.overflow = 'auto';
-        console.log("the loader is removed")
-        console.log("wating for the animation")
-    }, 1000);
-
-});
-
-// Loader End
-
-
-
-// Nav Responsive
-var navLinks = document.getElementById("navLinks");
-var header = document.getElementById("headerSection");
-
-function showMenu() {
-    navLinks.style.right = "0"
-    header.style.overflow = "visible"
-    console.log("showed menue and overflow")
-}
-
-function hideMenu() {
-    navLinks.style.right = "-200px"
-    header.style.overflow = "hidden"
-    console.log("hided menue and overflow")
-    
-}
-// Nav Responsive End
-
-
-
 // Set padding of class="body_section"
 function setDynamicPadding() {
     var windowWidth = window.innerWidth;
@@ -172,25 +201,6 @@ window.onload = setDynamicPadding;
 window.addEventListener('resize', setDynamicPadding);
 // Set padding End
 
-// Shutdown Ticket Form
-/*async function checkFormStatus() {
-    try {
-        const response = await fetch('user/backend.php');
-        const data = await response.json();
-
-        if (data.formOpen === '1') {
-            document.getElementById('myForm').style.display = 'none';
-            document.getElementById('done_message').style.display = 'block';
-        } else {
-            document.getElementById('myForm').style.display = 'block';
-            document.getElementById('done_message').style.display = 'none';
-            // document.getElementById('done_message').innerText = '';
-        }
-    } catch (error) {
-        console.error('Error fetching form status:', error);
-    }
-}
-checkFormStatus()*/
 
 // About Us Page Images Resize 
 // Function to resize elements based on screen width

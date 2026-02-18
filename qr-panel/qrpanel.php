@@ -94,8 +94,9 @@ function getMessageClass($success) {
                             <select name="event_type" class="form-control" required>
                                 <option value="" disabled selected>Select An Option</option>
                                 <option value="enter">Enter Event</option>
-                                <option value="dinner">Dinner Event</option>
                                 <option value="breakfast">Breakfast Event</option>
+                                <option value="snack">Snack Event</option>
+                                <option value="dinner">Dinner Event</option>
                             </select>
                         </div>
                         <div class="mb-3">

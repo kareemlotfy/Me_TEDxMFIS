@@ -7,7 +7,8 @@ initSecurityMiddleware();
 
 
 // Function to fetch ticket status (returns same key 'status' like قبل)
-function getTicketStatus($con, $ticket_id) {
+function getTicketStatus($con, $ticket_id)
+{
     $query = "SELECT ticket_status AS status FROM settings WHERE id = ? LIMIT 1";
     $stmt = $con->prepare($query);
     $stmt->bind_param("i", $ticket_id);
@@ -19,14 +20,16 @@ function getTicketStatus($con, $ticket_id) {
 }
 
 // fetch basic ticket detials from tickets (mapped to same keys basic_ticket_price & custom_discount)
-function getTicketPriceAndDiscount($con) {
+function getTicketPriceAndDiscount($con)
+{
     $query = "SELECT ticket_price AS basic_ticket_price, ticket_discount AS custom_discount FROM settings WHERE id = 1 LIMIT 1";
     $result = $con->query($query);
     return $result ? $result->fetch_assoc() : ['basic_ticket_price' => 0, 'custom_discount' => 0];
 }
 
 // fetch group ticket detials from tickets (mapped to same keys group_ticket_price & custom_discount_group)
-function getGroupTicketPriceAndDiscount($con) {
+function getGroupTicketPriceAndDiscount($con)
+{
     $query = "SELECT ticket_price AS group_ticket_price, ticket_discount AS custom_discount_group FROM settings WHERE id = 2 LIMIT 1";
     $result = $con->query($query);
     return $result ? $result->fetch_assoc() : ['group_ticket_price' => 0, 'custom_discount_group' => 0];
@@ -48,7 +51,7 @@ $ticket_price_group = $ticket_data_group['group_ticket_price'];
 $discount_group = $ticket_data_group['custom_discount_group'];
 $final_price_group = $ticket_price_group - $discount_group;
 
-$con->close();
+// $con->close();
 ?>
 
 
@@ -143,15 +146,6 @@ $con->close();
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-home.css">
 
-    <style>
-    .disabled-link {
-        pointer-events: none;
-        color: currentColor;
-        cursor: not-allowed;
-        opacity: 0.5;
-        text-decoration: none;
-    }
-    </style>
 
     <!-- Title -->
     <title>TEDx Manarat AlFarouk School</title>
@@ -344,7 +338,7 @@ $con->close();
         <div class="stats-container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number" data-target="90+">0</span>
+                    <span class="stat-number" data-target="85+">0</span>
                     <span class="stat-label">Speakers</span>
                 </div>
                 <div class="stat-item">
@@ -356,8 +350,8 @@ $con->close();
                     <span class="stat-label">Generations</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" data-target="49">0</span>
-                    <span class="stat-label">Sponser</span>
+                    <span class="stat-number" data-target="158">0</span>
+                    <span class="stat-label">Sponsors</span>
                 </div>
             </div>
         </div>
@@ -423,111 +417,118 @@ $con->close();
         </div>
     </section>
     <section class="speakers-section" id="speakers">
-        <!-- Animated Background -->
         <div class="speakers-bg"></div>
-
-        <!-- Spotlight Effect -->
         <div class="spotlight" id="spotlight"></div>
 
-        <!-- Section Header -->
         <div class="section-header">
             <div class="section-tag">Meet The Minds</div>
             <h1 class="section-title">Our Speakers</h1>
             <p class="section-subtitle">
-                Visionaries, innovators, and rule-breakers who dared to think differently and transformed their fields
+                Visionaries, innovators, and rule-breakers who dared to think differently
             </p>
         </div>
 
-        <!-- Speakers Grid -->
         <div class="speakers-container">
             <div class="speakers-grid">
-                <!-- Regular Speakers -->
-                <div class="speaker-card tba">
+                <?php
+            $currentGeneration = 8; // Update for Gen 8, 9, etc.
+            $speakersQuery = "SELECT * FROM speakers 
+                              WHERE generation = ? 
+                              AND status = 'published' 
+                              ORDER BY display_order ASC, created_at DESC";
+            $speakersStmt = $con->prepare($speakersQuery);
+            $speakersStmt->bind_param("i", $currentGeneration);
+            $speakersStmt->execute();
+            $speakersResult = $speakersStmt->get_result();
+            
+            if ($speakersResult->num_rows > 0):
+                while ($speaker = $speakersResult->fetch_assoc()):
+                    $isMystery = (strpos($speaker['full_name'], 'Mystery') !== false);
+                    $cardClass = $isMystery ? 'speaker-card tba' : 'speaker-card';
+            ?>
+                <div class="<?php echo $cardClass; ?>">
                     <div class="speaker-image-container">
-                        <img src="images\mistryspeaker.webp" alt="mystery speaker" class="speaker-image">
+                        <img src="<?php echo htmlspecialchars($speaker['image_path']); ?>"
+                            alt="<?php echo htmlspecialchars($speaker['full_name']); ?>" class="speaker-image"
+                            loading="lazy">
                     </div>
                     <div class="speaker-info">
-                        <h3 class="speaker-name">Mystery Speaker</h3>
-                        <p class="speaker-title">To Be Announced</p>
+                        <h3 class="speaker-name"><?php echo htmlspecialchars($speaker['full_name']); ?></h3>
+                        <p class="speaker-title"><?php echo htmlspecialchars($speaker['job_title']); ?></p>
                         <p class="speaker-bio">
-                            We're finalizing our lineup with more incredible minds who've shattered conventions in their
-                            fields. Stay tuned for the reveal!
+                            <?php echo htmlspecialchars($speaker['bio_processed']); ?>
                         </p>
-                        <div class="speaker-topic">
+                        <?php if ($isMystery): ?>
+                        <!-- <div class="speaker-topic">
                             <strong>Coming Soon:</strong> A talk that will blow your mind 🤯
-                        </div>
-                    </div>
-                </div>
-                <div class="speaker-card tba">
-                    <div class="speaker-image-container">
-                        <img src="images\mistryspeaker.webp" alt="mystery speaker" class="speaker-image">
-                    </div>
-                    <div class="speaker-info">
-                        <h3 class="speaker-name">Mystery Speaker</h3>
-                        <p class="speaker-title">To Be Announced</p>
-                        <p class="speaker-bio">
-                            We're finalizing our lineup with more incredible minds who've shattered conventions in their
-                            fields. Stay tuned for the reveal!
-                        </p>
-                        <div class="speaker-topic">
-                            <strong>Coming Soon:</strong> A talk that will blow your mind 🤯
-                        </div>
-                    </div>
-                </div>
-                <!-- Speaker Card -->
-                <!-- <div class="speaker-card">
-                    <div class="speaker-image-container">
-                        <img src="images\speakers_page\abouzaid.webp" alt="Fatima Al-Sayed" class="speaker-image">
-                        <div class="expertise-tags">
-                            <span class="expertise-tag">Sustainability</span>
-                            <span class="expertise-tag">Climate</span>
-                        </div>
-                    </div>
-                    <div class="speaker-info">
-                        <h3 class="speaker-name">Fatima Al-Sayed</h3>
-                        <p class="speaker-title">Environmental Scientist & Climate Innovator</p>
-                        <p class="speaker-bio">
-                            Developed groundbreaking sustainable solutions for water scarcity in arid regions. Her work
-                            challenges conventional environmental approaches.
-                        </p>
-                        <div class="speaker-topic">
-                            <strong>Talk:</strong> "Desert Innovation: Solving Tomorrow's Problems Today"
-                        </div>
+                        </div> -->
+                        <?php else: ?>
+                        <?php if (!empty($speaker['facebook_url']) || !empty($speaker['linkedin_url']) || 
+                                     !empty($speaker['instagram_url']) || !empty($speaker['twitter_url'])): ?>
                         <div class="speaker-social">
-                            <a href="#" class="social-link">in</a>
-                            <a href="#" class="social-link">𝕏</a>
-                            <a href="#" class="social-link">🌐</a>
+                            <?php if (!empty($speaker['facebook_url'])): ?>
+                            <a href="<?php echo htmlspecialchars($speaker['facebook_url']); ?>" class="social-link"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <?php endif; ?>
+
+                            <?php if (!empty($speaker['linkedin_url'])): ?>
+                            <a href="<?php echo htmlspecialchars($speaker['linkedin_url']); ?>" class="social-link"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <?php endif; ?>
+
+                            <?php if (!empty($speaker['instagram_url'])): ?>
+                            <a href="<?php echo htmlspecialchars($speaker['instagram_url']); ?>" class="social-link"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <?php endif; ?>
+
+                            <?php if (!empty($speaker['twitter_url'])): ?>
+                            <a href="<?php echo htmlspecialchars($speaker['twitter_url']); ?>" class="social-link"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <?php endif; ?>
                         </div>
+                        <?php endif; ?>
+                        <?php endif; ?>
                     </div>
-                </div> -->
-
-
-                <!-- TBA Card -->
+                </div>
+                <?php 
+                endwhile;
+            else:
+            ?>
                 <div class="speaker-card tba">
                     <div class="speaker-image-container">
-                        <img src="images\mistryspeaker.webp" alt="mystery speaker" class="speaker-image">
+                        <img src="images/mistryspeaker.webp" alt="mystery speaker" class="speaker-image">
                     </div>
                     <div class="speaker-info">
                         <h3 class="speaker-name">Mystery Speaker</h3>
                         <p class="speaker-title">To Be Announced</p>
                         <p class="speaker-bio">
-                            We're finalizing our lineup with more incredible minds who've shattered conventions in their
-                            fields. Stay tuned for the reveal!
+                            We're finalizing our lineup. Stay tuned for the reveal!
                         </p>
                         <div class="speaker-topic">
                             <strong>Coming Soon:</strong> A talk that will blow your mind 🤯
                         </div>
                     </div>
                 </div>
+                <?php 
+            endif;
+            $speakersStmt->close();
+            ?>
             </div>
         </div>
 
-        <!-- CTA -->
         <div class="speakers-cta">
             <h3>Don't Miss These Extraordinary Minds</h3>
-            <p>Limited seats available. Secure your spot to experience ideas that will reshape your thinking.</p>
+            <p>Limited seats available. Secure your spot now.</p>
             <a href="#tickets" class="cta-button">
-                <span>Reserve Your Seat Now →</span>
+                <span>Reserve Your Seat →</span>
             </a>
         </div>
     </section>
@@ -553,9 +554,10 @@ $con->close();
                     <div class="phase-content">
                         <div class="phase-header">
                             <div class="phase-icon">🐦</div>
-                            <h2 class="phase-title" id="phaseTitle">Early Bird Phase Active</h2>
+                            <h2 class="phase-title" id="phaseTitle">Early Bird Tickets</h2>
                             <p class="phase-message" id="phaseMessage">Lock in the lowest price before it's gone forever
                             </p>
+                            <!-- Lock in the lowest price before it's gone forever -->
                         </div>
 
                         <div class="phase-countdown">
@@ -576,15 +578,31 @@ $con->close();
                                 <span class="countdown-label">Seconds</span>
                             </div>
                         </div>
+                        <!-- 
+                        <div class="phase-countdownd">
+                            <div class="spots-alert">
+                                <span class="spots-icon">⚠️</span>
+                                <div style="width:100%; ">
+                                    <p class="spots-text">
+                                        Only <span class="spots-number" id="spotsRemaining">20%</span> of tickets
+                                        left!
+                                    </p>
+                                    <div class="spots-bar">
+                                        <div class="spots-fill" id="spotsFill" style="width:80%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
 
                         <div class="price-comparison">
                             <div class="price-box current">
-                                <div class="price-label-small">Current Price</div>
-                                <div class="price-value" id="currentPrice"><span>EGP</span> <?php echo $final_price ?></div>
+                                <div class="price-label-small">Starting Price</div>
+                                <div class="price-value" id="currentPrice"><span>EGP</span> <?php echo $final_price ?>
+                                </div>
                             </div>
                             <div class="price-arrow">→</div>
                             <div class="price-box next">
-                                <div class="price-label-small">After Deadline</div>
+                                <div class="price-label-small">Late Owl</div>
                                 <div class="price-value" id="nextPrice">EGP <?php echo $final_price_group ?></div>
                             </div>
                         </div>
@@ -616,7 +634,8 @@ $con->close();
                             <div class="faq-answer-wrapper">
                                 <p class="faq-answer">
                                     Both tickets include exactly the same benefits and access. The only difference is
-                                    the price - Early Bird tickets are <?php echo $final_price ?>EGP while Late Owl tickets are <?php echo $final_price_group ?>EGP. Same
+                                    the price - Early Bird tickets are <?php echo $final_price ?>EGP while Late Owl
+                                    tickets are <?php echo $final_price_group ?>EGP. Same
                                     experience, different timing!
                                 </p>
                             </div>
@@ -662,23 +681,26 @@ $con->close();
 
                     <div class="ticket-price">
                         <div class="price-amount">
-                            <span class="price-currency">EGP</span><span id="ticketPrice"><?php echo $final_price ?></span>
+                            <span class="price-currency">EGP</span><span
+                                id="ticketPrice"><?php echo $final_price ?></span>
                         </div>
                         <p class="price-label">Per Person</p>
-                        <span class="price-savings" id="savings">Save <?php echo $discount ?> EGP from regular price!</span>
+                        <span class="price-savings" id="savings">Save <?php echo $discount ?> EGP from regular
+                            price!</span>
                     </div>
-                    <!-- 
+
                     <div class="spots-alert">
                         <span class="spots-icon">⚠️</span>
-                        <div>
+                        <div style="width:100%; ">
                             <p class="spots-text">
-                                Only <span class="spots-number" id="spotsRemaining">87</span> Early Bird tickets left!
+                                Only <span class="spots-number" id="spotsRemaining">0%</span> of tickets
+                                left!
                             </p>
                             <div class="spots-bar">
-                                <div class="spots-fill" id="spotsFill"></div>
+                                <div class="spots-fill" id="spotsFill" style="width:100%;"></div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
                     <div class="ticket-includes">
                         <h4 class="includes-title">What's Included</h4>
@@ -728,8 +750,7 @@ $con->close();
                         </div>
                     </div>
 
-                    <a class="ticket-cta"
-                        href="Tickets\Early_Bird_Form\index.php" id="ticket-link">
+                    <a class="ticket-cta" href="Tickets\Early_Bird_Form\index.php" id="ticket-link">
                         <span id="ticketCtaText">
                             Reserve My Early Bird Ticket Now
                             <span class="cta-subtext">🔒 Secure checkout • Instant confirmation</span>
@@ -1103,8 +1124,9 @@ $con->close();
     <!-- JavaScript -->
     <script>
     // Configuration - SET YOUR ACTUAL DATES HERE
-    const EARLY_BIRD_DEADLINE = new Date('2025-12-05T23:59:59').getTime();
-    const EVENT_DATE = new Date('2025-12-12T18:00:00').getTime();
+    const START_EARLY_BIRD = new Date('2025-11-27T23:59:59').getTime();
+    const EARLY_BIRD_DEADLINE = new Date('2025-12-11T22:00:00').getTime();
+    const EVENT_DATE = new Date('2025-12-12T16:00:00').getTime();
 
     const EARLY_BIRD_PRICE = <?php echo $final_price ?>;
     const LATE_OWL_PRICE = <?php echo $final_price_group ?>;
@@ -1120,6 +1142,7 @@ $con->close();
 
         // Determine which deadline to count down to
         const targetDate = isEarlyBird ? EARLY_BIRD_DEADLINE : EVENT_DATE;
+        // const targetDate = isEarlyBird ? START_EARLY_BIRD : EVENT_DATE;
         const distance = targetDate - now;
 
         // Calculate time units
@@ -1151,6 +1174,9 @@ $con->close();
                             </div>
                         </div>
                     `;
+                document.getElementById('ticketCtaText').innerHTML = `Sold Out`;
+                document.querySelector('.ticket-cta').href = '#';
+                document.querySelector('.ticket-cta').classList.add('disabled-link');
             }
         }
     }
@@ -1160,12 +1186,12 @@ $con->close();
         currentPhase = 'late-owl';
 
         // Update phase indicator
-        document.getElementById('phaseTitle').textContent = 'Late Owl Phase Active';
+        document.getElementById('phaseTitle').textContent = 'Late Owl Tickets';
         document.getElementById('phaseMessage').textContent = 'Last chance to secure your spot!';
         document.querySelector('.phase-icon').textContent = '🦉';
 
         // Update prices
-        document.getElementById('currentPrice').textContent =LATE_OWL_PRICE;
+        document.getElementById('currentPrice').textContent = LATE_OWL_PRICE;
         document.getElementById('nextPrice').textContent = 'Sold Out';
 
         // Update ticket card
@@ -1222,8 +1248,6 @@ $con->close();
             }
         });
     });
-
-
     </script>
     <script>
     // Spotlight follows mouse
@@ -1461,12 +1485,21 @@ $con->close();
     // Close mobile menu when link clicked
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const target = link.getAttribute('href');
-            menuToggle.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
-            smoothScroll(target);
+
+            // Check if the link is an anchor (starts with #)
+            if (target.startsWith('#')) {
+                e.preventDefault(); // Stop default only for anchors
+
+                // Close menu
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+
+                smoothScroll(target);
+            }
+            // If it doesn't start with # (like 'About/index.html'), 
+            // we do NOTHING here, letting the browser navigate normally.
         });
     });
 

@@ -16,6 +16,13 @@ $adminId = $_SESSION['adminId']; // Assuming admin ID is stored in session after
 $pageId = 2; // Example: replace with the actual page ID you want to check
 
 checkAdminPermission($con, $adminId, $pageId);
+date_default_timezone_set('Africa/Cairo');
+
+$now = date("Y-m-d H:i:s");
+
+$update = $con->prepare("UPDATE admin_cred SET last_activity=? WHERE id=?");
+$update->bind_param("si", $now, $adminId);
+$update->execute();
 ?>
 
 <?php
@@ -120,8 +127,6 @@ if (!$totalFilteredResult) {
 $totalFilteredRow = $totalFilteredResult->fetch_assoc();
 $totalFilteredUsers = $totalFilteredRow["total_filtered"];
 
-$con->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -180,6 +185,23 @@ $con->close();
             border-radius: 50%;
         }
 
+        .number-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .blur-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(6px);
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+            z-index: 5;
+            pointer-events: none;
+        }
     </style>
 
     <!-- Helpers -->
@@ -195,347 +217,13 @@ $con->close();
         <div class="layout-container">
 <!-- Menu -->
 
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-                <div class="app-brand demo pb-4 pt-4 ">
-                    <a href="admin/Dashboard/dashboard.php" class="app-brand-link">
-                        <div class="logo-container">
-                            <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
-                                class="tedx-logo" id="tedx_logo" >
-                            <img src="admin\assets\img\logos\x-art.png" class="x-logo" alt="x-logo" >
-                        </div>
-                        
-                    </a>
-
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                        <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
-                    </a>
-                </div>
-
-                <div class="menu-inner-shadow"></div>
-
-
-
-                <ul class="menu-inner py-1">
-                    <!-- Dashboards -->
-                    <li class="menu-item ">
-                        <a href="admin/Dashboard/dashboard.php" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                            <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
-                        </a>
-                    </li>
-
-                    <!-- e-commerce-app menu start -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class='menu-icon tf-icons bx bx-cart-alt'></i>
-                            <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <div class="text-truncate" data-i18n="Products">Products</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Product List">Product List</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Add Product">Add Product</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Category List">Category List</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <div class="text-truncate" data-i18n="Order">Order</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Order List">Order List</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Order Details">Order Details</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <div class="text-truncate" data-i18n="Customer">Customer</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="All Customers">All Customers</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                            <div class="text-truncate" data-i18n="Customer Details">Customer Details
-                                            </div>
-                                        </a>
-                                        <ul class="menu-sub">
-                                            <li class="menu-item">
-                                                <a href="javascript:void(0);"
-                                                    class="menu-link">
-                                                    <div class="text-truncate" data-i18n="Overview">Overview</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="javascript:void(0);"
-                                                    class="menu-link">
-                                                    <div class="text-truncate" data-i18n="Security">Security</div>
-                                                </a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="javascript:void(0);" class="menu-link">
-                                                    <div class="text-truncate" data-i18n="Address & Billing">Address &
-                                                        Billing</div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Manage Reviews">Manage Reviews</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Referrals">Referrals</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                    <div class="text-truncate" data-i18n="Settings">Settings</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Store Details">Store Details</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Payments">Payments</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Checkout">Checkout</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Shipping & Delivery">Shipping &
-                                                Delivery</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Locations">Locations</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="javascript:void(0);" class="menu-link">
-                                            <div class="text-truncate" data-i18n="Notifications">Notifications</div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- e-commerce-app menu end -->
-                    <li class="menu-item active open">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class='menu-icon tf-icons bx bx-user'></i>
-                            <div class="text-truncate" data-i18n="Users">Users</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item active open">
-                                <a href="admin/Tickets/single.php?userFilter=all" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Single Tickets">Single Tickets</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="admin/Tickets/vip.php?userFilter=all" class="menu-link">
-                                    <div class="text-truncate" data-i18n="VIP Tickets">VIP Tickets</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="admin/Tickets/family.php?userFilter=all" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Family Tickets">Family Tickets</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item ">
-                        <a href="admin/Storage/" class="menu-link ">
-                            <i class="menu-icon tf-icons bx bx-box"></i>
-                            <div class="text-truncate" data-i18n="Storage">Storage</div>
-                        </a>
-                    </li>                
-                    <li class="menu-item ">
-                        <a href="admin/Settings/settings.php" class="menu-link ">
-                            <i class="menu-icon tf-icons bx bx-cog"></i>
-                            <div class="text-truncate" data-i18n="Settings">Settings</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="admin\Misc\coming-soon.php" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-purchase-tag-alt"></i>
-                            <div class="text-truncate" data-i18n="Coupons ">Coupons</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="admin\Misc\coming-soon.php" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-briefcase"></i>
-                            <div class="text-truncate" data-i18n="Recruit">Recruit</div>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="menu-inner" style="height:60px;">
-                    <li class="menu-item" style="position: absolute; bottom: 10px; margin-top:10px;">
-                        <a href="admin/Login/logout.php" class="menu-link">
-                            <i class="bx bx-power-off bx-sm me-3"></i>
-                            <div class="text-truncate" data-i18n="Log Out">Log Out</div>
-                        </a>
-                    </li>
-                </ul>
-                    
-            </aside>
+            <?php include('../Components/aside.php'); ?>
             <!-- / Menu -->
 
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
-                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0   d-xl-none ">
-                        <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
-                            <i class="bx bx-menu bx-md"></i>
-                        </a>
-                    </div>
-
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Language -->
-                            <li class="nav-item dropdown-language dropdown me-2 me-xl-0" style="visibility:hidden;">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
-                                    <i class='bx bx-globe bx-sm'></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="en"
-                                            data-text-direction="ltr">
-                                            <span>English</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="fr"
-                                            data-text-direction="ltr">
-                                            <span>French</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="ar"
-                                            data-text-direction="rtl">
-                                            <span>Arabic</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" data-language="de"
-                                            data-text-direction="ltr">
-                                            <span>German</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- /Language -->
-
-                            <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-online">
-                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
-                                            alt class="w-px-40 h-auto rounded-circle">
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0 me-3">
-                                                    <div class="avatar avatar-online">
-                                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
-                                                            alt class="w-px-40 h-auto rounded-circle">
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
-                                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider my-1"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item menu-link" href="admin\Profile\profile.php">
-                                            <i class="bx bx-user bx-sm me-3"></i><span>My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
-                                            <i class="bx bx-edit bx-sm me-3"></i><span>Edit Account</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider my-1"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item menu-link" href="admin/Login/logout.php">
-                                            <i class="bx bx-power-off bx-sm me-3"></i><span>Log Out</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!--/ User -->
-                        </ul>
-                    </div>
-
-
-                    <!-- Search Small Screens -->
-                    <div class="navbar-search-wrapper search-input-wrapper  d-none">
-                        <input type="text" class="form-control search-input container-xxl border-0"
-                            placeholder="Search..." aria-label="Search...">
-                        <i class="bx bx-x bx-md search-toggler cursor-pointer"></i>
-                    </div>
-                </nav>
+                <?php include('../components/nav.php'); ?>
                 <!-- / Navbar -->
 
 
@@ -545,116 +233,179 @@ $con->close();
 
                     <!-- Content -->
 
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        <!-- Analysis Part -->
-                        <div class="row g-6 mb-6">
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <div class="content-left">
-                                                <span class="text-heading">Total Users</span>
-                                                <div class="d-flex align-items-center my-1">
-                                                    <h4 class="mb-0 me-2">
-                                                        <?php echo htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8'); ?>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <div class="avatar">
-                                                <span class="avatar-initial rounded bg-label-primary">
-                                                    <i class="bx bx-group bx-sm"></i>
-                                                </span>
-                                            </div>
-                                        </div>
+<?php $canViewStats = hasPermission($con, $_SESSION["adminId"], 10); ?>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+    <div class="row g-6 mb-6">
+
+        <!-- Total Users -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="card <?php echo !$canViewStats ? 'locked-card' : ''; ?>">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span class="text-heading">Total Users</span>
+                            <div class="d-flex align-items-center my-1">
+                                <h4 class="mb-0 me-2">
+                                    <div class="number-wrapper">
+                                        <?php 
+                                            echo $canViewStats 
+                                                ? htmlspecialchars($totalUsers, ENT_QUOTES, 'UTF-8') 
+                                                : '•••••••';
+                                        ?>
+                                        <?php if (!$canViewStats): ?>
+                                            <span class="blur-overlay"></span>
+                                        <?php endif; ?>
                                     </div>
-                                </div>
+                                </h4>
                             </div>
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <div class="content-left">
-                                                <span class="text-heading">Paid Users</span>
-                                                <div class="d-flex align-items-center my-1">
-                                                    <h4 class="mb-0 me-2">
-                                                        <?php echo htmlspecialchars($paidCount, ENT_QUOTES, 'UTF-8'); ?>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <div class="avatar">
-                                                <span class="avatar-initial rounded bg-label-success">
-                                                    <i class="bx bx-user-check bx-sm"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <div class="content-left">
-                                                <span class="text-heading">Unpaid Users</span>
-                                                <div class="d-flex align-items-center my-1">
-                                                    <h4 class="mb-0 me-2">
-                                                        <?php echo htmlspecialchars($unpaidCount, ENT_QUOTES, 'UTF-8'); ?>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <div class="avatar">
-                                                <span class="avatar-initial rounded bg-label-danger">
-                                                    <i class="bx bx-user-plus bx-sm"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <div class="content-left">
-                                                <span class="text-heading">Rejected Users</span>
-                                                <div class="d-flex align-items-center my-1">
-                                                    <h4 class="mb-0 me-2">
-                                                        <?php echo htmlspecialchars($rejectedCount, ENT_QUOTES, 'UTF-8'); ?>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <div class="avatar">
-                                                <span class="avatar-initial rounded bg-label-warning">
-                                                    <i class="bx bx-user-voice bx-sm"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <div class="content-left">
-                                                <span class="text-heading">Profit</span>
-                                                <div class="d-flex align-items-center my-1">
-                                                    <h4 class="mb-0 me-2">
-                                                        <?php echo htmlspecialchars($totalProfit, ENT_QUOTES, 'UTF-8'); ?>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <div class="avatar">
-                                                <span class="avatar-initial rounded bg-label-warning">
-                                                    <i class="bx bx-user-voice bx-sm"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
                         </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-primary">
+                                <i class="bx bx-group bx-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Paid Users -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="card <?php echo !$canViewStats ? 'locked-card' : ''; ?>">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span class="text-heading">Paid Users</span>
+                            <div class="d-flex align-items-center my-1">
+                                <h4 class="mb-0 me-2">
+                                    <div class="number-wrapper">
+                                        <?php 
+                                            echo $canViewStats 
+                                                ? htmlspecialchars($paidCount, ENT_QUOTES, 'UTF-8') 
+                                                : '•••••••';
+                                        ?>
+                                        <?php if (!$canViewStats): ?>
+                                            <span class="blur-overlay"></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-success">
+                                <i class="bx bx-user-check bx-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Unpaid Users -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="card <?php echo !$canViewStats ? 'locked-card' : ''; ?>">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span class="text-heading">Unpaid Users</span>
+                            <div class="d-flex align-items-center my-1">
+                                <h4 class="mb-0 me-2">
+                                    <div class="number-wrapper">
+                                        <?php 
+                                            echo $canViewStats 
+                                                ? htmlspecialchars($unpaidCount, ENT_QUOTES, 'UTF-8') 
+                                                : '•••••••';
+                                        ?>
+                                        <?php if (!$canViewStats): ?>
+                                            <span class="blur-overlay"></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-danger">
+                                <i class="bx bx-user-plus bx-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Rejected Users -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="card <?php echo !$canViewStats ? 'locked-card' : ''; ?>">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span class="text-heading">Rejected Users</span>
+                            <div class="d-flex align-items-center my-1">
+                                <h4 class="mb-0 me-2">
+                                    <div class="number-wrapper">
+                                        <?php 
+                                            echo $canViewStats 
+                                                ? htmlspecialchars($rejectedCount, ENT_QUOTES, 'UTF-8') 
+                                                : '•••••••';
+                                        ?>
+                                        <?php if (!$canViewStats): ?>
+                                            <span class="blur-overlay"></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-warning">
+                                <i class="bx bx-user-voice bx-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Profit -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="card <?php echo !$canViewStats ? 'locked-card' : ''; ?>">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="content-left">
+                            <span class="text-heading">Profit</span>
+                            <div class="d-flex align-items-center my-1">
+                                <h4 class="mb-0 me-2">
+                                    <div class="number-wrapper">
+                                        <?php 
+                                            echo $canViewStats 
+                                                ? htmlspecialchars($totalProfit, ENT_QUOTES, 'UTF-8') 
+                                                : '•••••••••••••';
+                                        ?>
+                                        <?php if (!$canViewStats): ?>
+                                            <span class="blur-overlay"></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="avatar">
+                            <span class="avatar-initial rounded bg-label-warning">
+                                <i class="bx bx-wallet bx-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
                         <!-- Users List Table -->
                         <div class="card">
                             <div class="card-header border-bottom">
@@ -770,6 +521,9 @@ $con->close();
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1" style="width: 201px;"
                                                     aria-label="Billing: activate to sort column ascending">Ticket Sub Type</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1" style="width: 201px;"
+                                                    aria-label="Billing: activate to sort column ascending">Accepted by</th>
 
                                                 <th class="sorting_disabled dtr-hidden" rowspan="1" colspan="1"
                                                     style="width: 175px;" aria-label="Actions">Actions</th>
@@ -777,6 +531,7 @@ $con->close();
                                         </thead>
                                         <tbody id="userTable">
                                             <?php
+
             while ($row = $result->fetch_assoc()) {
                 $name = htmlspecialchars($row["first_name"] . " " . $row["last_name"], ENT_QUOTES, 'UTF-8');
                 $initials = htmlspecialchars(strtoupper($row["first_name"][0] . $row["last_name"][0]), ENT_QUOTES, 'UTF-8');
@@ -804,6 +559,8 @@ $con->close();
                     $ticket_sub_type = "Late Owl";
                 }
 
+                 $accepted_by = $row["accepted_by"];
+
 
                 $rowId = htmlspecialchars($row["id"], ENT_QUOTES, 'UTF-8');
                 echo "<tr>
@@ -829,6 +586,7 @@ if ($row["isaccepted"] == 'no') {
     <td><span class='badge bg-label-gray'>" . htmlspecialchars($payment_method, ENT_QUOTES, 'UTF-8') . "</span></td>
     <td><span class='badge bg-label-info'>" . htmlspecialchars($ticket_type, ENT_QUOTES, 'UTF-8') . "</span></td>
     <td><span class='badge bg-label-info'>" . htmlspecialchars($ticket_sub_type, ENT_QUOTES, 'UTF-8') . "</span></td>
+    <td><span class='badge bg-label-info'>" . htmlspecialchars($accepted_by, ENT_QUOTES, 'UTF-8') . "</span></td>
     <td>
         <div class='d-flex align-items-center'>
             <a href='javascript:;'
@@ -851,7 +609,11 @@ if ($row["isaccepted"] == 'no') {
 <div id="custom-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999; justify-content: center; align-items: center;">
     <div style="background: white; padding: 20px; border-radius: 8px; width: 300px; text-align: center;">
         <p>Are you sure you want to accept?</p>
-        <button onclick="confirmAction()" style="margin-right: 10px; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 4px;">Yes</button>
+<button onclick="confirmAction(this)" 
+        style="margin-right: 10px; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 4px;">
+    Yes
+</button>
+
         <button onclick="closePopup()" style="padding: 10px 20px; background: #f44336; color: white; border: none; border-radius: 4px;">No</button>
     </div>
 </div>
@@ -864,9 +626,18 @@ if ($row["isaccepted"] == 'no') {
         document.getElementById('custom-popup').style.display = 'flex'; // Show the popup
     }
 
-    function confirmAction() {
-        window.location.href = acceptUrl; // Redirect to the saved URL
-    }
+function confirmAction(button) {
+
+    if (button.dataset.clicked === "true") return;
+
+    button.dataset.clicked = "true";
+    button.style.pointerEvents = "none";
+    button.style.opacity = "0.6";
+    button.innerText = "Processing...";
+
+    window.location.href = acceptUrl;
+}
+
 
     function closePopup() {
         document.getElementById('custom-popup').style.display = 'none'; // Hide the popup
@@ -879,6 +650,7 @@ if ($row["isaccepted"] == 'no') {
                         <td><span class='badge bg-label-gray' text-capitalized=''>" . htmlspecialchars($payment_method, ENT_QUOTES, 'UTF-8') . "</span></td>
                         <td><span class='badge bg-label-info' text-capitalized=''>" . htmlspecialchars($ticket_type, ENT_QUOTES, 'UTF-8') . "</span></td>
                         <td><span class='badge bg-label-info'>" . htmlspecialchars($ticket_sub_type, ENT_QUOTES, 'UTF-8') . "</span></td>
+                        <td><span class='badge bg-label-info'>" . htmlspecialchars($accepted_by, ENT_QUOTES, 'UTF-8') . "</span></td>
 
                         <td >
                           <div class='d-flex align-items-center'>
@@ -906,6 +678,7 @@ if ($row["isaccepted"] == 'no') {
                         <td><span class='badge bg-label-gray' text-capitalized=''>" . htmlspecialchars($payment_method, ENT_QUOTES, 'UTF-8') . "</span></td>
                         <td><span class='badge bg-label-info' text-capitalized=''>" . htmlspecialchars($ticket_type, ENT_QUOTES, 'UTF-8') . "</span></td>
                         <td><span class='badge bg-label-info'>" . htmlspecialchars($ticket_sub_type, ENT_QUOTES, 'UTF-8') . "</span></td>
+                        <td><span class='badge bg-label-info'>" . htmlspecialchars($accepted_by, ENT_QUOTES, 'UTF-8') . "</span></td>
 
                         <td >
                           <div class='d-flex align-items-center'>
@@ -930,6 +703,13 @@ if ($row["isaccepted"] == 'no') {
         }
             ?>
             <?php
+
+$sql = $con->prepare("SELECT accepted_by FROM user_cred WHERE id = ?");
+$sql->bind_param("i", $userId);
+$sql->execute();
+$result = $sql->get_result();
+$user = $result->fetch_assoc();
+
             $startIndex = ($currentPage - 1) * $limit + 1; // Starting user index on the current page
             $endIndex = min($currentPage * $limit, $totalFilteredUsers); // Ending user index on the current page
             
@@ -943,7 +723,7 @@ if ($row["isaccepted"] == 'no') {
                                         <div class="col-sm-12 col-md-6">
                                             <div class="dataTables_info" id="DataTables_Table_0_info" role="status"
                                                 aria-live="polite">Showing
-                                                <?php echo $viewedUsersCount ?> of <?php echo $totalUsers ?> entries</div>
+                                                <?php echo $viewedUsersCount ?> of total entries</div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div class="dataTables_paginate paging_simple_numbers"
@@ -1254,7 +1034,9 @@ if ($currentPage < $totalPages) {
     });
 </script>
 
-
+<?php
+$con->close();
+?>
 
 </body>
 
