@@ -1,5 +1,6 @@
 <?php
 require_once('../Misc/security_middleware.php');
+require_once __DIR__ . '/../config.php';
 setCorsHeaders();
 setSecurityHeaders();
 
@@ -32,7 +33,7 @@ $mysqli->close();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/66081d606d.js" crossorigin="anonymous"></script>
         <link rel="shortcut icon" href="user/images/x-art.png" type="image/x-icon">
-        <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+        <base href="<?php echo BASE_URL; ?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="user/Tickets/style-tickets.css">
         <link rel="stylesheet" href="user/style.css">

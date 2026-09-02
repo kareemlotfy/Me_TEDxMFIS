@@ -1,90 +1,145 @@
-<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-    id="layout-navbar">
-    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
-        <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
-            <i class="bx bx-menu bx-md"></i>
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme hig-topbar"
+    id="layout-navbar"
+    role="navigation"
+    aria-label="Top navigation bar">
+
+    <!-- Mobile hamburger — triggers iOS bottom sheet -->
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-2 d-xl-none">
+        <a class="nav-item nav-link px-0 hig-topbar-menu-btn" href="javascript:void(0)" aria-label="Open navigation menu">
+            <i class="bx bx-menu" aria-hidden="true"></i>
         </a>
     </div>
 
-    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+    <!-- Page Title (populated via JS per page if needed) -->
+    <div class="hig-topbar-title d-none d-md-block" id="higPageTitle" aria-live="polite"></div>
 
-        <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <li class="nav-item dropdown-language dropdown me-2 me-xl-0" style="visibility:hidden;">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                    data-bs-toggle="dropdown">
-                    <i class='bx bx-globe bx-sm'></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-language="en"
-                            data-text-direction="ltr">
-                            <span>English</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);" data-language="ar"
-                            data-text-direction="rtl">
-                            <span>Arabic</span>
-                        </a>
-                    </li>
-                </ul>
+    <!-- Right-side actions -->
+    <div class="navbar-nav-right d-flex align-items-center ms-auto" id="navbar-collapse">
+        <ul class="navbar-nav flex-row align-items-center gap-1">
+
+            <!-- Dark Mode Toggle -->
+            <li class="nav-item">
+                <button class="hig-icon-btn" id="darkModeToggle" title="Toggle dark mode" aria-label="Toggle dark mode" type="button">
+                    <i class="bx bx-moon" id="darkModeIcon" aria-hidden="true"></i>
+                </button>
             </li>
 
+            <!-- User Avatar + Dropdown -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
-                    data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow p-0 hig-topbar-avatar"
+                   href="javascript:void(0);"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false"
+                   aria-haspopup="true"
+                   aria-label="User menu">
+
                     <div class="avatar avatar-online">
-                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
-                            alt class="w-px-40 h-auto rounded-circle">
+                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? htmlspecialchars($adminPic) : 'default-pic.jpg'; ?>"
+                             alt="Profile picture"
+                             class="w-px-40 h-auto rounded-circle">
+                    </div>
+
+                    <div class="avatar-info d-none d-lg-block">
+                        <span class="avatar-name"><?php echo htmlspecialchars($adminName); ?></span>
+                        <span class="avatar-role"><?php echo htmlspecialchars($adminCommitee); ?></span>
                     </div>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="javascript:void(0);">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <img src="admin/Profile/images/<?php echo !empty($adminPic) ? $adminPic : 'default-pic.jpg'; ?>"
-                                            alt class="w-px-40 h-auto rounded-circle">
-                                    </div>
+
+                <!-- Dropdown -->
+                <ul class="dropdown-menu dropdown-menu-end" role="menu">
+
+                    <!-- User info header -->
+                    <li role="none">
+                        <a class="dropdown-item pe-none" href="javascript:void(0);" style="cursor:default;" role="menuitem">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="avatar avatar-online flex-shrink-0">
+                                    <img src="admin/Profile/images/<?php echo !empty($adminPic) ? htmlspecialchars($adminPic) : 'default-pic.jpg'; ?>"
+                                         alt=""
+                                         class="w-px-40 h-auto rounded-circle">
                                 </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-0"><?php echo htmlspecialchars($adminName); ?></h6>
-                                    <small class="text-muted"><?php echo htmlspecialchars($adminCommitee); ?></small>
+                                <div>
+                                    <p class="mb-0 fw-semibold" style="font-size:0.875rem;color:var(--hig-label);">
+                                        <?php echo htmlspecialchars($adminName); ?>
+                                    </p>
+                                    <small style="color:var(--hig-label-2);">
+                                        <?php echo htmlspecialchars($adminCommitee); ?>
+                                    </small>
                                 </div>
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <div class="dropdown-divider my-1"></div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item menu-link" href="admin\Profile\profile.php">
-                            <i class="bx bx-user bx-sm me-3"></i><span>My Profile</span>
+
+                    <li role="none"><div class="dropdown-divider my-1"></div></li>
+
+                    <li role="none">
+                        <a class="dropdown-item" href="admin/Profile/profile.php" role="menuitem">
+                            <i class="bx bx-user me-2" aria-hidden="true"></i>
+                            <span>My Profile</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item menu-link" href="admin\Profile\edit_account.php">
-                            <i class="bx bx-edit bx-sm me-3"></i><span>Edit Account</span>
+                    <li role="none">
+                        <a class="dropdown-item" href="admin/Profile/edit_account.php" role="menuitem">
+                            <i class="bx bx-edit me-2" aria-hidden="true"></i>
+                            <span>Edit Account</span>
                         </a>
                     </li>
-                    <li>
-                        <div class="dropdown-divider my-1"></div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item menu-link" href="admin/Login/logout.php">
-                            <i class="bx bx-power-off bx-sm me-3"></i><span>Log Out</span>
+
+                    <li role="none"><div class="dropdown-divider my-1"></div></li>
+
+                    <li role="none">
+                        <a class="dropdown-item" href="admin/Login/logout.php" role="menuitem"
+                           style="color:var(--hig-red)!important;">
+                            <i class="bx bx-power-off me-2" aria-hidden="true" style="color:var(--hig-red)"></i>
+                            <span>Log Out</span>
                         </a>
                     </li>
                 </ul>
-            </li>
-            </ul>
-    </div>
+            </li><!-- /dropdown-user -->
 
+        </ul>
+    </div><!-- /navbar-nav-right -->
 
-    <div class="navbar-search-wrapper search-input-wrapper d-none">
-        <input type="text" class="form-control search-input container-xxl border-0"
-            placeholder="Search..." aria-label="Search...">
-        <i class="bx bx-x bx-md search-toggler cursor-pointer"></i>
-    </div>
 </nav>
+
+<!-- ── Dark Mode Toggle JavaScript ────────────────────────── -->
+<script>
+(function () {
+    'use strict';
+
+    var STORAGE_KEY = 'hig-theme';
+    var toggleBtn   = document.getElementById('darkModeToggle');
+    var icon        = document.getElementById('darkModeIcon');
+
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem(STORAGE_KEY, theme);
+        if (icon) {
+            icon.className = theme === 'dark' ? 'bx bx-sun' : 'bx bx-moon';
+        }
+        if (toggleBtn) {
+            toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            toggleBtn.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+        }
+    }
+
+    /* Restore saved preference or system preference */
+    var saved  = localStorage.getItem(STORAGE_KEY);
+    var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    applyTheme(saved || system);
+
+    /* Toggle on click */
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function () {
+            var current = document.documentElement.getAttribute('data-theme') || 'light';
+            applyTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    }
+
+    /* Listen for system preference changes */
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+        if (!localStorage.getItem(STORAGE_KEY)) {
+            applyTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+})();
+</script>

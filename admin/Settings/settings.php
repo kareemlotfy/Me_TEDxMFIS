@@ -1,6 +1,7 @@
 <?php
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 
 adminLogin();
 
@@ -87,7 +88,7 @@ $currentPage = 'settings';
 
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact ">
+<html lang="en" class="layout-navbar-fixed layout-menu-fixed layout-compact">
 
 <head>
     <meta charset="utf-8" />
@@ -99,17 +100,10 @@ $currentPage = 'settings';
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
-    <!-- Base -->
-    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
-        <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
 
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <!-- System font via Apple HIG -->
 
     <!-- Icons -->
     <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
@@ -127,6 +121,9 @@ $currentPage = 'settings';
     <link rel="stylesheet" href="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="admin/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="admin/assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- Apple HIG Design System -->
+    <link rel="stylesheet" href="admin/assets/css/apple-hig.css" />
 
     <!-- Helpers -->
     <script src="admin/assets/vendor/js/helpers.js"></script>
@@ -162,12 +159,12 @@ $currentPage = 'settings';
   <div class="row">
     <div class="col-md-12">
       <div class="card mb-4">
-        <h5 class="card-header">Update Ticket Settings</h5>
+        <div class="card-header border-bottom mb-3"><h5 class="card-title mb-0">Update Ticket Settings</h5></div>
         <div class="card-body">
 
           <!-- Ticket Loop -->
           <?php foreach ($tickets as $ticket): ?>
-            <div class="card_ticket_status mb-3 p-3 border rounded">
+            <div class="card mb-3 p-3">
               <h6><?= htmlspecialchars($ticket['ticket_name']) ?></h6>
 
               <!-- Ticket Price & Discount -->
@@ -191,30 +188,30 @@ $currentPage = 'settings';
               </div>
 
               <!-- Ticket Status -->
-              <div>
-                <label class="me-3">
-                  <input type="radio"
+              <div class="d-flex flex-wrap gap-3 mt-2">
+                <label class="me-3 d-flex align-items-center gap-2">
+                  <input type="radio" class="form-check-input mt-0"
                          name="ticket_status[<?= $ticket['id'] ?>]"
                          value="available"
                          <?= $ticket['ticket_status'] == 'available' ? 'checked' : '' ?>>
                   Available
                 </label>
-                <label class="me-3">
-                  <input type="radio"
+                <label class="me-3 d-flex align-items-center gap-2">
+                  <input type="radio" class="form-check-input mt-0"
                          name="ticket_status[<?= $ticket['id'] ?>]"
                          value="coming_soon"
                          <?= $ticket['ticket_status'] == 'coming_soon' ? 'checked' : '' ?>>
                   Coming Soon
                 </label>
-                <label class="me-3">
-                  <input type="radio"
+                <label class="me-3 d-flex align-items-center gap-2">
+                  <input type="radio" class="form-check-input mt-0"
                          name="ticket_status[<?= $ticket['id'] ?>]"
                          value="sold_out"
                          <?= $ticket['ticket_status'] == 'sold_out' ? 'checked' : '' ?>>
                   Sold Out
                 </label>
-                <label class="me-3">
-                  <input type="radio"
+                <label class="me-3 d-flex align-items-center gap-2">
+                  <input type="radio" class="form-check-input mt-0"
                          name="ticket_status[<?= $ticket['id'] ?>]"
                          value="hidden"
                          <?= $ticket['ticket_status'] == 'hidden' ? 'checked' : '' ?>>

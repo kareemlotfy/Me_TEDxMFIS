@@ -3,6 +3,7 @@
 ini_set('session.cookie_secure', '1'); // Ensure cookies are sent over HTTPS
 ini_set('session.cookie_httponly', '1'); // Prevent JavaScript access to session cookies
 ini_set('session.cookie_samesite', 'Strict'); // Mitigate CSRF attacks
+require_once __DIR__ . '/../../config.php';
 ?>
 
 <?php 
@@ -134,7 +135,7 @@ $con->close();
 
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact ">
+<html lang="en" class="layout-navbar-fixed layout-menu-fixed layout-compact">
 
 
 <head>
@@ -143,21 +144,14 @@ $con->close();
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Users</title>
-    <!-- Base -->
-    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
-        <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
 
     <!-- <link rel="stylesheet" href="admin/css/style.css"> -->
     <!-- <link rel="stylesheet" href="admin/css/style-tickets.css"> -->
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <!-- System font via Apple HIG -->
 
     <!-- Icons -->
     <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
@@ -189,6 +183,9 @@ $con->close();
         }
 
     </style>
+
+    <!-- Apple HIG Design System -->
+    <link rel="stylesheet" href="admin/assets/css/apple-hig.css" />
 
     <!-- Helpers -->
     <script src="admin/assets/vendor/js/helpers.js"></script>
@@ -864,8 +861,7 @@ if ($currentPage < $totalPages) {
             <!-- / Layout page -->
         </div>
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Overlay (handled by iOS sheet overlay) -->`n        <!-- <div class="layout-overlay layout-menu-toggle"></div> -->
 
         <!-- Drag Target Area To SlideIn Menu On Small Screens -->
         <div class="drag-target"></div>
@@ -938,3 +934,4 @@ if ($currentPage < $totalPages) {
 </body>
 
 </html>
+

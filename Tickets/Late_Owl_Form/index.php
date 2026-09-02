@@ -2,6 +2,7 @@
 
 include('../../admin/Misc/functions.php');
 include("../../Misc/db_conn.php");
+require_once __DIR__ . '/../../config.php';
 
 // Function to fetch ticket status by ID
 function getTicketStatus($con, $ticket_id) {
@@ -33,7 +34,7 @@ $late_final    = $late_price - $late_discount;
 $ticket_status2 = getTicketStatus($con, 2); // Late Owl status
 
 if ($ticket_status2 == "sold_out" || $ticket_status2 == "coming_soon") {
-    header('Location:../../Misc/error.html');
+    header('Location:../../Misc/error.php');
 }
 
 // Validate email
@@ -246,8 +247,7 @@ $stmt->bind_param("sssssissssssssssssissss",
     <meta name="author" content="TEDxManaratAlFaroukSchool">
 
     <link rel="shortcut icon" href="images/x-art.png" type="image/x-icon">
-    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
-    <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
 
 
     <link rel="stylesheet" href="assets\fontawesome-free-6.6.0-web\fontawesome-free-6.6.0-web\css\all.css">

@@ -8,6 +8,7 @@ session_start();
 
 require('../Misc/db_conn.php');
 require('../Misc/functions.php');
+require_once __DIR__ . '/../../config.php';
 
 // Redirect logged-in admin to the dashboard
 if (isset($_SESSION["adminLogin"]) && $_SESSION["adminLogin"] === true) {
@@ -57,9 +58,7 @@ if (isset($_POST["submit"])) {
 }
 
 ?>
-
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -67,129 +66,340 @@ if (isset($_POST["submit"])) {
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login</title>
-    <!--Base -->
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <title>Login — TEDxManaratAlfaroukSchool</title>
+    <base href="<?php echo BASE_URL; ?>">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet" />
-
-    <!-- Icons. Uncomment required icon fonts -->
+    <!-- Icons -->
     <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="admin/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="admin/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <!-- Core CSS (kept for JS compatibility) -->
+    <link rel="stylesheet" href="admin/assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="admin/assets/vendor/css/theme-default.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <!-- Apple HIG Design System -->
+    <link rel="stylesheet" href="admin/assets/css/apple-hig.css" />
 
-
-    <!-- Page -->
-    <link rel="stylesheet" href="admin/assets/vendor/css/pages/page-auth.css" />
     <!-- Helpers -->
     <script src="admin/assets/vendor/js/helpers.js"></script>
     <script src="admin/assets/js/config.js"></script>
+
+    <style>
+        /* ── Login page layout ──────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body.hig-login-body {
+            min-height: 100vh;
+            display: flex;
+            font-family: var(--hig-font);
+            background: var(--hig-bg);
+            transition: background var(--hig-duration) var(--hig-ease);
+        }
+
+        /* Left decorative panel */
+        .hig-login-panel {
+            display: none;
+            flex: 0 0 42%;
+            background: linear-gradient(145deg, #C0202F 0%, #EB3349 45%, #FF5C70 100%);
+            position: relative;
+            overflow: hidden;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px;
+        }
+        @media (min-width: 900px) {
+            .hig-login-panel { display: flex; }
+        }
+        .hig-login-panel::before,
+        .hig-login-panel::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+        }
+        .hig-login-panel::before { width: 400px; height: 400px; top: -120px; right: -100px; }
+        .hig-login-panel::after  { width: 300px; height: 300px; bottom: -80px; left: -80px; }
+
+        .hig-panel-logo {
+            width: auto; height: 90px; object-fit: contain;
+            filter: brightness(0) invert(1);
+            margin-bottom: 32px; position: relative; z-index: 1;
+        }
+        .hig-panel-title {
+            font-size: 2rem; font-weight: 800; color: #fff;
+            text-align: center; line-height: 1.15;
+            letter-spacing: -0.03em; position: relative; z-index: 1;
+        }
+        .hig-panel-subtitle {
+            font-size: 0.95rem; color: rgba(255,255,255,0.75);
+            text-align: center; margin-top: 12px;
+            max-width: 280px; line-height: 1.55; position: relative; z-index: 1;
+        }
+        .hig-panel-circles {
+            position: absolute; bottom: 40px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: 8px; z-index: 1;
+        }
+        .hig-panel-circles span {
+            display: block; width: 8px; height: 8px;
+            border-radius: 50%; background: rgba(255,255,255,0.40);
+        }
+        .hig-panel-circles span:first-child { background: rgba(255,255,255,0.90); }
+
+        /* Right form panel */
+        .hig-login-form-panel {
+            flex: 1; display: flex;
+            align-items: center; justify-content: center;
+            padding: 40px 24px;
+            background: var(--hig-bg);
+            transition: background var(--hig-duration) var(--hig-ease);
+        }
+        .hig-login-card {
+            width: 100%; max-width: 400px;
+            background: var(--hig-surface);
+            border: 1px solid var(--hig-separator);
+            border-radius: var(--hig-radius-2xl);
+            box-shadow: var(--hig-shadow-xl);
+            padding: 40px 36px;
+            animation: higPop 450ms var(--hig-ease-spring) both;
+            transition: background var(--hig-duration) var(--hig-ease),
+                        border-color var(--hig-duration) var(--hig-ease);
+        }
+        .hig-login-logo {
+            display: block; height: 56px; width: auto;
+            margin: 0 auto 24px; object-fit: contain;
+        }
+        .hig-login-headline {
+            font-size: 1.5rem; font-weight: 700;
+            color: var(--hig-label); text-align: center;
+            letter-spacing: -0.025em; margin-bottom: 6px;
+        }
+        .hig-login-subline {
+            font-size: 0.875rem; color: var(--hig-label-2);
+            text-align: center; margin-bottom: 32px;
+        }
+
+        /* Fields */
+        .hig-field { margin-bottom: 16px; }
+        .hig-field label {
+            display: block; font-size: 0.8125rem;
+            font-weight: 500; color: var(--hig-label-2); margin-bottom: 6px;
+        }
+        .hig-field input {
+            width: 100%; padding: 11px 14px;
+            background: var(--hig-bg);
+            border: 1.5px solid var(--hig-separator-opaque);
+            border-radius: var(--hig-radius-md);
+            font-size: 0.9375rem; color: var(--hig-label);
+            font-family: var(--hig-font); outline: none;
+            transition: border-color 160ms ease, box-shadow 160ms ease, background var(--hig-duration) ease;
+        }
+        .hig-field input:focus {
+            border-color: var(--hig-accent);
+            box-shadow: 0 0 0 3px var(--hig-accent-light);
+            background: var(--hig-surface);
+        }
+        .hig-field input::placeholder { color: var(--hig-label-3); }
+
+        .hig-pw-wrapper { position: relative; }
+        .hig-pw-toggle {
+            position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: var(--hig-label-3);
+            cursor: pointer; font-size: 1.1rem; padding: 0; line-height: 1;
+            transition: color 140ms ease;
+        }
+        .hig-pw-toggle:hover { color: var(--hig-label-2); }
+
+        /* Submit */
+        .hig-login-btn {
+            display: block; width: 100%; padding: 13px;
+            background: var(--hig-accent); color: #fff;
+            border: none; border-radius: var(--hig-radius-md);
+            font-size: 0.9375rem; font-weight: 600;
+            font-family: var(--hig-font); cursor: pointer;
+            margin-top: 24px; letter-spacing: -0.01em;
+            box-shadow: 0 2px 8px rgba(235,51,73,0.30);
+            transition: background 160ms ease, box-shadow 160ms ease, transform 120ms ease;
+        }
+        .hig-login-btn:hover {
+            background: var(--hig-accent-hover);
+            box-shadow: 0 4px 16px rgba(235,51,73,0.38);
+        }
+        .hig-login-btn:active { transform: scale(0.98); }
+
+        /* Dark mode toggle */
+        .hig-login-theme-btn {
+            position: fixed; top: 18px; right: 20px;
+            width: 38px; height: 38px; border-radius: 50%;
+            border: 1.5px solid var(--hig-separator-opaque);
+            background: var(--hig-surface); color: var(--hig-label-2);
+            font-size: 1.05rem; display: flex;
+            align-items: center; justify-content: center;
+            cursor: pointer; z-index: 100;
+            box-shadow: var(--hig-shadow-sm);
+            transition: background var(--hig-duration) ease, color 150ms ease,
+                        border-color var(--hig-duration) ease;
+        }
+        .hig-login-theme-btn:hover { color: var(--hig-label); }
+
+        /* Dark mode overrides */
+        [data-theme="dark"] .hig-login-card {
+            background: var(--hig-surface);
+            border-color: var(--hig-separator);
+        }
+        [data-theme="dark"] .hig-field input {
+            background: var(--hig-bg-2);
+            border-color: var(--hig-separator);
+            color: var(--hig-label);
+        }
+        [data-theme="dark"] .hig-field input:focus {
+            background: var(--hig-surface);
+        }
+        [data-theme="dark"] .hig-login-theme-btn {
+            background: var(--hig-surface);
+            border-color: var(--hig-separator);
+        }
+    </style>
 </head>
 
-<body>
-    <!-- Content -->
+<body class="hig-login-body">
 
-    <div class="container-xxl">
-        <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner">
-                <!-- Register -->
-                <div class="card">
-                    <div class="card-body">
-                        <!-- Logo -->
-                        <div class="app-brand justify-content-center">
-                            <a href="index.html" class="app-brand-link gap-2">
-                                <img src="admin/assets/img/logos/TEDx_logo_place2_RGB_CS2_page-0001.jpg" alt="tedx logo"
-                                    id="tedx_logo" style="
-    width: auto;
-    height: 70px;">
-                            </a>
-                        </div>
-                        <!-- /Logo -->
-                        <h4 class="mb-2">Welcome to TEDxManaratAlfaroukSchool! 👋</h4>
-                        <p class="mb-4">Please sign-in to your account and start the adventure</p>
+    <!-- Dark mode toggle -->
+    <button class="hig-login-theme-btn" id="loginDarkToggle"
+            title="Toggle dark mode" aria-label="Toggle dark mode" type="button">
+        <i class="bx bx-moon" id="loginDarkIcon" aria-hidden="true"></i>
+    </button>
 
-                        <form id="formAuthentication" class="mb-3" action="" method="POST">
-                            <input type="hidden" name="csrf_token"
-                                value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" name="admin_username" id="username" autocomplete="off"
-                                    class="form-control">
-                            </div>
-                            <div class="mb-3 form-password-toggle">
-                                <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
-                                </div>
-                                <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="admin_pass"
-                                        autocomplete="off"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password" />
-                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <input class="btn btn-primary d-grid w-100 btn1" type="submit" name="submit"
-                                    value="Login"></input>
-                            </div>
-                        </form>
-
-
-                    </div>
-                </div>
-            </div>
+    <!-- Left decorative panel -->
+    <div class="hig-login-panel" aria-hidden="true">
+        <img src="admin/assets/img/logos/tedx-logo-white.webp"
+             alt="" class="hig-panel-logo">
+        <!-- <h1 class="hig-panel-title">TEDxManaratAlfaroukSchool</h1> -->
+        <p class="hig-panel-subtitle">Admin dashboard for managing ticket registrations, speakers, and event operations.</p>
+        <div class="hig-panel-circles">
+            <span></span><span></span><span></span>
         </div>
     </div>
 
+    <!-- Right form panel -->
+    <main class="hig-login-form-panel" role="main">
+        <div class="hig-login-card">
 
-    <!-- / Content -->
+            <!-- Logo (mobile only — panel hidden on small screens) -->
+            <img src="admin/assets/img/logos/tedx-logo-black.webp"
+                 alt="TEDx Logo"
+                 class="hig-login-logo"
+                 id="loginLogo"
+                 style="display:block;">
 
+            <h2 class="hig-login-headline">Welcome back 👋</h2>
+            <p class="hig-login-subline">Sign in to the admin panel</p>
+
+            <form id="formAuthentication" action="" method="POST" novalidate>
+                <input type="hidden" name="csrf_token"
+                       value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+
+                <div class="hig-field">
+                    <label for="username">Username</label>
+                    <input type="text"
+                           name="admin_username"
+                           id="username"
+                           autocomplete="username"
+                           placeholder="Enter your username"
+                           required>
+                </div>
+
+                <div class="hig-field">
+                    <label for="password">Password</label>
+                    <div class="hig-pw-wrapper">
+                        <input type="password"
+                               id="password"
+                               name="admin_pass"
+                               autocomplete="current-password"
+                               placeholder="••••••••••••"
+                               required>
+                        <button type="button" class="hig-pw-toggle"
+                                aria-label="Show/hide password" id="pwToggleBtn">
+                            <i class="bx bx-hide" id="pwToggleIcon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" name="submit" class="hig-login-btn">Sign In</button>
+            </form>
+
+        </div>
+    </main>
 
     <!-- Core JS -->
     <script src="admin/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="admin/assets/vendor/libs/popper/popper.js"></script>
     <script src="admin/assets/vendor/js/bootstrap.js"></script>
     <script src="admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script>
-        function closePopup() {
-            let popup = document.getElementById("popup");
-            let email = document.getElementById("email");
-            let password = document.getElementById("password");
-            popup.classList.add("close_popup");
-            document.body.classList.remove("alertCalled");
-            email.value = "";
-            password.value = "";
-        }
-    </script>
-
     <script src="admin/assets/vendor/js/menu.js"></script>
-    <!-- Main JS -->
     <script src="admin/assets/js/main.js"></script>
 
-    <!-- Page JS -->
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-</body>
+    <script>
+    /* Password toggle */
+    (function () {
+        var btn  = document.getElementById('pwToggleBtn');
+        var inp  = document.getElementById('password');
+        var icon = document.getElementById('pwToggleIcon');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+            var shown = inp.type === 'text';
+            inp.type = shown ? 'password' : 'text';
+            icon.className = shown ? 'bx bx-hide' : 'bx bx-show';
+        });
+    })();
 
+    /* Dark mode toggle with logo switching */
+    (function () {
+        var STORAGE_KEY = 'hig-theme';
+        var btn  = document.getElementById('loginDarkToggle');
+        var icon = document.getElementById('loginDarkIcon');
+        var logo = document.getElementById('loginLogo');
+
+        function apply(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem(STORAGE_KEY, theme);
+            
+            // Update toggle icon
+            if (icon) icon.className = theme === 'dark' ? 'bx bx-sun' : 'bx bx-moon';
+            if (btn)  btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            
+            // Update logo based on theme
+            if (logo) {
+                logo.src = theme === 'dark' 
+                    ? 'admin/assets/img/logos/tedx-logo-white.webp' 
+                    : 'admin/assets/img/logos/tedx-logo-black.webp';
+            }
+        }
+
+        var saved  = localStorage.getItem(STORAGE_KEY);
+        var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        apply(saved || system);
+
+        if (btn) {
+            btn.addEventListener('click', function () {
+                var cur = document.documentElement.getAttribute('data-theme') || 'light';
+                apply(cur === 'dark' ? 'light' : 'dark');
+            });
+        }
+    })();
+
+    /* Popup close helper (used by alert() calls from PHP) */
+    function closePopup() {
+        var popup    = document.getElementById('popup');
+        var password = document.getElementById('password');
+        if (popup)    popup.classList.add('close_popup');
+        document.body.classList.remove('alertCalled');
+        if (password) password.value = '';
+    }
+    </script>
+
+</body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 require("Misc/db_conn.php");
 require("Misc/security_middleware.php");
+require_once __DIR__ . '/config.php';
 
 // Initialize security middleware
 initSecurityMiddleware();
@@ -138,9 +139,7 @@ $final_price_group = $ticket_price_group - $discount_group;
     <link rel="stylesheet" href="assets\splide-4.1.3\splide-4.1.3\dist\css\splide.min.css">
     <link rel="stylesheet" href="assets\splide-4.1.3\splide-4.1.3\dist\css\themes\splide-default.min.css">
     <!-- Base URL -->
-    <!-- <base href="http://localhost:8000/"> -->
-    <!-- <base href="https://tedxmanaratalfaroukschool.com/"> -->
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="<?php echo BASE_URL; ?>">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
@@ -181,7 +180,7 @@ $final_price_group = $ticket_price_group - $discount_group;
 
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
-                <li><a href="About\index.html" class="nav-link">About</a></li>
+                <li><a href="About\index.php" class="nav-link">About</a></li>
                 <li><a href="Speakers\index.php" class="nav-link">Speakers</a></li>
                 <li><a href="Sponsors\index.php" class="nav-link">Sponsors</a></li>
                 <li><a href="#tickets" class="nav-cta"><span>Get Tickets</span></a></li>
@@ -199,7 +198,7 @@ $final_price_group = $ticket_price_group - $discount_group;
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu-links">
             <li><a href="#home" class="mobile-menu-link">Home</a></li>
-            <li><a href="About\index.html" class="mobile-menu-link">About</a></li>
+            <li><a href="About\index.php" class="mobile-menu-link">About</a></li>
             <li><a href="Speakers\index.php" class="mobile-menu-link">Speakers</a></li>
             <li><a href="Sponsors\index.php" class="mobile-menu-link">Sponsors</a></li>
         </ul>
@@ -431,7 +430,7 @@ $final_price_group = $ticket_price_group - $discount_group;
         <div class="speakers-container">
             <div class="speakers-grid">
                 <?php
-            $currentGeneration = 8; // Update for Gen 8, 9, etc.
+            $currentGeneration = 7; // Update for Gen 8, 9, etc.
             $speakersQuery = "SELECT * FROM speakers 
                               WHERE generation = ? 
                               AND status = 'published' 
@@ -1124,9 +1123,9 @@ $final_price_group = $ticket_price_group - $discount_group;
     <!-- JavaScript -->
     <script>
     // Configuration - SET YOUR ACTUAL DATES HERE
-    const START_EARLY_BIRD = new Date('2025-11-27T23:59:59').getTime();
-    const EARLY_BIRD_DEADLINE = new Date('2025-12-11T22:00:00').getTime();
-    const EVENT_DATE = new Date('2025-12-12T16:00:00').getTime();
+    const START_EARLY_BIRD = new Date('2028-11-27T23:59:59').getTime();
+    const EARLY_BIRD_DEADLINE = new Date('2028-12-11T22:00:00').getTime();
+    const EVENT_DATE = new Date('2028-12-12T16:00:00').getTime();
 
     const EARLY_BIRD_PRICE = <?php echo $final_price ?>;
     const LATE_OWL_PRICE = <?php echo $final_price_group ?>;

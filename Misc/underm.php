@@ -11,7 +11,7 @@
     <title>Under Maintenance</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="user/images/x-art.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/x-art.png" type="image/x-icon">
 
     <!-- Base URL -->
     <base href="<?php echo BASE_URL; ?>">
@@ -34,24 +34,22 @@
 <body>
     <!-- Content -->
 
-    <!-- Error -->
+    <!--Under Maintenance -->
     <div class="container-xxl container-p-y">
         <div class="misc-wrapper">
-            <h2 class="mb-2 mx-2">Page Not Found :(</h2>
-            <p class="mb-4 mx-2">Oops! 😖 The requested URL was not found on this server.</p>
+            <h2 class="mb-2 mx-2">Under Maintenance!</h2>
+            <p class="mb-4 mx-2">Sorry for the inconvenience but we're performing some maintenance at the moment</p>
             <div class="ticket-button" style="top:0;"><a href="" style="box-shadow: none;">Back Home</a></div>
-            <div class="mt-3">
-                <img src="images/illustrations/page-misc-error-light.png" alt="page-misc-error-light" width="500"
-                    class="img-fluid" data-app-dark-img="illustrations/page-misc-error-dark.png"
-                    data-app-light-img="illustrations/page-misc-error-light.png" />
+            <div class="mt-4">
+                <img src="images/illustrations/girl-doing-yoga-light.png" alt="girl-doing-yoga-light" width="500"
+                    class="img-fluid" data-app-dark-img="illustrations/girl-doing-yoga-dark.png"
+                    data-app-light-img="illustrations/girl-doing-yoga-light.png" />
             </div>
         </div>
     </div>
-    <!-- /Error -->
+    <!-- /Under Maintenance -->
 
-    <!-- / Content -->
-
-
+    
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php 
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 
 adminLogin();
 
@@ -48,9 +49,7 @@ $currentPage = 'storage';
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <!-- Base -->
-    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
-        <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />

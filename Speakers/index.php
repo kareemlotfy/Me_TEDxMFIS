@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,8 +36,7 @@
     <link rel="shortcut icon" href="images/x-art.webp" type="image/x-icon">
 
     <!-- Base URL -->
-     <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
-    <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
 
 
     <!-- Splide CSS -->
@@ -63,7 +63,7 @@
 
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
-                <li><a href="About\index.html" class="nav-link">About</a></li>
+                <li><a href="About\index.php" class="nav-link">About</a></li>
                 <li><a href="Speakers\index.php" class="nav-link">Speakers</a></li>
                 <li><a href="Sponsors\index.php" class="nav-link">Sponsors</a></li>
                 <li><a href="#tickets" class="nav-cta"><span>Get Tickets</span></a></li>
@@ -81,7 +81,7 @@
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu-links">
             <li><a href="index.php" class="mobile-menu-link">Home</a></li>
-            <li><a href="About\index.html" class="mobile-menu-link">About</a></li>
+            <li><a href="About\index.php" class="mobile-menu-link">About</a></li>
             <li><a href="Speakers\index.php" class="mobile-menu-link">Speakers</a></li>
             <li><a href="Sponsors\index.php" class="mobile-menu-link">Sponsors</a></li>
         </ul>

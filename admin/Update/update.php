@@ -2,6 +2,7 @@
 
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 
 adminLogin();
 
@@ -134,8 +135,7 @@ $con->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="https://tedxmanaratalfaroukschool.com/">
-    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
+    <base href="<?php echo BASE_URL; ?>">
     <link rel="stylesheet" href="admin\Update\style.css">
     <title>User Details</title>
     <link rel="shortcut icon" href="images/x-art.png" type="image/x-icon">

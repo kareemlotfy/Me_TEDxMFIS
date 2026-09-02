@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../../Misc/db_conn.php");
+require_once __DIR__ . '/../../config.php';
 // require_once("../../Misc/functions.php");
 // adminLogin();
 
@@ -32,7 +33,7 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Speaker</title>
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="<?php echo BASE_URL; ?>">
     
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
@@ -382,3 +383,4 @@ $stmt->close();
 </body>
 </html>
 <?php $con->close(); ?>
+

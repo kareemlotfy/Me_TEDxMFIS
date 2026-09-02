@@ -2,6 +2,7 @@
 
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 
 adminLogin();
 
@@ -51,9 +52,7 @@ if ($adminDetails) {
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
-    <!-- Base -->
-    <base href="https://tedxmanaratalfaroukschool.com/">
-    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
+    <base href="<?php echo BASE_URL; ?>">
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">

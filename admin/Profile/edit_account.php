@@ -2,6 +2,7 @@
 
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 
 adminLogin();
 
@@ -13,7 +14,7 @@ checkAdminPermission($con, $adminId, $pageId);
 ?>
 
 <?php
-header("Location:../Misc/error.html")
+header("Location:../Misc/error.php")
 ?>
 
 
@@ -164,7 +165,7 @@ $currentPage = 'edit_account';
 <!DOCTYPE html>
 
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact ">
+<html lang="en" class="layout-navbar-fixed layout-menu-fixed layout-compact">
 
 
 <head>
@@ -178,18 +179,13 @@ $currentPage = 'edit_account';
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Font Awesome CSS -->
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <!-- System font via Apple HIG -->
 
     <!-- Icons -->
     <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
@@ -210,6 +206,9 @@ $currentPage = 'edit_account';
 
     <!-- Page CSS -->
 
+
+    <!-- Apple HIG Design System -->
+    <link rel="stylesheet" href="admin/assets/css/apple-hig.css" />
 
     <!-- Helpers -->
     <script src="admin/assets/vendor/js/helpers.js"></script>
@@ -474,8 +473,7 @@ $currentPage = 'edit_account';
 
 
 
-                    <!-- Overlay -->
-                    <div class="layout-overlay layout-menu-toggle"></div>
+                    <!-- Overlay (handled by iOS sheet overlay) -->`n        <!-- <div class="layout-overlay layout-menu-toggle"></div> -->
 
 
                     <!-- Drag Target Area To SlideIn Menu On Small Screens -->

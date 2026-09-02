@@ -1,0 +1,1599 @@
+/* ============================================================
+   APPLE HIG DESIGN SYSTEM — TEDxManaratAlfaroukSchool Admin
+   ============================================================
+   
+   Strategy: Visual override layer on top of Sneat Bootstrap.
+   All existing vendor JS (DataTables, ApexCharts, Bootstrap
+   dropdowns/modals) continues to work without modification.
+   
+   Sections:
+    1. Design Tokens (Light Mode)
+    2. Design Tokens (Dark Mode)
+    3. Base & Typography
+    4. Custom Scrollbar
+    5. Layout Shell
+    6. HIG Sidebar — Desktop
+    7. HIG Topbar
+    8. iOS Bottom Sheet — Mobile Sidebar
+    9. Content Area
+   10. HIG Stat Cards
+   11. HIG Cards (general)
+   12. HIG Tables
+   13. HIG Forms & Inputs
+   14. HIG Buttons
+   15. HIG Badges & Chips
+   16. HIG Segmented Control
+   17. HIG Dropdown Menu
+   18. HIG List (Settings-style)
+   19. HIG Avatar & User
+   20. HIG Modal Overrides
+   21. Dark Mode Overrides
+   22. Transitions & Animations
+   23. Utilities
+   ============================================================ */
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 1. DESIGN TOKENS — LIGHT MODE                               */
+/* ─────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --hig-bg:              #F2F2F7;   /* systemGroupedBackground */
+  --hig-bg-2:            #E5E5EA;   /* secondaryGroupedBackground */
+  --hig-surface:         #FFFFFF;   /* surface / card */
+  --hig-surface-2:       rgba(255,255,255,0.80); /* vibrancy */
+  --hig-surface-3:       rgba(242,242,247,0.88); /* sidebar vibrancy */
+
+  /* Separators */
+  --hig-separator:       rgba(60,60,67,0.12);
+  --hig-separator-opaque:#C6C6C8;
+
+  /* Labels */
+  --hig-label:           #1C1C1E;   /* primary label */
+  --hig-label-2:         #636366;   /* secondary label */
+  --hig-label-3:         #AEAEB2;   /* tertiary label */
+  --hig-label-4:         #D1D1D6;   /* quaternary label */
+
+  /* System Colors */
+  --hig-accent:          #EB3349;   /* TEDx red — primary accent */
+  --hig-accent-hover:    #C8293D;
+  --hig-accent-light:    rgba(235,51,73,0.12);
+  --hig-green:           #34C759;
+  --hig-green-light:     rgba(52,199,89,0.12);
+  --hig-orange:          #FF9500;
+  --hig-orange-light:    rgba(255,149,0,0.12);
+  --hig-red:             #FF3B30;
+  --hig-red-light:       rgba(255,59,48,0.12);
+  --hig-blue:            #007AFF;
+  --hig-blue-light:      rgba(0,122,255,0.12);
+  --hig-purple:          #AF52DE;
+  --hig-purple-light:    rgba(175,82,222,0.12);
+  --hig-yellow:          #FFCC00;
+  --hig-yellow-light:    rgba(255,204,0,0.14);
+  --hig-teal:            #30B0C7;
+  --hig-teal-light:      rgba(48,176,199,0.12);
+
+  /* Border Radius */
+  --hig-radius-xs:       6px;
+  --hig-radius-sm:       8px;
+  --hig-radius-md:       12px;
+  --hig-radius-lg:       16px;
+  --hig-radius-xl:       20px;
+  --hig-radius-2xl:      28px;
+  --hig-radius-full:     9999px;
+
+  /* Shadows */
+  --hig-shadow-xs:       0 1px 2px rgba(0,0,0,0.05);
+  --hig-shadow-sm:       0 1px 4px rgba(0,0,0,0.08), 0 0 1px rgba(0,0,0,0.04);
+  --hig-shadow-md:       0 4px 16px rgba(0,0,0,0.10), 0 0 1px rgba(0,0,0,0.04);
+  --hig-shadow-lg:       0 8px 32px rgba(0,0,0,0.12), 0 0 1px rgba(0,0,0,0.04);
+  --hig-shadow-xl:       0 16px 48px rgba(0,0,0,0.14), 0 0 1px rgba(0,0,0,0.04);
+  --hig-shadow-sidebar:  4px 0 20px rgba(0,0,0,0.06);
+
+  /* Typography */
+  --hig-font:            -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                         "Helvetica Neue", Arial, sans-serif;
+  --hig-font-mono:       "SF Mono", ui-monospace, "Cascadia Code", monospace;
+
+  /* Sidebar */
+  --hig-sidebar-width:   260px;
+  --hig-sidebar-bg:      rgba(242,242,247,0.92);
+  --hig-sidebar-border:  rgba(60,60,67,0.12);
+
+  /* Topbar */
+  --hig-topbar-height:   64px;
+  --hig-topbar-bg:       rgba(255,255,255,0.82);
+
+  /* Transitions */
+  --hig-ease:            cubic-bezier(0.25,0.46,0.45,0.94);
+  --hig-ease-spring:     cubic-bezier(0.34,1.56,0.64,1);
+  --hig-ease-in:         cubic-bezier(0.55,0,1,0.45);
+  --hig-ease-out:        cubic-bezier(0,0.55,0.45,1);
+  --hig-duration-fast:   150ms;
+  --hig-duration:        220ms;
+  --hig-duration-slow:   350ms;
+  --hig-duration-sheet:  400ms;
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 2. DESIGN TOKENS — DARK MODE                                */
+/* ─────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --hig-bg:              #1C1C1E;
+  --hig-bg-2:            #2C2C2E;
+  --hig-surface:         #2C2C2E;
+  --hig-surface-2:       rgba(44,44,46,0.85);
+  --hig-surface-3:       rgba(28,28,30,0.88);
+
+  --hig-separator:       rgba(255,255,255,0.10);
+  --hig-separator-opaque:#3A3A3C;
+
+  --hig-label:           #FFFFFF;
+  --hig-label-2:         rgba(235,235,245,0.60);
+  --hig-label-3:         rgba(235,235,245,0.30);
+  --hig-label-4:         rgba(235,235,245,0.18);
+
+  --hig-accent:          #FF4F64;
+  --hig-accent-hover:    #FF7082;
+  --hig-accent-light:    rgba(255,79,100,0.20);
+  --hig-green:           #30D158;
+  --hig-green-light:     rgba(48,209,88,0.18);
+  --hig-orange:          #FF9F0A;
+  --hig-orange-light:    rgba(255,159,10,0.18);
+  --hig-red:             #FF453A;
+  --hig-red-light:       rgba(255,69,58,0.18);
+  --hig-blue:            #0A84FF;
+  --hig-blue-light:      rgba(10,132,255,0.18);
+
+  --hig-sidebar-bg:      rgba(28,28,30,0.92);
+  --hig-sidebar-border:  rgba(255,255,255,0.08);
+  --hig-topbar-bg:       rgba(28,28,30,0.85);
+
+  --hig-shadow-sm:       0 1px 4px rgba(0,0,0,0.30);
+  --hig-shadow-md:       0 4px 16px rgba(0,0,0,0.35);
+  --hig-shadow-lg:       0 8px 32px rgba(0,0,0,0.40);
+  --hig-shadow-sidebar:  4px 0 20px rgba(0,0,0,0.25);
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 3. BASE & TYPOGRAPHY                                         */
+/* ─────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--hig-font) !important;
+  background-color: var(--hig-bg) !important;
+  color: var(--hig-label) !important;
+  line-height: 1.5;
+  transition: background-color var(--hig-duration) var(--hig-ease),
+              color var(--hig-duration) var(--hig-ease);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--hig-font) !important;
+  color: var(--hig-label) !important;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p, span, div, li, td, th, label, small {
+  font-family: var(--hig-font) !important;
+}
+
+a {
+  color: var(--hig-accent);
+  text-decoration: none;
+  transition: color var(--hig-duration-fast) var(--hig-ease);
+}
+
+a:hover { color: var(--hig-accent-hover); }
+
+/* Override Public Sans loaded by old theme */
+.card-title  { font-weight: 600; letter-spacing: -0.01em; }
+.card-subtitle { color: var(--hig-label-2) !important; font-size: 0.8125rem; }
+.text-muted  { color: var(--hig-label-2) !important; }
+
+/* Heading utilities */
+.hig-title-sm   { font-size: 0.6875rem; font-weight: 500; text-transform: uppercase;
+                   letter-spacing: 0.06em; color: var(--hig-label-2); }
+.hig-caption    { font-size: 0.75rem; color: var(--hig-label-2); }
+.hig-footnote   { font-size: 0.6875rem; color: var(--hig-label-3); }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 4. CUSTOM SCROLLBAR                                          */
+/* ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--hig-separator-opaque);
+  border-radius: var(--hig-radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--hig-label-3); }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 5. LAYOUT SHELL                                              */
+/* ─────────────────────────────────────────────────────────── */
+
+/* Override Sneat layout background */
+.layout-wrapper,
+.layout-container,
+.layout-page,
+.content-wrapper,
+.container-xxl {
+  background-color: var(--hig-bg) !important;
+  transition: background-color var(--hig-duration) var(--hig-ease);
+}
+
+/* Content padding */
+.container-p-y { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+.container-p-x { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 6. HIG SIDEBAR — DESKTOP                                     */
+/* ─────────────────────────────────────────────────────────── */
+
+/* Override Sneat sidebar shell */
+#layout-menu.hig-sidebar,
+.layout-menu.hig-sidebar {
+  background: var(--hig-sidebar-bg) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-right: 1px solid var(--hig-sidebar-border) !important;
+  box-shadow: var(--hig-shadow-sidebar) !important;
+  width: var(--hig-sidebar-width) !important;
+  transition: background var(--hig-duration) var(--hig-ease),
+              transform var(--hig-duration-sheet) var(--hig-ease),
+              width var(--hig-duration) var(--hig-ease);
+  overflow: visible !important;
+}
+
+/* Hide old Sneat menu shadow element */
+.menu-inner-shadow { display: none !important; }
+
+/* Sidebar header / brand */
+.hig-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 16px 12px;
+  border-bottom: 1px solid var(--hig-separator);
+}
+
+.hig-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.hig-brand-logo {
+  width: auto;
+  height: 36px;
+  object-fit: contain;
+}
+
+.hig-sidebar-collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--hig-radius-full);
+  border: none;
+  background: var(--hig-separator);
+  color: var(--hig-label-2);
+  cursor: pointer;
+  transition: background var(--hig-duration-fast) var(--hig-ease),
+              color var(--hig-duration-fast) var(--hig-ease),
+              transform var(--hig-duration) var(--hig-ease-spring);
+  flex-shrink: 0;
+}
+.hig-sidebar-collapse-btn:hover {
+  background: var(--hig-accent-light);
+  color: var(--hig-accent);
+}
+
+/* Override Sneat's app-brand area */
+.app-brand.demo {
+  padding: 0 !important;
+  border: none !important;
+}
+.app-brand.demo .layout-menu-toggle {
+  display: none !important; /* We handle toggle ourselves */
+}
+
+/* Navigation container */
+.hig-sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 0;
+}
+
+/* Section labels (MAIN, CONTENT, ACCOUNT) */
+.hig-nav-section {
+  margin-bottom: 4px;
+}
+
+.hig-nav-section-label {
+  display: block;
+  padding: 12px 20px 4px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--hig-label-3);
+  user-select: none;
+}
+
+/* Nav items — override Sneat .menu-item / .menu-link */
+.menu-inner > .menu-item { padding: 1px 10px; }
+
+.menu-link,
+a.menu-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 9px 12px !important;
+  border-radius: var(--hig-radius-sm) !important;
+  color: var(--hig-label) !important;
+  font-size: 0.9rem !important;
+  font-weight: 450 !important;
+  letter-spacing: -0.005em !important;
+  transition: background var(--hig-duration-fast) var(--hig-ease),
+              color var(--hig-duration-fast) var(--hig-ease) !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.menu-link:hover,
+a.menu-link:hover {
+  background: var(--hig-separator) !important;
+  color: var(--hig-label) !important;
+}
+
+/* Active nav item */
+.menu-item.active > .menu-link,
+.menu-item.active > a.menu-link,
+.menu-link.active {
+  background: var(--hig-accent-light) !important;
+  color: var(--hig-accent) !important;
+  font-weight: 600 !important;
+}
+.menu-item.active > .menu-link .menu-icon,
+.menu-item.active > a.menu-link .menu-icon {
+  color: var(--hig-accent) !important;
+}
+
+/* Nav icons */
+.menu-icon {
+  font-size: 1.1rem !important;
+  width: 20px !important;
+  min-width: 20px !important;
+  color: var(--hig-label-2) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--hig-duration-fast) var(--hig-ease);
+}
+.menu-link:hover .menu-icon { color: var(--hig-label) !important; }
+
+/* Sub-menu items */
+.menu-sub {
+  background: transparent !important;
+  padding: 0 0 4px 0 !important;
+  border-radius: 0 !important;
+}
+.menu-sub .menu-item { padding: 1px 0 1px 18px !important; }
+.menu-sub .menu-link {
+  font-size: 0.85rem !important;
+  padding: 8px 12px !important;
+  color: var(--hig-label-2) !important;
+}
+.menu-sub .menu-link:hover { color: var(--hig-label) !important; }
+.menu-sub .menu-item.active > .menu-link {
+  color: var(--hig-accent) !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+
+/* Menu toggle arrow */
+.menu-toggle::after {
+  display: block;
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--hig-label-3);
+  transition: transform var(--hig-duration) var(--hig-ease);
+}
+
+/* Sidebar footer (logout) */
+.hig-sidebar-footer {
+  padding: 12px 10px;
+  border-top: 1px solid var(--hig-separator);
+}
+
+/* Logout override */
+.menu-inner[style*="height:60px"] {
+  height: auto !important;
+  position: relative !important;
+  border-top: 1px solid var(--hig-separator);
+  padding: 8px 10px !important;
+  margin-top: auto;
+}
+.menu-inner[style*="height:60px"] .menu-item {
+  position: relative !important;
+  bottom: auto !important;
+}
+.menu-inner[style*="height:60px"] .menu-link {
+  color: var(--hig-red) !important;
+}
+.menu-inner[style*="height:60px"] .menu-link:hover {
+  background: var(--hig-red-light) !important;
+}
+.menu-inner[style*="height:60px"] i {
+  color: var(--hig-red) !important;
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 7. HIG TOPBAR                                                */
+/* ─────────────────────────────────────────────────────────── */
+
+#layout-navbar.hig-topbar,
+.layout-navbar.hig-topbar {
+  background: var(--hig-topbar-bg) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-bottom: 1px solid var(--hig-separator) !important;
+  box-shadow: none !important;
+  height: var(--hig-topbar-height) !important;
+  padding: 0 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px;
+  transition: background var(--hig-duration) var(--hig-ease);
+}
+
+.hig-topbar-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--hig-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--hig-label);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background var(--hig-duration-fast) var(--hig-ease);
+}
+.hig-topbar-menu-btn:hover { background: var(--hig-separator); }
+
+.hig-topbar-title {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--hig-label);
+  letter-spacing: -0.01em;
+}
+
+.hig-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* Icon button (dark mode toggle, etc.) */
+.hig-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--hig-radius-full);
+  border: none;
+  background: transparent;
+  color: var(--hig-label-2);
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: background var(--hig-duration-fast) var(--hig-ease),
+              color var(--hig-duration-fast) var(--hig-ease);
+}
+.hig-icon-btn:hover {
+  background: var(--hig-separator);
+  color: var(--hig-label);
+}
+
+/* Override Sneat navbar dropdown list */
+.navbar-nav.flex-row { gap: 4px; align-items: center; }
+
+/* Avatar in topbar */
+.hig-topbar-avatar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px 4px 4px;
+  border-radius: var(--hig-radius-full);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--hig-duration-fast) var(--hig-ease);
+}
+.hig-topbar-avatar:hover { background: var(--hig-separator); }
+
+.hig-topbar-avatar .avatar img,
+.hig-topbar-avatar img.rounded-circle {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: var(--hig-radius-full) !important;
+  object-fit: cover;
+  border: 2px solid var(--hig-separator-opaque);
+}
+
+.hig-topbar-avatar .avatar-info {
+  display: none;
+}
+@media (min-width: 768px) {
+  .hig-topbar-avatar .avatar-info { display: block; }
+}
+
+.hig-topbar-avatar .avatar-name {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--hig-label);
+  line-height: 1.2;
+}
+.hig-topbar-avatar .avatar-role {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--hig-label-2);
+  line-height: 1.2;
+}
+
+/* Online indicator */
+.avatar-online::after,
+.avatar.avatar-online::after {
+  background-color: var(--hig-green) !important;
+  border-color: var(--hig-surface) !important;
+  width: 9px !important;
+  height: 9px !important;
+  bottom: 1px !important;
+  right: 1px !important;
+}
+
+/* Topbar dropdown */
+.layout-navbar .dropdown-menu,
+.hig-topbar .dropdown-menu {
+  background: var(--hig-surface) !important;
+  border: 1px solid var(--hig-separator) !important;
+  border-radius: var(--hig-radius-md) !important;
+  box-shadow: var(--hig-shadow-lg) !important;
+  padding: 8px !important;
+  min-width: 220px;
+  animation: higDropdownIn var(--hig-duration) var(--hig-ease) both;
+}
+
+.layout-navbar .dropdown-item,
+.hig-topbar .dropdown-item {
+  border-radius: var(--hig-radius-sm) !important;
+  padding: 8px 12px !important;
+  font-size: 0.875rem !important;
+  color: var(--hig-label) !important;
+  transition: background var(--hig-duration-fast) var(--hig-ease) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+.layout-navbar .dropdown-item:hover,
+.hig-topbar .dropdown-item:hover {
+  background: var(--hig-separator) !important;
+  color: var(--hig-label) !important;
+}
+.layout-navbar .dropdown-item i,
+.hig-topbar .dropdown-item i { color: var(--hig-label-2); }
+
+.layout-navbar .dropdown-divider,
+.hig-topbar .dropdown-divider {
+  border-color: var(--hig-separator) !important;
+  margin: 6px 0 !important;
+}
+
+/* Hide arrow on avatar button */
+.hide-arrow::after { display: none !important; }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 8. iOS BOTTOM SHEET — MOBILE SIDEBAR                        */
+/* ─────────────────────────────────────────────────────────── */
+
+/* Overlay */
+.hig-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  z-index: 9998;
+  pointer-events: none;
+  transition: background var(--hig-duration-sheet) var(--hig-ease);
+}
+.hig-sheet-overlay.active {
+  background: rgba(0,0,0,0.45);
+  pointer-events: all;
+}
+
+@media (max-width: 1199px) {
+  /* Convert sidebar to bottom sheet */
+  #layout-menu.hig-sidebar,
+  .layout-menu.hig-sidebar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 80vh !important;
+    max-height: 90vh !important;
+    border-radius: 20px 20px 0 0 !important;
+    border-right: none !important;
+    border-top: 1px solid var(--hig-separator) !important;
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.18) !important;
+    transform: translateY(100%) !important;
+    transition: transform var(--hig-duration-sheet) var(--hig-ease) !important;
+    z-index: 9999 !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  #layout-menu.hig-sidebar.hig-sheet-open,
+  .layout-menu.hig-sidebar.hig-sheet-open {
+    transform: translateY(0) !important;
+  }
+
+  /* Sheet handle (pill indicator) */
+  #layout-menu.hig-sidebar::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 5px;
+    background: var(--hig-label-4);
+    border-radius: var(--hig-radius-full);
+    margin: 12px auto 4px;
+    flex-shrink: 0;
+  }
+
+  /* Content layout pushes under topbar, not sidebar */
+  .layout-page {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+  .content-wrapper {
+    padding-top: var(--hig-topbar-height) !important;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 9. CONTENT AREA                                              */
+/* ─────────────────────────────────────────────────────────── */
+
+.layout-page {
+  transition: margin-left var(--hig-duration) var(--hig-ease);
+}
+
+/* Page header utility */
+.hig-page-header {
+  margin-bottom: 24px;
+}
+.hig-page-header h4,
+.hig-page-header h5 {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.hig-page-header p {
+  margin: 4px 0 0;
+  color: var(--hig-label-2);
+  font-size: 0.875rem;
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 10. HIG STAT CARDS                                           */
+/* ─────────────────────────────────────────────────────────── */
+
+.hig-stat-card,
+.card.hig-stat-card {
+  background: var(--hig-surface) !important;
+  border: 1px solid var(--hig-separator) !important;
+  border-radius: var(--hig-radius-lg) !important;
+  box-shadow: var(--hig-shadow-sm) !important;
+  overflow: hidden;
+  transition: box-shadow var(--hig-duration) var(--hig-ease),
+              transform var(--hig-duration) var(--hig-ease),
+              background var(--hig-duration) var(--hig-ease);
+}
+.hig-stat-card:hover,
+.card.hig-stat-card:hover {
+  box-shadow: var(--hig-shadow-md) !important;
+  transform: translateY(-1px);
+}
+
+.hig-stat-card .card-body {
+  padding: 20px !important;
+}
+
+/* Stat card icon chip */
+.hig-stat-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--hig-radius-md);
+  flex-shrink: 0;
+}
+.hig-stat-chip--accent    { background: var(--hig-accent-light); color: var(--hig-accent); }
+.hig-stat-chip--green     { background: var(--hig-green-light);  color: var(--hig-green); }
+.hig-stat-chip--orange    { background: var(--hig-orange-light); color: var(--hig-orange); }
+.hig-stat-chip--red       { background: var(--hig-red-light);    color: var(--hig-red); }
+.hig-stat-chip--blue      { background: var(--hig-blue-light);   color: var(--hig-blue); }
+.hig-stat-chip--purple    { background: var(--hig-purple-light); color: var(--hig-purple); }
+.hig-stat-chip--teal      { background: var(--hig-teal-light);   color: var(--hig-teal); }
+.hig-stat-chip i          { font-size: 1.25rem; }
+
+/* Stat number */
+.hig-stat-number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--hig-label);
+  line-height: 1;
+  margin: 8px 0 4px;
+}
+.hig-stat-label {
+  font-size: 0.8125rem;
+  font-weight: 450;
+  color: var(--hig-label-2);
+}
+
+/* Override sneat avatar-initial in stat cards */
+.avatar-initial.rounded.bg-label-primary   { background: var(--hig-accent-light) !important; color: var(--hig-accent) !important; }
+.avatar-initial.rounded.bg-label-success   { background: var(--hig-green-light)  !important; color: var(--hig-green)  !important; }
+.avatar-initial.rounded.bg-label-warning   { background: var(--hig-orange-light) !important; color: var(--hig-orange) !important; }
+.avatar-initial.rounded.bg-label-danger    { background: var(--hig-red-light)    !important; color: var(--hig-red)    !important; }
+.avatar-initial.rounded.bg-label-info      { background: var(--hig-teal-light)   !important; color: var(--hig-teal)   !important; }
+.avatar-initial.rounded.bg-label-secondary { background: var(--hig-separator)    !important; color: var(--hig-label-2)!important; }
+
+/* All .avatar chips get consistent sizing */
+.avatar .avatar-initial {
+  border-radius: var(--hig-radius-sm) !important;
+  font-size: 1rem;
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 11. HIG CARDS (general)                                      */
+/* ─────────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--hig-surface) !important;
+  border: 1px solid var(--hig-separator) !important;
+  border-radius: var(--hig-radius-lg) !important;
+  box-shadow: var(--hig-shadow-sm) !important;
+  transition: background var(--hig-duration) var(--hig-ease),
+              border-color var(--hig-duration) var(--hig-ease);
+}
+
+.card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--hig-separator) !important;
+  padding: 16px 20px !important;
+}
+
+.card-body {
+  padding: 20px !important;
+}
+
+.card-footer {
+  background: transparent !important;
+  border-top: 1px solid var(--hig-separator) !important;
+  padding: 14px 20px !important;
+}
+
+.card-title {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--hig-label) !important;
+  margin-bottom: 2px !important;
+}
+
+/* Card hover variant */
+.card.hig-card-interactive {
+  cursor: pointer;
+  transition: box-shadow var(--hig-duration) var(--hig-ease),
+              transform var(--hig-duration) var(--hig-ease);
+}
+.card.hig-card-interactive:hover {
+  box-shadow: var(--hig-shadow-md) !important;
+  transform: translateY(-2px);
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 12. HIG TABLES                                               */
+/* ─────────────────────────────────────────────────────────── */
+
+.hig-table,
+table.hig-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--hig-label);
+}
+
+.hig-table thead th {
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--hig-label-2);
+  background: transparent;
+  border-bottom: 1px solid var(--hig-separator);
+  white-space: nowrap;
+}
+
+.hig-table tbody tr {
+  border-bottom: 1px solid var(--hig-separator);
+  transition: background var(--hig-duration-fast) var(--hig-ease);
+}
+.hig-table tbody tr:last-child { border-bottom: none; }
+.hig-table tbody tr:hover { background: rgba(0,0,0,0.02); }
+
+.hig-table tbody td {
+  padding: 13px 16px;
+  font-size: 0.875rem;
+  color: var(--hig-label);
+  vertical-align: middle;
+}
+
+/* Override DataTables styling to match HIG */
+.dataTables_wrapper,
+div.dataTables_wrapper {
+  font-family: var(--hig-font) !important;
+}
+
+table.dataTable {
+  color: var(--hig-label) !important;
+  border: none !important;
+}
+table.dataTable thead th,
+table.dataTable thead td {
+  padding: 12px 16px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--hig-label-2) !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--hig-separator) !important;
+  border-top: none !important;
+}
+table.dataTable tbody tr {
+  background: transparent !important;
+  transition: background var(--hig-duration-fast) var(--hig-ease) !important;
+}
+table.dataTable tbody tr:hover > td {
+  background: rgba(0,0,0,0.02) !important;
+}
+table.dataTable tbody td {
+  padding: 13px 16px !important;
+  font-size: 0.875rem !important;
+  color: var(--hig-label) !important;
+  border-top: none !important;
+  border-bottom: 1px solid var(--hig-separator) !important;
+}
+table.dataTable tbody tr:last-child td { border-bottom: none !important; }
+
+.dataTables_info,
+.dataTables_length,
+.dataTables_filter {
+  color: var(--hig-label-2) !important;
+  font-size: 0.875rem !important;
+}
+.dataTables_filter input {
+  border: 1px solid var(--hig-separator) !important;
+  border-radius: var(--hig-radius-sm) !important;
+  padding: 6px 12px !important;
+  background: var(--hig-surface) !important;
+  color: var(--hig-label) !important;
+  font-size: 0.875rem !important;
+  outline: none;
+  transition: border-color var(--hig-duration-fast) var(--hig-ease);
+}
+.dataTables_filter input:focus {
+  border-color: var(--hig-accent) !important;
+  box-shadow: 0 0 0 3px var(--hig-accent-light) !important;
+}
+.dataTables_paginate .paginate_button {
+  border-radius: var(--hig-radius-sm) !important;
+  font-size: 0.875rem !important;
+  color: var(--hig-label-2) !important;
+  border: none !important;
+  transition: background var(--hig-duration-fast) var(--hig-ease) !important;
+}
+.dataTables_paginate .paginate_button:hover {
+  background: var(--hig-separator) !important;
+  color: var(--hig-label) !important;
+}
+.dataTables_paginate .paginate_button.current,
+.dataTables_paginate .paginate_button.current:hover {
+  background: var(--hig-accent) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 13. HIG FORMS & INPUTS                                       */
+/* ─────────────────────────────────────────────────────────── */
+
+.form-label {
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  color: var(--hig-label-2) !important;
+  margin-bottom: 6px !important;
+}
+
+.form-control,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+  font-family: var(--hig-font) !important;
+  background: var(--hig-bg) !important;
+  border: 1px solid var(--hig-separator-opaque) !important;
+  border-radius: var(--hig-radius-md) !important;
+  color: var(--hig-label) !important;
+  padding: 10px 14px !important;
+  font-size: 0.9rem !important;
+  transition: border-color var(--hig-duration-fast) var(--hig-ease),
+              box-shadow var(--hig-duration-fast) var(--hig-ease),
+              background var(--hig-duration) var(--hig-ease) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--hig-accent) !important;
+  box-shadow: 0 0 0 3px var(--hig-accent-light) !important;
+  background: var(--hig-surface) !important;
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--hig-label-3) !important;
+}
+
+/* Input group (password toggle) */
+.input-group {
+  border-radius: var(--hig-radius-md) !important;
+}
+.input-group .form-control {
+  border-right: none !important;
+  border-radius: var(--hig-radius-md) 0 0 var(--hig-radius-md) !important;
+}
+.input-group .form-control:focus { z-index: 1; }
+.input-group-text {
+  background: var(--hig-bg) !important;
+  border: 1px solid var(--hig-separator-opaque) !important;
+  border-left: none !important;
+  border-radius: 0 var(--hig-radius-md) var(--hig-radius-md) 0 !important;
+  color: var(--hig-label-2) !important;
+  cursor: pointer;
+  transition: color var(--hig-duration-fast) var(--hig-ease),
+              background var(--hig-duration) var(--hig-ease);
+}
+.input-group-text:hover { color: var(--hig-label); }
+
+/* Select */
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23636366' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  padding-right: 36px !important;
+}
+
+/* Apple-style toggle switch */
+.hig-toggle {
+  position: relative;
+  display: inline-block;
+  width: 51px;
+  height: 31px;
+  flex-shrink: 0;
+}
+.hig-toggle input { opacity: 0; width: 0; height: 0; }
+.hig-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--hig-bg-2);
+  border-radius: var(--hig-radius-full);
+  cursor: pointer;
+  transition: background var(--hig-duration) var(--hig-ease);
+}
+.hig-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 27px;
+  height: 27px;
+  left: 2px;
+  top: 2px;
+  background: white;
+  border-radius: var(--hig-radius-full);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.22);
+  transition: transform var(--hig-duration) var(--hig-ease-spring);
+}
+.hig-toggle input:checked + .hig-toggle-slider {
+  background: var(--hig-green);
+}
+.hig-toggle input:checked + .hig-toggle-slider::before {
+  transform: translateX(20px);
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 14. HIG BUTTONS                                              */
+/* ─────────────────────────────────────────────────────────── */
+
+.btn,
+button.btn {
+  font-family: var(--hig-font) !important;
+  font-weight: 500 !important;
+  border-radius: var(--hig-radius-sm) !important;
+  padding: 9px 18px !important;
+  font-size: 0.875rem !important;
+  border: none !important;
+  cursor: pointer;
+  transition: background var(--hig-duration-fast) var(--hig-ease),
+              box-shadow var(--hig-duration-fast) var(--hig-ease),
+              transform var(--hig-duration-fast) var(--hig-ease-spring) !important;
+  letter-spacing: -0.005em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:active { transform: scale(0.97) !important; }
+
+/* Primary */
+.btn-primary {
+  background: var(--hig-accent) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 3px rgba(235,51,73,0.30) !important;
+}
+.btn-primary:hover {
+  background: var(--hig-accent-hover) !important;
+  box-shadow: 0 4px 12px rgba(235,51,73,0.35) !important;
+}
+
+/* Secondary (Ghost) */
+.btn-secondary, .btn-outline-secondary {
+  background: var(--hig-separator) !important;
+  color: var(--hig-label) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.btn-secondary:hover, .btn-outline-secondary:hover {
+  background: var(--hig-separator-opaque) !important;
+}
+
+/* Success */
+.btn-success {
+  background: var(--hig-green) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 3px rgba(52,199,89,0.30) !important;
+}
+.btn-success:hover { background: #2aab4e !important; }
+
+/* Danger */
+.btn-danger {
+  background: var(--hig-red) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 3px rgba(255,59,48,0.30) !important;
+}
+.btn-danger:hover { background: #d93025 !important; }
+
+/* Warning */
+.btn-warning {
+  background: var(--hig-orange) !important;
+  color: #fff !important;
+}
+.btn-warning:hover { background: #e0820a !important; }
+
+/* Label variants (pill chip buttons) */
+.btn-label-primary   { background: var(--hig-accent-light)  !important; color: var(--hig-accent)  !important; border: none !important; }
+.btn-label-success   { background: var(--hig-green-light)   !important; color: var(--hig-green)   !important; border: none !important; }
+.btn-label-danger    { background: var(--hig-red-light)     !important; color: var(--hig-red)     !important; border: none !important; }
+.btn-label-warning   { background: var(--hig-orange-light)  !important; color: var(--hig-orange)  !important; border: none !important; }
+.btn-label-info      { background: var(--hig-teal-light)    !important; color: var(--hig-teal)    !important; border: none !important; }
+
+/* Icon-only button */
+.hig-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0 !important;
+  border-radius: var(--hig-radius-sm) !important;
+  border: none !important;
+  cursor: pointer;
+  transition: background var(--hig-duration-fast) var(--hig-ease),
+              transform var(--hig-duration-fast) var(--hig-ease-spring);
+  font-size: 0.9rem;
+}
+.hig-btn-icon:hover { transform: scale(1.08); }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 15. HIG BADGES & CHIPS                                       */
+/* ─────────────────────────────────────────────────────────── */
+
+.badge,
+.hig-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 3px 9px !important;
+  border-radius: var(--hig-radius-full) !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+  white-space: nowrap;
+}
+
+/* Badge colours */
+.badge.bg-label-success, .hig-badge--green {
+  background: var(--hig-green-light) !important;
+  color: var(--hig-green) !important;
+}
+.badge.bg-label-danger, .hig-badge--red {
+  background: var(--hig-red-light) !important;
+  color: var(--hig-red) !important;
+}
+.badge.bg-label-warning, .hig-badge--orange {
+  background: var(--hig-orange-light) !important;
+  color: var(--hig-orange) !important;
+}
+.badge.bg-label-primary, .hig-badge--accent {
+  background: var(--hig-accent-light) !important;
+  color: var(--hig-accent) !important;
+}
+.badge.bg-label-info, .hig-badge--teal {
+  background: var(--hig-teal-light) !important;
+  color: var(--hig-teal) !important;
+}
+.badge.bg-label-secondary, .hig-badge--secondary {
+  background: var(--hig-separator) !important;
+  color: var(--hig-label-2) !important;
+}
+.badge.bg-success { background: var(--hig-green)  !important; color: #fff !important; }
+.badge.bg-danger  { background: var(--hig-red)    !important; color: #fff !important; }
+.badge.bg-warning { background: var(--hig-orange) !important; color: #fff !important; }
+.badge.bg-primary { background: var(--hig-accent) !important; color: #fff !important; }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 16. HIG SEGMENTED CONTROL                                    */
+/* ─────────────────────────────────────────────────────────── */
+
+.hig-segment {
+  display: inline-flex;
+  align-items: center;
+  background: var(--hig-bg-2);
+  border-radius: var(--hig-radius-md);
+  padding: 3px;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.hig-segment-btn {
+  padding: 7px 16px;
+  border-radius: var(--hig-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--hig-label-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--hig-duration-fast) var(--hig-ease),
+              color var(--hig-duration-fast) var(--hig-ease),
+              box-shadow var(--hig-duration-fast) var(--hig-ease);
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: var(--hig-font);
+}
+.hig-segment-btn:hover {
+  color: var(--hig-label);
+  text-decoration: none;
+}
+.hig-segment-btn.active {
+  background: var(--hig-surface);
+  color: var(--hig-label);
+  font-weight: 600;
+  box-shadow: var(--hig-shadow-sm);
+}
+.hig-segment-btn.active.accent {
+  background: var(--hig-accent);
+  color: #fff;
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 17. HIG DROPDOWN MENU (general)                              */
+/* ─────────────────────────────────────────────────────────── */
+
+.dropdown-menu {
+  background: var(--hig-surface) !important;
+  border: 1px solid var(--hig-separator) !important;
+  border-radius: var(--hig-radius-md) !important;
+  box-shadow: var(--hig-shadow-lg) !important;
+  padding: 6px !important;
+  font-family: var(--hig-font) !important;
+  animation: higDropdownIn var(--hig-duration) var(--hig-ease) both;
+}
+
+.dropdown-item {
+  border-radius: var(--hig-radius-xs) !important;
+  padding: 8px 12px !important;
+  font-size: 0.875rem !important;
+  color: var(--hig-label) !important;
+  transition: background var(--hig-duration-fast) var(--hig-ease) !important;
+  font-family: var(--hig-font) !important;
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: var(--hig-separator) !important;
+  color: var(--hig-label) !important;
+}
+.dropdown-divider {
+  border-color: var(--hig-separator) !important;
+  margin: 5px 0 !important;
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 18. HIG LIST (Settings / iOS-style grouped list)            */
+/* ─────────────────────────────────────────────────────────── */
+
+.hig-list {
+  background: var(--hig-surface);
+  border-radius: var(--hig-radius-lg);
+  border: 1px solid var(--hig-separator);
+  overflow: hidden;
+  box-shadow: var(--hig-shadow-sm);
+}
+
+.hig-list-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--hig-separator);
+  transition: background var(--hig-duration-fast) var(--hig-ease);
+}
+.hig-list-row:last-child { border-bottom: none; }
+.hig-list-row:hover { background: rgba(0,0,0,0.02); }
+.hig-list-row--link { cursor: pointer; }
+
+.hig-list-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--hig-radius-sm);
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.hig-list-content { flex: 1; }
+.hig-list-label { font-size: 0.9rem; font-weight: 450; color: var(--hig-label); }
+.hig-list-sublabel { font-size: 0.8125rem; color: var(--hig-label-2); margin-top: 1px; }
+
+.hig-list-chevron::after {
+  content: '›';
+  font-size: 1.25rem;
+  color: var(--hig-label-3);
+  line-height: 1;
+}
+
+.hig-list-section {
+  margin-bottom: 28px;
+}
+.hig-list-section-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--hig-label-2);
+  padding: 0 20px;
+  margin-bottom: 8px;
+}
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 19. HIG AVATAR & USER BLOCK                                  */
+/* ─────────────────────────────────────────────────────────── */
+
+.hig-user-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hig-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--hig-radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--hig-separator-opaque);
+}
+.hig-user-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--hig-label);
+  line-height: 1.3;
+}
+.hig-user-sub {
+  font-size: 0.8125rem;
+  color: var(--hig-label-2);
+  line-height: 1.3;
+}
+
+/* Profile page hero */
+.hig-profile-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 36px 24px 24px;
+}
+.hig-profile-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--hig-radius-full);
+  object-fit: cover;
+  border: 3px solid var(--hig-accent);
+  box-shadow: 0 0 0 5px var(--hig-accent-light);
+  margin-bottom: 16px;
+}
+.hig-profile-name { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+.hig-profile-role { font-size: 0.875rem; color: var(--hig-label-2); margin-top: 4px; }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 20. HIG MODAL OVERRIDES                                      */
+/* ─────────────────────────────────────────────────────────── */
+
+.modal-content {
+  background: var(--hig-surface) !important;
+  border: 1px solid var(--hig-separator) !important;
+  border-radius: var(--hig-radius-xl) !important;
+  box-shadow: var(--hig-shadow-xl) !important;
+  overflow: hidden;
+}
+.modal-header {
+  border-bottom: 1px solid var(--hig-separator) !important;
+  padding: 18px 24px !important;
+  background: transparent !important;
+}
+.modal-title { font-weight: 600 !important; font-size: 1rem !important; }
+.modal-body { padding: 24px !important; }
+.modal-footer {
+  border-top: 1px solid var(--hig-separator) !important;
+  padding: 16px 24px !important;
+  background: transparent !important;
+  gap: 10px;
+}
+.modal-backdrop { backdrop-filter: blur(4px) !important; }
+.btn-close { opacity: 0.5 !important; }
+.btn-close:hover { opacity: 1 !important; }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 21. DARK MODE OVERRIDES                                      */
+/* ─────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] body {
+  background-color: var(--hig-bg) !important;
+  color: var(--hig-label) !important;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .hig-stat-card {
+  background: var(--hig-surface) !important;
+  border-color: var(--hig-separator) !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="search"],
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background: var(--hig-bg-2) !important;
+  border-color: var(--hig-separator) !important;
+  color: var(--hig-label) !important;
+}
+
+[data-theme="dark"] .input-group-text {
+  background: var(--hig-bg-2) !important;
+  border-color: var(--hig-separator) !important;
+}
+
+[data-theme="dark"] .layout-wrapper,
+[data-theme="dark"] .layout-container,
+[data-theme="dark"] .layout-page,
+[data-theme="dark"] .content-wrapper,
+[data-theme="dark"] .container-xxl {
+  background-color: var(--hig-bg) !important;
+}
+
+[data-theme="dark"] table.dataTable tbody tr:hover > td {
+  background: rgba(255,255,255,0.04) !important;
+}
+[data-theme="dark"] .hig-list-row:hover {
+  background: rgba(255,255,255,0.03) !important;
+}
+[data-theme="dark"] .hig-toggle-slider { background: #3A3A3C; }
+
+[data-theme="dark"] .btn-secondary,
+[data-theme="dark"] .btn-outline-secondary {
+  background: var(--hig-separator) !important;
+  color: var(--hig-label) !important;
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background: #3A3A3C !important;
+}
+[data-theme="dark"] .dropdown-item { color: var(--hig-label) !important; }
+[data-theme="dark"] .dropdown-item:hover { background: var(--hig-separator) !important; }
+
+[data-theme="dark"] .modal-content { background: var(--hig-surface) !important; }
+
+[data-theme="dark"] .hig-segment { background: var(--hig-bg-2); }
+[data-theme="dark"] .hig-segment-btn.active { background: #3A3A3C; }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 22. TRANSITIONS & ANIMATIONS                                 */
+/* ─────────────────────────────────────────────────────────── */
+
+@keyframes higDropdownIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+@keyframes higFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes higSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes higPop {
+  0%   { transform: scale(0.92); opacity: 0; }
+  60%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+/* Page entrance */
+.content-wrapper > .container-xxl {
+  animation: higFadeIn var(--hig-duration-slow) var(--hig-ease) both;
+}
+
+/* Row card stagger entrance */
+.row.g-6 > [class*="col"]:nth-child(1) .card { animation: higSlideUp 300ms 50ms  var(--hig-ease) both; }
+.row.g-6 > [class*="col"]:nth-child(2) .card { animation: higSlideUp 300ms 100ms var(--hig-ease) both; }
+.row.g-6 > [class*="col"]:nth-child(3) .card { animation: higSlideUp 300ms 150ms var(--hig-ease) both; }
+.row.g-6 > [class*="col"]:nth-child(4) .card { animation: higSlideUp 300ms 200ms var(--hig-ease) both; }
+
+
+/* ─────────────────────────────────────────────────────────── */
+/* 23. UTILITIES                                                */
+/* ─────────────────────────────────────────────────────────── */
+
+.hig-divider {
+  border: none;
+  border-top: 1px solid var(--hig-separator);
+  margin: 16px 0;
+}
+
+.hig-surface    { background: var(--hig-surface) !important; }
+.hig-bg         { background: var(--hig-bg) !important; }
+.text-accent    { color: var(--hig-accent) !important; }
+.text-green     { color: var(--hig-green) !important; }
+.text-orange    { color: var(--hig-orange) !important; }
+.text-hig-red   { color: var(--hig-red) !important; }
+.text-secondary-label { color: var(--hig-label-2) !important; }
+.text-tertiary-label  { color: var(--hig-label-3) !important; }
+
+/* Responsive utilities */
+@media (max-width: 576px) {
+  .hig-segment { width: 100%; justify-content: stretch; }
+  .hig-segment-btn { flex: 1; text-align: center; }
+  .container-p-y { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+}
+
+/* Locked/blurred stat cards (permission restriction) */
+.locked-card { filter: none !important; }
+.blur-overlay {
+  backdrop-filter: blur(6px) !important;
+  background: rgba(255,255,255,0.35) !important;
+  border-radius: var(--hig-radius-xs) !important;
+}
+[data-theme="dark"] .blur-overlay {
+  background: rgba(28,28,30,0.50) !important;
+}
+
+/* Override Sneat's bg-menu-theme variable */
+.bg-menu-theme {
+  background: var(--hig-sidebar-bg) !important;
+}
+
+/* Force override lingering Sneat background colors */
+.bg-navbar-theme { background: var(--hig-topbar-bg) !important; }
+
+/* Ensure ApexCharts tooltips match theme */
+.apexcharts-tooltip {
+  background: var(--hig-surface) !important;
+  border: 1px solid var(--hig-separator) !important;
+  border-radius: var(--hig-radius-md) !important;
+  box-shadow: var(--hig-shadow-md) !important;
+  color: var(--hig-label) !important;
+}
+.apexcharts-tooltip-title {
+  background: transparent !important;
+  border-bottom: 1px solid var(--hig-separator) !important;
+  color: var(--hig-label-2) !important;
+  font-size: 0.75rem !important;
+}

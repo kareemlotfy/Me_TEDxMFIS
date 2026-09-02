@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,9 +37,7 @@
     <link rel="stylesheet" href="../assets/splide-4.1.3/splide-4.1.3/dist/css/splide.min.css">
     <link rel="stylesheet" href="../assets/splide-4.1.3/splide-4.1.3/dist/css/themes/splide-default.min.css">
 
-    <!-- <base href="http://localhost/tedxmanaratalfaroukschool/"> -->
-
-    <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
 
     <link rel="stylesheet" href="style-old.css">
     <link rel="stylesheet" href="style.css">
@@ -60,7 +59,7 @@
 
                 <ul class="nav-links">
                     <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
-                    <li><a href="About\index.html" class="nav-link">About</a></li>
+                    <li><a href="About\index.php" class="nav-link">About</a></li>
                     <li><a href="Speakers\index.php" class="nav-link">Speakers</a></li>
                     <li><a href="Sponsors\index.php" class="nav-link">Sponsors</a></li>
                     <li><a href="#tickets" class="nav-cta"><span>Get Tickets</span></a></li>
@@ -78,7 +77,7 @@
         <div class="mobile-menu" id="mobileMenu">
             <ul class="mobile-menu-links">
                 <li><a href="index.php" class="mobile-menu-link">Home</a></li>
-                <li><a href="About\index.html" class="mobile-menu-link">About</a></li>
+                <li><a href="About\index.php" class="mobile-menu-link">About</a></li>
                 <li><a href="Speakers\index.php" class="mobile-menu-link">Speakers</a></li>
                 <li><a href="Sponsors\index.php" class="mobile-menu-link">Sponsors</a></li>
             </ul>

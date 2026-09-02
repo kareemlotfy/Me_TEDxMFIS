@@ -2,6 +2,7 @@
 
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 
 adminLogin();
 
@@ -97,7 +98,7 @@ $currentPage = 'profile';
 
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact ">
+<html lang="en" class="layout-navbar-fixed layout-menu-fixed layout-compact">
 
 
 <head>
@@ -111,16 +112,9 @@ $currentPage = 'profile';
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
-    <!-- Base -->
-    <!-- <base href="http://localhost/TEDxManaratAlfaroukSchool/"> -->
-         <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <!-- System font via Apple HIG -->
 
     <!-- Icons -->
     <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
@@ -145,6 +139,9 @@ $currentPage = 'profile';
 
     <!-- Page CSS -->
     <link rel="stylesheet" href="admin/assets/vendor/css/pages/page-profile.css" />
+
+    <!-- Apple HIG Design System -->
+    <link rel="stylesheet" href="admin/assets/css/apple-hig.css" />
 
     <!-- Helpers -->
     <script src="admin/assets/vendor/js/helpers.js"></script>
@@ -299,8 +296,7 @@ $currentPage = 'profile';
 
 
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Overlay (handled by iOS sheet overlay) -->`n        <!-- <div class="layout-overlay layout-menu-toggle"></div> -->
 
 
         <!-- Drag Target Area To SlideIn Menu On Small Screens -->

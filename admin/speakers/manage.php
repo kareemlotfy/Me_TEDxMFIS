@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../../Misc/db_conn.php");
+require_once __DIR__ . '/../../config.php';
 // require_once("../../Misc/functions.php");
 // adminLogin();
 
@@ -58,7 +59,7 @@ $currentPage = 'speakers';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manage Speakers</title>
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="<?php echo BASE_URL; ?>">
 
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -247,7 +248,7 @@ $currentPage = 'speakers';
 
                             <!-- Total Speakers-->
                             <div class="col-sm-6 col-sm-3">
-                                <div class="card">
+                                <div class="card hig-card-interactive">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between">
                                             <div class="content-left">
@@ -273,7 +274,7 @@ $currentPage = 'speakers';
 
                             <!-- Published -->
                             <div class="col-sm-6 col-sm-3">
-                                <div class="card">
+                                <div class="card hig-card-interactive">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between">
                                             <div class="content-left">
@@ -299,7 +300,7 @@ $currentPage = 'speakers';
 
                             <!-- Drafts -->
                             <div class="col-sm-6 col-sm-3">
-                                <div class="card">
+                                <div class="card hig-card-interactive">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between">
                                             <div class="content-left">
@@ -323,7 +324,7 @@ $currentPage = 'speakers';
                             </div>
                             <!-- Archived -->
                             <div class="col-sm-6 col-sm-3">
-                                <div class="card">
+                                <div class="card hig-card-interactive">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between">
                                             <div class="content-left">
@@ -423,7 +424,7 @@ $currentPage = 'speakers';
                         </div>
 
                         <!-- Speakers Table -->
-                        <div class="card">
+                        <div class="card hig-card-interactive">
                             <div class="table-responsive">
                                 <?php if ($result && $result->num_rows > 0): ?>
                                 <table class="table table-hover">
@@ -544,8 +545,7 @@ $currentPage = 'speakers';
 
 
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Overlay (handled by iOS sheet overlay) -->`n        <!-- <div class="layout-overlay layout-menu-toggle"></div> -->
 
 
         <!-- Drag Target Area To SlideIn Menu On Small Screens -->
@@ -586,3 +586,4 @@ if (isset($genResult)) {
 }
 $con->close(); 
 ?>
+

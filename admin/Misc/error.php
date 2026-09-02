@@ -2,6 +2,7 @@
 
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 
 adminLogin();
 
@@ -66,7 +67,7 @@ $con->close();
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
     <!-- Base -->
-    <base href="https://tedxmanaratalfaroukschool.com/">
+    <base href="<?php echo BASE_URL; ?>">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,6 +1,7 @@
 <?php
 require("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 adminLogin();
 
 $admin_id = $_SESSION['adminId']; // Assuming admin ID is stored in session after login
@@ -87,7 +88,7 @@ $con->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
+    <base href="<?php echo BASE_URL; ?>">
     <link rel="stylesheet" href="admin/css/style.css">
     <link rel="stylesheet" href="admin/css/style-update.css">
     <title>Admin Panel - TEDx Manarat AlFarouk School</title>

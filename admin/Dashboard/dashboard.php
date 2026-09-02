@@ -2,6 +2,7 @@
 
 include("../Misc/db_conn.php");
 require("../Misc/functions.php");
+require_once __DIR__ . '/../../config.php';
 
 adminLogin();
 
@@ -53,7 +54,7 @@ $currentPage = 'dashboard';
 
 
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact ">
+<html lang="en" class="layout-navbar-fixed layout-menu-fixed layout-compact">
 
 <head>
     <meta charset="utf-8" />
@@ -65,16 +66,9 @@ $currentPage = 'dashboard';
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="admin/assets/img/logos/x-art.png" />
 
-    <!-- Base -->
-    <base href="http://localhost/TEDxManaratAlfaroukSchool/">
-    <!-- <base href="https://tedxmanaratalfaroukschool.com/"> -->
+    <base href="<?php echo BASE_URL; ?>">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <!-- System font via Apple HIG -->
 
     <!-- Icons -->
     <link rel="stylesheet" href="admin/assets/vendor/fonts/boxicons.css" />
@@ -91,13 +85,16 @@ $currentPage = 'dashboard';
     <link rel="stylesheet" href="admin/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="admin/assets/vendor/libs/apex-charts/apex-charts.css" />
 
+    <!-- Apple HIG Design System -->
+    <link rel="stylesheet" href="admin/assets/css/apple-hig.css" />
+
     <!-- Helpers -->
     <script src="admin/assets/vendor/js/helpers.js"></script>
     <script src="admin/assets/js/config.js"></script>
 
 </head>
 
-<body>
+<body class="layout-menu-fixed layout-menu-hig">
 
 
     <!-- Layout wrapper -->
@@ -124,7 +121,7 @@ $currentPage = 'dashboard';
                             <div class="col-xxl-6 col-lg-12 col-md-6 order-0">
                                 <div class="row">
                                     <div class="col-6 mb-6">
-                                        <div class="card h-100">
+                                        <div class="card h-100 hig-stat-card">
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Users</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
@@ -135,7 +132,7 @@ $currentPage = 'dashboard';
                                         </div>
                                     </div>
                                     <div class="col-6 mb-6">
-                                        <div class="card h-100">
+                                        <div class="card h-100 hig-stat-card">
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Ages</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Users age are
@@ -150,7 +147,7 @@ $currentPage = 'dashboard';
                             <div class="col-12 col-md-6 col-lg-12 col-xxl-6 order-3 order-md-2">
                                 <div class="row">
                                     <div class="col-6 mb-6">
-                                        <div class="card h-100">
+                                        <div class="card h-100 hig-stat-card">
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">From MFIS</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
@@ -161,7 +158,7 @@ $currentPage = 'dashboard';
                                         </div>
                                     </div>
                                     <div class="col-6 mb-6">
-                                        <div class="card h-100">
+                                        <div class="card h-100 hig-stat-card">
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Total Profit</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Total
@@ -172,7 +169,7 @@ $currentPage = 'dashboard';
                                         </div>
                                     </div>
                                     <div class="col-6 mb-6">
-                                        <div class="card h-100">
+                                        <div class="card h-100 hig-stat-card">
                                             <div class="card-body pb-0">
                                                 <span class="d-block fw-medium mb-1">Login Type</span>
                                                 <h4 class="card-title mb-0 mb-lg-4">Users are
@@ -188,7 +185,7 @@ $currentPage = 'dashboard';
                         <div class="row">
                             <!-- Event Statistics -->
                             <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-6">
-                                <div class="card h-100">
+                                <div class="card h-100 hig-stat-card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="card-title mb-0">
                                             <h5 class="mb-1 me-2">Event Status</h5>
@@ -388,7 +385,7 @@ $currentPage = 'dashboard';
                                     <div class="tab-content pt-0 pb-4">
                                         <div class="tab-pane fade show active" id="navs-pills-google" role="tabpanel">
                                             <div class="table-responsive text-start text-nowrap">
-                                                <div class="card h-100">
+                                                <div class="card h-100 hig-stat-card">
                                                     <div
                                                         class="card-header d-flex align-items-center justify-content-between">
                                                         <div class="card-title mb-0">
@@ -799,8 +796,8 @@ $currentPage = 'dashboard';
 
 
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Overlay (handled by iOS sheet overlay in aside.php) -->
+        <!-- <div class="layout-overlay layout-menu-toggle"></div> -->
 
 
         <!-- Drag Target Area To SlideIn Menu On Small Screens -->
